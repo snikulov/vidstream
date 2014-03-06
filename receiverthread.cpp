@@ -31,7 +31,6 @@ void ReceiverThread::run()
     while (!killed && (recv = t.Receive(10, recv_size))) {
         uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
         size_t encoded_len = recv_size - RestartBlock::get_info_len();
-        stat.AddPacket(encoded_len);
 
         // add errors to the whole RestartBlock in recv buffer
         Corruptor::add_err(encoded_ptr, encoded_len, err_percent);
@@ -41,6 +40,7 @@ void ReceiverThread::run()
         ptr = (uint8_t *) encoder.decode((char *) encoded_ptr, encoded_len, decoded_size,
                                          decoded_ok);
         stat.StopTimer(StatCollector::TIMER_DECODE);
+        stat.AddPacket(encoded_len, decoded_ok);
 
         if (RestartBlock::get_rst_block_number(ptr) > history.size() ||
             RestartBlock::get_data_length(ptr) > decoded_size - RestartBlock::get_info_len()) {
