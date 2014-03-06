@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
     head_size(0),
     image_buffer_size(0),
     hdr_buf_initialized(false),
-    recv_raster(scaled_width, scaled_height),
-    res_raster(image_width, image_height),
+    recv_raster(new Bitmap(scaled_width, scaled_height)),
+    res_raster(new Bitmap(image_width, image_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, stat)),
     enc_r(new ecc(settings.bch_m, settings.bch_t, stat)),
     history(MAX_RESTART_BLOCKS),
@@ -227,7 +227,7 @@ void MainWindow::processFrames(unsigned frame_count)
                  /*  + std::to_string(ui->errorSlider->value())  */
                      + "out_";
     unsigned cur = 0;
-    recv_raster.Clear();
+    recv_raster->Clear();
     while (running) {
         ui->infoLabel->setText(QString::fromStdString(stat.GetStats()));
         stat.Reset();
@@ -265,19 +265,15 @@ bool MainWindow::loadImageFile()
     input_width = image.width();
     input_height = image.height();
 
-    // if frame resolution is too large, abort
-    if (input_width > image_width || input_height > image_height) {
-        qDebug() << "Error: resolution too large";
-        ui->image_corrupt->setText("Error: resolution too large");
-        ui->image_corrupt->repaint();
-        QCoreApplication::processEvents();
-        return false;
+    // frame resolution differs from bitmaps size
+    if (input_width != image_width || input_height != image_height) {
+        image_width = input_width;
+        image_height = input_height;
+        scaled_width = image_width / 2;
+        scaled_height = image_height / 2;
+        res_raster = std::unique_ptr<Bitmap>(new Bitmap(input_width, input_height));
+        recv_raster = std::unique_ptr<Bitmap>(new Bitmap(scaled_width, scaled_height));
     }
-
-    image_width = input_width;
-    image_height = input_height;
-    scaled_width = image_width / 2;
-    scaled_height = image_height / 2;
 
     // convert QImage into RGB888 buffer
 
@@ -431,7 +427,7 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         stat.StartTimer(StatCollector::TIMER_INTERLACE);
         // insert received lines into recv_raster
         interlace_merge_rows(Bitmap(recv_buffer.get(),input_width, input_height),
-                             recv_raster, *interlace_rows);
+                             *recv_raster, *interlace_rows);
         // restore broken pixels from neighboring lines
         //for (size_t i = interlace_rows->FirstIndex(), srci = 0;
         //     srci < input_height;
@@ -440,7 +436,7 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         //        int rst_index = (j / 16) + (srci / 16) * (input_width / 16);
         //        if (!mask[rst_index] && i) {
         //            int neighrow = i % 2 ? i - 1 : i + 1;
-        //            memcpy(recv_raster.GetPixel(i, j), recv_raster.GetPixel(neighrow, j), 3);
+        //            memcpy(recv_raster->GetPixel(i, j), recv_raster->GetPixel(neighrow, j), 3);
         //            //recv_raster[i * image_width * 3 + j * 3] = 255;
         //        }
         //    }
@@ -448,7 +444,7 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         stat.StopTimer(StatCollector::TIMER_INTERLACE);
         stat.StartTimer(StatCollector::TIMER_SCALING);
         // resize bitmap back to full size
-        std::unique_ptr<Bitmap> res_raster(bilinear_resize(recv_raster, image_width, image_height));
+        std::unique_ptr<Bitmap> res_raster(bilinear_resize(*recv_raster, image_width, image_height));
         stat.StopTimer(StatCollector::TIMER_SCALING);
         QImage image(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
                      QImage::Format_RGB888);
