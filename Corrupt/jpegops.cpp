@@ -1,0 +1,276 @@
+#include "jpegops.h"
+
+#include <cstdio>
+#include <cstdlib>
+#include <jpeglib.h>
+#include <setjmp.h>
+
+#include <cstring>
+
+struct my_error_mgr {
+  struct jpeg_error_mgr pub;	/* "public" fields */
+  jmp_buf setjmp_buffer;	/* for return to caller */
+};
+
+typedef struct my_error_mgr * my_error_ptr;
+
+METHODDEF(void)
+my_error_exit (j_common_ptr cinfo)
+{
+  my_error_ptr myerr = (my_error_ptr) cinfo->err;
+  (*cinfo->err->output_message) (cinfo);
+  longjmp(myerr->setjmp_buffer, 1);
+}
+
+void decompress_JPEG(jpeg_decompress_struct &cinfo,
+              size_t &image_width, size_t &image_height,
+              JSAMPLE *image_buffer)
+{
+    jpeg_read_header(&cinfo, TRUE);
+    jpeg_start_decompress(&cinfo);
+
+    image_width = cinfo.output_width;
+    image_height = cinfo.output_height;
+    int row_stride = cinfo.output_width * cinfo.output_components;
+    JSAMPARRAY buffer = (*cinfo.mem->alloc_sarray)
+        ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+
+    size_t cur_buffer_pos = 0;
+    while (cinfo.output_scanline < cinfo.output_height) {
+        jpeg_read_scanlines(&cinfo, buffer, 1);
+        memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
+        cur_buffer_pos += row_stride;
+    }
+
+    (void) jpeg_finish_decompress(&cinfo);
+    jpeg_destroy_decompress(&cinfo);
+
+}
+
+void set_compress_params(jpeg_compress_struct &cinfo,
+                         size_t image_width, size_t image_height,
+                         int quality)
+{
+    cinfo.image_width = image_width;
+    cinfo.image_height = image_height;
+    cinfo.input_components = 3;
+    cinfo.in_color_space = JCS_RGB;
+    cinfo.smoothing_factor = 100;
+    jpeg_set_defaults(&cinfo);
+    jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
+    cinfo.restart_interval = 1;
+    cinfo.comp_info[0].h_samp_factor = 2; //for Y
+    cinfo.comp_info[0].v_samp_factor = 2;
+    cinfo.comp_info[1].h_samp_factor = 1; //for Cb
+    cinfo.comp_info[1].v_samp_factor = 1;
+    cinfo.comp_info[2].h_samp_factor = 1; //for Cr
+    cinfo.comp_info[2].v_samp_factor = 1;
+}
+
+void compress_JPEG(jpeg_compress_struct &cinfo,
+                   size_t image_width,
+                   JSAMPLE *image_buffer)
+{
+    jpeg_start_compress(&cinfo, TRUE);
+
+    int row_stride = image_width * 3;
+    JSAMPROW row_pointer[1];
+
+    while (cinfo.next_scanline < cinfo.image_height) {
+        row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
+        (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    }
+
+    jpeg_finish_compress(&cinfo);
+}
+
+int
+read_JPEG_file (void* image_buffer_ptr,
+                size_t &image_width, size_t &image_height,
+                const char *filename)
+{
+    JSAMPLE* image_buffer = (JSAMPLE *) image_buffer_ptr;
+    struct jpeg_decompress_struct cinfo;
+    struct my_error_mgr jerr;
+    FILE * infile;		/* source file */
+
+    if ((infile = fopen(filename, "rb")) == NULL) {
+        fprintf(stderr, "can't open %s\n", filename);
+        return 0;
+    }
+
+    cinfo.err = jpeg_std_error(&jerr.pub);
+    jerr.pub.error_exit = my_error_exit;
+    if (setjmp(jerr.setjmp_buffer)) {
+        jpeg_destroy_decompress(&cinfo);
+        fclose(infile);
+        fprintf(stderr, "Error occurred, aborting\n");
+        return 0;
+    }
+    jpeg_create_decompress(&cinfo);
+
+    //cinfo.output_components = 3;
+    //cinfo.out_color_space = JCS_RGB;
+
+    jpeg_stdio_src(&cinfo, infile);
+    decompress_JPEG(cinfo, image_width, image_height, image_buffer);
+    //jpeg_read_header(&cinfo, TRUE);
+    //jpeg_start_decompress(&cinfo);
+
+    //image_width = cinfo.output_width;
+    //image_height = cinfo.output_height;
+    //row_stride = cinfo.output_width * cinfo.output_components;
+    //buffer = (*cinfo.mem->alloc_sarray)
+    //    ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+
+    //size_t cur_buffer_pos = 0;
+    //while (cinfo.output_scanline < cinfo.output_height) {
+    //    jpeg_read_scanlines(&cinfo, buffer, 1);
+    //    //put_scanline_someplace(buffer[0], row_stride);
+    //    memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
+    //    cur_buffer_pos += row_stride;
+    //}
+
+    //(void) jpeg_finish_decompress(&cinfo);
+    //jpeg_destroy_decompress(&cinfo);
+
+    fclose(infile);
+    return 1;
+}
+
+int read_JPEG_mem(void *image_buffer_ptr,
+                  size_t &image_width, size_t &image_height,
+                  void *src, unsigned long bufsize)
+{
+    JSAMPLE* image_buffer = (JSAMPLE *) image_buffer_ptr;
+    struct jpeg_decompress_struct cinfo;
+    struct my_error_mgr jerr;
+
+    cinfo.err = jpeg_std_error(&jerr.pub);
+    jerr.pub.error_exit = my_error_exit;
+    if (setjmp(jerr.setjmp_buffer)) {
+        jpeg_destroy_decompress(&cinfo);
+        fprintf(stderr, "Error occurred, aborting\n");
+        return 0;
+    }
+    jpeg_create_decompress(&cinfo);
+
+    jpeg_mem_src(&cinfo, (unsigned char *) src, bufsize);
+    decompress_JPEG(cinfo, image_width, image_height, image_buffer);
+    //jpeg_read_header(&cinfo, TRUE);
+    //jpeg_start_decompress(&cinfo);
+
+    //image_width = cinfo.output_width;
+    //image_height = cinfo.output_height;
+    //row_stride = cinfo.output_width * cinfo.output_components;
+    //buffer = (*cinfo.mem->alloc_sarray)
+    //    ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+
+    //size_t cur_buffer_pos = 0;
+    //while (cinfo.output_scanline < cinfo.output_height) {
+    //    jpeg_read_scanlines(&cinfo, buffer, 1);
+    //    //put_scanline_someplace(buffer[0], row_stride);
+    //    memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
+    //    cur_buffer_pos += row_stride;
+    //}
+
+    //(void) jpeg_finish_decompress(&cinfo);
+    //jpeg_destroy_decompress(&cinfo);
+
+    return 1;
+}
+
+void
+write_JPEG_file (void *image_buffer_ptr,
+                 size_t image_width, size_t image_height,
+                 const char * filename, int quality)
+{
+    JSAMPLE *image_buffer = (JSAMPLE *) image_buffer_ptr;
+    struct jpeg_compress_struct cinfo;
+    struct jpeg_error_mgr jerr;
+    FILE * outfile;		/* target file */
+    cinfo.err = jpeg_std_error(&jerr);
+    jpeg_create_compress(&cinfo);
+    if ((outfile = fopen(filename, "wb")) == NULL) {
+        fprintf(stderr, "Can't open file %s\n", filename);
+        exit(1);
+    }
+
+    set_compress_params(cinfo, image_width, image_height, quality);
+    //cinfo.image_width = image_width;
+    //cinfo.image_height = image_height;
+    //cinfo.input_components = 3;
+    //cinfo.in_color_space = JCS_RGB;
+    //cinfo.smoothing_factor = 100;
+    //jpeg_set_defaults(&cinfo);
+    //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
+    //cinfo.restart_interval = 1;
+    //cinfo.comp_info[0].h_samp_factor = 2; //for Y
+    //cinfo.comp_info[0].v_samp_factor = 2;
+    //cinfo.comp_info[1].h_samp_factor = 1; //for Cb
+    //cinfo.comp_info[1].v_samp_factor = 1;
+    //cinfo.comp_info[2].h_samp_factor = 1; //for Cr
+    //cinfo.comp_info[2].v_samp_factor = 1;
+
+    jpeg_stdio_dest(&cinfo, outfile);
+
+    compress_JPEG(cinfo, image_width, image_buffer);
+    //jpeg_start_compress(&cinfo, TRUE);
+
+    //int row_stride = image_width * 3;
+
+    //while (cinfo.next_scanline < cinfo.image_height) {
+    //    row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
+    //    (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    //}
+
+    //jpeg_finish_compress(&cinfo);
+    fclose(outfile);
+
+    jpeg_destroy_compress(&cinfo);
+
+}
+
+void write_JPEG_mem(void *image_buffer_ptr,
+                    size_t image_width, size_t image_height,
+                    void **dest, unsigned long *bufsize,
+                    int quality)
+{
+    JSAMPLE *image_buffer = (JSAMPLE *) image_buffer_ptr;
+    struct jpeg_compress_struct cinfo;
+    struct jpeg_error_mgr jerr;
+    cinfo.err = jpeg_std_error(&jerr);
+    jpeg_create_compress(&cinfo);
+
+    set_compress_params(cinfo, image_width, image_height, quality);
+    //cinfo.image_width = image_width;
+    //cinfo.image_height = image_height;
+    //cinfo.input_components = 3;
+    //cinfo.in_color_space = JCS_RGB;
+    //cinfo.smoothing_factor = 100;
+    //jpeg_set_defaults(&cinfo);
+    //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
+    //cinfo.restart_interval = 1;
+    //cinfo.comp_info[0].h_samp_factor = 2; //for Y
+    //cinfo.comp_info[0].v_samp_factor = 2;
+    //cinfo.comp_info[1].h_samp_factor = 1; //for Cb
+    //cinfo.comp_info[1].v_samp_factor = 1;
+    //cinfo.comp_info[2].h_samp_factor = 1; //for Cr
+    //cinfo.comp_info[2].v_samp_factor = 1;
+
+    jpeg_mem_dest(&cinfo,(unsigned char **) dest, bufsize);
+
+    compress_JPEG(cinfo, image_width, image_buffer);
+    //jpeg_start_compress(&cinfo, TRUE);
+
+    //int row_stride = image_width * 3;
+
+    //while (cinfo.next_scanline < cinfo.image_height) {
+    //    row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
+    //    (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    //}
+
+    //jpeg_finish_compress(&cinfo);
+
+    jpeg_destroy_compress(&cinfo);
+}
