@@ -105,8 +105,8 @@ private:
     std::unique_ptr<uint8_t[]> res_buffer;
     bool hdr_buf_initialized;
 
-    Bitmap recv_raster;
-    Bitmap res_raster;
+    std::unique_ptr<Bitmap> recv_raster;
+    std::unique_ptr<Bitmap> res_raster;
     std::unique_ptr<ecc> enc_s, enc_r;
     Transceiver t;
     BlockHistory history;
