@@ -21,19 +21,17 @@ public:
                 };
     StatCollector();
     void Reset();
-    void AddPacket(unsigned long long size);
+    void AddPacket(unsigned long long size, bool decoded_ok);
+    void AddBchPkg(unsigned long long cnt, unsigned long long failed_cnt);
     void StartFrame();
     void FinishFrame();
     void ResetFileIOTimer();
     void StartTimer(Timers id);
     void StopTimer(Timers id);
-    void PrintStats(FILE *fout = stderr);
-    void PrintPacketSizeStats(FILE *fout = stderr);
-    void PrintFrameSizeStats(FILE *fout = stderr);
-    void PrintTimerStats(FILE *fout = stderr);
     std::string GetStats();
     std::string GetPacketSizeStats();
     std::string GetFrameSizeStats();
+    std::string GetErrorStats();
     std::string GetTimerStats();
 private:
     enum { TIMER_CNT = 9};
@@ -49,11 +47,15 @@ private:
                                   };
     unsigned long long total_packet_size;
     unsigned long long total_packet_cnt;
+    unsigned long long failed_packet_cnt;
     unsigned long long cur_frame_size;
     unsigned long long total_frame_size;
     unsigned long long total_frame_cnt;
     unsigned long long last_packet_size;
     unsigned long long last_frame_size;
+
+    unsigned long long total_bch_pkg_cnt;
+    unsigned long long failed_bch_pkg_cnt;
     clock_t total_time[TIMER_CNT];
     clock_t last_time[TIMER_CNT];
     clock_t started_time[TIMER_CNT];

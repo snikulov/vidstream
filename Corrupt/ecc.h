@@ -7,14 +7,12 @@
 
 //using namespace std;
 
+class StatCollector;
+
 class ecc{
     public:
-        ecc(float ecc2data = 1.0);
-        ecc(uint8_t m, uint8_t t);
-            // ecc2data = 0.2  гарантированно исправляется 1% ошибка и меньше
-            // ecc2data = 1.0 гарантированно исправляется 3.5% ошибка и меньше
-            // ecc2data = 2.0 гарантированно исправляется 5% ошибка и меньше
-            // ecc2data = 3.0 при 10% ошибок около 12% байт остаются неправильными
+        //ecc(float ecc2data = 1.0);
+        ecc(uint8_t m, uint8_t t, StatCollector &stat);
 
         ~ecc();
         void* encode(char* in_data, size_t in_data_len, size_t &out_data_len);
@@ -34,6 +32,8 @@ class ecc{
         uint8_t *data_buff;
         uint8_t *ecc_buff;
         unsigned int *errloc;
+
+        StatCollector &stat;
 };
 
 

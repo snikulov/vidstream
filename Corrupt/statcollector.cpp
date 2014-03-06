@@ -4,36 +4,42 @@
 
 #include <cstring>
 
-StatCollector::StatCollector() :
-    total_packet_size(0),
-    total_packet_cnt (0),
-    total_frame_size (0),
-    total_frame_cnt  (0),
-    last_packet_size (0),
-    last_frame_size  (0),
-    total_time{0, 0, 0},
-    last_time {0, 0, 0}
+StatCollector::StatCollector()
 {
+    Reset();
 }
 
 void StatCollector::Reset()
 {
     total_packet_cnt = 0;
     total_packet_size = 0;
+    failed_packet_cnt = 0;
     total_frame_cnt = 0;
     total_frame_size = 0;
     last_packet_size = 0;
     last_frame_size = 0;
     cur_frame_size = 0;
+    total_bch_pkg_cnt = 0;
+    failed_bch_pkg_cnt = 0;
     memset(total_time, 0, TIMER_CNT * sizeof(total_time[0]));
     memset(last_time,  0, TIMER_CNT * sizeof(last_time [0]));
 }
 
-void StatCollector::AddPacket(unsigned long long size)
+void StatCollector::AddPacket(unsigned long long size, bool decoded_ok)
 {
     total_packet_cnt++;
     total_packet_size += size;
     cur_frame_size += size;
+
+    if (!decoded_ok) {
+        failed_packet_cnt++;
+    }
+}
+
+void StatCollector::AddBchPkg(unsigned long long cnt, unsigned long long failed_cnt)
+{
+    total_bch_pkg_cnt += cnt;
+    failed_bch_pkg_cnt += failed_cnt;
 }
 
 void StatCollector::StartFrame()
@@ -66,60 +72,11 @@ void StatCollector::StopTimer(Timers id)
     total_time[id] += last_time[id];
 }
 
-void StatCollector::PrintStats(FILE *fout)
-{
-    PrintPacketSizeStats(fout);
-    PrintFrameSizeStats(fout);
-    PrintTimerStats(fout);
-}
-
-void StatCollector::PrintPacketSizeStats(FILE *fout)
-{
-    if (!total_packet_cnt) {
-        fprintf(fout, "No packet size data available\n");
-    } else {
-        fprintf(fout, "Average packet size: %f\n",
-                (1.0 * total_packet_size) / total_packet_cnt);
-    }
-}
-
-void StatCollector::PrintFrameSizeStats(FILE *fout)
-{
-    if (!total_frame_cnt) {
-        fprintf(fout, "No frame size data available\n");
-    } else {
-        fprintf(fout, "Average frame size: %f\n",
-                (1.0 * total_frame_size) / total_frame_cnt);
-    }
-}
-
-void StatCollector::PrintTimerStats(FILE *fout)
-{
-    fprintf(fout, "Frame processing time: %f (%f fps)\n",
-            last_time[TIMER_FRAME] * 1.0 / CLOCKS_PER_SEC,
-            CLOCKS_PER_SEC / (1.0 * last_time[TIMER_FRAME]));
-    fprintf(fout, "File i/o time: %f\n",
-            total_time[TIMER_FILEIO] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Video decoding time: %f\n",
-            total_time[TIMER_AVI] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total encoding time: %f\n",
-            total_time[TIMER_ENCODE] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total decoding time: %f\n",
-            total_time[TIMER_DECODE] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total JPEG creation time: %f\n",
-            total_time[TIMER_JPEG_CREATE] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total JPEG reading time: %f\n",
-            total_time[TIMER_JPEG_READ] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total interlace composition time: %f\n",
-            total_time[TIMER_INTERLACE] * 1.0 / CLOCKS_PER_SEC);
-    fprintf(fout, "Total scaling time: %f\n",
-            total_time[TIMER_SCALING] * 1.0 / CLOCKS_PER_SEC);
-}
-
 std::string StatCollector::GetStats() {
     return GetPacketSizeStats() + "\n" +
            GetFrameSizeStats()  + "\n" +
-           GetTimerStats() + "\n";
+           GetErrorStats()      + "\n" +
+           GetTimerStats()      + "\n";
 }
 
 std::string StatCollector::GetPacketSizeStats()
@@ -143,8 +100,28 @@ std::string StatCollector::GetFrameSizeStats()
                "\n" +
                "Required bandwith at 25 fps: " +
                 std::to_string((avg_frame * 25 * 8) / (1024 * 1024)) +
-               "Mbit/s";
+               " Mbit/s";
     }
+}
+
+std::string StatCollector::GetErrorStats()
+{
+    std::string res;
+    if (!total_packet_cnt) {
+        res = "No packet error data available\n";
+    } else {
+        res = "Failed to decode " +
+              std::to_string((1.0 * failed_packet_cnt) / total_packet_cnt) +
+              "% of packets\n";
+    }
+    if (!total_bch_pkg_cnt) {
+        res += "No package error data available";
+    } else {
+        res += "Failed to decode " +
+               std::to_string((1.0 * failed_bch_pkg_cnt) / total_bch_pkg_cnt) +
+               "% of packages";
+    }
+    return res;
 }
 
 std::string StatCollector::GetTimerStats()
