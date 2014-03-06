@@ -34,7 +34,7 @@ private:
     Ui::SettingsDialog *ui;
     MainWindow *mainWin;
 
-    void InitValues();
+    void InitSettingsUI();
 
     bool preset_changed[2];
 };

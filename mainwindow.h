@@ -58,6 +58,9 @@ public:
     Settings GetSettings() const;
     int SetSettings(const Settings &new_s);
 
+    void SetChannelState(bool ok) { broken_channel = !ok;   }
+    bool GetChannelState() const  { return !broken_channel; }
+
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
 
@@ -86,6 +89,8 @@ private:
     size_t cur_mode;
     Settings settings;
     Settings stored_settings[2];
+
+    bool broken_channel;
 
     std::string filename;
     std::ifstream fin;

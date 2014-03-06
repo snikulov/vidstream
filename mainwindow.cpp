@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     running(false),
     video_opened(false),
     cur_mode(0),
+    broken_channel(false),
     head_size(0),
     image_buffer_size(0),
     hdr_buf_initialized(false),
@@ -408,13 +409,12 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         return;
     }
     // each byte of mask corresponds to a whole RestartBlock
-    // Restart block occupies 16x16 pixels after 2v2c compression
-    // there are 3600 blocks in a 1280x720 image
     std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
     SenderThread sender(body_buffer.get(), body_size,
                         t, *enc_s.get(), frame_number,
                         stat,
-                        *interlace_blocks);
+                        *interlace_blocks,
+                        broken_channel);
     ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
                             t, *enc_r.get(), history, transmit_restart_count,
                             stat, err_percent);

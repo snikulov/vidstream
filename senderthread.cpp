@@ -5,20 +5,21 @@
 #include <fstream>
 
 #include "interlace.h"
-// is_rst
 #include "split.h"
 
 SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
                            Transceiver &t, ecc &encoder, uint8_t frame_number,
                            StatCollector &stat,
-                           const InterlaceControl &interlace) :
+                           const InterlaceControl &interlace,
+                           bool broken_channel) :
     buffer(buffer),
     buffer_size(buffer_size),
     t(t),
     encoder(encoder),
     frame_number(frame_number),
     stat(stat),
-    interlace(interlace)
+    interlace(interlace),
+    broken_channel(broken_channel)
 {
 }
 
@@ -38,7 +39,11 @@ int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
     size_t res_len = encoded_len + block.get_info_len();
     uint8_t *res_ptr = (uint8_t *) malloc(res_len);
     memcpy(res_ptr, block.raw_ptr(), block.get_info_len());
-    memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
+    if (!broken_channel) {
+        memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
+    } else {
+        memset(RestartBlock::get_data_ptr(res_ptr), 0, encoded_len);
+    }
     free(encoded_ptr);
     if (!t.Transmit(res_ptr, res_len)) {
         fprintf(stderr, "Failed to send data chunk\n");
