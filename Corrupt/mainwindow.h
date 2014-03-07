@@ -123,8 +123,8 @@ private:
     bool loadImageFile();
     void corruptImage(float err_percent, const std::string &out_filename,
                       uint8_t frame_number);
-    void processImage();
     void processFrames(unsigned frame_count);
+    void displayStatistics();
 };
 
 #endif // MAINWINDOW_H

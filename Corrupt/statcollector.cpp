@@ -111,14 +111,14 @@ std::string StatCollector::GetErrorStats()
         res = "No packet error data available\n";
     } else {
         res = "Failed to decode " +
-              std::to_string((1.0 * failed_packet_cnt) / total_packet_cnt) +
+              std::to_string((100.0 * failed_packet_cnt) / total_packet_cnt) +
               "% of packets\n";
     }
     if (!total_bch_pkg_cnt) {
         res += "No package error data available";
     } else {
         res += "Failed to decode " +
-               std::to_string((1.0 * failed_bch_pkg_cnt) / total_bch_pkg_cnt) +
+               std::to_string((100.0 * failed_bch_pkg_cnt) / total_bch_pkg_cnt) +
                "% of packages";
     }
     return res;
