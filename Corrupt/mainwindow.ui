@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,0,0">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1">
       <property name="sizeConstraint">
@@ -76,6 +76,47 @@
       </item>
       <item>
        <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QRadioButton" name="mode1_radioButton">
+        <property name="text">
+         <string>Mode 1</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="mode2_radioButton">
+        <property name="text">
+         <string>Mode 2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="breakChannelCheckBox">
+        <property name="text">
+         <string>Break channel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>

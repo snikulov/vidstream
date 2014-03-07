@@ -4,11 +4,14 @@
 #include "membuf.h"
 #include "split.h"
 
+#include <QDebug>
+
 ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
                                Transceiver &t, ecc &encoder, BlockHistory &history,
                                size_t restart_block_cnt,
                                StatCollector &stat,
-                               float err_percent) :
+                               float err_percent,
+                               bool broken_channel) :
     buffer(buffer),
     mask(mask),
     t(t),
@@ -17,7 +20,8 @@ ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
     restart_block_cnt(restart_block_cnt),
     stat(stat),
     err_percent(err_percent),
-    killed(false)
+    killed(false),
+    broken_channel(broken_channel)
 {
 }
 
@@ -33,7 +37,11 @@ void ReceiverThread::run()
         size_t encoded_len = recv_size - RestartBlock::get_info_len();
 
         // add errors to the whole RestartBlock in recv buffer
-        Corruptor::add_err(encoded_ptr, encoded_len, err_percent);
+        if (broken_channel) {
+            memset(encoded_ptr, 0, encoded_len);
+        } else {
+            Corruptor::add_err(encoded_ptr, encoded_len, err_percent);
+        }
 
         bool decoded_ok;
         stat.StartTimer(StatCollector::TIMER_DECODE);
@@ -48,24 +56,16 @@ void ReceiverThread::run()
             free(ptr);
             continue;
         }
-        RestartBlock &hsblock = history[RestartBlock::get_rst_block_number(ptr)];
-        uint8_t cur_number = RestartBlock::get_frame_number(ptr);
-        uint8_t diff = cur_number - hsblock.frame_number();
-        if (hsblock.frame_number() > cur_number) {
-            diff += 256;
-        }
-        if (diff > MAX_HISTORY_DIFF) {
-            hsblock.clear();
-        }
-        mask[RestartBlock::get_rst_block_number(ptr)] = hsblock.data_length() != 0;
+        HistoryElement &hsblock = history[RestartBlock::get_rst_block_number(ptr)];
+        mask[RestartBlock::get_rst_block_number(ptr)] = hsblock.get_age() <= MAX_HISTORY_DIFF;
 
-        //replace hsblock with new block if new block is good or hsblock is empty
-        if (decoded_ok || hsblock.data_length() == 0) {
+        //replace hsblock with new block if new block is good or hsblock is old
+        if (decoded_ok || hsblock.get_age() > MAX_HISTORY_DIFF) {
             hsblock = RestartBlock(RestartBlock::get_data_ptr(ptr),
                                    RestartBlock::get_data_length(ptr));
-            hsblock.set_info(RestartBlock::get_frame_number(ptr),
-                             RestartBlock::get_rst_block_number(ptr),
-                             RestartBlock::get_data_length(ptr));
+            hsblock.get_b().set_info(RestartBlock::get_frame_number(ptr),
+                                     RestartBlock::get_rst_block_number(ptr),
+                                     RestartBlock::get_data_length(ptr));
             mask[RestartBlock::get_rst_block_number(ptr)] = true;
         }
         free(recv);
@@ -90,12 +90,16 @@ void ReceiverThread::ComposeJpeg()
             base++;
         }
 
-        RestartBlock &hsblock = history[cur_iteration];
+        HistoryElement &hsblock = history[cur_iteration];
+        if (hsblock.get_age() > MAX_HISTORY_DIFF) {
+            hsblock.clear();
+        }
+        hsblock.increase_age();
 
         // skip the info part
-        size_t len = hsblock.data_length();
+        size_t len = hsblock.get_b().data_length();
         // encoded data contains block header as well
-        uint8_t *data = hsblock.data_ptr();
+        uint8_t *data = hsblock.get_b().data_ptr();
         // copy hsblock contents to output buffer
         // restore the 0x00s after 0xFF
         for (unsigned i = 0; i < len; i++) {

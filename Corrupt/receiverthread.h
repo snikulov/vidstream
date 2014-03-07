@@ -11,7 +11,29 @@
 #include "statcollector.h"
 #include "transceiver.h"
 
-typedef std::vector<RestartBlock> BlockHistory;
+class HistoryElement
+{
+public:
+    HistoryElement() : age(-1) { }
+    HistoryElement(const RestartBlock &rst) : b(rst), age(0) { }
+    HistoryElement &operator=(const RestartBlock &rst) {
+        b = rst;
+        age = 0;
+        return *this;
+    }
+    void clear() {
+        age = -1; // maximum size_t value
+        b.clear();
+    }
+    size_t get_age() const { return age;               }
+    void increase_age()    { if (age + 1 > age) age++; }
+    RestartBlock& get_b()  { return b;                 }
+private:
+    RestartBlock b;
+    size_t age;
+};
+
+typedef std::vector<HistoryElement> BlockHistory;
 
 class ReceiverThread : public QThread
 {
@@ -20,7 +42,8 @@ public:
                    Transceiver &t, ecc &encoder, BlockHistory &history,
                    size_t restart_block_cnt,
                    StatCollector &stat,
-                   float err_percent);
+                   float err_percent,
+                   bool broken_channel);
 
     void Kill()       { killed = true; }
     void ResetState() { killed = false; }
@@ -39,6 +62,8 @@ private:
     float err_percent;
 
     bool killed;
+
+    bool broken_channel;
 
     void ComposeJpeg();
 };

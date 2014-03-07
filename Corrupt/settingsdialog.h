@@ -26,10 +26,6 @@ private slots:
 
     void on_presetsComboBox_currentIndexChanged(int index);
 
-    void on_mode1_radioButton_clicked(bool checked);
-
-    void on_mode2_radioButton_clicked(bool checked);
-
 private:
     Ui::SettingsDialog *ui;
     MainWindow *mainWin;
