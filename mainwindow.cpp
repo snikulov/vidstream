@@ -229,7 +229,7 @@ void MainWindow::processFrames(unsigned frame_count)
     unsigned cur = 0;
     recv_raster->Clear();
     while (running) {
-        ui->infoLabel->setText(QString::fromStdString(stat.GetStats()));
+        displayStatistics();
         stat.Reset();
         stat.StartTimer(StatCollector::TIMER_FRAME);
         st = clock();
@@ -461,6 +461,16 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
     }
 }
 
+void MainWindow::displayStatistics()
+{
+    //ui->infoLabel1->setText(QString::fromStdString(stat.GetStats()));
+    ui->infoLabel1->setText(QString::fromStdString(
+                                stat.GetPacketSizeStats() + "\n" +
+                                stat.GetFrameSizeStats()  + "\n" +
+                                stat.GetErrorStats()      + "\n"));
+    ui->infoLabel2->setText(QString::fromStdString(stat.GetTimerStats()));
+}
+
 void MainWindow::on_settingsButton_clicked()
 {
     if (running) {
@@ -475,7 +485,7 @@ void MainWindow::on_openButton_clicked()
     video_opened = false;
     QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Any files (*.*);;mp4 video (*.mp4);;avi video (*.avi)"));
     int ret;
-    if ((ret = AVHandler::Instance()->open_input_file(filename.toAscii().constData()))) {
+    if ((ret = AVHandler::Instance()->open_input_file(filename.toStdString().c_str()))) {
         qDebug() << "Failed to open file " << filename;
         qDebug() << "Error code " << ret;
         ui->image_corrupt->setText("Failed to open video file");
