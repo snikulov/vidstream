@@ -409,11 +409,10 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
     SenderThread sender(body_buffer.get(), body_size,
                         t, *enc_s.get(), frame_number,
                         stat,
-                        *interlace_blocks,
-                        broken_channel);
+                        *interlace_blocks);
     ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
                             t, *enc_r.get(), history, transmit_restart_count,
-                            stat, err_percent);
+                            stat, err_percent, broken_channel);
     sender.start();
     receiver.start();
     while (sender.isRunning() || receiver.isRunning()) {
@@ -483,4 +482,19 @@ void MainWindow::on_openButton_clicked()
     } else {
         video_opened = true;
     }
+}
+
+void MainWindow::on_mode1_radioButton_clicked(bool checked)
+{
+    SwitchMode();
+}
+
+void MainWindow::on_mode2_radioButton_clicked(bool checked)
+{
+    SwitchMode();
+}
+
+void MainWindow::on_breakChannelCheckBox_toggled(bool checked)
+{
+    SetChannelState(!checked);
 }

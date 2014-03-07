@@ -12,7 +12,7 @@ public:
     RestartBlock(uint8_t *ptr, size_t size);
 
     void push_back(uint8_t c) { data.push_back(c);                   pushbacks_cnt++;   }
-    void clear()              { data.clear(); data.resize(info_len); pushbacks_cnt = 0; }
+    void clear();
     void set_info(uint8_t frame_number, uint16_t rst_block_number, uint16_t length);
 
     uint8_t *raw_ptr()               { return data.data();                     }

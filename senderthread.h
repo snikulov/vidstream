@@ -15,8 +15,7 @@ public:
     SenderThread(const uint8_t *buffer, const size_t buffer_size,
                  Transceiver &t, ecc &encoder, uint8_t frame_number,
                  StatCollector &stat,
-                 const InterlaceControl &interlace,
-                 bool broken_channel = false);
+                 const InterlaceControl &interlace);
 
 protected:
     void run();
@@ -33,7 +32,6 @@ private:
     uint8_t frame_number;
     StatCollector &stat;
     const InterlaceControl &interlace;
-    bool broken_channel;
 };
 
 #endif // SENDERTHREAD_H

@@ -71,6 +71,12 @@ private slots:
 
     void on_openButton_clicked();
 
+    void on_mode1_radioButton_clicked(bool checked);
+
+    void on_mode2_radioButton_clicked(bool checked);
+
+    void on_breakChannelCheckBox_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

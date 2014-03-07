@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="0" colspan="2">
+   <item row="1" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -330,33 +330,6 @@
        <string>Block interlace ratio:</string>
       </property>
      </widget>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QRadioButton" name="mode1_radioButton">
-     <property name="text">
-      <string>mode 1</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QRadioButton" name="mode2_radioButton">
-     <property name="text">
-      <string>mode 2</string>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QCheckBox" name="brokenChannelCheckBox">
-     <property name="text">
-      <string>break channel</string>
-     </property>
     </widget>
    </item>
   </layout>

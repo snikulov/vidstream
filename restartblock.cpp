@@ -1,6 +1,7 @@
 #include "restartblock.h"
 
 #include <stdio.h>
+#include <cassert>
 
 RestartBlock::RestartBlock() :
     pushbacks_cnt(0)
@@ -11,11 +12,18 @@ RestartBlock::RestartBlock() :
 RestartBlock::RestartBlock(uint8_t *ptr, size_t size) :
     pushbacks_cnt(0)
 {
-    data.resize(info_len);
     data.reserve(info_len + size);
+    data.resize(info_len);
     for (size_t i = 0; i < size; i++) {
         data.push_back(ptr[i]);
     }
+}
+
+void RestartBlock::clear()
+{
+    data.clear();
+    data.resize(info_len);
+    pushbacks_cnt = 0;
 }
 
 void RestartBlock::set_info(uint8_t frame_number, uint16_t rst_block_number, uint16_t length)

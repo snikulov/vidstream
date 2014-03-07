@@ -14,7 +14,6 @@ SettingsDialog::SettingsDialog(MainWindow *mainWin, QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     InitSettingsUI();
     // channel state doesn't belong in Settings
-    ui->brokenChannelCheckBox->setChecked(!mainWin->GetChannelState());
 }
 
 void SettingsDialog::InitSettingsUI()
@@ -44,11 +43,6 @@ void SettingsDialog::InitSettingsUI()
         ui->presetsComboBox->setCurrentIndex(3);
     } else {
         ui->presetsComboBox->setCurrentIndex(4);
-    }
-    if (mainWin->GetMode() == 0) {
-        ui->mode1_radioButton->setChecked(true);
-    } else {
-        ui->mode2_radioButton->setChecked(true);
     }
 }
 
@@ -108,17 +102,4 @@ void SettingsDialog::on_buttonBox_accepted()
        QMessageBox::warning(this, "Error", "Invalid interlace ratio");
        return;
    }
-   mainWin->SetChannelState(!ui->brokenChannelCheckBox->isChecked());
-}
-
-void SettingsDialog::on_mode1_radioButton_clicked(bool checked)
-{
-    mainWin->SwitchMode();
-    InitSettingsUI();
-}
-
-void SettingsDialog::on_mode2_radioButton_clicked(bool checked)
-{
-    mainWin->SwitchMode();
-    InitSettingsUI();
 }
