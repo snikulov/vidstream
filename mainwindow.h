@@ -20,22 +20,26 @@ struct Settings {
     int bch_m, bch_t;
     size_t row_num, row_denom;
     size_t block_num, block_denom;
+    size_t rst_block_size;
 
     Settings() :
         jpeg_quality(20),
         bch_m(5), bch_t(4),
         row_num(1), row_denom(1),
-        block_num(1), block_denom(1)
+        block_num(1), block_denom(1),
+        rst_block_size(1)
     { }
 
     Settings(int jpeg_quality,
              int bch_m, int bch_t,
              size_t row_num, size_t row_denom,
-             size_t block_num, size_t block_denom) :
+             size_t block_num, size_t block_denom,
+             size_t rst_block_size) :
         jpeg_quality(jpeg_quality),
         bch_m(bch_m), bch_t(bch_t),
         row_num(row_num), row_denom(row_denom),
-        block_num(block_num), block_denom(block_denom)
+        block_num(block_num), block_denom(block_denom),
+        rst_block_size(rst_block_size)
     { }
 };
 
@@ -47,8 +51,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    int  GetJpegQuality() const { return settings.jpeg_quality; }
+    int  GetJpegQuality() const { return settings.jpeg_quality;   }
     bool SetJpegQuality(int q);
+    size_t GetBlockSize() const { return settings.rst_block_size; }
+    bool SetBlockSize(size_t rst_block_size);
     void GetBchParams(int &bch_m, int &bch_t) const;
     bool SetBchParams(int bch_m, int bch_t);
     void GetRowInterlace(size_t &num, size_t &denom) const;

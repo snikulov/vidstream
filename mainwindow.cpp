@@ -107,6 +107,17 @@ bool MainWindow::SetJpegQuality(int q)
     }
 }
 
+bool MainWindow::SetBlockSize(size_t rst_block_size)
+{
+    if (rst_block_size >= 1) {
+        settings.rst_block_size = rst_block_size;
+        hdr_buf_initialized = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
 {
     bch_m = settings.bch_m;
@@ -177,7 +188,8 @@ Settings MainWindow::GetSettings() const
                     interlace_rows->GetNum(),
                     interlace_rows->GetDenom(),
                     interlace_blocks->GetNum(),
-                    interlace_blocks->GetDenom());
+                    interlace_blocks->GetDenom(),
+                    settings.rst_block_size);
 }
 
 int MainWindow::SetSettings(const Settings &new_s)
@@ -208,6 +220,7 @@ int MainWindow::SetSettings(const Settings &new_s)
     }
     settings.block_num = new_s.block_num;
     settings.block_denom = new_s.block_denom;
+    settings.rst_block_size = new_s.rst_block_size;
     return true;
 }
 
@@ -315,7 +328,7 @@ bool MainWindow::loadImageFile()
     // temp is a JPEG file containing half the image that will be transmitted
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.jpeg_quality,
+                    "temp", settings.jpeg_quality, settings.rst_block_size,
                     grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
@@ -368,8 +381,6 @@ bool MainWindow::loadImageFile()
         ui->image_corrupt->setText("Error occurred while parsing image");
         return false;
     }
-
-    qDebug() << "rst count = " << transmit_restart_count;
 
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
@@ -456,7 +467,8 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         ui->image_corrupt->repaint();
         stat.StartTimer(StatCollector::TIMER_FILEIO);
         write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                        out_filename.c_str(), settings.jpeg_quality, grayscale);
+                        out_filename.c_str(), settings.jpeg_quality,
+                        settings.rst_block_size, grayscale);
         stat.StopTimer(StatCollector::TIMER_FILEIO);
     } catch(...) {
         qDebug() << "Failed to decode/draw image";

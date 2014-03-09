@@ -13,7 +13,6 @@ SettingsDialog::SettingsDialog(MainWindow *mainWin, QWidget *parent) :
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
     InitSettingsUI();
-    // channel state doesn't belong in Settings
 }
 
 void SettingsDialog::InitSettingsUI()
@@ -22,10 +21,6 @@ void SettingsDialog::InitSettingsUI()
     int q = s.jpeg_quality, m = s.bch_m, t = s.bch_t;
     size_t rn = s.row_num, rd = s.row_denom;
     size_t bn = s.block_num, bd = s.block_denom;
-    q = mainWin->GetJpegQuality();
-    mainWin->GetBchParams(m, t);
-    mainWin->GetRowInterlace(rn, rd);
-    mainWin->GetBlockInterlace(bn, bd);
     ui->qualitySpinBox->setValue(q);
     ui->mSpinBox->setValue(m);
     ui->tSpinBox->setValue(t);
@@ -44,6 +39,7 @@ void SettingsDialog::InitSettingsUI()
     } else {
         ui->presetsComboBox->setCurrentIndex(4);
     }
+    ui->blockSizeSpinBox->setValue(s.rst_block_size);
 }
 
 void SettingsDialog::on_presetsComboBox_currentIndexChanged(int index)
@@ -100,6 +96,10 @@ void SettingsDialog::on_buttonBox_accepted()
        !mainWin->SetBlockInterlace(ui->blocksNumSpinBox->value(),
                                    ui->blocksDenomSpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid interlace ratio");
+       return;
+   }
+   if (!mainWin->SetBlockSize(ui->blockSizeSpinBox->value())) {
+       QMessageBox::warning(this, "Error", "Invalid RST block size");
        return;
    }
 }
