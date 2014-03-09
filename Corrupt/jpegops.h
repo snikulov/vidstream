@@ -15,14 +15,15 @@ int read_JPEG_mem(void *image_buffer,
 
 void write_JPEG_file(void *image_buffer,
                      size_t width, size_t height,
-                     const char * filename, int quality,
+                     const char * filename,
+                     int lum_quality, int chrom_quality,
                      size_t rst_block_size,
                      bool grayscale = false);
 
 void write_JPEG_mem(void *image_buffer,
                     size_t width, size_t height,
                     void **dest, unsigned long *bufsize,
-                    int quality,
+                    int lum_quality, int chrom_quality,
                     size_t rst_block_size,
                     bool grayscale = false);
 

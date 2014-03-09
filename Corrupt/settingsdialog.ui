@@ -183,12 +183,12 @@
            </font>
           </property>
           <property name="text">
-           <string>Quality:</string>
+           <string>Lum quality:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="qualitySpinBox">
+         <widget class="QSpinBox" name="lumQualitySpinBox">
           <property name="minimum">
            <number>1</number>
           </property>
@@ -200,7 +200,28 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Chrom quality:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="chromQualitySpinBox">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
         <item>
          <widget class="QLabel" name="label_7">
           <property name="text">

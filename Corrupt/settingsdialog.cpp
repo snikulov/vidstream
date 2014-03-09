@@ -18,10 +18,12 @@ SettingsDialog::SettingsDialog(MainWindow *mainWin, QWidget *parent) :
 void SettingsDialog::InitSettingsUI()
 {
     Settings s = mainWin->GetSettings();
-    int q = s.jpeg_quality, m = s.bch_m, t = s.bch_t;
+    int lq = s.lum_quality, cq = s.chrom_quality;
+    int m = s.bch_m, t = s.bch_t;
     size_t rn = s.row_num, rd = s.row_denom;
     size_t bn = s.block_num, bd = s.block_denom;
-    ui->qualitySpinBox->setValue(q);
+    ui->lumQualitySpinBox->setValue(lq);
+    ui->chromQualitySpinBox->setValue(cq);
     ui->mSpinBox->setValue(m);
     ui->tSpinBox->setValue(t);
     ui->rowsNumSpinBox->setValue(rn);
@@ -85,7 +87,8 @@ void SettingsDialog::on_tSpinBox_valueChanged(int arg1)
 
 void SettingsDialog::on_buttonBox_accepted()
 {
-   if (!mainWin->SetJpegQuality(ui->qualitySpinBox->value())) {
+   if (!mainWin->SetJpegQuality(ui->lumQualitySpinBox->value(),
+                                ui->chromQualitySpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid JPEG quality");
    }
    if (!mainWin->SetBchParams(ui->mSpinBox->value(), ui->tSpinBox->value())) {

@@ -65,7 +65,8 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
 
 void set_compress_params(jpeg_compress_struct &cinfo,
                          size_t image_width, size_t image_height,
-                         int quality, size_t rst_block_size,
+                         int lum_quality, int chrom_quality,
+                         size_t rst_block_size,
                          bool grayscale)
 {
     cinfo.image_width = image_width;
@@ -79,8 +80,10 @@ void set_compress_params(jpeg_compress_struct &cinfo,
     }
     cinfo.smoothing_factor = 100;
     jpeg_set_defaults(&cinfo);
-    jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
-    fprintf(stderr, "rst_block_size = %d\n", rst_block_size);
+    //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
+    cinfo.q_scale_factor[0] = jpeg_quality_scaling(lum_quality);
+    cinfo.q_scale_factor[1] = jpeg_quality_scaling(chrom_quality);
+    jpeg_default_qtables(&cinfo, true);
     cinfo.restart_interval = rst_block_size;
     if (!grayscale) {
         cinfo.comp_info[0].h_samp_factor = 2; //for Y
@@ -193,7 +196,8 @@ int read_JPEG_mem(void *image_buffer_ptr,
 void
 write_JPEG_file (void *image_buffer_ptr,
                  size_t image_width, size_t image_height,
-                 const char * filename, int quality,
+                 const char * filename,
+                 int lum_quality, int chrom_quality,
                  size_t rst_block_size,
                  bool grayscale)
 {
@@ -209,7 +213,8 @@ write_JPEG_file (void *image_buffer_ptr,
     }
 
     set_compress_params(cinfo, image_width, image_height,
-                        quality, rst_block_size, grayscale);
+                        lum_quality, chrom_quality,
+                        rst_block_size, grayscale);
     jpeg_stdio_dest(&cinfo, outfile);
     compress_JPEG(cinfo, image_width, image_buffer, grayscale);
 
@@ -222,7 +227,7 @@ write_JPEG_file (void *image_buffer_ptr,
 void write_JPEG_mem(void *image_buffer_ptr,
                     size_t image_width, size_t image_height,
                     void **dest, unsigned long *bufsize,
-                    int quality, size_t rst_block_size,
+                    int lum_quality, int chrom_quality, size_t rst_block_size,
                     bool grayscale)
 {
     JSAMPLE *image_buffer = (JSAMPLE *) image_buffer_ptr;
@@ -232,7 +237,8 @@ void write_JPEG_mem(void *image_buffer_ptr,
     jpeg_create_compress(&cinfo);
 
     set_compress_params(cinfo, image_width, image_height,
-                        quality, rst_block_size, grayscale);
+                        lum_quality, chrom_quality,
+                        rst_block_size, grayscale);
     jpeg_mem_dest(&cinfo,(unsigned char **) dest, bufsize);
     compress_JPEG(cinfo, image_width, image_buffer, grayscale);
 
