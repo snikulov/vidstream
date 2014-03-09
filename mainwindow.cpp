@@ -96,10 +96,12 @@ void MainWindow::on_startButton_clicked()
     }
 }
 
-bool MainWindow::SetJpegQuality(int q)
+bool MainWindow::SetJpegQuality(int lum, int chrom)
 {
-    if (q > 0 && q <= 100) {
-        settings.jpeg_quality = q;
+    if ((lum > 0 && lum <= 100) ||
+        (chrom > 0 && chrom <= 100)) {
+        settings.lum_quality = lum;
+        settings.chrom_quality = chrom;
         hdr_buf_initialized = false;
         return true;
     } else {
@@ -183,7 +185,8 @@ bool MainWindow::SetBlockInterlace(size_t num, size_t denom)
 
 Settings MainWindow::GetSettings() const
 {
-    return Settings(settings.jpeg_quality,
+    return Settings(settings.lum_quality,
+                    settings.chrom_quality,
                     settings.bch_m, settings.bch_t,
                     interlace_rows->GetNum(),
                     interlace_rows->GetDenom(),
@@ -194,11 +197,13 @@ Settings MainWindow::GetSettings() const
 
 int MainWindow::SetSettings(const Settings &new_s)
 {
-    if (settings.jpeg_quality != new_s.jpeg_quality &&
-        !SetJpegQuality(new_s.jpeg_quality)) {
+    if ((settings.lum_quality != new_s.lum_quality ||
+         settings.chrom_quality != new_s.chrom_quality) &&
+        !SetJpegQuality(new_s.lum_quality, new_s.chrom_quality)) {
         return false;
     }
-    settings.jpeg_quality = new_s.jpeg_quality;
+    settings.lum_quality = new_s.lum_quality;
+    settings.chrom_quality = new_s.chrom_quality;
     if ((settings.bch_m != new_s.bch_m  ||
          settings.bch_t != new_s.bch_t) &&
         !SetBchParams(new_s.bch_m, new_s.bch_t)) {
@@ -328,8 +333,8 @@ bool MainWindow::loadImageFile()
     // temp is a JPEG file containing half the image that will be transmitted
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.jpeg_quality, settings.rst_block_size,
-                    grayscale);
+                    "temp", settings.lum_quality, settings.chrom_quality,
+                    settings.rst_block_size, grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
     // now read JPEG from temp file
@@ -467,7 +472,8 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         ui->image_corrupt->repaint();
         stat.StartTimer(StatCollector::TIMER_FILEIO);
         write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                        out_filename.c_str(), settings.jpeg_quality,
+                        out_filename.c_str(),
+                        settings.lum_quality, settings.chrom_quality,
                         settings.rst_block_size, grayscale);
         stat.StopTimer(StatCollector::TIMER_FILEIO);
     } catch(...) {
