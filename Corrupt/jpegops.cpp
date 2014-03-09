@@ -7,6 +7,11 @@
 
 #include <cstring>
 
+JSAMPLE to_grayscale(JSAMPLE r, JSAMPLE g, JSAMPLE b)
+{
+    return 0.299 * r + 0.587 * g + 0.114 * b;
+}
+
 struct my_error_mgr {
   struct jpeg_error_mgr pub;	/* "public" fields */
   jmp_buf setjmp_buffer;	/* for return to caller */
@@ -32,14 +37,25 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
     image_width = cinfo.output_width;
     image_height = cinfo.output_height;
     int row_stride = cinfo.output_width * cinfo.output_components;
+    bool grayscale = (cinfo.output_components == 1);
     JSAMPARRAY buffer = (*cinfo.mem->alloc_sarray)
         ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
 
     size_t cur_buffer_pos = 0;
     while (cinfo.output_scanline < cinfo.output_height) {
         jpeg_read_scanlines(&cinfo, buffer, 1);
-        memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
-        cur_buffer_pos += row_stride;
+        // put scanline from buffer into image_buffer
+        if (grayscale) {
+            for (size_t i = 0; i < cinfo.image_width; i++) {
+                image_buffer[cur_buffer_pos + 3 * i + 0] = buffer[0][i];
+                image_buffer[cur_buffer_pos + 3 * i + 1] = buffer[0][i];
+                image_buffer[cur_buffer_pos + 3 * i + 2] = buffer[0][i];
+            }
+            cur_buffer_pos += row_stride * 3;
+        } else {
+            memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
+            cur_buffer_pos += row_stride;
+        }
     }
 
     (void) jpeg_finish_decompress(&cinfo);
@@ -49,36 +65,69 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
 
 void set_compress_params(jpeg_compress_struct &cinfo,
                          size_t image_width, size_t image_height,
-                         int quality)
+                         int quality, bool grayscale)
 {
     cinfo.image_width = image_width;
     cinfo.image_height = image_height;
-    cinfo.input_components = 3;
-    cinfo.in_color_space = JCS_RGB;
+    if (grayscale) {
+        cinfo.input_components = 1;
+        cinfo.in_color_space = JCS_GRAYSCALE;
+    } else {
+        cinfo.input_components = 3;
+        cinfo.in_color_space = JCS_RGB;
+    }
     cinfo.smoothing_factor = 100;
     jpeg_set_defaults(&cinfo);
     jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
     cinfo.restart_interval = 1;
-    cinfo.comp_info[0].h_samp_factor = 2; //for Y
-    cinfo.comp_info[0].v_samp_factor = 2;
-    cinfo.comp_info[1].h_samp_factor = 1; //for Cb
-    cinfo.comp_info[1].v_samp_factor = 1;
-    cinfo.comp_info[2].h_samp_factor = 1; //for Cr
-    cinfo.comp_info[2].v_samp_factor = 1;
+    if (!grayscale) {
+        cinfo.comp_info[0].h_samp_factor = 2; //for Y
+        cinfo.comp_info[0].v_samp_factor = 2;
+        cinfo.comp_info[1].h_samp_factor = 1; //for Cb
+        cinfo.comp_info[1].v_samp_factor = 1;
+        cinfo.comp_info[2].h_samp_factor = 1; //for Cr
+        cinfo.comp_info[2].v_samp_factor = 1;
+    } else {
+        cinfo.comp_info[0].h_samp_factor = 1; //for Y
+        cinfo.comp_info[0].v_samp_factor = 1;
+    }
 }
 
 void compress_JPEG(jpeg_compress_struct &cinfo,
                    size_t image_width,
-                   JSAMPLE *image_buffer)
+                   JSAMPLE *image_buffer,
+                   bool grayscale)
 {
     jpeg_start_compress(&cinfo, TRUE);
 
-    int row_stride = image_width * 3;
+    int row_stride;
+    JSAMPLE *buffer;
+
+    if (grayscale) {
+        row_stride = image_width;
+        buffer = new JSAMPLE[image_width * cinfo.image_height];
+        for (size_t row = 0; row < cinfo.image_height; row++) {
+            for(size_t col = 0; col < image_width; col++) {
+                buffer[row * image_width + col] = to_grayscale(
+                            image_buffer[row * image_width * 3 + col * 3 + 0],
+                            image_buffer[row * image_width * 3 + col * 3 + 1],
+                            image_buffer[row * image_width * 3 + col * 3 + 2]);
+            }
+        }
+    } else {
+        row_stride = image_width * 3;
+        buffer = image_buffer;
+    }
+
     JSAMPROW row_pointer[1];
 
     while (cinfo.next_scanline < cinfo.image_height) {
-        row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
+        row_pointer[0] = & buffer[cinfo.next_scanline * row_stride];
         (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+    }
+
+    if (grayscale) {
+        delete[] buffer;
     }
 
     jpeg_finish_compress(&cinfo);
@@ -109,30 +158,8 @@ read_JPEG_file (void* image_buffer_ptr,
     }
     jpeg_create_decompress(&cinfo);
 
-    //cinfo.output_components = 3;
-    //cinfo.out_color_space = JCS_RGB;
-
     jpeg_stdio_src(&cinfo, infile);
     decompress_JPEG(cinfo, image_width, image_height, image_buffer);
-    //jpeg_read_header(&cinfo, TRUE);
-    //jpeg_start_decompress(&cinfo);
-
-    //image_width = cinfo.output_width;
-    //image_height = cinfo.output_height;
-    //row_stride = cinfo.output_width * cinfo.output_components;
-    //buffer = (*cinfo.mem->alloc_sarray)
-    //    ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
-
-    //size_t cur_buffer_pos = 0;
-    //while (cinfo.output_scanline < cinfo.output_height) {
-    //    jpeg_read_scanlines(&cinfo, buffer, 1);
-    //    //put_scanline_someplace(buffer[0], row_stride);
-    //    memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
-    //    cur_buffer_pos += row_stride;
-    //}
-
-    //(void) jpeg_finish_decompress(&cinfo);
-    //jpeg_destroy_decompress(&cinfo);
 
     fclose(infile);
     return 1;
@@ -157,25 +184,6 @@ int read_JPEG_mem(void *image_buffer_ptr,
 
     jpeg_mem_src(&cinfo, (unsigned char *) src, bufsize);
     decompress_JPEG(cinfo, image_width, image_height, image_buffer);
-    //jpeg_read_header(&cinfo, TRUE);
-    //jpeg_start_decompress(&cinfo);
-
-    //image_width = cinfo.output_width;
-    //image_height = cinfo.output_height;
-    //row_stride = cinfo.output_width * cinfo.output_components;
-    //buffer = (*cinfo.mem->alloc_sarray)
-    //    ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
-
-    //size_t cur_buffer_pos = 0;
-    //while (cinfo.output_scanline < cinfo.output_height) {
-    //    jpeg_read_scanlines(&cinfo, buffer, 1);
-    //    //put_scanline_someplace(buffer[0], row_stride);
-    //    memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
-    //    cur_buffer_pos += row_stride;
-    //}
-
-    //(void) jpeg_finish_decompress(&cinfo);
-    //jpeg_destroy_decompress(&cinfo);
 
     return 1;
 }
@@ -183,7 +191,8 @@ int read_JPEG_mem(void *image_buffer_ptr,
 void
 write_JPEG_file (void *image_buffer_ptr,
                  size_t image_width, size_t image_height,
-                 const char * filename, int quality)
+                 const char * filename, int quality,
+                 bool grayscale)
 {
     JSAMPLE *image_buffer = (JSAMPLE *) image_buffer_ptr;
     struct jpeg_compress_struct cinfo;
@@ -196,35 +205,10 @@ write_JPEG_file (void *image_buffer_ptr,
         exit(1);
     }
 
-    set_compress_params(cinfo, image_width, image_height, quality);
-    //cinfo.image_width = image_width;
-    //cinfo.image_height = image_height;
-    //cinfo.input_components = 3;
-    //cinfo.in_color_space = JCS_RGB;
-    //cinfo.smoothing_factor = 100;
-    //jpeg_set_defaults(&cinfo);
-    //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
-    //cinfo.restart_interval = 1;
-    //cinfo.comp_info[0].h_samp_factor = 2; //for Y
-    //cinfo.comp_info[0].v_samp_factor = 2;
-    //cinfo.comp_info[1].h_samp_factor = 1; //for Cb
-    //cinfo.comp_info[1].v_samp_factor = 1;
-    //cinfo.comp_info[2].h_samp_factor = 1; //for Cr
-    //cinfo.comp_info[2].v_samp_factor = 1;
-
+    set_compress_params(cinfo, image_width, image_height, quality, grayscale);
     jpeg_stdio_dest(&cinfo, outfile);
+    compress_JPEG(cinfo, image_width, image_buffer, grayscale);
 
-    compress_JPEG(cinfo, image_width, image_buffer);
-    //jpeg_start_compress(&cinfo, TRUE);
-
-    //int row_stride = image_width * 3;
-
-    //while (cinfo.next_scanline < cinfo.image_height) {
-    //    row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
-    //    (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
-    //}
-
-    //jpeg_finish_compress(&cinfo);
     fclose(outfile);
 
     jpeg_destroy_compress(&cinfo);
@@ -234,7 +218,8 @@ write_JPEG_file (void *image_buffer_ptr,
 void write_JPEG_mem(void *image_buffer_ptr,
                     size_t image_width, size_t image_height,
                     void **dest, unsigned long *bufsize,
-                    int quality)
+                    int quality,
+                    bool grayscale)
 {
     JSAMPLE *image_buffer = (JSAMPLE *) image_buffer_ptr;
     struct jpeg_compress_struct cinfo;
@@ -242,35 +227,9 @@ void write_JPEG_mem(void *image_buffer_ptr,
     cinfo.err = jpeg_std_error(&jerr);
     jpeg_create_compress(&cinfo);
 
-    set_compress_params(cinfo, image_width, image_height, quality);
-    //cinfo.image_width = image_width;
-    //cinfo.image_height = image_height;
-    //cinfo.input_components = 3;
-    //cinfo.in_color_space = JCS_RGB;
-    //cinfo.smoothing_factor = 100;
-    //jpeg_set_defaults(&cinfo);
-    //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
-    //cinfo.restart_interval = 1;
-    //cinfo.comp_info[0].h_samp_factor = 2; //for Y
-    //cinfo.comp_info[0].v_samp_factor = 2;
-    //cinfo.comp_info[1].h_samp_factor = 1; //for Cb
-    //cinfo.comp_info[1].v_samp_factor = 1;
-    //cinfo.comp_info[2].h_samp_factor = 1; //for Cr
-    //cinfo.comp_info[2].v_samp_factor = 1;
-
+    set_compress_params(cinfo, image_width, image_height, quality, grayscale);
     jpeg_mem_dest(&cinfo,(unsigned char **) dest, bufsize);
-
-    compress_JPEG(cinfo, image_width, image_buffer);
-    //jpeg_start_compress(&cinfo, TRUE);
-
-    //int row_stride = image_width * 3;
-
-    //while (cinfo.next_scanline < cinfo.image_height) {
-    //    row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
-    //    (void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
-    //}
-
-    //jpeg_finish_compress(&cinfo);
+    compress_JPEG(cinfo, image_width, image_buffer, grayscale);
 
     jpeg_destroy_compress(&cinfo);
 }

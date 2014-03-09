@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     video_opened(false),
     cur_mode(0),
     broken_channel(false),
+    grayscale(false),
     head_size(0),
     image_buffer_size(0),
     hdr_buf_initialized(false),
@@ -99,6 +100,7 @@ bool MainWindow::SetJpegQuality(int q)
 {
     if (q > 0 && q <= 100) {
         settings.jpeg_quality = q;
+        hdr_buf_initialized = false;
         return true;
     } else {
         return false;
@@ -313,7 +315,8 @@ bool MainWindow::loadImageFile()
     // temp is a JPEG file containing half the image that will be transmitted
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.jpeg_quality);
+                    "temp", settings.jpeg_quality,
+                    grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
     // now read JPEG from temp file
@@ -354,7 +357,7 @@ bool MainWindow::loadImageFile()
 #ifdef GENERATE_HEADER
     std::unique_ptr<std::ostream> fhdr;
     std::unique_ptr<membuf> sbuf_res;
-    hdr_buf_initialized = false;
+    //hdr_buf_initialized = false;
     if (!hdr_buf_initialized) {
         sbuf_res = std::unique_ptr<membuf>
                    (new membuf((char *) res_buffer.get(), image_size));
@@ -365,6 +368,8 @@ bool MainWindow::loadImageFile()
         ui->image_corrupt->setText("Error occurred while parsing image");
         return false;
     }
+
+    qDebug() << "rst count = " << transmit_restart_count;
 
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
@@ -451,7 +456,7 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         ui->image_corrupt->repaint();
         stat.StartTimer(StatCollector::TIMER_FILEIO);
         write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                        out_filename.c_str(), settings.jpeg_quality);
+                        out_filename.c_str(), settings.jpeg_quality, grayscale);
         stat.StopTimer(StatCollector::TIMER_FILEIO);
     } catch(...) {
         qDebug() << "Failed to decode/draw image";
@@ -507,4 +512,10 @@ void MainWindow::on_mode2_radioButton_clicked(bool checked)
 void MainWindow::on_breakChannelCheckBox_toggled(bool checked)
 {
     SetChannelState(!checked);
+}
+
+void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
+{
+    grayscale = checked;
+    hdr_buf_initialized = false;
 }
