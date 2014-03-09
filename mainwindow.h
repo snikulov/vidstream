@@ -77,6 +77,8 @@ private slots:
 
     void on_breakChannelCheckBox_toggled(bool checked);
 
+    void on_grayscaleCheckBox_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
@@ -97,6 +99,7 @@ private:
     Settings stored_settings[2];
 
     bool broken_channel;
+    bool grayscale;
 
     std::string filename;
     std::ifstream fin;
