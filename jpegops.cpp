@@ -32,12 +32,13 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
               JSAMPLE *image_buffer)
 {
     jpeg_read_header(&cinfo, TRUE);
+    cinfo.out_color_space = JCS_RGB;
     jpeg_start_decompress(&cinfo);
 
     image_width = cinfo.output_width;
     image_height = cinfo.output_height;
     int row_stride = cinfo.output_width * cinfo.output_components;
-    bool grayscale = (cinfo.output_components == 1);
+    //bool grayscale = (cinfo.output_components == 1);
     JSAMPARRAY buffer = (*cinfo.mem->alloc_sarray)
         ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
 
@@ -45,17 +46,17 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
     while (cinfo.output_scanline < cinfo.output_height) {
         jpeg_read_scanlines(&cinfo, buffer, 1);
         // put scanline from buffer into image_buffer
-        if (grayscale) {
-            for (size_t i = 0; i < cinfo.image_width; i++) {
-                image_buffer[cur_buffer_pos + 3 * i + 0] = buffer[0][i];
-                image_buffer[cur_buffer_pos + 3 * i + 1] = buffer[0][i];
-                image_buffer[cur_buffer_pos + 3 * i + 2] = buffer[0][i];
-            }
-            cur_buffer_pos += row_stride * 3;
-        } else {
+        //if (grayscale) {
+        //    for (size_t i = 0; i < cinfo.image_width; i++) {
+        //        image_buffer[cur_buffer_pos + 3 * i + 0] = buffer[0][i];
+        //        image_buffer[cur_buffer_pos + 3 * i + 1] = buffer[0][i];
+        //        image_buffer[cur_buffer_pos + 3 * i + 2] = buffer[0][i];
+        //    }
+        //    cur_buffer_pos += row_stride * 3;
+        //} else {
             memcpy(image_buffer + cur_buffer_pos, buffer[0], row_stride);
             cur_buffer_pos += row_stride;
-        }
+        //}
     }
 
     (void) jpeg_finish_decompress(&cinfo);
@@ -85,17 +86,12 @@ void set_compress_params(jpeg_compress_struct &cinfo,
     cinfo.q_scale_factor[1] = jpeg_quality_scaling(chrom_quality);
     jpeg_default_qtables(&cinfo, true);
     cinfo.restart_interval = rst_block_size;
-    if (!grayscale) {
-        cinfo.comp_info[0].h_samp_factor = 2; //for Y
-        cinfo.comp_info[0].v_samp_factor = 2;
-        cinfo.comp_info[1].h_samp_factor = 1; //for Cb
-        cinfo.comp_info[1].v_samp_factor = 1;
-        cinfo.comp_info[2].h_samp_factor = 1; //for Cr
-        cinfo.comp_info[2].v_samp_factor = 1;
-    } else {
-        cinfo.comp_info[0].h_samp_factor = 1; //for Y
-        cinfo.comp_info[0].v_samp_factor = 1;
-    }
+    cinfo.comp_info[0].h_samp_factor = 2; //for Y
+    cinfo.comp_info[0].v_samp_factor = 2;
+    cinfo.comp_info[1].h_samp_factor = 1; //for Cb
+    cinfo.comp_info[1].v_samp_factor = 1;
+    cinfo.comp_info[2].h_samp_factor = 1; //for Cr
+    cinfo.comp_info[2].v_samp_factor = 1;
 }
 
 void compress_JPEG(jpeg_compress_struct &cinfo,
