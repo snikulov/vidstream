@@ -73,6 +73,9 @@ public:
     void SetChannelState(bool ok) { broken_channel = !ok;   }
     bool GetChannelState() const  { return !broken_channel; }
 
+    void GetScalingResolution(size_t &w, size_t &h) const;
+    bool SetScalingResolution(size_t w, size_t h);
+
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
 
@@ -94,7 +97,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    static constexpr size_t MAX_RESTART_BLOCKS = 3600;
+    // block count with no downsampling on 1280x720 is 14400
+    static constexpr size_t MAX_RESTART_BLOCKS = 15000;
 
     size_t image_width;
     size_t image_height;

@@ -42,6 +42,10 @@ void SettingsDialog::InitSettingsUI()
         ui->presetsComboBox->setCurrentIndex(4);
     }
     ui->blockSizeSpinBox->setValue(s.rst_block_size);
+    size_t w, h;
+    mainWin->GetScalingResolution(w, h);
+    ui->widthSpinBox->setValue(w);
+    ui->heightSpinBox->setValue(h);
 }
 
 void SettingsDialog::on_presetsComboBox_currentIndexChanged(int index)
@@ -103,6 +107,11 @@ void SettingsDialog::on_buttonBox_accepted()
    }
    if (!mainWin->SetBlockSize(ui->blockSizeSpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid RST block size");
+       return;
+   }
+   if (!mainWin->SetScalingResolution(ui->widthSpinBox->value(),
+                                      ui->heightSpinBox->value())) {
+       QMessageBox::warning(this, "Error", "Invalid frame resolution");
        return;
    }
 }
