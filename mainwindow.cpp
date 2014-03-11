@@ -229,6 +229,20 @@ int MainWindow::SetSettings(const Settings &new_s)
     return true;
 }
 
+void MainWindow::GetScalingResolution(size_t &w, size_t &h) const
+{
+    w = scaled_width;
+    h = scaled_height;
+}
+
+bool MainWindow::SetScalingResolution(size_t w, size_t h)
+{
+    scaled_width = w;
+    scaled_height = h;
+    recv_raster = std::unique_ptr<Bitmap>(new Bitmap(scaled_width, scaled_height));
+    return true;
+}
+
 bool MainWindow::SwitchMode()
 {
     // first remember the settings for this mode
@@ -289,10 +303,8 @@ bool MainWindow::loadImageFile()
     if (input_width != image_width || input_height != image_height) {
         image_width = input_width;
         image_height = input_height;
-        scaled_width = image_width / 2;
-        scaled_height = image_height / 2;
         res_raster = std::unique_ptr<Bitmap>(new Bitmap(input_width, input_height));
-        recv_raster = std::unique_ptr<Bitmap>(new Bitmap(scaled_width, scaled_height));
+        SetScalingResolution(input_width / 2, input_height / 2);
     }
 
     // convert QImage into RGB888 buffer
