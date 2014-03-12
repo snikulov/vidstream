@@ -31,6 +31,7 @@ private:
     MainWindow *mainWin;
 
     void InitSettingsUI();
+    void DisplayBchInfo(int m, int t);
 
     bool preset_changed[2];
 };

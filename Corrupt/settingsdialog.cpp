@@ -43,6 +43,25 @@ void SettingsDialog::InitSettingsUI()
     mainWin->GetScalingResolution(w, h);
     ui->widthSpinBox->setValue(w);
     ui->heightSpinBox->setValue(h);
+    DisplayBchInfo(m, t);
+}
+
+void SettingsDialog::DisplayBchInfo(int m, int t)
+{
+    unsigned pkg_len = (1 << m) / 8;
+    unsigned ecc_len = m*t/8;
+    if ((m*t) % 8) {
+        ecc_len += 1;
+    }
+    unsigned data_len = pkg_len - ecc_len;
+    ui->bchInfoLabel->setText(QString::fromStdString("package len = " +
+                                                     std::to_string(pkg_len) + "\n" +
+                                                     "ecc len = " +
+                                                     std::to_string(ecc_len) + "\n" +
+                                                     "data len = " +
+                                                     std::to_string(data_len) + "\n" +
+                                                     "ecc/data overhead: " +
+                                                     std::to_string((1.0 * ecc_len) / data_len)));
 }
 
 void SettingsDialog::on_presetsComboBox_currentIndexChanged(int index)
@@ -62,6 +81,7 @@ void SettingsDialog::on_presetsComboBox_currentIndexChanged(int index)
         ui->mSpinBox->setValue(5);
         ui->tSpinBox->setValue(4);
     }
+    DisplayBchInfo(ui->mSpinBox->value(), ui->tSpinBox->value());
     QApplication::processEvents();
 }
 
@@ -75,6 +95,7 @@ void SettingsDialog::on_mSpinBox_valueChanged(int arg1)
     if (!preset_changed[0]) {
         ui->presetsComboBox->setCurrentIndex(4); // Custom
     }
+    DisplayBchInfo(ui->mSpinBox->value(), ui->tSpinBox->value());
     preset_changed[0] = false;
 }
 
@@ -83,6 +104,7 @@ void SettingsDialog::on_tSpinBox_valueChanged(int arg1)
     if (!preset_changed[1]) {
         ui->presetsComboBox->setCurrentIndex(4); // Custom
     }
+    DisplayBchInfo(ui->mSpinBox->value(), ui->tSpinBox->value());
     preset_changed[1] = false;
 }
 
