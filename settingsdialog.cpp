@@ -21,15 +21,12 @@ void SettingsDialog::InitSettingsUI()
     int lq = s.lum_quality, cq = s.chrom_quality;
     int m = s.bch_m, t = s.bch_t;
     size_t rn = s.row_num, rd = s.row_denom;
-    size_t bn = s.block_num, bd = s.block_denom;
     ui->lumQualitySpinBox->setValue(lq);
     ui->chromQualitySpinBox->setValue(cq);
     ui->mSpinBox->setValue(m);
     ui->tSpinBox->setValue(t);
     ui->rowsNumSpinBox->setValue(rn);
     ui->rowsDenomSpinBox->setValue(rd);
-    ui->blocksNumSpinBox->setValue(bn);
-    ui->blocksDenomSpinBox->setValue(bd);
     if (m == 13 && t == 105) {       // ecc2data = 0.2
         ui->presetsComboBox->setCurrentIndex(0);
     } else if (m == 5 && t == 3) { // ecc2data = 1
@@ -99,9 +96,7 @@ void SettingsDialog::on_buttonBox_accepted()
        QMessageBox::warning(this, "Error", "Invalid BCH parameters");
    }
    if (!mainWin->SetRowInterlace(ui->rowsNumSpinBox->value(),
-                                 ui->rowsDenomSpinBox->value()) ||
-       !mainWin->SetBlockInterlace(ui->blocksNumSpinBox->value(),
-                                   ui->blocksDenomSpinBox->value())) {
+                                 ui->rowsDenomSpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid interlace ratio");
        return;
    }

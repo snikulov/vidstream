@@ -4,8 +4,13 @@
 
 #include <cstring>
 
-StatCollector::StatCollector()
+StatCollector::StatCollector() :
+    avg_packet_size(0),
+    avg_frame_size(0),
+    avg_packet_error(0),
+    avg_pkg_error(0)
 {
+    memset(last_shown_time,  0, TIMER_CNT * sizeof(last_shown_time[0]));
     Reset();
 }
 
@@ -84,8 +89,13 @@ std::string StatCollector::GetPacketSizeStats()
     if (!total_packet_cnt) {
         return "No packet size data available";
     } else {
-        return "Average packet size: " +
-                std::to_string((1.0 * total_packet_size) / total_packet_cnt);
+        float coeff = 1.0;
+        if (avg_packet_size > 0) {
+            avg_packet_size *= inertness;
+            coeff = 1 - inertness;
+        }
+        avg_packet_size += (coeff * total_packet_size) / total_packet_cnt;
+        return "Average packet size: " + std::to_string(avg_packet_size);
     }
 }
 
@@ -94,12 +104,17 @@ std::string StatCollector::GetFrameSizeStats()
     if (!total_frame_cnt) {
         return "No frame size data available";
     } else {
-        float avg_frame = (1.0 * total_frame_size) / total_frame_cnt;
+        float coeff = 1.0;
+        if (avg_frame_size > 0) {
+            avg_frame_size *= inertness;
+            coeff = 1 - inertness;
+        }
+        avg_frame_size += (coeff * total_frame_size) / total_frame_cnt;
         return "Average frame size: " +
-               std::to_string(avg_frame) +
+               std::to_string(avg_frame_size) +
                "\n" +
                "Required bandwith at 25 fps: " +
-                std::to_string((avg_frame * 25 * 8) / (1024 * 1024)) +
+                std::to_string((avg_frame_size * 25 * 8) / (1024 * 1024)) +
                " Mbit/s";
     }
 }
@@ -110,15 +125,27 @@ std::string StatCollector::GetErrorStats()
     if (!total_packet_cnt) {
         res = "No packet error data available\n";
     } else {
+        float coeff = 1.0;
+        if (avg_packet_error > 0) {\
+            avg_packet_error *= inertness;
+            coeff = 1 - inertness;
+        }
+        avg_packet_error += (coeff * 100.0 * failed_packet_cnt) / total_packet_cnt;
         res = "Failed to decode " +
-              std::to_string((100.0 * failed_packet_cnt) / total_packet_cnt) +
+              std::to_string(avg_packet_error) +
               "% of packets\n";
     }
     if (!total_bch_pkg_cnt) {
         res += "No package error data available";
     } else {
+        float coeff = 1.0;
+        if (avg_pkg_error > 0) {\
+            avg_pkg_error *= inertness;
+            coeff = 0.1;
+        }
+        avg_pkg_error += (coeff * 100.0 * failed_bch_pkg_cnt) / total_bch_pkg_cnt;
         res += "Failed to decode " +
-               std::to_string((100.0 * failed_bch_pkg_cnt) / total_bch_pkg_cnt) +
+               std::to_string(avg_pkg_error) +
                "% of packages";
     }
     return res;
@@ -128,14 +155,18 @@ std::string StatCollector::GetTimerStats()
 {
     std::string res;
     for (int i = 0; i < TIMER_CNT; i++) {
-        res += desc[i] + std::to_string(total_time[i] * 1.0 / CLOCKS_PER_SEC);
-        if (i != TIMER_FRAME) {
-            float percentage = total_time[i] * 100.0 / last_time[TIMER_FRAME];
+        float cur_time = inertness * last_shown_time[i];
+        float coeff = last_shown_time[i] ? (1.0 - inertness) : 1.0;
+        cur_time += coeff * total_time[i];
+        res += desc[i] + std::to_string(cur_time / CLOCKS_PER_SEC);
+        if (i != TIMER_FRAME) { // print % of total frame time
+            float percentage = cur_time * 100.0 / last_time[TIMER_FRAME];
             res += " (" + std::to_string(percentage) + "%)";
-        } else {
-            res += " (" + std::to_string(CLOCKS_PER_SEC / (1.0 * total_time[i])) + " fps)";
+        } else { // print fps
+            res += " (" + std::to_string(CLOCKS_PER_SEC / (1.0 * cur_time)) + " fps)";
         }
         res += "\n";
+        last_shown_time[i] = static_cast<clock_t>(cur_time);
     }
     return res;
 }
