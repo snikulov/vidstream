@@ -45,20 +45,29 @@ private:
                                     "interlace composition time: ",
                                     "scaling time: "
                                   };
-    unsigned long long total_packet_size;
-    unsigned long long total_packet_cnt;
-    unsigned long long failed_packet_cnt;
-    unsigned long long cur_frame_size;
-    unsigned long long total_frame_size;
-    unsigned long long total_frame_cnt;
-    unsigned long long last_packet_size;
-    unsigned long long last_frame_size;
 
-    unsigned long long total_bch_pkg_cnt;
-    unsigned long long failed_bch_pkg_cnt;
+    static constexpr float inertness = 0.90;
+
+    unsigned total_packet_size;
+    unsigned total_packet_cnt;
+    unsigned failed_packet_cnt;
+    unsigned cur_frame_size;
+    unsigned total_frame_size;
+    unsigned total_frame_cnt;
+    unsigned last_packet_size;
+    unsigned last_frame_size;
+
+    unsigned total_bch_pkg_cnt;
+    unsigned failed_bch_pkg_cnt;
     clock_t total_time[TIMER_CNT];
     clock_t last_time[TIMER_CNT];
     clock_t started_time[TIMER_CNT];
+    clock_t last_shown_time[TIMER_CNT];
+
+    float avg_packet_size;
+    float avg_frame_size;
+    float avg_packet_error;
+    float avg_pkg_error;
 
     StatCollector(const StatCollector &T);
 };

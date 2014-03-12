@@ -339,50 +339,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="label_6">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Block interlace ratio:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="blocksNumSpinBox">
-        <property name="suffix">
-         <string> blocks transmitted</string>
-        </property>
-        <property name="prefix">
-         <string/>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="blocksDenomSpinBox">
-        <property name="suffix">
-         <string> blocks</string>
-        </property>
-        <property name="prefix">
-         <string>out of every </string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
