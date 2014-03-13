@@ -27,7 +27,13 @@ SOURCES += main.cpp\
     settingsdialog.cpp \
     bitmap.cpp \
     avhandler.cpp \
-    interlace.cpp
+    interlace.cpp \
+    main_decode.cpp \
+    main_encode.cpp \
+    main_read.cpp \
+    main_send.cpp \
+    transport.cpp \
+    err.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
@@ -44,9 +50,12 @@ HEADERS  += mainwindow.h \
     settingsdialog.h \
     bitmap.h \
     avhandler.h \
-    interlace.h
+    interlace.h \
+    transport.h \
+    err.h \
+    threaded_coder.h
 
-LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale
+LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui

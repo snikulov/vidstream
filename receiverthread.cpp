@@ -33,8 +33,10 @@ void ReceiverThread::run()
     // receive a block if it comes before the timeout of 10 ms elapses
     // put all received and successfully decoded blocks in history
     while (!killed && (recv = t.Receive(10, recv_size))) {
-        uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
-        size_t encoded_len = recv_size - RestartBlock::get_info_len();
+        //uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
+        uint8_t *encoded_ptr = recv;
+        //size_t encoded_len = recv_size - RestartBlock::get_info_len();
+        size_t encoded_len = recv_size;
 
         // add errors to the whole RestartBlock in recv buffer
         if (broken_channel) {

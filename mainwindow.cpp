@@ -43,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     res_raster(new Bitmap(image_width, image_height)),
-    enc_s(new ecc(settings.bch_m, settings.bch_t, stat)),
-    enc_r(new ecc(settings.bch_m, settings.bch_t, stat)),
+    enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
+    enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
     history(MAX_RESTART_BLOCKS),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
@@ -133,8 +133,8 @@ void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
 bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
     try {
-        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
-        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
+        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
+        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
     } catch (...) { // failed to initialize bch
         return false;
     }

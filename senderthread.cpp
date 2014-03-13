@@ -34,17 +34,12 @@ int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
                                                       block.raw_length(), encoded_len);
     stat.StopTimer(StatCollector::TIMER_ENCODE);
 
-    size_t res_len = encoded_len + block.get_info_len();
-    uint8_t *res_ptr = (uint8_t *) malloc(res_len);
-    memcpy(res_ptr, block.raw_ptr(), block.get_info_len());
-    memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
-    free(encoded_ptr);
-    if (!t.Transmit(res_ptr, res_len)) {
+    if (!t.Transmit(encoded_ptr, encoded_len)) {
         qDebug() << "Failed to send data chunk";
-        free(res_ptr);
+        free(encoded_ptr);
         return 0;
     }
-    free(res_ptr);
+    free(encoded_ptr);
     return 1;
 }
 
