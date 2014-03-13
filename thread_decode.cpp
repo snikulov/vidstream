@@ -1,3 +1,5 @@
+#include "thread_decode.h"
+
 #include <errno.h>
 #include "ecc.h"
 #include "err.h"
@@ -12,8 +14,13 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 using namespace boost::interprocess;
-//==============================================================================================================
-int process_decode(int argc, char *argv[])
+
+DecoderThread::DecoderThread(ecc &coder, StatCollector &stat) :
+    coder(coder),
+    stat(stat)
+{ }
+
+void DecoderThread::run()
 {
     message_queue input_que(open_or_create, TO_DECODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     message_queue output_que(open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
@@ -22,7 +29,6 @@ int process_decode(int argc, char *argv[])
     size_t buff_len = sizeof(msg);
     size_t recvd, msg_len, out_lnt;
 
-    ecc coder(5, 4);
     unsigned int priority;
 
     cout<< "decode started.\n"; 

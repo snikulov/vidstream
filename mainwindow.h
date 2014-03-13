@@ -4,7 +4,7 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
-#include "receiverthread.h"
+#include "thread_reassemble.h"
 #include "transceiver.h"
 
 #include <QMainWindow>

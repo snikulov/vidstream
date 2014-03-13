@@ -17,9 +17,7 @@ SOURCES += main.cpp\
     bch.cpp \
     corrupt.cpp \
     ecc.cpp \
-    receiverthread.cpp \
     restartblock.cpp \
-    senderthread.cpp \
     split.cpp \
     transceiver.cpp \
     jpegops.cpp \
@@ -28,21 +26,21 @@ SOURCES += main.cpp\
     bitmap.cpp \
     avhandler.cpp \
     interlace.cpp \
-    main_decode.cpp \
-    main_encode.cpp \
-    main_read.cpp \
-    main_send.cpp \
     transport.cpp \
-    err.cpp
+    err.cpp \
+    thread_encode.cpp \
+    thread_decode.cpp \
+    thread_send.cpp \
+    thread_read.cpp \
+    thread_packetize.cpp \
+    thread_reassemble.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
     corrupt.h \
     ecc.h \
     membuf.h \
-    receiverthread.h \
     restartblock.h \
-    senderthread.h \
     split.h \
     transceiver.h \
     jpegops.h \
@@ -53,7 +51,12 @@ HEADERS  += mainwindow.h \
     interlace.h \
     transport.h \
     err.h \
-    threaded_coder.h
+    threaded_coder.h \
+    thread_packetize.h \
+    thread_reassemble.h \
+    thread_encode.h \
+    thread_decode.h \
+    thread_send.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 

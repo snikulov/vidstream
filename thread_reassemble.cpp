@@ -1,4 +1,4 @@
-#include "receiverthread.h"
+#include "thread_reassemble.h"
 
 #include "corrupt.h"
 #include "membuf.h"
@@ -6,7 +6,7 @@
 
 #include <QDebug>
 
-ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
+ReassemblerThread::ReassemblerThread(uint8_t *buffer, char *mask,
                                Transceiver &t, ecc &encoder, BlockHistory &history,
                                size_t restart_block_cnt,
                                StatCollector &stat,
@@ -25,7 +25,7 @@ ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
 {
 }
 
-void ReceiverThread::run()
+void ReassemblerThread::run()
 {
     uint8_t *recv, *ptr;
     size_t recv_size, decoded_size;
@@ -78,7 +78,7 @@ void ReceiverThread::run()
     stat.FinishFrame();
 }
 
-void ReceiverThread::ComposeJpeg()
+void ReassemblerThread::ComposeJpeg()
 {
     uint8_t *base = buffer;
     for (size_t cur_iteration = 0; cur_iteration < restart_block_cnt;

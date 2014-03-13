@@ -11,15 +11,20 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 using namespace boost::interprocess;
-//==============================================================================================================
-int process_encode(int argc, char *argv[]){
+
+EncoderThread::EncoderThread(ecc &coder, StatCollector &stat) :
+    coder(coder),
+    stat(stat)
+{ }
+
+void EncoderThread::run()
+{
 
     message_queue input_que(open_or_create, TO_ENCODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     message_queue output_que(open_or_create, TO_SEND_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
     send_data msg;
     size_t buff_len = sizeof(msg);
-    ecc coder(5, 4);
     cout<< "encode started.\n"; 
 
     size_t recvd, msg_len, out_lnt;

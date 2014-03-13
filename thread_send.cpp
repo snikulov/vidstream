@@ -1,22 +1,21 @@
+#include "thread_send.h"
+
 #include <errno.h>
 #include "ecc.h"
 #include "err.h"
 #include "pthread.h"
 #include "threaded_coder.h"
-#include  "transport.h"
-#include  <sys/types.h>
+#include "transport.h"
+#include <sys/types.h>
 #include <sys/errno.h>
 #include <sys/msg.h>
 #include <sys/ipc.h>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 using namespace boost::interprocess;
-//==============================================================================================================
-int process_send(int argc, char *argv[]){
 
-    //Using:
-    //send IP_ADDRESS PORT_NUMBER
-    //
+void SenderThread::run()
+{
 
     message_queue input_que(open_or_create, TO_SEND_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
@@ -48,11 +47,11 @@ int process_send(int argc, char *argv[]){
 	
 	
         if(loc_size){
-            T.send(argv[1], atoi(argv[2]), loc_buff, loc_size); //отсылаем пакет
+            T.send(ip, port, loc_buff, loc_size); //отсылаем пакет
             cout<< "send one pkg.\n"; 
         }
     }
 
-    return 0;
+    return;
 }
 

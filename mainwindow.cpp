@@ -7,8 +7,8 @@
 #include "interlace.h"
 #include "jpegops.h"
 #include "membuf.h"
-#include "receiverthread.h"
-#include "senderthread.h"
+#include "thread_reassemble.h"
+#include "thread_packetize.h"
 #include "split.h"
 #include "transceiver.h"
 
@@ -439,11 +439,11 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
     }
     // each byte of mask corresponds to a whole RestartBlock
     std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    SenderThread sender(body_buffer.get(), body_size,
+    PacketizerThread sender(body_buffer.get(), body_size,
                         t, *enc_s.get(), frame_number,
                         stat,
                         *interlace_blocks);
-    ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
+    ReassemblerThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
                             t, *enc_r.get(), history, transmit_restart_count,
                             stat, err_percent, broken_channel);
     sender.start();
