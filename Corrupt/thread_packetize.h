@@ -9,10 +9,10 @@
 #include "transceiver.h"
 #include "statcollector.h"
 
-class SenderThread : public QThread
+class PacketizerThread : public QThread
 {
 public:
-    SenderThread(const uint8_t *buffer, const size_t buffer_size,
+    PacketizerThread(const uint8_t *buffer, const size_t buffer_size,
                  Transceiver &t, ecc &encoder, uint8_t frame_number,
                  StatCollector &stat,
                  const InterlaceControl &interlace);

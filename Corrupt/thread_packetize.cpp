@@ -1,4 +1,4 @@
-#include "senderthread.h"
+#include "thread_packetize.h"
 
 #include <cassert>
 #include <cmath>
@@ -9,7 +9,7 @@
 #include "interlace.h"
 #include "split.h"
 
-SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
+PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_size,
                            Transceiver &t, ecc &encoder, uint8_t frame_number,
                            StatCollector &stat,
                            const InterlaceControl &interlace) :
@@ -23,7 +23,7 @@ SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
 {
 }
 
-int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
+int PacketizerThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
                                 uint16_t rst_number, uint16_t data_len)
 {
     block.set_info(frame_number, rst_number, data_len);
@@ -43,7 +43,7 @@ int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
     return 1;
 }
 
-void SenderThread::run()
+void PacketizerThread::run()
 {
     // c - current char, p - previous char
     uint8_t p = 0, c;
