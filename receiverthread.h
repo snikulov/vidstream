@@ -35,16 +35,18 @@ private:
 
 typedef std::vector<HistoryElement> BlockHistory;
 
-class ReassemblerThread : public QThread
+class ReceiverThread : public QThread
 {
 public:
-    ReassemblerThread(uint8_t *buffer, char *mask,
+    ReceiverThread(uint8_t *buffer, char *mask,
                    Transceiver &t, ecc &encoder, BlockHistory &history,
                    size_t restart_block_cnt,
                    StatCollector &stat,
                    float err_percent,
                    bool broken_channel);
 
+    void Kill()       { killed = true; }
+    void ResetState() { killed = false; }
 protected:
     void run();
 private:
@@ -58,6 +60,8 @@ private:
     size_t restart_block_cnt;
     StatCollector &stat;
     float err_percent;
+
+    bool killed;
 
     bool broken_channel;
 

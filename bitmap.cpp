@@ -148,3 +148,25 @@ Bitmap* bicubic_resize(Bitmap &img, int newWidth, int newHeight)
             }
         return img2;
 }
+
+void swap_regions(Bitmap &img, size_t r1, size_t c1, size_t r2, size_t c2, size_t w, size_t h)
+{
+    size_t chunk_width = w * 3;
+    char* buffer = new char[chunk_width];
+    for (size_t i = 0; i < h; i++) {
+        memcpy(buffer, img.GetPixel(r1 + i, c1), chunk_width);
+        memcpy(img.GetPixel(r1 + i, c1), img.GetPixel(r2 + i, c2), chunk_width);
+        memcpy(img.GetPixel(r2 + i, c2), buffer, chunk_width);
+    }
+    delete[] buffer;
+}
+
+void change_order(Bitmap &img, size_t bsize)
+{
+    for (size_t row = 0; row < img.GetHeight() - bsize; row += 2 * bsize) {
+        for (size_t col = 0; col < img.GetWidth() - 4 * bsize; col += 4 * bsize) {
+            swap_regions(img, row, col + 2 * bsize, row + bsize, col,
+                         2 * bsize, bsize);
+        }
+    }
+}

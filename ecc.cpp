@@ -6,7 +6,7 @@
 
 using namespace std;
 
-ecc::ecc(uint8_t m, uint8_t t, StatCollector *stat) :
+ecc::ecc(uint8_t m, uint8_t t, StatCollector &stat) :
     data_buff(NULL), errloc(NULL), stat(stat)
 {
 
@@ -115,17 +115,9 @@ void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len, bool 
         memcpy(data_out + data_len*curr_blk, data_buff, data_len);
     }
 
-    if (stat) {
-        stat->AddBchPkg(data_blocks, failed_cnt);
-    }
+    stat.AddBchPkg(data_blocks, failed_cnt);
 
     out_data_len = data_blocks * data_len;
     return data_out;
 }
 
-
-void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len)
-{
-    bool temp;
-    return decode(in_data, in_data_len, out_data_len, temp);
-}
