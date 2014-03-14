@@ -17,7 +17,9 @@ SOURCES += main.cpp\
     bch.cpp \
     corrupt.cpp \
     ecc.cpp \
+    receiverthread.cpp \
     restartblock.cpp \
+    senderthread.cpp \
     split.cpp \
     transceiver.cpp \
     jpegops.cpp \
@@ -25,22 +27,16 @@ SOURCES += main.cpp\
     settingsdialog.cpp \
     bitmap.cpp \
     avhandler.cpp \
-    interlace.cpp \
-    transport.cpp \
-    err.cpp \
-    thread_encode.cpp \
-    thread_decode.cpp \
-    thread_send.cpp \
-    thread_read.cpp \
-    thread_packetize.cpp \
-    thread_reassemble.cpp
+    interlace.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
     corrupt.h \
     ecc.h \
     membuf.h \
+    receiverthread.h \
     restartblock.h \
+    senderthread.h \
     split.h \
     transceiver.h \
     jpegops.h \
@@ -48,15 +44,7 @@ HEADERS  += mainwindow.h \
     settingsdialog.h \
     bitmap.h \
     avhandler.h \
-    interlace.h \
-    transport.h \
-    err.h \
-    threaded_coder.h \
-    thread_packetize.h \
-    thread_reassemble.h \
-    thread_encode.h \
-    thread_decode.h \
-    thread_send.h
+    interlace.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 
@@ -69,5 +57,5 @@ FORMS    += mainwindow.ui \
 OTHER_FILES += \
     Corrupt.pro.user
 
-QMAKE_CFLAGS +=
-QMAKE_CXXFLAGS += -DGENERATE_HEADER -g -std=c++11 -Wno-write-strings
+QMAKE_CFLAGS += -O3
+QMAKE_CXXFLAGS += -O3 -DGENERATE_HEADER -g -std=c++11 -Wno-write-strings

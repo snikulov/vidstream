@@ -1,4 +1,4 @@
-#include "thread_reassemble.h"
+#include "receiverthread.h"
 
 #include "corrupt.h"
 #include "membuf.h"
@@ -6,7 +6,7 @@
 
 #include <QDebug>
 
-ReassemblerThread::ReassemblerThread(uint8_t *buffer, char *mask,
+ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
                                Transceiver &t, ecc &encoder, BlockHistory &history,
                                size_t restart_block_cnt,
                                StatCollector &stat,
@@ -25,7 +25,7 @@ ReassemblerThread::ReassemblerThread(uint8_t *buffer, char *mask,
 {
 }
 
-void ReassemblerThread::run()
+void ReceiverThread::run()
 {
     uint8_t *recv, *ptr;
     size_t recv_size, decoded_size;
@@ -33,10 +33,8 @@ void ReassemblerThread::run()
     // receive a block if it comes before the timeout of 10 ms elapses
     // put all received and successfully decoded blocks in history
     while (!killed && (recv = t.Receive(10, recv_size))) {
-        //uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
-        uint8_t *encoded_ptr = recv;
-        //size_t encoded_len = recv_size - RestartBlock::get_info_len();
-        size_t encoded_len = recv_size;
+        uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
+        size_t encoded_len = recv_size - RestartBlock::get_info_len();
 
         // add errors to the whole RestartBlock in recv buffer
         if (broken_channel) {
@@ -78,7 +76,7 @@ void ReassemblerThread::run()
     stat.FinishFrame();
 }
 
-void ReassemblerThread::ComposeJpeg()
+void ReceiverThread::ComposeJpeg()
 {
     uint8_t *base = buffer;
     for (size_t cur_iteration = 0; cur_iteration < restart_block_cnt;

@@ -7,8 +7,8 @@
 #include "interlace.h"
 #include "jpegops.h"
 #include "membuf.h"
-#include "thread_reassemble.h"
-#include "thread_packetize.h"
+#include "receiverthread.h"
+#include "senderthread.h"
 #include "split.h"
 #include "transceiver.h"
 
@@ -38,13 +38,14 @@ MainWindow::MainWindow(QWidget *parent) :
     cur_mode(0),
     broken_channel(false),
     grayscale(false),
+    reorder_blocks(false),
     head_size(0),
     image_buffer_size(0),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     res_raster(new Bitmap(image_width, image_height)),
-    enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
-    enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
+    enc_s(new ecc(settings.bch_m, settings.bch_t, stat)),
+    enc_r(new ecc(settings.bch_m, settings.bch_t, stat)),
     history(MAX_RESTART_BLOCKS),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
@@ -63,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
         throw;
     }
     ui->setupUi(this);
+    ui->reorderCheckBox->setDisabled(true);
     this->setAttribute(Qt::WA_DeleteOnClose);
     QDir folder(QDir::currentPath()+"/res_frames");
     if (!folder.exists()) {
@@ -111,13 +113,19 @@ bool MainWindow::SetJpegQuality(int lum, int chrom)
 
 bool MainWindow::SetBlockSize(size_t rst_block_size)
 {
-    if (rst_block_size >= 1) {
-        settings.rst_block_size = rst_block_size;
-        hdr_buf_initialized = false;
-        return true;
-    } else {
+    if (rst_block_size < 1) {
         return false;
     }
+    settings.rst_block_size = rst_block_size;
+    hdr_buf_initialized = false;
+    if (!grayscale || GetBlockSize() != 4) {
+        ui->reorderCheckBox->setEnabled(false);
+        ui->reorderCheckBox->setChecked(false);
+        reorder_blocks = false;
+    } else {
+        ui->reorderCheckBox->setEnabled(true);
+    }
+    return true;
 }
 
 void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
@@ -133,8 +141,8 @@ void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
 bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
     try {
-        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
-        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
+        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
+        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
     } catch (...) { // failed to initialize bch
         return false;
     }
@@ -344,6 +352,9 @@ bool MainWindow::loadImageFile()
     // create JPEG from dst_buffer, write to temp file
     // temp is a JPEG file containing half the image that will be transmitted
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
+    if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
+        change_order(*dst, 8);
+    }
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
                     "temp", settings.lum_quality, settings.chrom_quality,
                     settings.rst_block_size, grayscale);
@@ -439,11 +450,11 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
     }
     // each byte of mask corresponds to a whole RestartBlock
     std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    PacketizerThread sender(body_buffer.get(), body_size,
+    SenderThread sender(body_buffer.get(), body_size,
                         t, *enc_s.get(), frame_number,
                         stat,
                         *interlace_blocks);
-    ReassemblerThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
+    ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
                             t, *enc_r.get(), history, transmit_restart_count,
                             stat, err_percent, broken_channel);
     sender.start();
@@ -455,11 +466,14 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
+        Bitmap received(recv_buffer.get(), input_width, input_height);
+        if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
+            change_order(received, 8);
+        }
         stat.StopTimer(StatCollector::TIMER_JPEG_READ);
         stat.StartTimer(StatCollector::TIMER_INTERLACE);
         // insert received lines into recv_raster
-        interlace_merge_rows(Bitmap(recv_buffer.get(),input_width, input_height),
-                             *recv_raster, *interlace_rows);
+        interlace_merge_rows(received, *recv_raster, *interlace_rows);
         // restore broken pixels from neighboring lines
         //for (size_t i = interlace_rows->FirstIndex(), srci = 0;
         //     srci < input_height;
@@ -547,5 +561,16 @@ void MainWindow::on_breakChannelCheckBox_toggled(bool checked)
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
     grayscale = checked;
+    if (checked && GetBlockSize() == 1) {
+        SetBlockSize(4);
+    }
     hdr_buf_initialized = false;
+    ui->reorderCheckBox->setEnabled(grayscale && GetBlockSize() == 4);
+    reorder_blocks = ui->reorderCheckBox->isEnabled();
+    ui->reorderCheckBox->setChecked(reorder_blocks);
+}
+
+void MainWindow::on_reorderCheckBox_toggled(bool checked)
+{
+   reorder_blocks = checked;
 }

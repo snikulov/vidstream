@@ -50,4 +50,6 @@ private:
 Bitmap* bilinear_resize(Bitmap &img, int newWidth, int newHeight);
 Bitmap* bicubic_resize (Bitmap &img, int newWidth, int newHeight);
 
+void change_order(Bitmap &img, size_t block_size_in_pixels);
+
 #endif // BITMAP_H

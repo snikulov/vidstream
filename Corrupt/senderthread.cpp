@@ -1,4 +1,4 @@
-#include "thread_packetize.h"
+#include "senderthread.h"
 
 #include <cassert>
 #include <cmath>
@@ -9,7 +9,7 @@
 #include "interlace.h"
 #include "split.h"
 
-PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_size,
+SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
                            Transceiver &t, ecc &encoder, uint8_t frame_number,
                            StatCollector &stat,
                            const InterlaceControl &interlace) :
@@ -23,7 +23,7 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
 {
 }
 
-int PacketizerThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
+int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
                                 uint16_t rst_number, uint16_t data_len)
 {
     block.set_info(frame_number, rst_number, data_len);
@@ -34,16 +34,21 @@ int PacketizerThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
                                                       block.raw_length(), encoded_len);
     stat.StopTimer(StatCollector::TIMER_ENCODE);
 
-    if (!t.Transmit(encoded_ptr, encoded_len)) {
+    size_t res_len = encoded_len + block.get_info_len();
+    uint8_t *res_ptr = (uint8_t *) malloc(res_len);
+    memcpy(res_ptr, block.raw_ptr(), block.get_info_len());
+    memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
+    free(encoded_ptr);
+    if (!t.Transmit(res_ptr, res_len)) {
         qDebug() << "Failed to send data chunk";
-        free(encoded_ptr);
+        free(res_ptr);
         return 0;
     }
-    free(encoded_ptr);
+    free(res_ptr);
     return 1;
 }
 
-void PacketizerThread::run()
+void SenderThread::run()
 {
     // c - current char, p - previous char
     uint8_t p = 0, c;

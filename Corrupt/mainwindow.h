@@ -4,7 +4,7 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
-#include "thread_reassemble.h"
+#include "receiverthread.h"
 #include "transceiver.h"
 
 #include <QMainWindow>
@@ -94,6 +94,8 @@ private slots:
 
     void on_grayscaleCheckBox_clicked(bool checked);
 
+    void on_reorderCheckBox_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
@@ -116,6 +118,7 @@ private:
 
     bool broken_channel;
     bool grayscale;
+    bool reorder_blocks;
 
     std::string filename;
     std::ifstream fin;
