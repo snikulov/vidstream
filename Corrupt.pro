@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     restartblock.cpp \
     senderthread.cpp \
     split.cpp \
-    transceiver.cpp \
     jpegops.cpp \
     statcollector.cpp \
     settingsdialog.cpp \
@@ -38,13 +37,13 @@ HEADERS  += mainwindow.h \
     restartblock.h \
     senderthread.h \
     split.h \
-    transceiver.h \
     jpegops.h \
     statcollector.h \
     settingsdialog.h \
     bitmap.h \
     avhandler.h \
-    interlace.h
+    interlace.h \
+    queue_params.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 

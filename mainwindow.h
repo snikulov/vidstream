@@ -5,7 +5,6 @@
 #include "ecc.h"
 #include "interlace.h"
 #include "receiverthread.h"
-#include "transceiver.h"
 
 #include <QMainWindow>
 #include <fstream>
@@ -102,6 +101,9 @@ private:
     // block count with no downsampling on 1280x720 is 14400
     static constexpr size_t MAX_RESTART_BLOCKS = 15000;
 
+    static constexpr char const *output_queue_name = "transceiver_queue";
+    static constexpr char const *input_queue_name = "transceiver_queue";
+
     size_t image_width;
     size_t image_height;
     size_t scaled_width;
@@ -136,7 +138,6 @@ private:
     std::unique_ptr<Bitmap> recv_raster;
     std::unique_ptr<Bitmap> res_raster;
     std::unique_ptr<ecc> enc_s, enc_r;
-    Transceiver t;
     BlockHistory history;
     StatCollector stat;
 

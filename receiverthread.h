@@ -9,7 +9,6 @@
 #include "ecc.h"
 #include "restartblock.h"
 #include "statcollector.h"
-#include "transceiver.h"
 
 class HistoryElement
 {
@@ -39,7 +38,8 @@ class ReceiverThread : public QThread
 {
 public:
     ReceiverThread(uint8_t *buffer, char *mask,
-                   Transceiver &t, ecc &encoder, BlockHistory &history,
+                   std::string queue_name,
+                   ecc &encoder, BlockHistory &history,
                    size_t restart_block_cnt,
                    StatCollector &stat,
                    float err_percent,
@@ -54,7 +54,7 @@ private:
 
     uint8_t *buffer;
     char *mask;
-    Transceiver &t;
+    std::string queue_name;
     ecc &encoder;
     BlockHistory &history;
     size_t restart_block_cnt;
