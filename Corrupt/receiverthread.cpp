@@ -1,20 +1,28 @@
 #include "receiverthread.h"
 
+#include <QDebug>
+
+#include <boost/interprocess/ipc/message_queue.hpp>
+
 #include "corrupt.h"
 #include "membuf.h"
 #include "split.h"
+#include "queue_params.h"
 
-#include <QDebug>
+
+namespace bipc = boost::interprocess;
+namespace btime = boost::posix_time;
 
 ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
-                               Transceiver &t, ecc &encoder, BlockHistory &history,
+                               std::string queue_name,
+                               ecc &encoder, BlockHistory &history,
                                size_t restart_block_cnt,
                                StatCollector &stat,
                                float err_percent,
                                bool broken_channel) :
     buffer(buffer),
     mask(mask),
-    t(t),
+    queue_name(queue_name),
     encoder(encoder),
     history(history),
     restart_block_cnt(restart_block_cnt),
@@ -25,15 +33,26 @@ ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
 {
 }
 
+inline btime::ptime timeout(int ms) {
+    return btime::microsec_clock::universal_time() + btime::milliseconds(ms);
+}
+
 void ReceiverThread::run()
 {
-    uint8_t *recv, *ptr;
+    bipc::message_queue mq(bipc::open_or_create, queue_name.c_str(),
+                           package_num, package_max_size);
+    uint8_t *ptr;
+    size_t recv_buf_size = package_max_size;
+    std::unique_ptr<uint8_t[]> recv(new uint8_t[recv_buf_size]);
     size_t recv_size, decoded_size;
+    unsigned priority;
     stat.StartFrame();
     // receive a block if it comes before the timeout of 10 ms elapses
     // put all received and successfully decoded blocks in history
-    while (!killed && (recv = t.Receive(10, recv_size))) {
-        uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv);
+    while (!killed && mq.timed_receive(recv.get(), recv_buf_size, recv_size, priority,
+           timeout(10))) {
+           // (recv = t.Receive(10, recv_size))) {
+        uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv.get());
         size_t encoded_len = recv_size - RestartBlock::get_info_len();
 
         // add errors to the whole RestartBlock in recv buffer
@@ -52,7 +71,6 @@ void ReceiverThread::run()
 
         if (RestartBlock::get_rst_block_number(ptr) > history.size() ||
             RestartBlock::get_data_length(ptr) > decoded_size - RestartBlock::get_info_len()) {
-            free(recv);
             free(ptr);
             continue;
         }
@@ -68,7 +86,6 @@ void ReceiverThread::run()
                                      RestartBlock::get_data_length(ptr));
             mask[RestartBlock::get_rst_block_number(ptr)] = true;
         }
-        free(recv);
         free(ptr);
     }
 

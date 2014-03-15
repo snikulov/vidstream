@@ -6,16 +6,22 @@
 
 #include <QDebug>
 
+#include <boost/interprocess/ipc/message_queue.hpp>
+
 #include "interlace.h"
 #include "split.h"
+#include "queue_params.h"
+
+namespace bipc = boost::interprocess;
 
 SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
-                           Transceiver &t, ecc &encoder, uint8_t frame_number,
+                           std::string queue_name,
+                           ecc &encoder, uint8_t frame_number,
                            StatCollector &stat,
                            const InterlaceControl &interlace) :
     buffer(buffer),
     buffer_size(buffer_size),
-    t(t),
+    queue_name(queue_name),
     encoder(encoder),
     frame_number(frame_number),
     stat(stat),
@@ -23,11 +29,8 @@ SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
 {
 }
 
-int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
-                                uint16_t rst_number, uint16_t data_len)
+int SenderThread::TransmitBlock(RestartBlock& block, bipc::message_queue &mq)
 {
-    block.set_info(frame_number, rst_number, data_len);
-
     size_t encoded_len = 0;
     stat.StartTimer(StatCollector::TIMER_ENCODE);
     uint8_t *encoded_ptr = (uint8_t *) encoder.encode((char *) block.raw_ptr(),
@@ -39,17 +42,16 @@ int SenderThread::TransmitBlock(RestartBlock& block, uint8_t frame_number,
     memcpy(res_ptr, block.raw_ptr(), block.get_info_len());
     memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
     free(encoded_ptr);
-    if (!t.Transmit(res_ptr, res_len)) {
-        qDebug() << "Failed to send data chunk";
-        free(res_ptr);
-        return 0;
-    }
+    mq.send(res_ptr, res_len, 0);
     free(res_ptr);
     return 1;
 }
 
 void SenderThread::run()
 {
+    bipc::message_queue mq(bipc::open_or_create, queue_name.c_str(),
+                           package_num, package_max_size);
+
     // c - current char, p - previous char
     uint8_t p = 0, c;
     uint16_t rst_cnt = 0;
@@ -60,10 +62,11 @@ void SenderThread::run()
         if (p == 0xFF) { // && (c == 0x00 || is_rst(c))) {
             if (is_rst(c)) {
                 // send buffer
-                if (interlace_refresh_block(rst_cnt, interlace)
-                    && !TransmitBlock(block, frame_number, rst_cnt, block.pushbacks_count())) {
-                    // can't send blocks, aborting
-                    return;
+                if (interlace_refresh_block(rst_cnt, interlace)) {
+                    block.set_info(frame_number, rst_cnt, block.pushbacks_count());
+                    if (!TransmitBlock(block, mq)) {
+                        return;
+                    }
                 }
                 block.clear();
                 rst_cnt++;
@@ -79,9 +82,9 @@ void SenderThread::run()
     }
 
     // send remaining data
-    if (block.pushbacks_count() > 0) {
-        if (!TransmitBlock(block, 0, rst_cnt, block.pushbacks_count())) {//block.pushbacks_count())) {
-            // a serious error happened, aborting
+    if (block.pushbacks_count() > 0 && interlace_refresh_block(rst_cnt, interlace)) {
+        block.set_info(frame_number, rst_cnt, block.pushbacks_count());
+        if (!TransmitBlock(block, mq)) {
             return;
         }
     }
