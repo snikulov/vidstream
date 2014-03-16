@@ -52,8 +52,8 @@ void ReceiverThread::run()
     while (!killed && mq.timed_receive(recv.get(), recv_buf_size, recv_size, priority,
            timeout(10))) {
            // (recv = t.Receive(10, recv_size))) {
-        uint8_t *encoded_ptr = RestartBlock::get_data_ptr(recv.get());
-        size_t encoded_len = recv_size - RestartBlock::get_info_len();
+        uint8_t *encoded_ptr = recv.get();
+        size_t encoded_len = recv_size;
 
         // add errors to the whole RestartBlock in recv buffer
         if (broken_channel) {
