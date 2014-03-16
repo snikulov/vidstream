@@ -31,19 +31,7 @@ SenderThread::SenderThread(const uint8_t *buffer, const size_t buffer_size,
 
 int SenderThread::TransmitBlock(RestartBlock& block, bipc::message_queue &mq)
 {
-    size_t encoded_len = 0;
-    stat.StartTimer(StatCollector::TIMER_ENCODE);
-    uint8_t *encoded_ptr = (uint8_t *) encoder.encode((char *) block.raw_ptr(),
-                                                      block.raw_length(), encoded_len);
-    stat.StopTimer(StatCollector::TIMER_ENCODE);
-
-    size_t res_len = encoded_len + block.get_info_len();
-    uint8_t *res_ptr = (uint8_t *) malloc(res_len);
-    memcpy(res_ptr, block.raw_ptr(), block.get_info_len());
-    memcpy(RestartBlock::get_data_ptr(res_ptr), encoded_ptr, encoded_len);
-    free(encoded_ptr);
-    mq.send(res_ptr, res_len, 0);
-    free(res_ptr);
+    mq.send(block.raw_ptr(), block.raw_length(), 0);
     return 1;
 }
 
