@@ -1,16 +1,22 @@
 #include "thread_read.h"
 
-#include <errno.h>
 #include "ecc.h"
-#include "err.h"
+//#include "err.h"
+#include "corrupt.h"
 #include "pthread.h"
 #include "threaded_coder.h"
 #include "transport.h"
+
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/errno.h>
 #include <sys/msg.h>
 #include <sys/ipc.h>
 #include <boost/interprocess/ipc/message_queue.hpp>
+
+#include <iostream>
+
+#include <QDebug>
 
 using namespace boost::interprocess;
 
@@ -26,52 +32,33 @@ ReaderThread::ReaderThread(float err_percent,
 
 void ReaderThread::run()
 {
+    using std::cout;
 
     // Using:
     // read IP_ADDRESS ERRORS_PERCENT
 
     message_queue output_que(open_or_create, TO_DECODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
-    //message_queue input_que(open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
+    message_queue input_que(open_or_create, TO_READ_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
-    send_data msg;
+    std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
+    size_t recvd = 0;
+    unsigned priority;
 
     //transport P;
     //int port = P.get_free_port();
     //cout << "on port: " << port;
 
-    size_t msg_len;
-
     //transport T(ip.c_str(), port);
 
-    err E;
-    int readed;
     cout<< " read started.\n"; 
 
     for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
-        msg.in_buff_lnt = DATA_LEN;
-
-        //input_que.try_receive((void*)&msg, buff_len, recvd, priority);
-        if(!msg.in_buff_lnt)
-            return;
-
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
-        uint8_t *ptr = tcv.Receive(10, msg.in_buff_lnt);
-        if (!ptr) {
-            break;
-        }
-        memcpy(msg.in_buff, ptr, msg.in_buff_lnt);
-        readed = msg.in_buff_lnt;
+        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
+        Corruptor::add_err(recv_buf.get(), recvd, err_percent);
 
-        if (readed > 0) {
-
-            E.add_err((uint8_t*)msg.in_buff, msg.in_buff_lnt, err_percent);
-
-            msg_len = msg.in_buff_lnt + sizeof(size_t);
-            output_que.send((void*)&msg, msg_len, 0);
-        } else {
-            break;
-        }
+        output_que.send(recv_buf.get(), recvd, 0);
     }
 
     cout << "read quit\n";

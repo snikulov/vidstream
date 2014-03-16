@@ -27,39 +27,26 @@ void EncoderThread::run()
     message_queue input_que(open_or_create, TO_ENCODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     message_queue output_que(open_or_create, TO_SEND_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
-    send_data msg;
-    size_t buff_len = sizeof(msg);
-    cout<< "encode started.\n"; 
-
-    size_t recvd, msg_len, out_lnt;
+    std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
+    std::unique_ptr<uint8_t[]> send_buf(new uint8_t[PKG_MAX_SIZE]);
+    size_t recvd, out_lnt;
     unsigned priority;
+
+    cout<< "encode started.\n";
 
     for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
 
-        boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
-        if (!input_que.timed_receive((void*)&msg, buff_len, recvd, priority, timeout)) {
-            return;
-        }
+        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+        //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
+        //if (!input_que.timed_receive(buf.get(), PKG_MAX_SIZE, recvd, priority, timeout)) {
+        //    break;
+        //}
 
-        if(!msg.in_buff_lnt) {
-            return;
-        }
+        char* out_data = (char*)coder.encode((char *)(recv_buf.get()), recvd, out_lnt);
+        memcpy(send_buf.get(), out_data, out_lnt);
+        free(out_data);
 
-        msg_len = msg.in_buff_lnt + sizeof(size_t);// in_buff_lnt can be less than DATA_LNT
-
-        if(recvd == msg_len){
-
-            char* out_data = (char*)coder.encode(msg.in_buff, msg.in_buff_lnt, out_lnt);
-            memcpy(msg.in_buff, out_data, out_lnt);// here  out_lnt == DATA_LEN if coder create parameter is 3
-                                                   // and can be less for enother coder create parameter
-            free(out_data);
-            msg.in_buff_lnt = out_lnt;
-            msg_len = out_lnt + sizeof(size_t);
-
-            output_que.send((void*)&msg, msg_len, 0);
-        }
-        else
-            cout<< "encode: wrong pkg.\n" << "recv = " << recvd << ", msg_len = " << msg_len << "\n";
+        output_que.send(send_buf.get(), out_lnt, 0);
     }
 
     cout << "encode quit\n";

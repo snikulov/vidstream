@@ -147,7 +147,7 @@ bool AVHandler::ReadFrame2QImage(int64_t frame_timestamp, QImage& image)
             image.detach();    // Copies the data which we are about to destroy
             av_free_packet(&packet);
             av_free(pFrameRGB); // NEW
-            delete buffer; // NEW
+            delete[] buffer; // NEW
             sws_freeContext(img_convert_ctx); // NEW
             return true;
         }

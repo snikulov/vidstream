@@ -30,13 +30,9 @@ void SenderThread::run()
 {
 
     message_queue input_que(open_or_create, TO_SEND_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
+    message_queue output_que(open_or_create, TO_READ_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
-    send_data msg;
-    size_t buff_len = sizeof(msg);
-    char loc_buff[DATA_LEN];
-    memset((void*)loc_buff,0,DATA_LEN);
-    size_t  loc_size = 0;
-
+    std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     size_t recvd = 0;
     unsigned priority;
 
@@ -45,27 +41,15 @@ void SenderThread::run()
 
     for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
 
-        //input_que.try_receive((void*)&msg, buff_len, recvd, priority); // посылаем пакет непрерывно до прихода следующего
-        //input_que.receive((void*)&msg, buff_len, recvd, priority); // посылаем пакет один раз и ждем прихода следующего
-        boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
-        if (!input_que.timed_receive((void*)&msg, buff_len, recvd, priority,
-                                     timeout)) {
-            return;
-        }
+        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+        //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
+        //if (!input_que.timed_receive((void*)&msg, buff_len, recvd, priority,
+        //                             timeout)) {
+        //    return;
+        //}
 
-        if(recvd){
-            if(!msg.in_buff_lnt)
-                return;
-
-            loc_size = msg.in_buff_lnt;
-            memcpy(loc_buff, msg.in_buff, loc_size);
-        }
-	
-	
-        if(loc_size){
-            //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
-            tcv.Transmit((uint8_t *) loc_buff, loc_size);
-        }
+        //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
+        output_que.send(recv_buf.get(), PKG_MAX_SIZE, 0);
     }
 
     cout << "send quit\n";

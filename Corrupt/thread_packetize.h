@@ -24,7 +24,7 @@ protected:
     void run();
 
 private:
-    int TransmitBlock(RestartBlock& block, bipc::message_queue &mq);
+    void TransmitBlock(RestartBlock& block, bipc::message_queue &mq);
 
     const uint8_t *buffer;
     const size_t buffer_size;

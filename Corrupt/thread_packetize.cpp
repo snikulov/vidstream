@@ -27,14 +27,13 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
 {
 }
 
-int PacketizerThread::TransmitBlock(RestartBlock& block,
+void PacketizerThread::TransmitBlock(RestartBlock& block,
                                     bipc::message_queue &mq)
 {
-    send_data msg;
-    msg.in_buff_lnt = block.raw_length();
-    memcpy(msg.in_buff, block.raw_ptr(), block.raw_length());
-    mq.send(&msg, msg.in_buff_lnt + sizeof(msg.in_buff_lnt), 0);
-    return 1;
+    //send_data msg;
+    //msg.in_buff_lnt = block.raw_length();
+    //memcpy(msg.in_buff, block.raw_ptr(), block.raw_length());
+    mq.send(block.raw_ptr(), block.raw_length(), 0);
 }
 
 void PacketizerThread::run()
@@ -52,9 +51,7 @@ void PacketizerThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
-                    if (!TransmitBlock(block, mq)) {
-                        return;
-                    }
+                    TransmitBlock(block, mq);
                 }
                 block.clear();
                 rst_cnt++;
@@ -71,9 +68,7 @@ void PacketizerThread::run()
 
     if (block.pushbacks_count() > 0) {
         block.set_info(frame_number, rst_cnt,block.pushbacks_count());
-        if (!TransmitBlock(block, mq)) {
-            return;
-        }
+        TransmitBlock(block, mq);
     }
 }
 

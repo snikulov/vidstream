@@ -30,17 +30,18 @@ void ReassemblerThread::run()
     uint8_t *ptr;
     size_t recv_size, decoded_size;
     stat.StartFrame();
-    send_data msg;
+    std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     unsigned priority;
     // receive a block if it comes before the timeout of 10 ms elapses
     // put all received and successfully decoded blocks in history
     for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
-        boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
-        if (!mq.timed_receive(&msg, sizeof(msg), recv_size, priority, timeout)) {
-            return;
-        }
-        ptr = reinterpret_cast<uint8_t *>(msg.in_buff);
-        decoded_size = msg.in_buff_lnt;
+        //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
+        //if (!mq.timed_receive(recv_buf.get(), PKG_MAX_SIZE, recv_size, priority, timeout)) {
+        //    return;
+        //}
+        mq.receive(recv_buf.get(), PKG_MAX_SIZE, recv_size, priority);
+        ptr = recv_buf.get();
+        decoded_size = recv_size;
         // TODO: receive decoded_ok from decoder thread
         bool decoded_ok = true;
 
@@ -68,14 +69,14 @@ void ReassemblerThread::run()
     }
 
     ComposeJpeg();
+
     stat.FinishFrame();
 }
 
 void ReassemblerThread::ComposeJpeg()
 {
     uint8_t *base = buffer;
-    for (size_t cur_iteration = 0; cur_iteration < restart_block_cnt;
-         ) {
+    for (size_t cur_iteration = 0; cur_iteration < restart_block_cnt; ) {
 
         // add RST marker before each block, except the first one
         if (cur_iteration) {

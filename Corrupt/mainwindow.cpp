@@ -321,8 +321,6 @@ bool MainWindow::loadImageFile()
         for (size_t i = 0; i < input_height; i++) {
             for (size_t j = 0; j < input_width; j++) {
                 src_buffer[cur] =     qRed  (image.pixel(j, i));
-                src_buffer[cur + 1] = qGreen(image.pixel(j, i));
-                src_buffer[cur + 2] = qBlue (image.pixel(j, i));
                 cur += 3;
             }
         }
@@ -468,28 +466,27 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
     packetizer.start();
 
     reassembler.wait();
-
-    decoder.terminate();
-    reader.terminate();
-    sender.terminate();
-    encoder.terminate();
-    packetizer.terminate();
+    //decoder.wait();
+    //reader.wait();
+    //sender.wait();
+    //encoder.wait();
+    //packetizer.wait();
 
     boost::interprocess::message_queue::remove(TO_READ_MSG);
     boost::interprocess::message_queue::remove(TO_SEND_MSG);
     boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
     boost::interprocess::message_queue::remove(TO_DECODE_MSG);
     boost::interprocess::message_queue::remove(TO_OUT_MSG);
-    qDebug() << "waiting for decoder\n";
-    decoder.wait();
-    qDebug() << "waiting for reader\n";
-    reader.wait();
-    qDebug() << "waiting for sender\n";
-    sender.wait();
-    qDebug() << "waiting for encoder\n";
-    encoder.wait();
-    qDebug() << "waiting for packetizer\n";
-    packetizer.wait();
+    //qDebug() << "waiting for decoder\n";
+    //decoder.wait();
+    //qDebug() << "waiting for reader\n";
+    //reader.wait();
+    //qDebug() << "waiting for sender\n";
+    //sender.wait();
+    //qDebug() << "waiting for encoder\n";
+    //encoder.wait();
+    //qDebug() << "waiting for packetizer\n";
+    //packetizer.wait();
     try {
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
