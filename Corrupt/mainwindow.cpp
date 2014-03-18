@@ -69,6 +69,12 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!folder.exists()) {
         folder.mkdir(QDir::currentPath()+"/res_frames");
     }
+    try {
+        LoadSettingsFromFile("settings.conf", stored_settings[0],
+                                              stored_settings[1]);
+        SetSettings(stored_settings[0]);
+    } catch(...) {
+    }
 }
 
 MainWindow::~MainWindow()
@@ -256,7 +262,14 @@ bool MainWindow::SwitchMode()
     stored_settings[cur_mode] = settings;
     // now apply settings for the new mode
     cur_mode = 1 - cur_mode;
+    hdr_buf_initialized = false;
     return SetSettings(stored_settings[cur_mode]);
+}
+
+void MainWindow::SaveSettings()
+{
+    stored_settings[cur_mode] = settings;
+    SaveSettingsToFile("settings.conf", stored_settings[0], stored_settings[1]);
 }
 
 void MainWindow::processFrames(unsigned frame_count)

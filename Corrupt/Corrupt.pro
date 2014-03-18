@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     settingsdialog.cpp \
     bitmap.cpp \
     avhandler.cpp \
-    interlace.cpp
+    interlace.cpp \
+    settings.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
@@ -43,7 +44,8 @@ HEADERS  += mainwindow.h \
     bitmap.h \
     avhandler.h \
     interlace.h \
-    queue_params.h
+    queue_params.h \
+    settings.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 
