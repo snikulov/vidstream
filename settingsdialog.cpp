@@ -113,9 +113,11 @@ void SettingsDialog::on_buttonBox_accepted()
    if (!mainWin->SetJpegQuality(ui->lumQualitySpinBox->value(),
                                 ui->chromQualitySpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid JPEG quality");
+       return;
    }
    if (!mainWin->SetBchParams(ui->mSpinBox->value(), ui->tSpinBox->value())) {
        QMessageBox::warning(this, "Error", "Invalid BCH parameters");
+       return;
    }
    if (!mainWin->SetRowInterlace(ui->rowsNumSpinBox->value(),
                                  ui->rowsDenomSpinBox->value())) {
@@ -131,4 +133,5 @@ void SettingsDialog::on_buttonBox_accepted()
        QMessageBox::warning(this, "Error", "Invalid frame resolution");
        return;
    }
+   mainWin->SaveSettings();
 }
