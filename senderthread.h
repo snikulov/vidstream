@@ -10,6 +10,8 @@
 #include "restartblock.h"
 #include "statcollector.h"
 
+extern uint32_t ChannelSpeed;
+
 class SenderThread : public QThread
 {
 public:

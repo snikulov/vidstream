@@ -70,6 +70,8 @@ private slots:
 
     void on_reorderCheckBox_toggled(bool checked);
 
+    void on_bandwidthSpinBox_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 

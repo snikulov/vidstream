@@ -587,3 +587,8 @@ void MainWindow::on_reorderCheckBox_toggled(bool checked)
 {
    reorder_blocks = checked;
 }
+
+void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
+{
+    ChannelSpeed = arg1 / 8;
+}
