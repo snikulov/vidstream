@@ -101,6 +101,8 @@ void MainWindow::on_startButton_clicked()
         running = false;
         ui->startButton->setText("Continue");
     }
+    SendBytes = 0;
+    StartTime = 0;
 }
 
 bool MainWindow::SetJpegQuality(int lum, int chrom)
@@ -591,4 +593,6 @@ void MainWindow::on_reorderCheckBox_toggled(bool checked)
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
 {
     ChannelSpeed = arg1 / 8;
+    SendBytes = 0;
+    StartTime = 0;
 }
