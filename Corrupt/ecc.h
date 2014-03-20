@@ -18,7 +18,6 @@ class ecc{
         void* encode(char* in_data, size_t in_data_len, size_t &out_data_len);
         //кодирует данные, возвращает указатель на закодированный массив и его размер помещает в out_data_len
         void* decode(char* in_data, size_t in_data_len, size_t &out_data_len, bool &successful);
-        void* decode(char* in_data, size_t in_data_len, size_t &out_data_len);
         //раскодирует данные и исправляет по возможности ошибки, возвращает указатель на раскодированный массив и его размер помещает в out_data_len
         //
         //in_data - указатель на входные данные, 

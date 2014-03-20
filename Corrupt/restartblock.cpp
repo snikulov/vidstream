@@ -12,11 +12,24 @@ RestartBlock::RestartBlock() :
 RestartBlock::RestartBlock(uint8_t *ptr, size_t size) :
     pushbacks_cnt(0)
 {
-    data.reserve(info_len + size);
-    data.resize(info_len);
+    data.resize(info_len + size);
     for (size_t i = 0; i < size; i++) {
-        data.push_back(ptr[i]);
+        data[info_len + i] = ptr[i];
     }
+}
+
+RestartBlock &RestartBlock::operator=(const RestartBlock &other)
+{
+    pushbacks_cnt = other.pushbacks_cnt;
+    data = other.data;
+    return *this;
+}
+
+RestartBlock &RestartBlock::operator=(RestartBlock &&other)
+{
+    pushbacks_cnt = other.pushbacks_cnt;
+    data = std::move(other.data);
+    return *this;
 }
 
 void RestartBlock::clear()

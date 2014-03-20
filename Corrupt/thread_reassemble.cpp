@@ -3,6 +3,7 @@
 #include "corrupt.h"
 #include "membuf.h"
 #include "split.h"
+#include "thread_decode.h"
 #include "threaded_coder.h"
 
 #include <QDebug>
@@ -24,20 +25,22 @@ ReassemblerThread::ReassemblerThread(uint8_t *buffer,
 void ReassemblerThread::run()
 {
     bipc::message_queue mq(bipc::open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
+    DecodedBlock recv_block;
     uint8_t *ptr;
     size_t recv_size, decoded_size;
     uint8_t prev_frame_number = 0;
+    size_t time_since_last_frame = 0;
     stat.StartFrame();
     std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     unsigned priority;
     // receive a block
     // put all received and successfully decoded blocks in history
     while (!killed) {
-        mq.receive(recv_buf.get(), PKG_MAX_SIZE, recv_size, priority);
-        ptr = recv_buf.get();
-        decoded_size = recv_size;
+        mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
+        ptr = recv_block.data;
+        decoded_size = recv_block.data_len;
         // TODO: receive decoded_ok from decoder thread
-        bool decoded_ok = true;
+        bool decoded_ok = recv_block.decoded_ok;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
@@ -59,11 +62,14 @@ void ReassemblerThread::run()
                                      RestartBlock::get_data_length(ptr));
             //mask[RestartBlock::get_rst_block_number(ptr)] = true;
         }
-        if (RestartBlock::get_frame_number(ptr) != prev_frame_number) {
+        time_since_last_frame++;
+        if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&
+            time_since_last_frame >= history.size()) {
             stat.FinishFrame();
             emit frameReady();
             stat.StartFrame();
             prev_frame_number = RestartBlock::get_frame_number(ptr);
+            time_since_last_frame = 0;
         }
     }
 }

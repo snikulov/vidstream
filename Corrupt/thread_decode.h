@@ -5,6 +5,14 @@
 
 #include "ecc.h"
 #include "statcollector.h"
+#include "threaded_coder.h"
+
+struct DecodedBlock
+{
+    int data_len;
+    bool decoded_ok;
+    uint8_t data[PKG_MAX_SIZE];
+};
 
 class DecoderThread : public QThread
 {

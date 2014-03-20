@@ -10,6 +10,12 @@ class RestartBlock
 public:
     RestartBlock();
     RestartBlock(uint8_t *ptr, size_t size);
+    RestartBlock(const RestartBlock& other) :
+        pushbacks_cnt(other.pushbacks_cnt),
+        data(other.data)
+    { }
+    RestartBlock &operator=(const RestartBlock &other);
+    RestartBlock &operator=(RestartBlock &&other);
 
     void push_back(uint8_t c) { data.push_back(c); pushbacks_cnt++; }
     void clear();

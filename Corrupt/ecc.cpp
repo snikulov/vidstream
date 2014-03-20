@@ -122,10 +122,3 @@ void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len, bool 
     out_data_len = data_blocks * data_len;
     return data_out;
 }
-
-
-void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len)
-{
-    bool temp;
-    return decode(in_data, in_data_len, out_data_len, temp);
-}

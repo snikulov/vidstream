@@ -95,7 +95,7 @@ void SettingsDialog::on_mSpinBox_valueChanged(int arg1)
     if (!preset_changed[0]) {
         ui->presetsComboBox->setCurrentIndex(4); // Custom
     }
-    DisplayBchInfo(ui->mSpinBox->value(), ui->tSpinBox->value());
+    DisplayBchInfo(arg1, ui->tSpinBox->value());
     preset_changed[0] = false;
 }
 
@@ -104,7 +104,7 @@ void SettingsDialog::on_tSpinBox_valueChanged(int arg1)
     if (!preset_changed[1]) {
         ui->presetsComboBox->setCurrentIndex(4); // Custom
     }
-    DisplayBchInfo(ui->mSpinBox->value(), ui->tSpinBox->value());
+    DisplayBchInfo(ui->mSpinBox->value(), arg1);
     preset_changed[1] = false;
 }
 

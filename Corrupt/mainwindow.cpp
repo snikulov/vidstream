@@ -501,19 +501,6 @@ void MainWindow::drawImage()
         // insert received lines into recv_raster
         interlace_merge_rows(Bitmap(recv_buffer.get(),input_width, input_height),
                              *recv_raster, *interlace_rows);
-        // restore broken pixels from neighboring lines
-        //for (size_t i = interlace_rows->FirstIndex(), srci = 0;
-        //     srci < input_height;
-        //     i = interlace_rows->NextIndex(i), srci++) {
-        //    for (size_t j = 0; j < input_width; j++) {
-        //        int rst_index = (j / 16) + (srci / 16) * (input_width / 16);
-        //        if (!mask[rst_index] && i) {
-        //            int neighrow = i % 2 ? i - 1 : i + 1;
-        //            memcpy(recv_raster->GetPixel(i, j), recv_raster->GetPixel(neighrow, j), 3);
-        //            //recv_raster[i * image_width * 3 + j * 3] = 255;
-        //        }
-        //    }
-        //}
         stat.StopTimer(StatCollector::TIMER_INTERLACE);
         stat.StartTimer(StatCollector::TIMER_SCALING);
         // resize bitmap back to full size
@@ -588,4 +575,9 @@ void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
     grayscale = checked;
     hdr_buf_initialized = false;
+}
+
+void MainWindow::on_errorSpinBox_valueChanged(int arg1)
+{
+   reader->SetErrPercent(arg1);
 }
