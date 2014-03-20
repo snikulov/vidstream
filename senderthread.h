@@ -11,6 +11,8 @@
 #include "statcollector.h"
 
 extern uint32_t ChannelSpeed;
+extern uint32_t StartTime;
+extern uint64_t SendBytes;
 
 class SenderThread : public QThread
 {
