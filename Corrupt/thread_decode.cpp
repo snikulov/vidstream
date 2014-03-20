@@ -32,9 +32,7 @@ void DecoderThread::run()
     size_t recvd, out_lnt;
     unsigned int priority;
 
-    cout<< "decode started.\n";
-
-    for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
+    while (!killed) {
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
         //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
@@ -48,8 +46,6 @@ void DecoderThread::run()
 
         output_que.send(send_buf.get(), out_lnt, 0);
     }
-
-    cout << "decode quit\n";
 
     return;
 }

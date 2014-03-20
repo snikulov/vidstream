@@ -1,16 +1,19 @@
 #include "thread_encode.h"
 
-#include <errno.h>
 #include "ecc.h"
 #include "err.h"
 #include "pthread.h"
 #include "threaded_coder.h"
 #include "transport.h"
+
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/errno.h>
 #include <sys/msg.h>
 #include <sys/ipc.h>
 #include <boost/interprocess/ipc/message_queue.hpp>
+
+#include <QDebug>
 
 using namespace boost::interprocess;
 
@@ -18,7 +21,8 @@ EncoderThread::EncoderThread(ecc &coder, size_t restart_block_cnt,
                              StatCollector &stat) :
     coder(coder),
     restart_block_cnt(restart_block_cnt),
-    stat(stat)
+    stat(stat),
+    killed(false)
 { }
 
 void EncoderThread::run()
@@ -32,9 +36,7 @@ void EncoderThread::run()
     size_t recvd, out_lnt;
     unsigned priority;
 
-    cout<< "encode started.\n";
-
-    for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
+    while (!killed) {
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
         //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
@@ -48,8 +50,6 @@ void EncoderThread::run()
 
         output_que.send(send_buf.get(), out_lnt, 0);
     }
-
-    cout << "encode quit\n";
 
     return;
 }

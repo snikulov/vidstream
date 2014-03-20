@@ -71,4 +71,4 @@ OTHER_FILES += \
     Corrupt.pro.user
 
 QMAKE_CFLAGS +=
-QMAKE_CXXFLAGS += -DGENERATE_HEADER -g -std=c++11 -Wno-write-strings
+QMAKE_CXXFLAGS += -DGENERATE_HEADER -g -O2 -std=c++11 -Wall -Wno-write-strings

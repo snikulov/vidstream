@@ -10,15 +10,12 @@
 
 namespace bipc = boost::interprocess;
 
-ReassemblerThread::ReassemblerThread(uint8_t *buffer, char *mask,
+ReassemblerThread::ReassemblerThread(uint8_t *buffer,
                                BlockHistory &history,
-                               size_t restart_block_cnt,
                                StatCollector &stat,
                                bool broken_channel) :
     buffer(buffer),
-    mask(mask),
     history(history),
-    restart_block_cnt(restart_block_cnt),
     stat(stat),
     broken_channel(broken_channel)
 {
@@ -29,23 +26,19 @@ void ReassemblerThread::run()
     bipc::message_queue mq(bipc::open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     uint8_t *ptr;
     size_t recv_size, decoded_size;
+    uint8_t prev_frame_number = 0;
     stat.StartFrame();
     std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     unsigned priority;
-    // receive a block if it comes before the timeout of 10 ms elapses
+    // receive a block
     // put all received and successfully decoded blocks in history
-    for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
-        //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
-        //if (!mq.timed_receive(recv_buf.get(), PKG_MAX_SIZE, recv_size, priority, timeout)) {
-        //    return;
-        //}
+    while (!killed) {
         mq.receive(recv_buf.get(), PKG_MAX_SIZE, recv_size, priority);
         ptr = recv_buf.get();
         decoded_size = recv_size;
         // TODO: receive decoded_ok from decoder thread
         bool decoded_ok = true;
 
-        // add errors to the whole RestartBlock in recv buffer
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
         }
@@ -55,7 +48,7 @@ void ReassemblerThread::run()
             continue;
         }
         HistoryElement &hsblock = history[RestartBlock::get_rst_block_number(ptr)];
-        mask[RestartBlock::get_rst_block_number(ptr)] = hsblock.get_age() <= MAX_HISTORY_DIFF;
+        //mask[RestartBlock::get_rst_block_number(ptr)] = hsblock.get_age() <= MAX_HISTORY_DIFF;
 
         //replace hsblock with new block if new block is good or hsblock is old
         if (decoded_ok || hsblock.get_age() > MAX_HISTORY_DIFF) {
@@ -64,19 +57,22 @@ void ReassemblerThread::run()
             hsblock.get_b().set_info(RestartBlock::get_frame_number(ptr),
                                      RestartBlock::get_rst_block_number(ptr),
                                      RestartBlock::get_data_length(ptr));
-            mask[RestartBlock::get_rst_block_number(ptr)] = true;
+            //mask[RestartBlock::get_rst_block_number(ptr)] = true;
+        }
+        if (RestartBlock::get_frame_number(ptr) != prev_frame_number) {
+            stat.FinishFrame();
+            emit frameReady();
+            stat.StartFrame();
+            prev_frame_number = RestartBlock::get_frame_number(ptr);
         }
     }
-
-    ComposeJpeg();
-
-    stat.FinishFrame();
 }
 
-void ReassemblerThread::ComposeJpeg()
+void ComposeJpeg(uint8_t *buffer, BlockHistory &history)
 {
     uint8_t *base = buffer;
-    for (size_t cur_iteration = 0; cur_iteration < restart_block_cnt; ) {
+    for (size_t cur_iteration = 0; cur_iteration < history.size();
+         cur_iteration++) {
 
         // add RST marker before each block, except the first one
         if (cur_iteration) {
@@ -87,7 +83,7 @@ void ReassemblerThread::ComposeJpeg()
         }
 
         HistoryElement &hsblock = history[cur_iteration];
-        if (hsblock.get_age() > MAX_HISTORY_DIFF) {
+        if (hsblock.get_age() > ReassemblerThread::MAX_HISTORY_DIFF) {
             hsblock.clear();
         }
         hsblock.increase_age();
@@ -106,7 +102,6 @@ void ReassemblerThread::ComposeJpeg()
                 base++;
             }
         }
-        cur_iteration++;
     }
     *base = 0xFF;
     base++;

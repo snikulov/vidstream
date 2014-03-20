@@ -33,6 +33,7 @@ void PacketizerThread::TransmitBlock(RestartBlock& block,
     //send_data msg;
     //msg.in_buff_lnt = block.raw_length();
     //memcpy(msg.in_buff, block.raw_ptr(), block.raw_length());
+    static int n = 0;
     mq.send(block.raw_ptr(), block.raw_length(), 0);
 }
 

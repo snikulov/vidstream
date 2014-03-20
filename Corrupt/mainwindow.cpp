@@ -52,6 +52,18 @@ MainWindow::MainWindow(QWidget *parent) :
     enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
     enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
     history(MAX_RESTART_BLOCKS),
+    port(transport().get_free_port()),
+    sender_tp(),
+    //reader_tp("127.0.0.1", port),
+    reader_tp(),
+    encoder(new EncoderThread(*enc_s, transmit_restart_count, stat)),
+    sender(new SenderThread("127.0.0.1", port, sender_tp, t,
+           transmit_restart_count, stat)),
+    reader(new ReaderThread(0.0, reader_tp, t,
+           transmit_restart_count, stat)),
+    decoder(new DecoderThread(*enc_r, transmit_restart_count, stat)),
+    reassembler(new ReassemblerThread(res_buffer.get() + head_size,
+                                      history, stat, false)),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
     interlace_blocks(new InterlaceControl(settings.block_num,
@@ -74,6 +86,21 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!folder.exists()) {
         folder.mkdir(QDir::currentPath()+"/res_frames");
     }
+
+    // queues created by a dead process may hang
+    boost::interprocess::message_queue::remove(TO_READ_MSG);
+    boost::interprocess::message_queue::remove(TO_SEND_MSG);
+    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
+    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
+    boost::interprocess::message_queue::remove(TO_OUT_MSG);
+
+    connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
+
+    decoder->start();
+    reader->start();
+    sender->start();
+    encoder->start();
+    reassembler->start();
 }
 
 MainWindow::~MainWindow()
@@ -138,6 +165,10 @@ void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
 // i.e. Sender/Receiver threads aren't running
 bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
+    encoder->Kill();
+    decoder->Kill();
+    encoder->wait();
+    decoder->wait();
     try {
         enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
         enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
@@ -146,6 +177,14 @@ bool MainWindow::SetBchParams(int bch_m, int bch_t)
     }
     settings.bch_m = bch_m;
     settings.bch_t = bch_t;
+
+    encoder = std::unique_ptr<EncoderThread>
+                (new EncoderThread(*enc_s, transmit_restart_count, stat));
+    decoder = std::unique_ptr<DecoderThread>
+                (new DecoderThread(*enc_r, transmit_restart_count, stat));
+    encoder->start();
+    decoder->start();
+
     return true;
 }
 
@@ -279,9 +318,8 @@ void MainWindow::processFrames(unsigned frame_count)
         qDebug() << cur << " frames processed";
         char buf[5];
         snprintf(buf, 5, "%03d", cur + 1);
-        corruptImage(ui->errorSpinBox->value(),
-                     out_prefix + filename + buf + ".jpg",
-                     cur);
+        out_filename = out_prefix + filename + buf + ".jpg";
+        corruptImage(cur);
         cur = (cur + 1) % frame_count;
         interlace_rows->Advance();
         interlace_blocks->Advance();
@@ -403,6 +441,8 @@ bool MainWindow::loadImageFile()
         return false;
     }
 
+    history.resize(transmit_restart_count);
+
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
         head_size = sbuf_res->written();
@@ -434,60 +474,25 @@ bool MainWindow::loadImageFile()
     return true;
 }
 
-void MainWindow::corruptImage(float err_percent, const std::string &out_filename,
-                              uint8_t frame_number)
+void MainWindow::corruptImage(uint8_t frame_number)
 {
     if (!fin.is_open()) {
         ui->image_corrupt->setText("Image not loaded");
         return;
     }
     // each byte of mask corresponds to a whole RestartBlock
-    std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    unsigned port = transport().get_free_port();
-    transport reader_tp("127.0.0.1", port);
-    transport sender_tp;
+    //std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
     PacketizerThread packetizer(body_buffer.get(), body_size,
                                 frame_number, transmit_restart_count,
                                 stat, *interlace_blocks);
-    EncoderThread encoder(*enc_s, transmit_restart_count, stat);
-    SenderThread sender("127.0.0.1", port, sender_tp, t,
-                        transmit_restart_count, stat);
-    ReaderThread reader(err_percent, reader_tp, t,
-                        transmit_restart_count, stat);
-    DecoderThread decoder(*enc_r, transmit_restart_count, stat);
-    ReassemblerThread reassembler(res_buffer.get() + head_size, mask.get(), // write into body
-                                  history, transmit_restart_count,
-                                  stat, broken_channel);
-    reassembler.start();
-    decoder.start();
-    reader.start();
-    sender.start();
-    encoder.start();
     packetizer.start();
+    packetizer.wait();
+}
 
-    reassembler.wait();
-    //decoder.wait();
-    //reader.wait();
-    //sender.wait();
-    //encoder.wait();
-    //packetizer.wait();
-
-    boost::interprocess::message_queue::remove(TO_READ_MSG);
-    boost::interprocess::message_queue::remove(TO_SEND_MSG);
-    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
-    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
-    boost::interprocess::message_queue::remove(TO_OUT_MSG);
-    //qDebug() << "waiting for decoder\n";
-    //decoder.wait();
-    //qDebug() << "waiting for reader\n";
-    //reader.wait();
-    //qDebug() << "waiting for sender\n";
-    //sender.wait();
-    //qDebug() << "waiting for encoder\n";
-    //encoder.wait();
-    //qDebug() << "waiting for packetizer\n";
-    //packetizer.wait();
+void MainWindow::drawImage()
+{
     try {
+        ComposeJpeg(res_buffer.get() + head_size, history);
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
@@ -528,7 +533,6 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         qDebug() << "Failed to decode/draw image";
         ui->image_corrupt->setText("Failed to decode/draw image");
         ui->image_corrupt->repaint();
-        throw;
     }
 }
 

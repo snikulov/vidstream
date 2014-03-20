@@ -52,7 +52,7 @@ void ReaderThread::run()
 
     cout<< " read started.\n"; 
 
-    for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
+    while (1) {
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 

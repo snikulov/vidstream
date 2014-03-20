@@ -11,6 +11,7 @@ class EncoderThread : public QThread
 public:
     EncoderThread(ecc &coder, size_t restart_block_cnt, StatCollector &stat);
 
+    void Kill() { killed = true; }
 protected:
     void run();
 private:
@@ -18,6 +19,8 @@ private:
     ecc &coder;
     size_t restart_block_cnt;
     StatCollector &stat;
+
+    bool killed;
 };
 
 #endif // THREAD_ENCODE_H

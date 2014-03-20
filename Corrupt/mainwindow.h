@@ -4,6 +4,11 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
+#include "thread_packetize.h"
+#include "thread_encode.h"
+#include "thread_send.h"
+#include "thread_read.h"
+#include "thread_decode.h"
 #include "thread_reassemble.h"
 #include "transceiver.h"
 
@@ -79,6 +84,9 @@ public:
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
 
+public slots:
+    void drawImage();
+
 private slots:
     void on_settingsButton_clicked();
 
@@ -118,6 +126,8 @@ private:
     bool grayscale;
 
     std::string filename;
+    std::string out_filename;
+
     std::ifstream fin;
     size_t image_size;
     size_t body_size;
@@ -137,11 +147,19 @@ private:
     BlockHistory history;
     StatCollector stat;
 
+    unsigned port;
+    transport sender_tp, reader_tp;
+
+    std::unique_ptr<EncoderThread> encoder;
+    std::unique_ptr<SenderThread>  sender;
+    std::unique_ptr<ReaderThread>  reader;
+    std::unique_ptr<DecoderThread> decoder;
+    std::unique_ptr<ReassemblerThread> reassembler;
+
     std::unique_ptr<InterlaceControl> interlace_rows, interlace_blocks;
 
     bool loadImageFile();
-    void corruptImage(float err_percent, const std::string &out_filename,
-                      uint8_t frame_number);
+    void corruptImage(uint8_t frame_number);
     void processFrames(unsigned frame_count);
     void displayStatistics();
 };

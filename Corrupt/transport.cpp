@@ -6,39 +6,38 @@ transport::~transport(){
     close(sock);
 }
 
-transport::transport(){
+transport::transport()
+{
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
+        printf("%s","can't create socket\n");
+        return;
+    }
 
-            if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
-                printf("%s","can't create socket\n");
-                return;
-            }
+    memset((char *)&my_addr, 0, sizeof(my_addr));
+    my_addr.sin_family = AF_INET;
+    my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    my_addr.sin_port = htons(0);
 
-            memset((char *)&my_addr, 0, sizeof(my_addr));
-            my_addr.sin_family = AF_INET;
-            my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-            my_addr.sin_port = htons(0);
+    if (bind(sock, (struct sockaddr *)&my_addr, sizeof(my_addr)) < 0){
+        printf("%s %d","can't bind socket: \n", errno);
+        return;
+    }
 
-            if (bind(sock, (struct sockaddr *)&my_addr, sizeof(my_addr)) < 0){
-                printf("%s %d","can't bind socket: \n", errno);
-                return;
-            }
+    socklen_t rem_addr_len = sizeof(my_addr);
+    getsockname(sock, (struct sockaddr *)&my_addr, &rem_addr_len);
 
-            socklen_t rem_addr_len = sizeof(my_addr);
-            getsockname(sock, (struct sockaddr *)&my_addr, &rem_addr_len);
-
-	    struct timeval tv;
-	    tv.tv_sec = 1;
-	    tv.tv_usec = 0;
-	    if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) 
-	       perror("Error");
-//            printf("%s : %d\n",inet_ntoa(my_addr.sin_addr), ntohs(my_addr.sin_port));
+    struct timeval tv;
+    tv.tv_sec = 1;
+    tv.tv_usec = 0;
+    if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
+       perror("Error");
+    }
 }
 
 transport::transport(const char *addr, int port){
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
         printf("can't create %s : %d socket\n",addr,port);
         throw(std::bad_alloc());
-        return;
     }
 
     memset((char *)&my_addr, 0, sizeof(my_addr));
@@ -47,7 +46,6 @@ transport::transport(const char *addr, int port){
 
     if (inet_aton(addr, &my_addr.sin_addr)==0) {
         throw(std::invalid_argument("invalid ip address"));
-        return;
     }
 
     my_addr.sin_port = htons(port);
@@ -55,7 +53,6 @@ transport::transport(const char *addr, int port){
     if (bind(sock, (struct sockaddr *)&my_addr, sizeof(my_addr)) < 0){
         printf("can't bind %s : %d socket : %d\n",addr,port, errno);
         throw(std::invalid_argument("connection failed"));
-        return;
     }
 
     socklen_t rem_addr_len = sizeof(my_addr);
@@ -66,7 +63,6 @@ transport::transport(const char *addr, int port){
     tv.tv_usec = 0;
     if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv) )  < 0) {
         throw(std::invalid_argument("setsockopt failed"));
-       perror("Error");
     }
 //    printf("created %s : %d socket\n",inet_ntoa(my_addr.sin_addr), ntohs(my_addr.sin_port));
 }

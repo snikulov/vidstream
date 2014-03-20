@@ -37,27 +37,33 @@ typedef std::vector<HistoryElement> BlockHistory;
 
 class ReassemblerThread : public QThread
 {
+    Q_OBJECT
+
 public:
-    ReassemblerThread(uint8_t *buffer, char *mask,
+    ReassemblerThread(uint8_t *buffer,
                    BlockHistory &history,
-                   size_t restart_block_cnt,
                    StatCollector &stat,
                    bool broken_channel);
 
+    void Kill() { killed = true; }
+
+    static constexpr uint8_t MAX_HISTORY_DIFF = 5;
+signals:
+    void frameReady();
 protected:
     void run();
 private:
-    static constexpr uint8_t MAX_HISTORY_DIFF = 5;
 
     uint8_t *buffer;
-    char *mask;
+    //char *mask;
     BlockHistory &history;
-    size_t restart_block_cnt;
     StatCollector &stat;
 
     bool broken_channel;
 
-    void ComposeJpeg();
+    bool killed;
 };
+
+void ComposeJpeg(uint8_t *buffer, BlockHistory &history);
 
 #endif // RECEIVERTHREAD_H

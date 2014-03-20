@@ -14,6 +14,7 @@ public:
     ReaderThread(float err_percent, transport &T, Transceiver &tcv,
                  size_t restart_block_cnt, StatCollector &stat);
 
+    void SetErrPercent(float p) { err_percent = p; }
 protected:
     void run();
 private:
