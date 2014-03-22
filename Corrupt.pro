@@ -17,9 +17,7 @@ SOURCES += main.cpp\
     bch.cpp \
     corrupt.cpp \
     ecc.cpp \
-    receiverthread.cpp \
     restartblock.cpp \
-    senderthread.cpp \
     split.cpp \
     jpegops.cpp \
     statcollector.cpp \
@@ -34,9 +32,7 @@ HEADERS  += mainwindow.h \
     corrupt.h \
     ecc.h \
     membuf.h \
-    receiverthread.h \
     restartblock.h \
-    senderthread.h \
     split.h \
     jpegops.h \
     statcollector.h \

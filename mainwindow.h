@@ -4,7 +4,7 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
-#include "receiverthread.h"
+#include "statcollector.h"
 
 #include <QMainWindow>
 #include <fstream>
@@ -115,7 +115,6 @@ private:
     std::unique_ptr<Bitmap> recv_raster;
     std::unique_ptr<Bitmap> res_raster;
     std::unique_ptr<ecc> enc_s, enc_r;
-    BlockHistory history;
     StatCollector stat;
 
     std::unique_ptr<InterlaceControl> interlace_rows, interlace_blocks;

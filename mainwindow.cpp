@@ -7,8 +7,6 @@
 #include "interlace.h"
 #include "jpegops.h"
 #include "membuf.h"
-#include "receiverthread.h"
-#include "senderthread.h"
 #include "split.h"
 
 #include <unistd.h>
@@ -45,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
     res_raster(new Bitmap(image_width, image_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, stat)),
     enc_r(new ecc(settings.bch_m, settings.bch_t, stat)),
-    history(MAX_RESTART_BLOCKS),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
     interlace_blocks(new InterlaceControl(settings.block_num,
@@ -93,9 +90,6 @@ void MainWindow::on_startButton_clicked()
     if (!running) {
         running = true;
         ui->startButton->setText("Pause");
-        for (size_t i = 0; i < history.size(); i++) {
-            history[i].clear();
-        }
         processFrames(256);
     } else {
         running = false;
@@ -291,11 +285,6 @@ void MainWindow::processFrames(unsigned frame_count)
             break;
         }
         qDebug() << cur << " frames processed";
-        char buf[5];
-        snprintf(buf, 5, "%03d", cur + 1);
-        corruptImage(ui->errorSpinBox->value(),
-                     out_prefix + filename + buf + ".jpg",
-                     cur);
         cur = (cur + 1) % frame_count;
         interlace_rows->Advance();
         interlace_blocks->Advance();
@@ -326,6 +315,8 @@ bool MainWindow::loadImageFile()
         res_raster = std::unique_ptr<Bitmap>(new Bitmap(input_width, input_height));
         SetScalingResolution(input_width / 2, input_height / 2);
     }
+
+    ui->image_corrupt->setPixmap(QPixmap::fromImage(image));
 
     // convert QImage into RGB888 buffer
 
@@ -367,8 +358,14 @@ bool MainWindow::loadImageFile()
     if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
         change_order(*dst, 8);
     }
+
+    char buf[5];
+    static int cur = 0;
+    snprintf(buf, 5, "%03d", ++cur);
+    std::string tempname = std::string("temp") + buf + ".jpg";
+
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.lum_quality, settings.chrom_quality,
+                    tempname.c_str(), settings.lum_quality, settings.chrom_quality,
                     settings.rst_block_size, grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
@@ -377,7 +374,7 @@ bool MainWindow::loadImageFile()
     if (fin.is_open()) {
         fin.close();
     }
-    fin.open("temp", std::ios::binary);
+    fin.open(tempname, std::ios::binary);
     if (!fin) {
         ui->image_corrupt->setText("Failed to load image.");
         ui->image_corrupt->repaint();
@@ -453,76 +450,6 @@ bool MainWindow::loadImageFile()
     return true;
 }
 
-void MainWindow::corruptImage(float err_percent, const std::string &out_filename,
-                              uint8_t frame_number)
-{
-    if (!fin.is_open()) {
-        ui->image_corrupt->setText("Image not loaded");
-        return;
-    }
-    // each byte of mask corresponds to a whole RestartBlock
-    std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    SenderThread sender(body_buffer.get(), body_size,
-                        output_queue_name,
-                        *enc_s.get(), frame_number,
-                        stat, *interlace_blocks);
-    ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
-                            input_queue_name,
-                            *enc_r.get(), history, transmit_restart_count,
-                            stat, err_percent, broken_channel);
-    sender.start();
-    receiver.start();
-    while (sender.isRunning() || receiver.isRunning()) {
-        usleep(1000);
-    }
-    try {
-        size_t input_width, input_height;
-        stat.StartTimer(StatCollector::TIMER_JPEG_READ);
-        read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
-        Bitmap received(recv_buffer.get(), input_width, input_height);
-        if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
-            change_order(received, 8);
-        }
-        stat.StopTimer(StatCollector::TIMER_JPEG_READ);
-        stat.StartTimer(StatCollector::TIMER_INTERLACE);
-        // insert received lines into recv_raster
-        interlace_merge_rows(received, *recv_raster, *interlace_rows);
-        // restore broken pixels from neighboring lines
-        //for (size_t i = interlace_rows->FirstIndex(), srci = 0;
-        //     srci < input_height;
-        //     i = interlace_rows->NextIndex(i), srci++) {
-        //    for (size_t j = 0; j < input_width; j++) {
-        //        int rst_index = (j / 16) + (srci / 16) * (input_width / 16);
-        //        if (!mask[rst_index] && i) {
-        //            int neighrow = i % 2 ? i - 1 : i + 1;
-        //            memcpy(recv_raster->GetPixel(i, j), recv_raster->GetPixel(neighrow, j), 3);
-        //            //recv_raster[i * image_width * 3 + j * 3] = 255;
-        //        }
-        //    }
-        //}
-        stat.StopTimer(StatCollector::TIMER_INTERLACE);
-        stat.StartTimer(StatCollector::TIMER_SCALING);
-        // resize bitmap back to full size
-        std::unique_ptr<Bitmap> res_raster(bilinear_resize(*recv_raster, image_width, image_height));
-        stat.StopTimer(StatCollector::TIMER_SCALING);
-        QImage image(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                     QImage::Format_RGB888);
-        ui->image_corrupt->setPixmap(QPixmap::fromImage(image));
-        ui->image_corrupt->repaint();
-        stat.StartTimer(StatCollector::TIMER_FILEIO);
-        write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                        out_filename.c_str(),
-                        settings.lum_quality, settings.chrom_quality,
-                        settings.rst_block_size, grayscale);
-        stat.StopTimer(StatCollector::TIMER_FILEIO);
-    } catch(...) {
-        qDebug() << "Failed to decode/draw image";
-        ui->image_corrupt->setText("Failed to decode/draw image");
-        ui->image_corrupt->repaint();
-        throw;
-    }
-}
-
 void MainWindow::displayStatistics()
 {
     //ui->infoLabel1->setText(QString::fromStdString(stat.GetStats()));
@@ -590,5 +517,4 @@ void MainWindow::on_reorderCheckBox_toggled(bool checked)
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
 {
-    ChannelSpeed = arg1 / 8;
 }
