@@ -329,6 +329,8 @@ bool MainWindow::loadImageFile()
         SetScalingResolution(input_width / 2, input_height / 2);
     }
 
+    ui->image_corrupt->setPixmap(QPixmap::fromImage(image));
+
     // convert QImage into RGB888 buffer
 
     if (image.format() != QImage::Format_RGB888) {
@@ -369,8 +371,14 @@ bool MainWindow::loadImageFile()
     if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
         change_order(*dst, 8);
     }
+
+    char buf[5];
+    static int cur = 0;
+    snprintf(buf, 5, "%03d", ++cur);
+    std::string tempname = std::string("temp") + buf + ".jpg";
+
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.lum_quality, settings.chrom_quality,
+                    tempname.c_str(), settings.lum_quality, settings.chrom_quality,
                     settings.rst_block_size, grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
@@ -379,7 +387,7 @@ bool MainWindow::loadImageFile()
     if (fin.is_open()) {
         fin.close();
     }
-    fin.open("temp", std::ios::binary);
+    fin.open(tempname, std::ios::binary);
     if (!fin) {
         ui->image_corrupt->setText("Failed to load image.");
         ui->image_corrupt->repaint();
