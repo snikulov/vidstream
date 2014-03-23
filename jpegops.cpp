@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include <jpeglib.h>
 #include <setjmp.h>
-
+#include <iostream>
 #include <cstring>
-
+int change_qual = 1;
 JSAMPLE to_grayscale(JSAMPLE r, JSAMPLE g, JSAMPLE b)
 {
     return 0.299 * r + 0.587 * g + 0.114 * b;
@@ -70,6 +70,10 @@ void set_compress_params(jpeg_compress_struct &cinfo,
                          size_t rst_block_size,
                          bool grayscale)
 {
+
+        using std::cout;
+        using std::flush;
+
     cinfo.image_width = image_width;
     cinfo.image_height = image_height;
     if (grayscale) {
@@ -81,7 +85,24 @@ void set_compress_params(jpeg_compress_struct &cinfo,
     }
     cinfo.smoothing_factor = 100;
     jpeg_set_defaults(&cinfo);
+
     //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
+    if (change_qual>0 ) {
+        lum_quality -=10;
+  //      chrom_quality -=10;
+        change_qual = -1;
+
+        cout <<"\n down "<< lum_quality << "\n" <<flush;
+
+
+    }
+       else {
+        lum_quality +=10;
+//        chrom_quality +=10;
+        change_qual = 1;
+        cout <<"\n up "<< lum_quality <<"\n" << flush;
+
+    }
     cinfo.q_scale_factor[0] = jpeg_quality_scaling(lum_quality);
     cinfo.q_scale_factor[1] = jpeg_quality_scaling(chrom_quality);
     jpeg_default_qtables(&cinfo, true);

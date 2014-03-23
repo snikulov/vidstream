@@ -420,7 +420,7 @@ bool MainWindow::loadImageFile()
 #ifdef GENERATE_HEADER
     std::unique_ptr<std::ostream> fhdr;
     std::unique_ptr<membuf> sbuf_res;
-    //hdr_buf_initialized = false;
+    hdr_buf_initialized = false;
     if (!hdr_buf_initialized) {
         sbuf_res = std::unique_ptr<membuf>
                    (new membuf((char *) res_buffer.get(), image_size));
