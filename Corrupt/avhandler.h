@@ -17,7 +17,7 @@ extern "C" {
     #include "libavformat/avformat.h"
     #include "libavdevice/avdevice.h"
     #include <libavfilter/avfiltergraph.h>
-    #include <libavfilter/buffersink.h>
+
     #include <libswscale/swscale.h>
 }
 
