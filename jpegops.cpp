@@ -9,7 +9,15 @@
 int change_qual = 1;
 JSAMPLE to_grayscale(JSAMPLE r, JSAMPLE g, JSAMPLE b)
 {
-    return 0.299 * r + 0.587 * g + 0.114 * b;
+    using std::cout;
+    using std::flush;
+
+    JSAMPLE tmp,tmp1;
+    tmp = 0.299 * r + 0.587 * g + 0.114 * b;
+    tmp = (0.299 * r + 0.587 * g + 0.114 * b) || 0xFC;
+  //  cout <<" tmpls"<<  tmp <<" "<<(int)(tmp1)<<"\n"<<flush;
+
+    return (0.299 * r + 0.587 * g + 0.114 * b) ;
 }
 
 struct my_error_mgr {
@@ -88,7 +96,7 @@ void set_compress_params(jpeg_compress_struct &cinfo,
 
     //jpeg_set_quality(&cinfo, quality, TRUE /* limit to baseline-JPEG values */);
     if (change_qual>0 ) {
-        lum_quality -=10;
+  //      lum_quality -=10;
   //      chrom_quality -=10;
         change_qual = -1;
 
@@ -97,7 +105,7 @@ void set_compress_params(jpeg_compress_struct &cinfo,
 
     }
        else {
-        lum_quality +=10;
+//        lum_quality +=10;
 //        chrom_quality +=10;
         change_qual = 1;
         cout <<"\n up "<< lum_quality <<"\n" << flush;
