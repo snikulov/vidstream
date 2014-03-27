@@ -16,9 +16,56 @@
 
 uint32_t StartTime = 0;
 uint64_t SendBytes = 0;
+uint32_t Base_len = 3;
+uint32_t cur_rst_len, prev_rst_len, last_grp, pack_size, out_size, loc_rst_count;
+
+
 struct timespec start_time, cur_time;
 uint32_t ChannelSpeed = 10000000/8;
 //int64_t diff_time(struct timespec *start_time)
+
+//
+void stat_start_frame()
+{
+    loc_rst_count = 0;
+    cur_rst_len = 0;
+    prev_rst_len = 0;
+    last_grp = 0;
+    pack_size = 0;
+    out_size = 0;
+}
+void stat_flush_pack()
+{
+    out_size+= 6+(out_size / 100)*6;
+}
+
+void  stat_add_rst_out()
+{
+    loc_rst_count++;
+    if( (cur_rst_len > (Base_len + 2)) || (cur_rst_len < Base_len) )
+    {
+        if (last_grp >0)  {
+            // put out last group
+            out_size++;
+            // if group count > 3 and <7 (if 7 - on prev  step group must be  flushed)
+            if (last_grp > 3)  {
+                out_size++;
+            }
+        };
+        out_size++;
+        last_grp = 0;
+    } else  {
+        last_grp++;;
+        if (last_grp > 7)
+        {
+            last_grp = 0;
+            out_size += 2;
+        };
+    };
+    out_size += cur_rst_len;
+}
+
+
 
 int64_t diff_time(struct timespec *timeA_p, struct timespec *timeB_p)
 {
@@ -88,11 +135,15 @@ int SenderThread::TransmitBlock(RestartBlock& block, bipc::message_queue &mq)
 
 void SenderThread::run()
 {
+    using std::cout;
+    using std::flush;
+
     bipc::message_queue mq(bipc::open_or_create, queue_name.c_str(),
                            package_num, package_max_size);
 
     // c - current char, p - previous char
     uint8_t p = 0, c;
+    stat_start_frame();
     uint16_t rst_cnt = 0;
     RestartBlock block;
     for (size_t i = 0; i < buffer_size; i++) {
@@ -103,6 +154,8 @@ void SenderThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
+                    cur_rst_len = block.data_length();
+                    stat_add_rst_out();
                     if (!TransmitBlock(block, mq)) {
                         return;
                     }
@@ -119,6 +172,8 @@ void SenderThread::run()
         }
         p = c;
     }
+    stat_flush_pack();
+    cout << "Frame size = "<< out_size <<" blocks "<< loc_rst_count<<"\n"<< flush;
 
     // send remaining data
     if (block.pushbacks_count() > 0 && interlace_refresh_block(rst_cnt, interlace)) {

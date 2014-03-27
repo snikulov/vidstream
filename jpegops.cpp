@@ -16,17 +16,11 @@ JSAMPLE to_grayscale(JSAMPLE r, JSAMPLE g, JSAMPLE b)
     u_int8_t tmp,tmp1;
     cout.unsetf(ios::dec);
     cout.setf(ios::hex);
-    if ( once==1 ) {
-        tmp = 0.299 * r + 0.587 * g + 0.114 * b;
-        tmp1 = tmp1 ;
-        cout <<" tmpls"<<   tmp <<" "<<  tmp1 <<"\n"<<flush;
-        tmp1 >>=1;
-        cout <<" tmpls "<<  (int) tmp <<" "<< (int) tmp1 <<"\n"<<flush;
-        once = 0;
-    }
+    tmp = 0.299 * r + 0.587 * g + 0.114 * b;
+    tmp1 = tmp & 0xC0;
+    return tmp1;
 
-
-    return (0.299 * r + 0.587 * g + 0.114 * b) ;
+ //   return (0.299 * r + 0.587 * g + 0.114 * b) ;
 }
 
 struct my_error_mgr {
