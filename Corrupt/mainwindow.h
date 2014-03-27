@@ -84,10 +84,11 @@ public:
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
 
-public slots:
-    void drawImage();
+//public slots:
 
 private slots:
+    void drawImage();
+
     void on_settingsButton_clicked();
 
     void on_startButton_clicked();
@@ -147,6 +148,7 @@ private:
     std::unique_ptr<ecc> enc_s, enc_r;
     Transceiver t;
     BlockHistory history;
+    QMutex history_mutex;
     StatCollector stat;
 
     unsigned port;

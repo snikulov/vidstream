@@ -13,17 +13,23 @@ namespace bipc = boost::interprocess;
 
 ReassemblerThread::ReassemblerThread(uint8_t *buffer,
                                BlockHistory &history,
+                               size_t &rst_block_count,
+                               QMutex &history_mutex,
                                StatCollector &stat,
                                bool broken_channel) :
     buffer(buffer),
     history(history),
+    rst_block_count(rst_block_count),
+    history_mutex(history_mutex),
     stat(stat),
-    broken_channel(broken_channel)
+    broken_channel(broken_channel),
+    killed(false)
 {
 }
 
 void ReassemblerThread::run()
 {
+    history_mutex.lock();
     bipc::message_queue mq(bipc::open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     DecodedBlock recv_block;
     uint8_t *ptr;
@@ -39,15 +45,16 @@ void ReassemblerThread::run()
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
-        // TODO: receive decoded_ok from decoder thread
         bool decoded_ok = recv_block.decoded_ok;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
         }
 
-        if (RestartBlock::get_rst_block_number(ptr) > history.size() ||
-            RestartBlock::get_data_length(ptr) > decoded_size - RestartBlock::get_info_len()) {
+        if (RestartBlock::get_rst_block_number(ptr) > rst_block_count) {
+            continue;
+        }
+        if (RestartBlock::get_data_length(ptr) > decoded_size - RestartBlock::get_info_len()) {
             continue;
         }
         HistoryElement &hsblock = history[RestartBlock::get_rst_block_number(ptr)];
@@ -64,9 +71,10 @@ void ReassemblerThread::run()
         }
         time_since_last_frame++;
         if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&
-            time_since_last_frame >= history.size()) {
+            time_since_last_frame >= rst_block_count / 2) {
             stat.FinishFrame();
-            emit frameReady();
+            emit frameReady(); // unlocks history_mutex when finishes
+            history_mutex.lock();
             stat.StartFrame();
             prev_frame_number = RestartBlock::get_frame_number(ptr);
             time_since_last_frame = 0;
@@ -74,12 +82,11 @@ void ReassemblerThread::run()
     }
 }
 
-void ComposeJpeg(uint8_t *buffer, BlockHistory &history)
+void ComposeJpeg(uint8_t *buffer, BlockHistory &history, size_t rst_number)
 {
     uint8_t *base = buffer;
-    for (size_t cur_iteration = 0; cur_iteration < history.size();
+    for (size_t cur_iteration = 0; cur_iteration < rst_number;
          cur_iteration++) {
-
         // add RST marker before each block, except the first one
         if (cur_iteration) {
             *base = 0xFF;
@@ -89,23 +96,22 @@ void ComposeJpeg(uint8_t *buffer, BlockHistory &history)
         }
 
         HistoryElement &hsblock = history[cur_iteration];
-        if (hsblock.get_age() > ReassemblerThread::MAX_HISTORY_DIFF) {
-            hsblock.clear();
-        }
-        hsblock.increase_age();
+        if (hsblock.get_age() <= ReassemblerThread::MAX_HISTORY_DIFF) {
+            hsblock.increase_age();
 
-        // skip the info part
-        size_t len = hsblock.get_b().data_length();
-        // encoded data contains block header as well
-        uint8_t *data = hsblock.get_b().data_ptr();
-        // copy hsblock contents to output buffer
-        // restore the 0x00s after 0xFF
-        for (unsigned i = 0; i < len; i++) {
-            *base = data[i];
-            base++;
-            if (data[i] == 0xFF) {
-                *base = 0x00;
+            // skip the info part
+            size_t len = hsblock.get_b().data_length();
+            // encoded data contains block header as well
+            uint8_t *data = hsblock.get_b().data_ptr();
+            // copy hsblock contents to output buffer
+            // restore the 0x00s after 0xFF
+            for (unsigned i = 0; i < len; i++) {
+                *base = data[i];
                 base++;
+                if (data[i] == 0xFF) {
+                    *base = 0x00;
+                    base++;
+                }
             }
         }
     }

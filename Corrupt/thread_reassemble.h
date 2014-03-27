@@ -2,6 +2,7 @@
 #define RECEIVERTHREAD_H
 
 #include <QThread>
+#include <QMutex>
 
 #include <utility>
 #include <vector>
@@ -16,8 +17,8 @@ class HistoryElement
 public:
     HistoryElement() : age(-1) { }
     HistoryElement(const RestartBlock &rst) : b(rst), age(0) { }
-    HistoryElement &operator=(const RestartBlock &rst) {
-        b = rst;
+    HistoryElement &operator=(RestartBlock &&rst) {
+        b = std::move(rst);
         age = 0;
         return *this;
     }
@@ -42,6 +43,8 @@ class ReassemblerThread : public QThread
 public:
     ReassemblerThread(uint8_t *buffer,
                    BlockHistory &history,
+                   size_t &rst_block_count,
+                   QMutex &history_mutex,
                    StatCollector &stat,
                    bool broken_channel);
 
@@ -57,6 +60,8 @@ private:
     uint8_t *buffer;
     //char *mask;
     BlockHistory &history;
+    size_t &rst_block_count;
+    QMutex &history_mutex;
     StatCollector &stat;
 
     bool broken_channel;
@@ -64,6 +69,6 @@ private:
     bool killed;
 };
 
-void ComposeJpeg(uint8_t *buffer, BlockHistory &history);
+void ComposeJpeg(uint8_t *buffer, BlockHistory &history, size_t rst_block_count);
 
 #endif // RECEIVERTHREAD_H

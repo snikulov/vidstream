@@ -45,7 +45,9 @@ MainWindow::MainWindow(QWidget *parent) :
     broken_channel(false),
     grayscale(false),
     head_size(0),
-    image_buffer_size(0),
+    image_buffer_size(50000),
+    body_buffer(new uint8_t[image_buffer_size]),
+    res_buffer(new uint8_t[2 * image_buffer_size]),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     res_raster(new Bitmap(image_width, image_height)),
@@ -56,14 +58,15 @@ MainWindow::MainWindow(QWidget *parent) :
     sender_tp(),
     //reader_tp("127.0.0.1", port),
     reader_tp(),
-    encoder(new EncoderThread(*enc_s, transmit_restart_count, stat)),
+    encoder(new EncoderThread(*enc_s, stat)),
     sender(new SenderThread("127.0.0.1", port, sender_tp, t,
            transmit_restart_count, stat)),
     reader(new ReaderThread(0.0, reader_tp, t,
            transmit_restart_count, stat)),
-    decoder(new DecoderThread(*enc_r, transmit_restart_count, stat)),
+    decoder(new DecoderThread(*enc_r, stat)),
     reassembler(new ReassemblerThread(res_buffer.get() + head_size,
-                                      history, stat, false)),
+                                      history, transmit_restart_count,
+                                      history_mutex, stat, false)),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
     interlace_blocks(new InterlaceControl(settings.block_num,
@@ -95,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent) :
     boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
     connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
+    //connect(reassembler.get(), SIGNAL(frameReady()), qApp, SLOT(aboutQt()));
 
     decoder->start();
     reader->start();
@@ -119,9 +123,6 @@ void MainWindow::on_startButton_clicked()
     if (!running) {
         running = true;
         ui->startButton->setText("Pause");
-        for (size_t i = 0; i < history.size(); i++) {
-            history[i].clear();
-        }
         processFrames(256);
     } else {
         running = false;
@@ -167,6 +168,8 @@ bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
     encoder->Kill();
     decoder->Kill();
+    encoder->terminate();
+    decoder->terminate();
     encoder->wait();
     decoder->wait();
     try {
@@ -179,9 +182,9 @@ bool MainWindow::SetBchParams(int bch_m, int bch_t)
     settings.bch_t = bch_t;
 
     encoder = std::unique_ptr<EncoderThread>
-                (new EncoderThread(*enc_s, transmit_restart_count, stat));
+                (new EncoderThread(*enc_s, stat));
     decoder = std::unique_ptr<DecoderThread>
-                (new DecoderThread(*enc_r, transmit_restart_count, stat));
+                (new DecoderThread(*enc_r, stat));
     encoder->start();
     decoder->start();
 
@@ -385,9 +388,12 @@ bool MainWindow::loadImageFile()
                                                      *interlace_rows));
     // create JPEG from dst_buffer, write to temp file
     // temp is a JPEG file containing half the image that will be transmitted
+
+    std::string tempname = "temp";
+
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.lum_quality, settings.chrom_quality,
+                    tempname.c_str(), settings.lum_quality, settings.chrom_quality,
                     settings.rst_block_size, grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
@@ -396,7 +402,7 @@ bool MainWindow::loadImageFile()
     if (fin.is_open()) {
         fin.close();
     }
-    fin.open("temp", std::ios::binary);
+    fin.open(tempname, std::ios::binary);
     if (!fin) {
         ui->image_corrupt->setText("Failed to load image.");
         ui->image_corrupt->repaint();
@@ -412,16 +418,16 @@ bool MainWindow::loadImageFile()
     // resize buffers if image doesn't fit in them
     if (image_size > image_buffer_size) {
         try {
-            res_buffer  = std::unique_ptr<uint8_t[]> (new uint8_t[2 * image_size]);
-            body_buffer = std::unique_ptr<uint8_t[]> (new uint8_t[image_size]);
-        } catch (const std::bad_alloc &e) {
-            qDebug() << "Allocation failed: " << e.what();
-            ui->image_corrupt->setText("Not enough memory.\n");
-            image_buffer_size = 0;
-            return false;
+            throw std::runtime_error("JPEG size larger than buffer size");
+        } catch (const std::exception &e) {
+            qDebug() << "Exception occurred: " << e.what();
+            ui->image_corrupt->setText("Error occurred.\n");
+            ui->image_corrupt->repaint();
+            throw;
+            //return false;
         }
+
         hdr_buf_initialized = false;
-        image_buffer_size = image_size;
     }
     membuf sbuf_body((char *) body_buffer.get(), image_size);
     std::ostream fbdy(&sbuf_body);
@@ -429,7 +435,7 @@ bool MainWindow::loadImageFile()
 #ifdef GENERATE_HEADER
     std::unique_ptr<std::ostream> fhdr;
     std::unique_ptr<membuf> sbuf_res;
-    //hdr_buf_initialized = false;
+    hdr_buf_initialized = false;
     if (!hdr_buf_initialized) {
         sbuf_res = std::unique_ptr<membuf>
                    (new membuf((char *) res_buffer.get(), image_size));
@@ -441,7 +447,7 @@ bool MainWindow::loadImageFile()
         return false;
     }
 
-    history.resize(transmit_restart_count);
+    //history.resize(transmit_restart_count);
 
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
@@ -486,13 +492,17 @@ void MainWindow::corruptImage(uint8_t frame_number)
                                 frame_number, transmit_restart_count,
                                 stat, *interlace_blocks);
     packetizer.start();
-    packetizer.wait();
+    //packetizer.wait();
+    while (packetizer.isRunning()) {
+        usleep(1000);
+        QCoreApplication::processEvents();
+    }
 }
 
 void MainWindow::drawImage()
 {
     try {
-        ComposeJpeg(res_buffer.get() + head_size, history);
+        ComposeJpeg(res_buffer.get() + head_size, history, transmit_restart_count);
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
@@ -521,6 +531,7 @@ void MainWindow::drawImage()
         ui->image_corrupt->setText("Failed to decode/draw image");
         ui->image_corrupt->repaint();
     }
+    history_mutex.unlock();
 }
 
 void MainWindow::displayStatistics()

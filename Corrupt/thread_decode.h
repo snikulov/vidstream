@@ -17,7 +17,7 @@ struct DecodedBlock
 class DecoderThread : public QThread
 {
 public:
-    DecoderThread(ecc &coder, size_t restart_block_cnt, StatCollector &stat);
+    DecoderThread(ecc &coder, StatCollector &stat);
 
     void Kill() { killed = true; }
 protected:
@@ -25,7 +25,6 @@ protected:
 private:
 
     ecc &coder;
-    size_t restart_block_cnt;
     StatCollector &stat;
 
     bool killed;

@@ -9,7 +9,7 @@
 class EncoderThread : public QThread
 {
 public:
-    EncoderThread(ecc &coder, size_t restart_block_cnt, StatCollector &stat);
+    EncoderThread(ecc &coder, StatCollector &stat);
 
     void Kill() { killed = true; }
 protected:
@@ -17,7 +17,6 @@ protected:
 private:
 
     ecc &coder;
-    size_t restart_block_cnt;
     StatCollector &stat;
 
     bool killed;

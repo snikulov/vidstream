@@ -15,6 +15,7 @@ public:
                  transport &T, Transceiver &tcv,
                  size_t restart_block_cnt, StatCollector &stat);
 
+    void Kill() { killed = true; }
 protected:
     void run();
 private:
@@ -24,6 +25,7 @@ private:
     Transceiver &tcv;
     size_t restart_block_cnt;
     StatCollector &stat;
+    bool killed;
 };
 
 #endif // THREAD_SEND_H

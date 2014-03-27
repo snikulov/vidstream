@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <cassert>
+#include <cstring>
 
 RestartBlock::RestartBlock() :
     pushbacks_cnt(0)
@@ -18,17 +19,31 @@ RestartBlock::RestartBlock(uint8_t *ptr, size_t size) :
     }
 }
 
-RestartBlock &RestartBlock::operator=(const RestartBlock &other)
-{
-    pushbacks_cnt = other.pushbacks_cnt;
-    data = other.data;
-    return *this;
-}
+//RestartBlock &RestartBlock::operator=(const RestartBlock &other)
+//{
+//    if (this != &other) {
+//        pushbacks_cnt = other.pushbacks_cnt;
+//        data = other.data; // Invalid delete: address x is 2,704 bytes inside a block of 231,136 alloc'd
+//    }
+//    return *this;
+//}
 
 RestartBlock &RestartBlock::operator=(RestartBlock &&other)
 {
-    pushbacks_cnt = other.pushbacks_cnt;
-    data = std::move(other.data);
+    if (this != &other) {
+        pushbacks_cnt = other.pushbacks_cnt;
+        //data = std::move(other.data);
+        //fprintf(stderr, "resizing vector from %lu to %lu\n", data.size(), other.data.size());
+        //fflush(stderr);
+        data.resize(other.data.size());
+        //fprintf(stderr, "ok!\n");
+        //fflush(stderr);
+        memcpy(data.data(), other.data.data(),
+               other.data.size() * sizeof(other.data[0]));
+        //for (unsigned i = 0; i < data.size(); i++) {
+        //    data[i] = other.data[i];
+        //}
+    }
     return *this;
 }
 

@@ -2,7 +2,7 @@
 #define THREADED_CODER_H
 
 #define DATA_LEN             400 // maximum package size
-#define NUM_OF_PKGS          1000  // maximum packages in interprocess queue
+#define NUM_OF_PKGS          100 // maximum packages in interprocess queue
 #define PKG_MAX_SIZE         DATA_LEN
 
 #define TO_ENCODE_MSG       "TO_ENCODE_MSG"

@@ -15,11 +15,11 @@
 
 using namespace boost::interprocess;
 
-DecoderThread::DecoderThread(ecc &coder, size_t restart_block_cnt,
+DecoderThread::DecoderThread(ecc &coder,
                              StatCollector &stat) :
     coder(coder),
-    restart_block_cnt(restart_block_cnt),
-    stat(stat)
+    stat(stat),
+    killed(false)
 { }
 
 void DecoderThread::run()
@@ -39,6 +39,7 @@ void DecoderThread::run()
 
         char* out_data = (char*)coder.decode((char *)(recv_buf.get()), recvd,
                                              out_lnt, send_buf.decoded_ok);
+        stat.AddPacket(recvd, send_buf.decoded_ok);
         send_buf.data_len = out_lnt;
         memcpy(send_buf.data, out_data, out_lnt);
         free(out_data);

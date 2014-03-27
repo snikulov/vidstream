@@ -14,7 +14,7 @@ public:
         pushbacks_cnt(other.pushbacks_cnt),
         data(other.data)
     { }
-    RestartBlock &operator=(const RestartBlock &other);
+    //RestartBlock &operator=(const RestartBlock &other);
     RestartBlock &operator=(RestartBlock &&other);
 
     void push_back(uint8_t c) { data.push_back(c); pushbacks_cnt++; }
@@ -34,7 +34,7 @@ public:
         return raw_ptr + info_len;
     }
     static size_t get_data_length(const uint8_t *raw_ptr) {
-        return raw_ptr[3] * 0xFF + raw_ptr[4];
+        return (size_t) raw_ptr[3] * 0xFF + (size_t) raw_ptr[4];
     }
     static uint8_t get_frame_number(const uint8_t *raw_ptr) {
         return *raw_ptr;

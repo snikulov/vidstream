@@ -23,7 +23,8 @@ SenderThread::SenderThread(const char *ip, unsigned port,
     T(T),
     tcv(tcv),
     restart_block_cnt(restart_block_cnt),
-    stat(stat)
+    stat(stat),
+    killed(false)
 { }
 
 void SenderThread::run()
@@ -36,23 +37,13 @@ void SenderThread::run()
     size_t recvd = 0;
     unsigned priority;
 
-
-    cout<< "send started.\n"; 
-
-    for (size_t cnt = 0; cnt < restart_block_cnt; cnt++) {
+    while (!killed) {
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
-        //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
-        //if (!input_que.timed_receive((void*)&msg, buff_len, recvd, priority,
-        //                             timeout)) {
-        //    return;
-        //}
 
         //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
         output_que.send(recv_buf.get(), PKG_MAX_SIZE, 0);
     }
-
-    cout << "send quit\n";
 
     return;
 }

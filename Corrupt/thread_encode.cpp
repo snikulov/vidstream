@@ -17,10 +17,9 @@
 
 using namespace boost::interprocess;
 
-EncoderThread::EncoderThread(ecc &coder, size_t restart_block_cnt,
+EncoderThread::EncoderThread(ecc &coder,
                              StatCollector &stat) :
     coder(coder),
-    restart_block_cnt(restart_block_cnt),
     stat(stat),
     killed(false)
 { }
