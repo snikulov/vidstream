@@ -12,7 +12,7 @@ class StatCollector;
 class ecc{
     public:
         //ecc(float ecc2data = 1.0);
-        ecc(uint8_t m, uint8_t t, StatCollector &stat);
+        ecc(uint8_t m, uint8_t t, StatCollector *stat = NULL);
 
         ~ecc();
         void* encode(char* in_data, size_t in_data_len, size_t &out_data_len);
@@ -33,7 +33,7 @@ class ecc{
         uint8_t *ecc_buff;
         unsigned int *errloc;
 
-        StatCollector &stat;
+        StatCollector *stat;
 };
 
 

@@ -90,65 +90,6 @@ Bitmap* bilinear_resize(Bitmap &img, int newWidth, int newHeight)
      return img2;
 }
 
-Bitmap* bicubic_resize(Bitmap &img, int newWidth, int newHeight)
-{
-        Bitmap *img2 = new Bitmap(newWidth, newHeight);
-        //uint8_t * data = img.GetData();
-        uint8_t * Data = img2->GetData();
-        uint8_t Cc;
-        uint8_t C[5] = { 0 };
-        uint8_t d0, d2, d3, a0, a1, a2, a3;
-        int i, j, k, jj;
-        int x, y;
-        float dx, dy;
-        float tx, ty;
-
-        tx = (float) img.GetWidth()  / newWidth;
-        ty = (float) img.GetHeight() / newHeight;
-
-        for (i=0; i < newHeight; i++)
-            for (j=0; j < newWidth; j++) {
-               x = (int)(tx*j);
-               y = (int)(ty*i);
-
-               dx= tx*j - x;
-               dy= ty*i - y;
-
-               for (k=0; k < 3; k++) {
-                  for (jj=0; jj <= 3; jj++) {
-                      const int z = y - 1 + jj;
-                      a0 = GetColour(img, z, x, k);
-                      d0 = GetColour(img, z, x - 1, k) - a0;
-                      d2 = GetColour(img, z, x + 1, k) - a0;
-                      d3 = GetColour(img, z, x + 2, k) - a0;
-
-                      //d0 = data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x-1)*Bitmap::CHANNELS_NUM +k] - data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x)*Bitmap::CHANNELS_NUM +k] ;
-                      //d2 = data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x+1)*Bitmap::CHANNELS_NUM +k] - data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x)*Bitmap::CHANNELS_NUM +k] ;
-                      //d3 = data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x+2)*Bitmap::CHANNELS_NUM +k] - data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x)*Bitmap::CHANNELS_NUM +k] ;
-                      //a0 = data[(y-1+jj)*img.GetWidth() * Bitmap::CHANNELS_NUM + (x)*Bitmap::CHANNELS_NUM +k];
-                      a1 =  -1.0/3*d0 + d2 -1.0/6*d3;
-                      a2 = 1.0/2*d0 + 1.0/2*d2;
-                      a3 = -1.0/6*d0 - 1.0/2*d2 + 1.0/6*d3;
-                      C[jj] = a0 + a1*dx + a2*dx*dx + a3*dx*dx*dx;
-
-                      d0 = C[0]-C[1];
-                      d2 = C[2]-C[1];
-                      d3 = C[3]-C[1];
-                      a0=C[1];
-                      a1 =  -1.0/3*d0 + d2 -1.0/6*d3;
-                      a2 = 1.0/2*d0 + 1.0/2*d2;
-                      a3 = -1.0/6*d0 - 1.0/2*d2 + 1.0/6*d3;
-                      Cc = a0 + a1*dy + a2*dy*dy + a3*dy*dy*dy;
-                      // if((int)Cc>255) Cc=255;
-                      // if((int)Cc<0)   Cc=0;
-                      Data[i * img2->GetWidth() * Bitmap::CHANNELS_NUM + j * Bitmap::CHANNELS_NUM + k] = Cc;
-                  }
-               }
-
-            }
-        return img2;
-}
-
 void swap_regions(Bitmap &img, size_t r1, size_t c1, size_t r2, size_t c2, size_t w, size_t h)
 {
     size_t chunk_width = w * 3;

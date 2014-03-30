@@ -25,7 +25,6 @@ public:
     void AddBchPkg(unsigned long long cnt, unsigned long long failed_cnt);
     void StartFrame();
     void FinishFrame();
-    void ResetFileIOTimer();
     void StartTimer(Timers id);
     void StopTimer(Timers id);
     std::string GetStats();

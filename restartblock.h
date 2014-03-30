@@ -10,8 +10,14 @@ class RestartBlock
 public:
     RestartBlock();
     RestartBlock(uint8_t *ptr, size_t size);
+    RestartBlock(const RestartBlock& other) :
+        pushbacks_cnt(other.pushbacks_cnt),
+        data(other.data)
+    { }
+    //RestartBlock &operator=(const RestartBlock &other);
+    RestartBlock &operator=(RestartBlock &&other);
 
-    void push_back(uint8_t c) { data.push_back(c);                   pushbacks_cnt++;   }
+    void push_back(uint8_t c) { data.push_back(c); pushbacks_cnt++; }
     void clear();
     void set_info(uint8_t frame_number, uint16_t rst_block_number, uint16_t length);
 
@@ -28,7 +34,7 @@ public:
         return raw_ptr + info_len;
     }
     static size_t get_data_length(const uint8_t *raw_ptr) {
-        return raw_ptr[3] * 0xFF + raw_ptr[4];
+        return (size_t) raw_ptr[3] * 0xFF + (size_t) raw_ptr[4];
     }
     static uint8_t get_frame_number(const uint8_t *raw_ptr) {
         return *raw_ptr;
@@ -36,7 +42,7 @@ public:
     static uint16_t get_rst_block_number(const uint8_t *raw_ptr) {
         return raw_ptr[1] * 0xFF + raw_ptr[2];
     }
-    static size_t get_info_len() {
+    static constexpr size_t get_info_len() {
         return info_len;
     }
 
