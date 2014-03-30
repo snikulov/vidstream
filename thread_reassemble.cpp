@@ -45,7 +45,8 @@ void ReassemblerThread::run()
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
-        bool decoded_ok = recv_block.decoded_ok;
+        //bool decoded_ok = recv_block.decoded_ok;
+        bool decoded_ok = true;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
