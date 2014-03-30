@@ -10,7 +10,7 @@
 struct DecodedBlock
 {
     int data_len;
-    bool decoded_ok;
+    std::vector<char> decoded_ok;
     uint8_t data[PKG_MAX_SIZE];
 };
 

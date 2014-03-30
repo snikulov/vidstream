@@ -92,10 +92,13 @@ void* ecc::encode(char* in_data, size_t in_data_len, size_t &out_data_len){
 }
 
 //==================================================================
-void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len, bool &successful){
+void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len,
+                  std::vector<char> &successful){
     unsigned data_blocks = in_data_len / pkg_len;
     char *data_out = (char *) calloc(data_blocks, data_len);
-    successful = true;
+    if (successful.size() < data_blocks * data_len) {
+        successful.resize(data_blocks * data_len);
+    }
     unsigned failed_cnt = 0;
     for(unsigned curr_blk = 0; curr_blk < data_blocks; curr_blk++){
         memcpy(data_buff, in_data + pkg_len * curr_blk,  pkg_len);
@@ -107,14 +110,16 @@ void* ecc::decode(char* in_data, size_t in_data_len, size_t &out_data_len, bool 
                      data_buff[errloc[ii]/8] ^= 1 << (errloc[ii] & 7);
         }
         if (errors < 0) {
-            successful = false;
+            // failed to decode a block
+            // set all its bytes to false
+            memset(&successful[data_len * curr_blk], 0, data_len);
             failed_cnt++;
         }
-
 
         memcpy(data_out + data_len*curr_blk, data_buff, data_len);
     }
 
+    // update error statistics
     if (stat) {
         stat->AddBchPkg(data_blocks, failed_cnt);
     }

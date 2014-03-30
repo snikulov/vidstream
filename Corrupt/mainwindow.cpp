@@ -634,3 +634,10 @@ void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
     //SendBytes = 0;
     //StartTime = 0;
 }
+
+void MainWindow::on_errorSpinBox_valueChanged(int arg1)
+{
+    if (reader) {
+        reader->SetErrPercent(arg1);
+    }
+}

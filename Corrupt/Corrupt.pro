@@ -26,7 +26,6 @@ SOURCES += main.cpp\
     avhandler.cpp \
     interlace.cpp \
     transport.cpp \
-    err.cpp \
     thread_encode.cpp \
     thread_decode.cpp \
     thread_send.cpp \
@@ -49,7 +48,6 @@ HEADERS  += mainwindow.h \
     avhandler.h \
     interlace.h \
     transport.h \
-    err.h \
     threaded_coder.h \
     thread_packetize.h \
     thread_reassemble.h \

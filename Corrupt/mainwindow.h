@@ -79,6 +79,8 @@ private slots:
 
     void on_bandwidthSpinBox_valueChanged(int arg1);
 
+    void on_errorSpinBox_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 
