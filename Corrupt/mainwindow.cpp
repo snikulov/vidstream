@@ -7,9 +7,15 @@
 #include "interlace.h"
 #include "jpegops.h"
 #include "membuf.h"
-#include "receiverthread.h"
-#include "senderthread.h"
 #include "split.h"
+#include "thread_packetize.h"
+#include "thread_encode.h"
+#include "thread_send.h"
+#include "thread_read.h"
+#include "thread_decode.h"
+#include "thread_reassemble.h"
+#include "threaded_coder.h"
+#include "transport.h"
 
 #include <unistd.h>
 #include <cstdio>
@@ -39,13 +45,28 @@ MainWindow::MainWindow(QWidget *parent) :
     grayscale(false),
     reorder_blocks(false),
     head_size(0),
-    image_buffer_size(0),
+    image_buffer_size(50000),
+    body_buffer(new uint8_t[image_buffer_size]),
+    res_buffer(new uint8_t[2 * image_buffer_size]),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     res_raster(new Bitmap(image_width, image_height)),
-    enc_s(new ecc(settings.bch_m, settings.bch_t, stat)),
-    enc_r(new ecc(settings.bch_m, settings.bch_t, stat)),
+    enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
+    enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
     history(MAX_RESTART_BLOCKS),
+    port(transport().get_free_port()),
+    sender_tp(),
+    //reader_tp("127.0.0.1", port),
+    reader_tp(),
+    encoder(new EncoderThread(*enc_s, stat)),
+    sender(new SenderThread("127.0.0.1", port, sender_tp,
+           transmit_restart_count, stat)),
+    reader(new ReaderThread(0.0, reader_tp,
+           transmit_restart_count, stat)),
+    decoder(new DecoderThread(*enc_r, stat)),
+    reassembler(new ReassemblerThread(res_buffer.get() + head_size,
+                                      history, transmit_restart_count,
+                                      history_mutex, stat, false)),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
     interlace_blocks(new InterlaceControl(settings.block_num,
@@ -75,6 +96,22 @@ MainWindow::MainWindow(QWidget *parent) :
         SetSettings(stored_settings[0]);
     } catch(...) {
     }
+
+    // queues created by a dead process may hang
+    boost::interprocess::message_queue::remove(TO_READ_MSG);
+    boost::interprocess::message_queue::remove(TO_SEND_MSG);
+    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
+    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
+    boost::interprocess::message_queue::remove(TO_OUT_MSG);
+
+    connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
+    //connect(reassembler.get(), SIGNAL(frameReady()), qApp, SLOT(aboutQt()));
+
+    decoder->start();
+    reader->start();
+    sender->start();
+    encoder->start();
+    reassembler->start();
 }
 
 MainWindow::~MainWindow()
@@ -93,16 +130,13 @@ void MainWindow::on_startButton_clicked()
     if (!running) {
         running = true;
         ui->startButton->setText("Pause");
-        for (size_t i = 0; i < history.size(); i++) {
-            history[i].clear();
-        }
         processFrames(256);
     } else {
         running = false;
         ui->startButton->setText("Continue");
     }
-    SendBytes = 0;
-    StartTime = 0;
+    //SendBytes = 0;
+    //StartTime = 0;
 }
 
 bool MainWindow::SetJpegQuality(int lum, int chrom)
@@ -147,14 +181,28 @@ void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
 // i.e. Sender/Receiver threads aren't running
 bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
+    encoder->Kill();
+    decoder->Kill();
+    encoder->terminate();
+    decoder->terminate();
+    encoder->wait();
+    decoder->wait();
     try {
-        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
-        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, stat));
+        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
+        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
     } catch (...) { // failed to initialize bch
         return false;
     }
     settings.bch_m = bch_m;
     settings.bch_t = bch_t;
+
+    encoder = std::unique_ptr<EncoderThread>
+                (new EncoderThread(*enc_s, stat));
+    decoder = std::unique_ptr<DecoderThread>
+                (new DecoderThread(*enc_r, stat));
+    encoder->start();
+    decoder->start();
+
     return true;
 }
 
@@ -295,9 +343,8 @@ void MainWindow::processFrames(unsigned frame_count)
         qDebug() << cur << " frames processed";
         char buf[5];
         snprintf(buf, 5, "%03d", cur + 1);
-        corruptImage(ui->errorSpinBox->value(),
-                     out_prefix + filename + buf + ".jpg",
-                     cur);
+        out_filename = out_prefix + filename + buf + ".jpg";
+        corruptImage(cur);
         cur = (cur + 1) % frame_count;
         interlace_rows->Advance();
         interlace_blocks->Advance();
@@ -337,8 +384,6 @@ bool MainWindow::loadImageFile()
         for (size_t i = 0; i < input_height; i++) {
             for (size_t j = 0; j < input_width; j++) {
                 src_buffer[cur] =     qRed  (image.pixel(j, i));
-                src_buffer[cur + 1] = qGreen(image.pixel(j, i));
-                src_buffer[cur + 2] = qBlue (image.pixel(j, i));
                 cur += 3;
             }
         }
@@ -365,12 +410,15 @@ bool MainWindow::loadImageFile()
                                                      *interlace_rows));
     // create JPEG from dst_buffer, write to temp file
     // temp is a JPEG file containing half the image that will be transmitted
+
+    std::string tempname = "temp";
+
     stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
     if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
         change_order(*dst, 8);
     }
     write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    "temp", settings.lum_quality, settings.chrom_quality,
+                    tempname.c_str(), settings.lum_quality, settings.chrom_quality,
                     settings.rst_block_size, grayscale);
     stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
 
@@ -379,7 +427,7 @@ bool MainWindow::loadImageFile()
     if (fin.is_open()) {
         fin.close();
     }
-    fin.open("temp", std::ios::binary);
+    fin.open(tempname, std::ios::binary);
     if (!fin) {
         ui->image_corrupt->setText("Failed to load image.");
         ui->image_corrupt->repaint();
@@ -395,16 +443,16 @@ bool MainWindow::loadImageFile()
     // resize buffers if image doesn't fit in them
     if (image_size > image_buffer_size) {
         try {
-            res_buffer  = std::unique_ptr<uint8_t[]> (new uint8_t[2 * image_size]);
-            body_buffer = std::unique_ptr<uint8_t[]> (new uint8_t[image_size]);
-        } catch (const std::bad_alloc &e) {
-            qDebug() << "Allocation failed: " << e.what();
-            ui->image_corrupt->setText("Not enough memory.\n");
-            image_buffer_size = 0;
-            return false;
+            throw std::runtime_error("JPEG size larger than buffer size");
+        } catch (const std::exception &e) {
+            qDebug() << "Exception occurred: " << e.what();
+            ui->image_corrupt->setText("Error occurred.\n");
+            ui->image_corrupt->repaint();
+            throw;
+            //return false;
         }
+
         hdr_buf_initialized = false;
-        image_buffer_size = image_size;
     }
     membuf sbuf_body((char *) body_buffer.get(), image_size);
     std::ostream fbdy(&sbuf_body);
@@ -423,6 +471,8 @@ bool MainWindow::loadImageFile()
         ui->image_corrupt->setText("Error occurred while parsing image");
         return false;
     }
+
+    //history.resize(transmit_restart_count);
 
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
@@ -455,29 +505,29 @@ bool MainWindow::loadImageFile()
     return true;
 }
 
-void MainWindow::corruptImage(float err_percent, const std::string &out_filename,
-                              uint8_t frame_number)
+void MainWindow::corruptImage(uint8_t frame_number)
 {
     if (!fin.is_open()) {
         ui->image_corrupt->setText("Image not loaded");
         return;
     }
     // each byte of mask corresponds to a whole RestartBlock
-    std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    SenderThread sender(body_buffer.get(), body_size,
-                        output_queue_name,
-                        *enc_s.get(), frame_number,
-                        stat, *interlace_blocks);
-    ReceiverThread receiver(res_buffer.get() + head_size, mask.get(), // write into body
-                            input_queue_name,
-                            *enc_r.get(), history, transmit_restart_count,
-                            stat, err_percent, broken_channel);
-    sender.start();
-    receiver.start();
-    while (sender.isRunning() || receiver.isRunning()) {
+    //std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
+    PacketizerThread packetizer(body_buffer.get(), body_size,
+                                frame_number, transmit_restart_count,
+                                stat, *interlace_blocks);
+    packetizer.start();
+    //packetizer.wait();
+    while (packetizer.isRunning()) {
         usleep(1000);
+        QCoreApplication::processEvents();
     }
+}
+
+void MainWindow::drawImage()
+{
     try {
+        ComposeJpeg(res_buffer.get() + head_size, history, transmit_restart_count);
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
@@ -488,20 +538,8 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         stat.StopTimer(StatCollector::TIMER_JPEG_READ);
         stat.StartTimer(StatCollector::TIMER_INTERLACE);
         // insert received lines into recv_raster
-        interlace_merge_rows(received, *recv_raster, *interlace_rows);
-        // restore broken pixels from neighboring lines
-        //for (size_t i = interlace_rows->FirstIndex(), srci = 0;
-        //     srci < input_height;
-        //     i = interlace_rows->NextIndex(i), srci++) {
-        //    for (size_t j = 0; j < input_width; j++) {
-        //        int rst_index = (j / 16) + (srci / 16) * (input_width / 16);
-        //        if (!mask[rst_index] && i) {
-        //            int neighrow = i % 2 ? i - 1 : i + 1;
-        //            memcpy(recv_raster->GetPixel(i, j), recv_raster->GetPixel(neighrow, j), 3);
-        //            //recv_raster[i * image_width * 3 + j * 3] = 255;
-        //        }
-        //    }
-        //}
+        interlace_merge_rows(Bitmap(recv_buffer.get(),input_width, input_height),
+                             *recv_raster, *interlace_rows);
         stat.StopTimer(StatCollector::TIMER_INTERLACE);
         stat.StartTimer(StatCollector::TIMER_SCALING);
         // resize bitmap back to full size
@@ -521,8 +559,8 @@ void MainWindow::corruptImage(float err_percent, const std::string &out_filename
         qDebug() << "Failed to decode/draw image";
         ui->image_corrupt->setText("Failed to decode/draw image");
         ui->image_corrupt->repaint();
-        throw;
     }
+    history_mutex.unlock();
 }
 
 void MainWindow::displayStatistics()
@@ -592,7 +630,7 @@ void MainWindow::on_reorderCheckBox_toggled(bool checked)
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
 {
-    ChannelSpeed = arg1 / 8;
-    SendBytes = 0;
-    StartTime = 0;
+    //ChannelSpeed = arg1 / 8;
+    //SendBytes = 0;
+    //StartTime = 0;
 }

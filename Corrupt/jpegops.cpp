@@ -86,8 +86,8 @@ void set_compress_params(jpeg_compress_struct &cinfo,
     cinfo.q_scale_factor[1] = jpeg_quality_scaling(chrom_quality);
     jpeg_default_qtables(&cinfo, true);
     cinfo.restart_interval = rst_block_size;
-    cinfo.comp_info[0].h_samp_factor = 1; //for Y
-    cinfo.comp_info[0].v_samp_factor = 1;
+    cinfo.comp_info[0].h_samp_factor = 2; //for Y
+    cinfo.comp_info[0].v_samp_factor = 2;
     cinfo.comp_info[1].h_samp_factor = 1; //for Cb
     cinfo.comp_info[1].v_samp_factor = 1;
     cinfo.comp_info[2].h_samp_factor = 1; //for Cr

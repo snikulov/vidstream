@@ -61,11 +61,6 @@ void StatCollector::FinishFrame()
     last_frame_size = cur_frame_size;
 }
 
-void StatCollector::ResetFileIOTimer()
-{
-    total_time[TIMER_FILEIO] = 0;
-}
-
 void StatCollector::StartTimer(Timers id)
 {
     started_time[id] = clock();

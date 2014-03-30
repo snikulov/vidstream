@@ -4,7 +4,12 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
-#include "receiverthread.h"
+#include "thread_packetize.h"
+#include "thread_encode.h"
+#include "thread_send.h"
+#include "thread_read.h"
+#include "thread_decode.h"
+#include "thread_reassemble.h"
 
 #include <QMainWindow>
 #include <fstream>
@@ -54,6 +59,8 @@ public:
     void SaveSettings();
 
 private slots:
+    void drawImage();
+
     void on_settingsButton_clicked();
 
     void on_startButton_clicked();
@@ -100,6 +107,8 @@ private:
     bool reorder_blocks;
 
     std::string filename;
+    std::string out_filename;
+
     std::ifstream fin;
     size_t image_size;
     size_t body_size;
@@ -116,13 +125,22 @@ private:
     std::unique_ptr<Bitmap> res_raster;
     std::unique_ptr<ecc> enc_s, enc_r;
     BlockHistory history;
+    QMutex history_mutex;
     StatCollector stat;
+
+    unsigned port;
+    transport sender_tp, reader_tp;
+
+    std::unique_ptr<EncoderThread> encoder;
+    std::unique_ptr<SenderThread>  sender;
+    std::unique_ptr<ReaderThread>  reader;
+    std::unique_ptr<DecoderThread> decoder;
+    std::unique_ptr<ReassemblerThread> reassembler;
 
     std::unique_ptr<InterlaceControl> interlace_rows, interlace_blocks;
 
     bool loadImageFile();
-    void corruptImage(float err_percent, const std::string &out_filename,
-                      uint8_t frame_number);
+    void corruptImage(uint8_t frame_number);
     void processFrames(unsigned frame_count);
     void displayStatistics();
 };

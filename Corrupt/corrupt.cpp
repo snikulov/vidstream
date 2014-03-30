@@ -13,38 +13,6 @@ float Corruptor::check_err(uint8_t *etalon, uint8_t *data, unsigned len){
     return 100.0* bad_bytes /(float)len;
 }
 
-/*unsigned Corruptor::add_err(uint8_t* data, unsigned len, float err_prcnt){
-    uint8_t curr_bad_bit = 0;
-    unsigned bad_bits = 0;
-    unsigned bad_bytes = 0;
-    bool wrong_byte;
-
-    srand (time(NULL));
-    err_prcnt *= RAND_MAX / 100.0;
-
-    for(unsigned ii = 0; ii< len; ii++){
-        wrong_byte = false;
-        for(int jj = 0; jj< 8; jj++){
-            if (rand() < prob) {
-                curr_bad_bit = 1 << jj;
-                bad_bits += 1;
-                wrong_byte = true;
-
-                if(data[ii] & curr_bad_bit)
-                    data[ii] &= ~curr_bad_bit;
-                else
-                    data[ii] |= curr_bad_bit;
-            }
-        }
-
-        if(wrong_byte)
-            bad_bytes += 1;
-    }
-
-    return bad_bytes;
-}
-*/
-
 unsigned Corruptor::add_err(uint8_t *data, unsigned len, float err_prcnt)
 {
     unsigned cnt = 0;

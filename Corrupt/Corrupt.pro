@@ -17,9 +17,7 @@ SOURCES += main.cpp\
     bch.cpp \
     corrupt.cpp \
     ecc.cpp \
-    receiverthread.cpp \
     restartblock.cpp \
-    senderthread.cpp \
     split.cpp \
     jpegops.cpp \
     statcollector.cpp \
@@ -27,6 +25,14 @@ SOURCES += main.cpp\
     bitmap.cpp \
     avhandler.cpp \
     interlace.cpp \
+    transport.cpp \
+    err.cpp \
+    thread_encode.cpp \
+    thread_decode.cpp \
+    thread_send.cpp \
+    thread_read.cpp \
+    thread_packetize.cpp \
+    thread_reassemble.cpp \
     settings.cpp
 
 HEADERS  += mainwindow.h \
@@ -34,9 +40,7 @@ HEADERS  += mainwindow.h \
     corrupt.h \
     ecc.h \
     membuf.h \
-    receiverthread.h \
     restartblock.h \
-    senderthread.h \
     split.h \
     jpegops.h \
     statcollector.h \
@@ -44,6 +48,15 @@ HEADERS  += mainwindow.h \
     bitmap.h \
     avhandler.h \
     interlace.h \
+    transport.h \
+    err.h \
+    threaded_coder.h \
+    thread_packetize.h \
+    thread_reassemble.h \
+    thread_encode.h \
+    thread_decode.h \
+    thread_send.h \
+    thread_read.h \
     queue_params.h \
     settings.h
 
@@ -58,5 +71,5 @@ FORMS    += mainwindow.ui \
 OTHER_FILES += \
     Corrupt.pro.user
 
-QMAKE_CFLAGS += -O3
-QMAKE_CXXFLAGS += -O3 -DGENERATE_HEADER -g -std=c++11 -Wno-write-strings
+QMAKE_CFLAGS +=
+QMAKE_CXXFLAGS += -DGENERATE_HEADER -g -O2 -std=c++11 -Wall -Wno-write-strings
