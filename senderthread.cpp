@@ -16,26 +16,29 @@
 
 uint32_t StartTime = 0;
 uint64_t SendBytes = 0;
-uint32_t Base_len = 3;
-uint32_t cur_rst_len, prev_rst_len, last_grp, pack_size, out_size, loc_rst_count;
+
 
 
 struct timespec start_time, cur_time;
 uint32_t ChannelSpeed = 10000000/8;
-//int64_t diff_time(struct timespec *start_time)
 
-//
+uint32_t Base_len = 3;
+uint8_t packet[1000];
+uint32_t grp_len, grp_count, cur_rst_len, prev_rst_len, last_grp, pack_size, out_size, loc_rst_count;
 void stat_start_frame()
 {
     loc_rst_count = 0;
     cur_rst_len = 0;
     prev_rst_len = 0;
     last_grp = 0;
+    grp_len = 0;
+    grp_count = 0;
     pack_size = 0;
     out_size = 0;
 }
 void stat_flush_pack()
 {
+
     out_size+= 6+(out_size / 100)*6;
 }
 
@@ -154,9 +157,10 @@ void SenderThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
+
                     cur_rst_len = block.data_length();
                     stat_add_rst_out();
-                    if (!TransmitBlock(block, mq)) {
+                     if (!TransmitBlock(block, mq)) {
                         return;
                     }
                 }
