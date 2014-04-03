@@ -13,7 +13,7 @@
 extern uint32_t ChannelSpeed;
 extern uint32_t StartTime;
 extern uint64_t SendBytes;
-
+extern char PacketByte;
 class SenderThread : public QThread
 {
 public:

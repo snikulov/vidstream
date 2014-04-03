@@ -103,7 +103,7 @@ void set_compress_params(jpeg_compress_struct &cinfo,
   //      chrom_quality -=10;
         change_qual = -1;
 
-        cout <<"\n down "<< lum_quality << "\n" <<flush;
+ //       cout <<"\n down "<< lum_quality << "\n" <<flush;
 
 
     }
@@ -111,7 +111,7 @@ void set_compress_params(jpeg_compress_struct &cinfo,
 //        lum_quality +=10;
 //        chrom_quality +=10;
         change_qual = 1;
-        cout <<"\n up "<< lum_quality <<"\n" << flush;
+ //       cout <<"\n up "<< lum_quality <<"\n" << flush;
 
     }
     cinfo.q_scale_factor[0] = jpeg_quality_scaling(lum_quality);

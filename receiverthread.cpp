@@ -13,6 +13,134 @@
 namespace bipc = boost::interprocess;
 namespace btime = boost::posix_time;
 
+char rPacketByte;
+char rPacket[1000];
+uint32_t rMaxPacketSize = 100;
+int32_t  rMaxLenRSTInGRP = 8;
+int32_t  rMaxGRP = 15;
+int32_t  rSubPacketLength = 20;
+int32_t  rplen;
+int rGetPos;
+uint32_t rNextGroupPos, rNextGroupStartNum;
+bool ByteError(int Pos )
+{
+    return false;
+}
+bool GetByteFromPacket()
+{
+  rPacketByte = rPacket[rGetPos];
+  return (! ByteError(rGetPos)) ;// ByteError(getPos);
+
+}
+
+
+
+void  NextInpPos()
+
+{
+    rGetPos++;
+    if ((rGetPos % rSubPacketLength) == 0)  {
+        if (ByteError(rGetPos) || ByteError(rGetPos+1)) {
+            rNextGroupPos = -1;
+            rNextGroupStartNum = -1;
+        } else {
+            rNextGroupPos = rPacket[rGetPos];
+            rNextGroupStartNum = rPacket[rGetPos+1];
+        };
+        rGetPos = rGetPos+2;
+    };
+};
+
+void GetRSTFromPack()
+
+{
+
+    int32_t   i1,j1;
+    int32_t   rRSTLen ;
+    int32_t   rRSTNum ;
+    int32_t   rLastRSTNum ;
+    int32_t   rRSTStartNum;
+    int32_t   rGrpCount;
+    int32_t   TmpLen;
+    char TmpRST[1000];
+    bool BlockOK;
+    rplen = rPacket[6];
+    rRSTStartNum = rPacket[4]*255 + rPacket[5];
+    rRSTNum = rRSTStartNum;
+    rLastRSTNum = rRSTNum;
+    rGetPos = 7;
+    rNextGroupPos = 7;
+    rNextGroupStartNum = 0;
+
+    while (rGetPos<rplen)  {
+        if (not GetByteFromPacket)
+        {
+            rGetPos = ( 1+(rGetPos / rSubPacketLength) ) * rSubPacketLength;
+            while (rGetPos<rplen)
+            {
+                if (GetByteFromPacket)
+                {
+                    rRSTNum = rRSTStartNum+rPacketByte;
+                    if (GetByteFromPacket())
+                    {
+                        rGetPos = rPacketByte;
+                        break;
+                    }
+                }
+                rGetPos = ( 1+(rGetPos / rSubPacketLength) ) * rSubPacketLength;
+            }
+            continue;
+        }
+
+        if ((rPacketByte & 0x80) != 0)  {
+
+            rGrpCount = 1;
+            rRSTLen = rPacket[rGetPos] & 0x7F;
+        } else {
+
+            rRSTLen = (rPacketByte >> 4) +1;
+
+            rGrpCount = rPacketByte &0x0F;
+
+        };
+
+        NextInpPos();
+
+        for (i1 = 0; i1<=  rGrpCount -1; i1++)   {
+            BlockOK = true;
+            TmpLen = 0;
+            for ( j1 = 0; j1<= rRSTLen -1; j1++)   {
+                if ( ! GetByteFromPacket())
+                {
+                    BlockOK = false;
+                } else {
+                    TmpRST[TmpLen] = rPacketByte;
+                    TmpLen++;
+                };
+                NextInpPos();
+            };
+            if (BlockOK)
+            {
+
+                    // put bytes to block  for j1 = 0 to tmplen-1 do PutOut(TmpRst[j1])
+            }
+
+                    else
+            {
+                // skip block
+
+            };
+
+            rRSTNum++;
+            rLastRSTNum = rRSTNum;
+        };
+    }
+};
+
+
+
+
+
 ReceiverThread::ReceiverThread(uint8_t *buffer, char *mask,
                                std::string queue_name,
                                ecc &encoder, BlockHistory &history,

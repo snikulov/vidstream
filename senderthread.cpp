@@ -17,14 +17,148 @@
 uint32_t StartTime = 0;
 uint64_t SendBytes = 0;
 
+uint32_t RSTCount;
+uint32_t MaxLenRST;
+uint32_t RstStart, PacketLen;
+uint32_t BufSize, OutBufSize;
+int32_t  PrevRSTLen,  cur_rst_len;
+uint32_t PackStartRSTNum,CurGrp, LenPos;
+int32_t  LastGRP ;
+char Packet[1000];
+char TmpRST[1000];
+uint32_t TmpLen ;
+uint32_t MaxPacketSize = 100;
+int32_t  MaxLenRSTInGRP = 8;
+int32_t  MaxGRP = 15;
+int32_t  SubPacketLength = 20;
+bool BlockOK ;
+int32_t  LastMarkerPosition ;
+int32_t  LastMarkerRSTNum   ;
+uint32_t PacketStartRSTNum  ;
+uint32_t getPos ;
+uint32_t pLen;
+uint32_t GrpCount, RstLen ;
+uint32_t RSTNum ;
+char PacketByte;
+uint32_t NextGroupPos, NextGroupStartNum;
+uint32_t RSTStartNum;
+bool FirstInSub;
+uint32_t IDD;
+
+void  PutToPacket(char b)
+{
+    Packet[PacketLen] = b;
+    PacketLen++;
+    if ((PacketLen % SubPacketLength)  == 0)
+    {
+            LastMarkerPosition = PacketLen;
+            PacketLen += 2;
+            FirstInSub = true;
+      }
+}
+
+void InitRSTPack(int StartNum)
+{
+    FirstInSub = false; //First frp in pack not need
+    PackStartRSTNum=StartNum;
+    PrevRSTLen = 0;
+    PacketLen =0;
+    LastGRP =0;
+    LenPos = 7;
+    Packet[0] = 0; //signature
+    Packet[1] = 1; //signature
+    Packet[2] = 2; //signature
+    Packet[3] = 3; //signature
+    Packet[4] = StartNum / 256 ;
+    Packet[5] = StartNum % 256 ;
+    Packet[6] = 0 ; //reserv for len
+    PacketStartRSTNum = RSTCount;
+    LastMarkerPosition = -1;
+    LastMarkerRSTNum   = -1;
+    OutBufSize += 7;
+    PacketLen += 7;
+}
+void FlushGroup()
+{
+    char Len;
+    if (LastGRP > 0)
+    {
+        if (PrevRSTLen>MaxLenRSTInGRP )
+        {
+            Packet[LenPos] = PrevRSTLen | 0x80;
+        }  else {
+            Packet[LenPos] = ((PrevRSTLen - 1) << 4) + LastGRP;
+        } ;
+        if (FirstInSub)
+        {
+            Packet[LastMarkerPosition] = RSTCount - PacketStartRSTNum;
+            Packet[LastMarkerPosition+1] = LenPos - LastMarkerPosition;
+            FirstInSub = false;
+        };
+    };
+    PrevRSTLen = 0;
+    LastGRP = 0;
+    LenPos = PacketLen;
+};
+
+void AddRSTToGroup()
+{
+    int i1;
+
+    if (LastGRP == 0)   {
+
+        LenPos = PacketLen;
+        PutToPacket(0);
+        LastMarkerRSTNum = RSTCount;
+    };
+
+    LastGRP++;
+    for (i1=0 ; i1<= cur_rst_len-1; i1++ ) {
+
+        //###    PutToPacket(Buf[RSTPos+i1]);
+    };
+    if (LastGRP == MaxGRP )
+    {
+        FlushGroup();
+    };
+};
+
+void SendPacket(){
+};
+
+void AddRSTBlock()
+{
+
+    bool ChangeGroup;
+    if ((PacketLen + cur_rst_len) > MaxPacketSize)
+    {
+        FlushGroup();
+        Packet[6]=PacketLen;
+        SendPacket();
+        InitRSTPack(RSTCount);
+    };
+    ChangeGroup =((cur_rst_len != PrevRSTLen))  || ( cur_rst_len > MaxLenRSTInGRP);
+    if (ChangeGroup)
+    {
+        FlushGroup();
+    }
+    AddRSTToGroup();
+    PrevRSTLen = cur_rst_len;
+};
+
+
+
 
 
 struct timespec start_time, cur_time;
 uint32_t ChannelSpeed = 10000000/8;
 
-uint32_t Base_len = 3;
+int Base_len = 3;
 uint8_t packet[1000];
-uint32_t grp_len, grp_count, cur_rst_len, prev_rst_len, last_grp, pack_size, out_size, loc_rst_count;
+uint32_t grp_len, grp_count, prev_rst_len, last_grp, pack_size, out_size, loc_rst_count;
+
+
+
 void stat_start_frame()
 {
     loc_rst_count = 0;
@@ -36,6 +170,11 @@ void stat_start_frame()
     pack_size = 0;
     out_size = 0;
 }
+void flush_group()
+{
+
+}
+
 void stat_flush_pack()
 {
 
@@ -177,7 +316,7 @@ void SenderThread::run()
         p = c;
     }
     stat_flush_pack();
-    cout << "Frame size = "<< out_size <<" blocks "<< loc_rst_count<<"\n"<< flush;
+ //   cout << "Frame size = "<< out_size <<" blocks "<< loc_rst_count<<"\n"<< flush;
 
     // send remaining data
     if (block.pushbacks_count() > 0 && interlace_refresh_block(rst_cnt, interlace)) {
