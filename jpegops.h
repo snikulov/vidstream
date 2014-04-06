@@ -2,6 +2,14 @@
 #define JPEGOPS_H
 
 #include <cstddef>
+#include <cstdint>
+
+struct JpegHeader
+{
+    size_t size;
+    uint8_t *data;
+    JpegHeader(uint8_t *data) : data(data) { }
+};
 
 // (JSAMPLE *) image_buffer points to large array of R,G,B-order data
 

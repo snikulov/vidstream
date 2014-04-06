@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     split.cpp \
     jpegops.cpp \
     statcollector.cpp \
-    settingsdialog.cpp \
     bitmap.cpp \
     avhandler.cpp \
     interlace.cpp \
@@ -32,7 +31,8 @@ SOURCES += main.cpp\
     thread_read.cpp \
     thread_packetize.cpp \
     thread_reassemble.cpp \
-    settings.cpp
+    settings.cpp \
+    thread_loader.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
@@ -43,7 +43,6 @@ HEADERS  += mainwindow.h \
     split.h \
     jpegops.h \
     statcollector.h \
-    settingsdialog.h \
     bitmap.h \
     avhandler.h \
     interlace.h \
@@ -56,7 +55,8 @@ HEADERS  += mainwindow.h \
     thread_send.h \
     thread_read.h \
     queue_params.h \
-    settings.h
+    settings.h \
+    thread_loader.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt
 

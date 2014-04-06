@@ -17,6 +17,7 @@ Bitmap::Bitmap(const size_t width, const size_t height) :
 }
 
 Bitmap::Bitmap(const Bitmap &other) :
+    own_data(true),
     width(other.width),
     height(other.height),
     data(new uint8_t[data_size()])

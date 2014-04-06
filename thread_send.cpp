@@ -16,11 +16,10 @@ using namespace boost::interprocess;
 
 SenderThread::SenderThread(const char *ip, unsigned port,
                            transport &T,
-                           size_t restart_block_cnt, StatCollector &stat) :
+                           StatCollector &stat) :
     ip(ip),
     port(port),
     T(T),
-    restart_block_cnt(restart_block_cnt),
     stat(stat),
     killed(false)
 { }

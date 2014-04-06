@@ -4,6 +4,9 @@
 #include "bitmap.h"
 #include "ecc.h"
 #include "interlace.h"
+#include "thread_loader.h"
+#include "jpegops.h"
+#include "settings.h"
 #include "thread_packetize.h"
 #include "thread_encode.h"
 #include "thread_send.h"
@@ -11,16 +14,13 @@
 #include "thread_decode.h"
 #include "thread_reassemble.h"
 
-#include <QMainWindow>
 #include <fstream>
 #include <memory>
-
-#include "settings.h"
+#include <QMainWindow>
 
 namespace Ui {
 class MainWindow;
 }
-
 
 class MainWindow : public QMainWindow
 {
@@ -35,23 +35,8 @@ public:
         lum = settings.lum_quality;
         chrom = settings.chrom_quality;
     }
-    bool SetJpegQuality(int lum, int chrom);
-    size_t GetBlockSize() const { return settings.rst_block_size; }
-    bool SetBlockSize(size_t rst_block_size);
-    void GetBchParams(int &bch_m, int &bch_t) const;
-    bool SetBchParams(int bch_m, int bch_t);
-    void GetRowInterlace(size_t &num, size_t &denom) const;
-    bool SetRowInterlace(size_t num, size_t denom);
-    void GetBlockInterlace(size_t &num, size_t &denom) const;
-    bool SetBlockInterlace(size_t num, size_t denom);
-    Settings GetSettings() const;
-    int SetSettings(const Settings &new_s);
-
     void SetChannelState(bool ok) { broken_channel = !ok;   }
     bool GetChannelState() const  { return !broken_channel; }
-
-    void GetScalingResolution(size_t &w, size_t &h) const;
-    bool SetScalingResolution(size_t w, size_t h);
 
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
@@ -61,21 +46,19 @@ public:
 private slots:
     void drawImage();
 
-    void on_settingsButton_clicked();
-
     void on_startButton_clicked();
 
     void on_openButton_clicked();
 
-    void on_mode1_radioButton_clicked(bool checked);
+   // void on_mode1_radioButton_clicked(bool checked);
 
-    void on_mode2_radioButton_clicked(bool checked);
+   // void on_mode2_radioButton_clicked(bool checked);
 
-    void on_breakChannelCheckBox_toggled(bool checked);
+   // void on_breakChannelCheckBox_toggled(bool checked);
 
-    void on_grayscaleCheckBox_clicked(bool checked);
+   // void on_grayscaleCheckBox_clicked(bool checked);
 
-    void on_reorderCheckBox_toggled(bool checked);
+   // void on_reorderCheckBox_toggled(bool checked);
 
     void on_bandwidthSpinBox_valueChanged(int arg1);
 
@@ -105,8 +88,6 @@ private:
     Settings stored_settings[2];
 
     bool broken_channel;
-    bool grayscale;
-    bool reorder_blocks;
 
     std::string filename;
     std::string out_filename;
@@ -114,13 +95,10 @@ private:
     std::ifstream fin;
     size_t image_size;
     size_t body_size;
-    size_t head_size;
     size_t image_buffer_size;
-    std::unique_ptr<uint8_t[]> src_buffer;
-    std::unique_ptr<uint8_t[]> dst_buffer;
     std::unique_ptr<uint8_t[]> recv_buffer;
-    std::unique_ptr<uint8_t[]> body_buffer;
     std::unique_ptr<uint8_t[]> res_buffer;
+    JpegHeader jpeg_header;
     bool hdr_buf_initialized;
 
     std::unique_ptr<Bitmap> recv_raster;
@@ -133,6 +111,7 @@ private:
     unsigned port;
     transport sender_tp, reader_tp;
 
+    LoaderThread loader;
     std::unique_ptr<EncoderThread> encoder;
     std::unique_ptr<SenderThread>  sender;
     std::unique_ptr<ReaderThread>  reader;
