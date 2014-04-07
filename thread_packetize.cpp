@@ -15,18 +15,22 @@
 
 uint32_t RSTCount;
 uint32_t MaxLenRST;
-uint32_t RstStart, PacketLen;
+int32_t RSTStart, PacketLen;
 uint32_t BufSize, OutBufSize;
 int32_t  PrevRSTLen,  cur_rst_len;
 uint32_t PackStartRSTNum,CurGrp, LenPos;
+uint32_t CurRSTNum, CurFrameNum;
 int32_t  LastGRP ;
-char Packet[1000];
-char TmpRST[1000];
+char     Packet[1000];
+uint8_t TmpRST[1000];
+uint16_t TmpRSTLen;
+
 uint32_t TmpLen ;
-uint32_t MaxPacketSize = 100;
+int32_t MaxPacketSize = 100;
 int32_t  MaxLenRSTInGRP = 8;
 int32_t  MaxGRP = 15;
 int32_t  SubPacketLength = 20;
+int32_t  PacketHeaderLen = 7;
 bool BlockOK ;
 int32_t  LastMarkerPosition ;
 int32_t  LastMarkerRSTNum   ;
@@ -38,8 +42,9 @@ uint32_t RSTNum ;
 char PacketByte;
 uint32_t NextGroupPos, NextGroupStartNum;
 uint32_t RSTStartNum;
-bool FirstInSub;
+bool FirstInSub, FirstPacket, PacketReadyForSend, FirstPackOfFrame;
 uint32_t IDD;
+uint8_t PackFrame;
 
 void  PutToPacket(char b)
 {
@@ -53,10 +58,13 @@ void  PutToPacket(char b)
       }
 }
 
-void InitRSTPack(int StartNum)
+void InitRSTPack()
 {
+    using std::cout;
+       using std::flush;
+    cout << "Init Pack \n";
     FirstInSub = false; //First frp in pack not need
-    PackStartRSTNum=StartNum;
+    PacketReadyForSend = false;
     PrevRSTLen = 0;
     PacketLen =0;
     LastGRP =0;
@@ -65,17 +73,20 @@ void InitRSTPack(int StartNum)
     Packet[1] = 1; //signature
     Packet[2] = 2; //signature
     Packet[3] = 3; //signature
-    Packet[4] = StartNum / 256 ;
-    Packet[5] = StartNum % 256 ;
+    Packet[4] = CurRSTNum / 256 ; // Number of start RST block in pack
+    Packet[5] = CurRSTNum % 256 ; //
     Packet[6] = 0 ; //reserv for len
-    PacketStartRSTNum = RSTCount;
+    Packet[7] = CurFrameNum; // frame number
+    PacketStartRSTNum = CurRSTNum;
     LastMarkerPosition = -1;
     LastMarkerRSTNum   = -1;
-    OutBufSize += 7;
-    PacketLen += 7;
+    PacketLen += PacketHeaderLen+1;
 }
 void FlushGroup()
 {
+    using std::cout;
+       using std::flush;
+    cout << "Flush group \n";
 
     if (LastGRP > 0)
     {
@@ -100,18 +111,17 @@ void FlushGroup()
 void AddRSTToGroup()
 {
     int i1;
-
+    using std::cout;
+       using std::flush;
+    cout << "Add RST To group \n";
     if (LastGRP == 0)   {
-
         LenPos = PacketLen;
         PutToPacket(0);
         LastMarkerRSTNum = RSTCount;
     };
-
     LastGRP++;
     for (i1=0 ; i1<= cur_rst_len-1; i1++ ) {
-
-        //###    PutToPacket(Buf[RSTPos+i1]);
+        PutToPacket(TmpRST[i1]);
     };
     if (LastGRP == MaxGRP )
     {
@@ -120,26 +130,10 @@ void AddRSTToGroup()
 };
 
 void SendPacket(){
-};
-
-void AddRSTBlock()
-{
-
-    bool ChangeGroup;
-    if ((PacketLen + cur_rst_len) > MaxPacketSize)
-    {
-        FlushGroup();
-        Packet[6]=PacketLen;
-        SendPacket();
-        InitRSTPack(RSTCount);
-    };
-    ChangeGroup =((cur_rst_len != PrevRSTLen))  || ( cur_rst_len > MaxLenRSTInGRP);
-    if (ChangeGroup)
-    {
-        FlushGroup();
+    if (PacketLen>PacketHeaderLen){
+        PacketReadyForSend = true;
+//        mq.send(block.raw_ptr(), block.raw_length(), 0);
     }
-    AddRSTToGroup();
-    PrevRSTLen = cur_rst_len;
 };
 
 
@@ -160,6 +154,29 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
     interlace(interlace)
 {
 }
+void PacketizerThread::AddRSTBlock(bipc::message_queue &mq)
+{
+    using std::cout;
+       using std::flush;
+    cout << "ADD RST Block \n";
+    bool ChangeGroup;
+    if ((PacketLen + cur_rst_len) > MaxPacketSize)
+    {
+        FlushGroup();
+        Packet[6]=PacketLen;
+        mq.send(&Packet, PacketLen, 0);
+        InitRSTPack();
+    };
+    ChangeGroup =((cur_rst_len != PrevRSTLen))  || ( cur_rst_len > MaxLenRSTInGRP);
+    if (ChangeGroup)
+    {
+        FlushGroup();
+    }
+    AddRSTToGroup();
+    PrevRSTLen = cur_rst_len;
+};
+
+
 
 void PacketizerThread::TransmitBlock(RestartBlock& block,
                                     bipc::message_queue &mq)
@@ -172,11 +189,13 @@ void PacketizerThread::TransmitBlock(RestartBlock& block,
 
 void PacketizerThread::run()
 {
+
     bipc::message_queue mq(bipc::open_or_create, TO_ENCODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     // c - current char, p - previous char
     uint8_t p = 0, c;
     uint16_t rst_cnt = 0;
     RestartBlock block;
+    FirstPackOfFrame = true;
     for (size_t i = 0; i < buffer_size; i++) {
         c = buffer[i];
         // section can only contain FF 00 and RST markers
@@ -185,11 +204,26 @@ void PacketizerThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
-                    TransmitBlock(block, mq);
+//                    TransmitBlock(block, mq);
+                    CurRSTNum = rst_cnt;
+                    CurFrameNum = frame_number;
+                    cur_rst_len = block.data_length();
+                    size_t len = block.data_length();
+                    uint8_t *data = block.data_ptr();
+                                // copy block contents to TmpRS
+                    for (unsigned TmpLen = 0; TmpLen < len; TmpLen++) {
+                        TmpRST[TmpLen] = data[TmpLen];
+                    }
+                    if (FirstPackOfFrame){
+                        InitRSTPack();
+                        FirstPackOfFrame = false;
+                    }
+                    AddRSTBlock(mq);
+
                 }
                 block.clear();
                 rst_cnt++;
-            } else { // {p, c} = FF00; ignoring 00
+            } else { // {p, c} = FF00; ignoring 00                
                 block.push_back(p);
             }
         } else { // p != 0xFF
@@ -202,7 +236,21 @@ void PacketizerThread::run()
 
     if (block.pushbacks_count() > 0) {
         block.set_info(frame_number, rst_cnt,block.pushbacks_count());
-        TransmitBlock(block, mq);
+        //        TransmitBlock(block, mq);
+        CurRSTNum = rst_cnt;
+        CurFrameNum = frame_number;
+        cur_rst_len = block.data_length();
+        size_t len = block.data_length();
+        uint8_t *data = block.data_ptr();
+        // copy block contents to TmpRS
+        for (unsigned TmpLen = 0; TmpLen < len; TmpLen++) {
+            TmpRST[TmpLen] = data[TmpLen];
+        }
+        AddRSTBlock(mq);
+    }
+    FlushGroup();
+    if (PacketLen>PacketHeaderLen+1){
+        mq.send(&Packet[0], PacketLen, 0);
     }
 }
 

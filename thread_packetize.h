@@ -24,7 +24,7 @@ protected:
 
 private:
     void TransmitBlock(RestartBlock& block, bipc::message_queue &mq);
-
+    void AddRSTBlock(bipc::message_queue &mq);
     const uint8_t *buffer;
     const size_t buffer_size;
     RestartBlock buf;

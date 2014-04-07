@@ -6,7 +6,8 @@
 #include "ecc.h"
 #include "statcollector.h"
 #include "threaded_coder.h"
-
+#include <boost/interprocess/ipc/message_queue.hpp>
+namespace bipc = boost::interprocess;
 struct DecodedBlock
 {
     int data_len;
@@ -18,7 +19,7 @@ class DecoderThread : public QThread
 {
 public:
     DecoderThread(ecc &coder, StatCollector &stat);
-
+    void GetRSTFromPack(bipc::message_queue &output_que);
     void Kill() { killed = true; }
 protected:
     void run();

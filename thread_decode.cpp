@@ -14,14 +14,16 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 using namespace boost::interprocess;
-
+namespace bipc = boost::interprocess;
 
 char rPacketByte;
-char rPacket[1000];
+uint8_t* rPacket;
 uint32_t rMaxPacketSize = 100;
 int32_t  rMaxLenRSTInGRP = 8;
 int32_t  rMaxGRP = 15;
 int32_t  rSubPacketLength = 20;
+int32_t  rPacketHeaderLen = 7;
+uint8_t  rTmpRST[1000];
 int32_t  rplen;
 int rGetPos;
 uint32_t rNextGroupPos, rNextGroupStartNum;
@@ -54,36 +56,53 @@ void  NextInpPos()
     };
 };
 
-void GetRSTFromPack()
+ void DecoderThread::GetRSTFromPack(bipc::message_queue &output_que)
 
 {
+
+  using std::cout;
+     using std::flush;
+
 
     int32_t   i1,j1;
     int32_t   rRSTLen ;
     int32_t   rRSTNum ;
+    int32_t   rFrameNum ;
     int32_t   rLastRSTNum ;
     int32_t   rRSTStartNum;
     int32_t   rGrpCount;
     int32_t   TmpLen;
-    char TmpRST[1000];
+    rGetPos = 0;
+    cout <<" check packet header \n" << flush;
+    for (i1 = 0; i1<=rPacketHeaderLen; i1++){
+        if (not GetByteFromPacket()) {
+            return;
+        }
+    }
+    cout <<"  packet header ok\n" << flush;
+
     bool BlockOK;
     rplen = rPacket[6];
+    rFrameNum = rPacket[7];
     rRSTStartNum = rPacket[4]*255 + rPacket[5];
     rRSTNum = rRSTStartNum;
+
     rLastRSTNum = rRSTNum;
-    rGetPos = 7;
-    rNextGroupPos = 7;
+    rGetPos = rPacketHeaderLen+1;
+    rNextGroupPos = -1;
     rNextGroupStartNum = 0;
+    cout <<"Len="<< rplen<< " Frame="<<rFrameNum <<" RST Num="<< rRSTStartNum<< " \n" << flush;
 
     while (rGetPos<rplen)  {
-        if (not GetByteFromPacket)
+        if (not GetByteFromPacket())
         {
             rGetPos = ( 1+(rGetPos / rSubPacketLength) ) * rSubPacketLength;
             while (rGetPos<rplen)
             {
-                if (GetByteFromPacket)
+                if (GetByteFromPacket())
                 {
                     rRSTNum = rRSTStartNum+rPacketByte;
+                    NextInpPos();
                     if (GetByteFromPacket())
                     {
                         rGetPos = rPacketByte;
@@ -94,30 +113,23 @@ void GetRSTFromPack()
             }
             continue;
         }
-
         if ((rPacketByte & 0x80) != 0)  {
-
             rGrpCount = 1;
             rRSTLen = rPacket[rGetPos] & 0x7F;
         } else {
-
             rRSTLen = (rPacketByte >> 4) +1;
-
             rGrpCount = rPacketByte &0x0F;
-
         };
-
         NextInpPos();
-
         for (i1 = 0; i1<=  rGrpCount -1; i1++)   {
             BlockOK = true;
-            TmpLen = 0;
+            TmpLen = 5;
             for ( j1 = 0; j1<= rRSTLen -1; j1++)   {
                 if ( ! GetByteFromPacket())
                 {
                     BlockOK = false;
                 } else {
-                    TmpRST[TmpLen] = rPacketByte;
+                    rTmpRST[TmpLen] = rPacketByte;
                     TmpLen++;
                 };
                 NextInpPos();
@@ -125,7 +137,19 @@ void GetRSTFromPack()
             if (BlockOK)
             {
 
-                    // put bytes to block  for j1 = 0 to tmplen-1 do PutOut(TmpRst[j1])
+
+                    // put bytes to block
+                rTmpRST[0] = rFrameNum;
+                rTmpRST[1] = rRSTNum / 256;
+                rTmpRST[2] = rRSTNum % 256;
+                rTmpRST[3] = TmpLen / 256;
+                rTmpRST[3] = TmpLen % 256 ;
+                output_que.send(&rTmpRST, TmpLen, 0);
+                cout <<"Frame="<<rFrameNum<<" RST="<<rRSTNum<<"\n"<< flush;
+
+                //for (int j1 = 0; j1 <  TmpLen-1; j1++){
+                 //   PutOut(rTmpRST[j1])
+
                     // and put block to queue
             }
 
@@ -155,6 +179,10 @@ DecoderThread::DecoderThread(ecc &coder,
 
 void DecoderThread::run()
 {
+
+    using std::cout;
+       using std::flush;
+
     message_queue input_que(open_or_create, TO_DECODE_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
     message_queue output_que(open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
@@ -169,14 +197,20 @@ void DecoderThread::run()
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
-        char* out_data = (char*)coder.decode((char *)(recv_buf.get()), recvd,
+        uint8_t* out_data = (uint8_t*)coder.decode((char *)(recv_buf.get()), recvd,
                                              out_lnt, send_buf.decoded_ok);
         //stat.AddPacket(recvd, send_buf.decoded_ok);
-        send_buf.data_len = out_lnt;
-        memcpy(send_buf.data, out_data, out_lnt);
+        cout <<" GetRST From PAck \n" <<flush;
+
+        rPacket = out_data;
+        GetRSTFromPack(output_que);
+//        send_buf.data_len = out_lnt;
+//
+//        memcpy(send_buf.data, out_data, out_lnt);
+//          output_que.send(&send_buf, out_lnt, 0);
         free(out_data);
 
-        output_que.send(&send_buf, out_lnt, 0);
+//        output_que.send(&send_buf, out_lnt, 0);
     }
 
     return;
