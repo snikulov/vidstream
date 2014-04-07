@@ -26,7 +26,7 @@ uint8_t TmpRST[1000];
 uint16_t TmpRSTLen;
 
 uint32_t TmpLen ;
-int32_t MaxPacketSize = 100;
+int32_t MaxPacketSize = 50;
 int32_t  MaxLenRSTInGRP = 8;
 int32_t  MaxGRP = 15;
 int32_t  SubPacketLength = 20;
@@ -158,7 +158,7 @@ void PacketizerThread::AddRSTBlock(bipc::message_queue &mq)
 {
     using std::cout;
        using std::flush;
-    cout << "ADD RST Block \n";
+    cout << "ADD RST Frame="<<CurFrameNum<<" RST=" <<CurRSTNum<<" Len="<<cur_rst_len << "\n"<<flush;
     bool ChangeGroup;
     if ((PacketLen + cur_rst_len) > MaxPacketSize)
     {

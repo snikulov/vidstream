@@ -91,7 +91,7 @@ void  NextInpPos()
     rGetPos = rPacketHeaderLen+1;
     rNextGroupPos = -1;
     rNextGroupStartNum = 0;
-    cout <<"Len="<< rplen<< " Frame="<<rFrameNum <<" RST Num="<< rRSTStartNum<< " \n" << flush;
+    cout <<"\n Rec Packet Len="<< rplen<< " Frame="<<rFrameNum <<" RST Num="<< rRSTStartNum<< " \n" << flush;
 
     while (rGetPos<rplen)  {
         if (not GetByteFromPacket())
@@ -143,9 +143,9 @@ void  NextInpPos()
                 rTmpRST[1] = rRSTNum / 256;
                 rTmpRST[2] = rRSTNum % 256;
                 rTmpRST[3] = TmpLen / 256;
-                rTmpRST[3] = TmpLen % 256 ;
+                rTmpRST[4] = TmpLen % 256 ;
                 output_que.send(&rTmpRST, TmpLen, 0);
-                cout <<"Frame="<<rFrameNum<<" RST="<<rRSTNum<<"\n"<< flush;
+                cout <<"RECRST Frame="<<rFrameNum<<" RST="<<rRSTNum<<"\n"<<" RSTLen="<<TmpLen<<  flush;
 
                 //for (int j1 = 0; j1 <  TmpLen-1; j1++){
                  //   PutOut(rTmpRST[j1])
