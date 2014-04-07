@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "settingsdialog.h"
+//#include "settingsdialog.h"
 
 #include "avhandler.h"
 #include "interlace.h"
@@ -42,15 +42,11 @@ MainWindow::MainWindow(QWidget *parent) :
     video_opened(false),
     cur_mode(0),
     broken_channel(false),
-    grayscale(false),
-    reorder_blocks(false),
-    head_size(0),
     image_buffer_size(50000),
-    body_buffer(new uint8_t[image_buffer_size]),
     res_buffer(new uint8_t[2 * image_buffer_size]),
+    jpeg_header(res_buffer.get()),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
-    res_raster(new Bitmap(image_width, image_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
     enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
     history(MAX_RESTART_BLOCKS),
@@ -58,14 +54,12 @@ MainWindow::MainWindow(QWidget *parent) :
     sender_tp(),
     //reader_tp("127.0.0.1", port),
     reader_tp(),
+    loader(stat, transmit_restart_count, res_buffer, jpeg_header),
     encoder(new EncoderThread(*enc_s, stat)),
-    sender(new SenderThread("127.0.0.1", port, sender_tp,
-           transmit_restart_count, stat)),
-    reader(new ReaderThread(0.0, reader_tp,
-           transmit_restart_count, stat)),
+    sender(new SenderThread("127.0.0.1", port, sender_tp, stat)),
+    reader(new ReaderThread(0.0, reader_tp, stat)),
     decoder(new DecoderThread(*enc_r, stat)),
-    reassembler(new ReassemblerThread(res_buffer.get() + head_size,
-                                      history, transmit_restart_count,
+    reassembler(new ReassemblerThread(history, transmit_restart_count,
                                       history_mutex, stat, false)),
     interlace_rows  (new InterlaceControl(settings.row_num,
                                           settings.row_denom)),
@@ -73,10 +67,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                           settings.block_denom))
 {
     try {
-        src_buffer  = std::unique_ptr<uint8_t[]>
-                (new uint8_t[image_width * image_height * Bitmap::CHANNELS_NUM]);
-        dst_buffer  = std::unique_ptr<uint8_t[]>
-                (new uint8_t[image_width * image_height * Bitmap::CHANNELS_NUM]);
         recv_buffer = std::unique_ptr<uint8_t[]>
                 (new uint8_t[image_width * image_height * Bitmap::CHANNELS_NUM]);
     } catch (const std::bad_alloc &e) {
@@ -93,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
     try {
         LoadSettingsFromFile("settings.conf", stored_settings[0],
                                               stored_settings[1]);
-        SetSettings(stored_settings[0]);
+        settings = stored_settings[0];
     } catch(...) {
     }
 
@@ -104,7 +94,9 @@ MainWindow::MainWindow(QWidget *parent) :
     boost::interprocess::message_queue::remove(TO_DECODE_MSG);
     boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
-    connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
+    connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()),
+            Qt::DirectConnection);
+            //Qt::DirectConnection);
     //connect(reassembler.get(), SIGNAL(frameReady()), qApp, SLOT(aboutQt()));
 
     decoder->start();
@@ -130,190 +122,15 @@ void MainWindow::on_startButton_clicked()
     if (!running) {
         running = true;
         ui->startButton->setText("Pause");
-        processFrames(256);
+        loader.start();
+        //processFrames(256);
     } else {
+        loader.terminate();
         running = false;
         ui->startButton->setText("Continue");
     }
     //SendBytes = 0;
     //StartTime = 0;
-}
-
-bool MainWindow::SetJpegQuality(int lum, int chrom)
-{
-    if ((lum > 0 && lum <= 100) ||
-        (chrom > 0 && chrom <= 100)) {
-        settings.lum_quality = lum;
-        settings.chrom_quality = chrom;
-        hdr_buf_initialized = false;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool MainWindow::SetBlockSize(size_t rst_block_size)
-{
-    if (rst_block_size < 1) {
-        return false;
-    }
-    settings.rst_block_size = rst_block_size;
-    hdr_buf_initialized = false;
-    if (!grayscale || GetBlockSize() != 4) {
-        ui->reorderCheckBox->setEnabled(false);
-        ui->reorderCheckBox->setChecked(false);
-        reorder_blocks = false;
-    } else {
-        ui->reorderCheckBox->setEnabled(true);
-    }
-    return true;
-}
-
-void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
-{
-    bch_m = settings.bch_m;
-    bch_t = settings.bch_t;
-}
-
-// this function isn't executed simultaneously
-// with corruptImage() or loadImageFile()
-// it runs when QCoreApplication::processEvents is called in processFrames()
-// i.e. Sender/Receiver threads aren't running
-bool MainWindow::SetBchParams(int bch_m, int bch_t)
-{
-    encoder->Kill();
-    decoder->Kill();
-    encoder->terminate();
-    decoder->terminate();
-    encoder->wait();
-    decoder->wait();
-    try {
-        enc_s = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
-        enc_r = std::unique_ptr<ecc> (new ecc(bch_m, bch_t, &stat));
-    } catch (...) { // failed to initialize bch
-        return false;
-    }
-    settings.bch_m = bch_m;
-    settings.bch_t = bch_t;
-
-    encoder = std::unique_ptr<EncoderThread>
-                (new EncoderThread(*enc_s, stat));
-    decoder = std::unique_ptr<DecoderThread>
-                (new DecoderThread(*enc_r, stat));
-    encoder->start();
-    decoder->start();
-
-    return true;
-}
-
-void MainWindow::GetRowInterlace(size_t &num, size_t &denom) const
-{
-    num = interlace_rows->GetNum();
-    denom = interlace_rows->GetDenom();
-}
-
-bool MainWindow::SetRowInterlace(size_t num, size_t denom)
-{
-    try {
-        interlace_rows = std::unique_ptr<InterlaceControl>
-                         (new InterlaceControl(num, denom));
-    } catch (const std::invalid_argument &e) {
-        qDebug() << "Failed to create InterlaceControl: " << e.what();
-        return false;
-    }
-    settings.row_num = num;
-    settings.row_denom = denom;
-    return true;
-}
-
-void MainWindow::GetBlockInterlace(size_t &num, size_t &denom) const
-{
-    num = interlace_blocks->GetNum();
-    denom = interlace_blocks->GetDenom();
-}
-
-bool MainWindow::SetBlockInterlace(size_t num, size_t denom)
-{
-    try {
-        interlace_blocks = std::unique_ptr<InterlaceControl>
-                           (new InterlaceControl(num, denom));
-    } catch (const std::invalid_argument &e) {
-        qDebug() << "Failed to create InterlaceControl: " << e.what();
-        return false;
-    }
-    settings.block_num = num;
-    settings.block_denom = denom;
-    return true;
-}
-
-Settings MainWindow::GetSettings() const
-{
-    return Settings(settings.lum_quality,
-                    settings.chrom_quality,
-                    settings.bch_m, settings.bch_t,
-                    interlace_rows->GetNum(),
-                    interlace_rows->GetDenom(),
-                    interlace_blocks->GetNum(),
-                    interlace_blocks->GetDenom(),
-                    settings.rst_block_size);
-}
-
-int MainWindow::SetSettings(const Settings &new_s)
-{
-    if ((settings.lum_quality != new_s.lum_quality ||
-         settings.chrom_quality != new_s.chrom_quality) &&
-        !SetJpegQuality(new_s.lum_quality, new_s.chrom_quality)) {
-        return false;
-    }
-    settings.lum_quality = new_s.lum_quality;
-    settings.chrom_quality = new_s.chrom_quality;
-    if ((settings.bch_m != new_s.bch_m  ||
-         settings.bch_t != new_s.bch_t) &&
-        !SetBchParams(new_s.bch_m, new_s.bch_t)) {
-        return false;
-    }
-    settings.bch_m = new_s.bch_m;
-    settings.bch_t = new_s.bch_t;
-    if ((settings.row_num != new_s.row_num ||
-         settings.row_denom != new_s.row_denom) &&
-        !SetRowInterlace(new_s.row_num, new_s.row_denom)) {
-        return false;
-    }
-    settings.row_num = new_s.row_num;
-    settings.row_denom = new_s.row_denom;
-    if ((settings.block_num != new_s.block_num ||
-         settings.block_denom != new_s.block_denom) &&
-        !SetBlockInterlace(new_s.block_num, new_s.block_denom)) {
-        return false;
-    }
-    settings.block_num = new_s.block_num;
-    settings.block_denom = new_s.block_denom;
-    settings.rst_block_size = new_s.rst_block_size;
-    return true;
-}
-
-void MainWindow::GetScalingResolution(size_t &w, size_t &h) const
-{
-    w = scaled_width;
-    h = scaled_height;
-}
-
-bool MainWindow::SetScalingResolution(size_t w, size_t h)
-{
-    scaled_width = w;
-    scaled_height = h;
-    recv_raster = std::unique_ptr<Bitmap>(new Bitmap(scaled_width, scaled_height));
-    return true;
-}
-
-bool MainWindow::SwitchMode()
-{
-    // first remember the settings for this mode
-    stored_settings[cur_mode] = settings;
-    // now apply settings for the new mode
-    cur_mode = 1 - cur_mode;
-    hdr_buf_initialized = false;
-    return SetSettings(stored_settings[cur_mode]);
 }
 
 void MainWindow::SaveSettings()
@@ -356,209 +173,48 @@ void MainWindow::processFrames(unsigned frame_count)
 
 bool MainWindow::loadImageFile()
 {
-    // fetch raster data from avi
-    size_t input_width, input_height;
-    QImage image;
-    stat.StartTimer(StatCollector::TIMER_AVI);
-    if (!AVHandler::Instance()->ReadFrame2QImage(0, image)) {
-        return false;
-    }
-    stat.StopTimer(StatCollector::TIMER_AVI);
-
-    input_width = image.width();
-    input_height = image.height();
-
-    // frame resolution differs from bitmaps size
-    if (input_width != image_width || input_height != image_height) {
-        image_width = input_width;
-        image_height = input_height;
-        res_raster = std::unique_ptr<Bitmap>(new Bitmap(input_width, input_height));
-        SetScalingResolution(input_width / 2, input_height / 2);
-    }
-
-    // convert QImage into RGB888 buffer
-
-    if (image.format() != QImage::Format_RGB888) {
-        // slow copying
-        int cur = 0;
-        for (size_t i = 0; i < input_height; i++) {
-            for (size_t j = 0; j < input_width; j++) {
-                src_buffer[cur] =     qRed  (image.pixel(j, i));
-                cur += 3;
-            }
-        }
-    } else {
-        // Format_RGB888, can be copied directly
-        for (size_t i = 0; i < input_height; i++) {
-            memcpy(src_buffer.get() + i * image_width * Bitmap::CHANNELS_NUM,
-                   image.scanLine(i), image_width * Bitmap::CHANNELS_NUM);
-        }
-    }
-
-    image.detach();
-
-    // orig_raster - unscaled
-    // src_raster - scaled bitmap
-    Bitmap orig_raster(src_buffer.get(), input_width, input_height);
-    stat.StartTimer(StatCollector::TIMER_SCALING);
-    std::unique_ptr<Bitmap> src_raster(bilinear_resize(orig_raster, scaled_width, scaled_height));
-    stat.StopTimer(StatCollector::TIMER_SCALING);
-
-    // select rows to transmit
-    //qDebug() << "calling interlace_split_rows from pid " << getpid() << ", tid " << syscall(SYS_gettid);
-    std::unique_ptr<Bitmap> dst(interlace_split_rows(*src_raster,
-                                                     *interlace_rows));
-    // create JPEG from dst_buffer, write to temp file
-    // temp is a JPEG file containing half the image that will be transmitted
-
-    std::string tempname = "temp";
-
-    stat.StartTimer(StatCollector::TIMER_JPEG_CREATE);
-    if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
-        change_order(*dst, 8);
-    }
-    write_JPEG_file(dst->GetData(), dst->GetWidth(), dst->GetHeight(),
-                    tempname.c_str(), settings.lum_quality, settings.chrom_quality,
-                    settings.rst_block_size, grayscale);
-    stat.StopTimer(StatCollector::TIMER_JPEG_CREATE);
-
-    // now read JPEG from temp file
-
-    if (fin.is_open()) {
-        fin.close();
-    }
-    fin.open(tempname, std::ios::binary);
-    if (!fin) {
-        ui->image_corrupt->setText("Failed to load image.");
-        ui->image_corrupt->repaint();
-        QCoreApplication::processEvents();
-        return false;
-    }
-
-    // get image size
-    fin.seekg(0, std::ios::end);
-    image_size = fin.tellg();
-    fin.seekg(0);
-
-    // resize buffers if image doesn't fit in them
-    if (image_size > image_buffer_size) {
-        try {
-            throw std::runtime_error("JPEG size larger than buffer size");
-        } catch (const std::exception &e) {
-            qDebug() << "Exception occurred: " << e.what();
-            ui->image_corrupt->setText("Error occurred.\n");
-            ui->image_corrupt->repaint();
-            throw;
-            //return false;
-        }
-
-        hdr_buf_initialized = false;
-    }
-    membuf sbuf_body((char *) body_buffer.get(), image_size);
-    std::ostream fbdy(&sbuf_body);
-
-#ifdef GENERATE_HEADER
-    std::unique_ptr<std::ostream> fhdr;
-    std::unique_ptr<membuf> sbuf_res;
-    //hdr_buf_initialized = false;
-    if (!hdr_buf_initialized) {
-        sbuf_res = std::unique_ptr<membuf>
-                   (new membuf((char *) res_buffer.get(), image_size));
-        fhdr = std::unique_ptr<std::ostream> (new std::ostream(sbuf_res.get()));
-    }
-    stat.StartTimer(StatCollector::TIMER_FILEIO);
-    if (!split_file(fin, fhdr.get(), fbdy, 1, transmit_restart_count)) {
-        ui->image_corrupt->setText("Error occurred while parsing image");
-        return false;
-    }
-
-    //history.resize(transmit_restart_count);
-
-    stat.StopTimer(StatCollector::TIMER_FILEIO);
-    if (!hdr_buf_initialized) {
-        head_size = sbuf_res->written();
-        hdr_buf_initialized = true;
-    }
-#else
-    if (!hdr_buf_initialized) {
-        std::ifstream fhdr("header", std::ios::binary);
-        fhdr.seekg(0, std::ios::end);
-        head_size = fhdr.tellg();
-        if (head_size > image_size) {
-            qDebug() << "Error: header file is too large";
-            throw std::length_error("header file is too large");
-            return false;
-        }
-        fhdr.seekg(0, std::ios::beg);
-        fhdr.read((char *) res_buffer.get(), head_size);
-    }
-    stat.StartTimer(StatCollector::TIMER_FILEIO);
-    if (!split_file(fin, NULL, fbdy, 1, transmit_restart_count)) {
-        ui->image_corrupt->setText("Error occurred while parsing image");
-        return false;
-    }
-
-    stat.StopTimer(StatCollector::TIMER_FILEIO);
-#endif
-    body_size = sbuf_body.written();
-
-    return true;
+    return loader.loadImageFile();
 }
 
 void MainWindow::corruptImage(uint8_t frame_number)
 {
-    if (!fin.is_open()) {
-        ui->image_corrupt->setText("Image not loaded");
-        return;
-    }
-    // each byte of mask corresponds to a whole RestartBlock
-    //std::unique_ptr<char[]> mask(new char[MAX_RESTART_BLOCKS]);
-    PacketizerThread packetizer(body_buffer.get(), body_size,
-                                frame_number, transmit_restart_count,
-                                stat, *interlace_blocks);
-    packetizer.start();
-    //packetizer.wait();
-    while (packetizer.isRunning()) {
-        usleep(1000);
-        QCoreApplication::processEvents();
-    }
+    loader.corruptImage(frame_number);
 }
 
 void MainWindow::drawImage()
 {
     try {
-        ComposeJpeg(res_buffer.get() + head_size, history, transmit_restart_count);
+        displayStatistics();
+        ComposeJpeg(res_buffer.get() + jpeg_header.size, history, transmit_restart_count);
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
         Bitmap received(recv_buffer.get(), input_width, input_height);
-        if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
-            change_order(received, 8);
-        }
+        //if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
+        //    change_order(received, 8);
+        //}
         stat.StopTimer(StatCollector::TIMER_JPEG_READ);
-        stat.StartTimer(StatCollector::TIMER_INTERLACE);
-        // insert received lines into recv_raster
-        interlace_merge_rows(Bitmap(recv_buffer.get(),input_width, input_height),
-                             *recv_raster, *interlace_rows);
-        stat.StopTimer(StatCollector::TIMER_INTERLACE);
         stat.StartTimer(StatCollector::TIMER_SCALING);
         // resize bitmap back to full size
-        std::unique_ptr<Bitmap> res_raster(bilinear_resize(*recv_raster, image_width, image_height));
+        std::unique_ptr<Bitmap> res_raster(bilinear_resize(received, image_width, image_height));
         stat.StopTimer(StatCollector::TIMER_SCALING);
         QImage image(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
                      QImage::Format_RGB888);
         ui->image_corrupt->setPixmap(QPixmap::fromImage(image));
-        ui->image_corrupt->repaint();
+        static size_t cur_frame = 0;
+        cur_frame++;
+        char out_filename[64];
+        snprintf(out_filename, sizeof(out_filename),
+                 "res_frames/frame%03lu.jpg", cur_frame);
         stat.StartTimer(StatCollector::TIMER_FILEIO);
         write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
-                        out_filename.c_str(),
+                        out_filename,
                         settings.lum_quality, settings.chrom_quality,
-                        settings.rst_block_size, grayscale);
+                        settings.rst_block_size, false);
         stat.StopTimer(StatCollector::TIMER_FILEIO);
     } catch(...) {
         qDebug() << "Failed to decode/draw image";
         ui->image_corrupt->setText("Failed to decode/draw image");
-        ui->image_corrupt->repaint();
     }
     history_mutex.unlock();
 }
@@ -573,15 +229,6 @@ void MainWindow::displayStatistics()
     ui->infoLabel2->setText(QString::fromStdString(stat.GetTimerStats()));
 }
 
-void MainWindow::on_settingsButton_clicked()
-{
-    if (running) {
-        ui->startButton->click();
-    }
-    SettingsDialog *dialog = new SettingsDialog(this);
-    dialog->show();
-}
-
 void MainWindow::on_openButton_clicked()
 {
     video_opened = false;
@@ -594,38 +241,6 @@ void MainWindow::on_openButton_clicked()
     } else {
         video_opened = true;
     }
-}
-
-void MainWindow::on_mode1_radioButton_clicked(bool checked)
-{
-    SwitchMode();
-}
-
-void MainWindow::on_mode2_radioButton_clicked(bool checked)
-{
-    SwitchMode();
-}
-
-void MainWindow::on_breakChannelCheckBox_toggled(bool checked)
-{
-    SetChannelState(!checked);
-}
-
-void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
-{
-    grayscale = checked;
-    if (checked && GetBlockSize() == 1) {
-        SetBlockSize(4);
-    }
-    hdr_buf_initialized = false;
-    ui->reorderCheckBox->setEnabled(grayscale && GetBlockSize() == 4);
-    reorder_blocks = ui->reorderCheckBox->isEnabled();
-    ui->reorderCheckBox->setChecked(reorder_blocks);
-}
-
-void MainWindow::on_reorderCheckBox_toggled(bool checked)
-{
-   reorder_blocks = checked;
 }
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)

@@ -11,7 +11,7 @@ class ReaderThread : public QThread
 {
 public:
     ReaderThread(float err_percent, transport &T,
-                 size_t restart_block_cnt, StatCollector &stat);
+                 StatCollector &stat);
 
     void SetErrPercent(float p) { err_percent = p; }
 protected:
@@ -19,7 +19,6 @@ protected:
 private:
     float err_percent;
     transport &T;
-    size_t restart_block_cnt;
     StatCollector &stat;
 };
 

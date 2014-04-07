@@ -7,17 +7,16 @@
 #include "threaded_coder.h"
 
 #include <QDebug>
+#include <QMessageBox>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 namespace bipc = boost::interprocess;
 
-ReassemblerThread::ReassemblerThread(uint8_t *buffer,
-                               BlockHistory &history,
+ReassemblerThread::ReassemblerThread(BlockHistory &history,
                                size_t &rst_block_count,
                                QMutex &history_mutex,
                                StatCollector &stat,
                                bool broken_channel) :
-    buffer(buffer),
     history(history),
     rst_block_count(rst_block_count),
     history_mutex(history_mutex),

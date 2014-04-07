@@ -40,8 +40,7 @@ class ReassemblerThread : public QThread
     Q_OBJECT
 
 public:
-    ReassemblerThread(uint8_t *buffer,
-                   BlockHistory &history,
+    ReassemblerThread(BlockHistory &history,
                    size_t &rst_block_count,
                    QMutex &history_mutex,
                    StatCollector &stat,
@@ -56,7 +55,6 @@ protected:
     void run();
 private:
 
-    uint8_t *buffer;
     //char *mask;
     BlockHistory &history;
     size_t &rst_block_count;

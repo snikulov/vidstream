@@ -16,25 +16,23 @@ public:
     ~Bitmap();
 
     uint8_t *GetPixel(size_t row, size_t col) {
+        // calling const GetPixel() here
         return const_cast<uint8_t *>(static_cast<const Bitmap *>(this)->GetPixel(row, col));
     }
-
     const uint8_t *GetPixel(size_t row, size_t col) const {
         return &data[row * width * CHANNELS_NUM + col * CHANNELS_NUM];
     }
-
     uint8_t GetColour(size_t row, size_t col, size_t channel) const {
         return GetPixel(row, col)[channel];
     }
 
-    uint8_t *GetData()             { return data; }
-    const uint8_t *GetData() const { return data; }
-
-    size_t GetWidth()  const       { return width;      }
-    size_t GetHeight() const       { return height;     }
+    uint8_t *GetData()             { return data;                 }
+    const uint8_t *GetData() const { return data;                 }
+    size_t GetWidth()        const { return width;                }
+    size_t GetHeight()       const { return height;               }
+    size_t GetRowStride()    const { return width * CHANNELS_NUM; }
 
     bool ReduceHeight(size_t new_height);
-
     void Clear()       {
         memset(data, 0, width * height * CHANNELS_NUM);
     }

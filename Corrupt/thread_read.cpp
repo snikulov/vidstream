@@ -22,10 +22,9 @@ using namespace boost::interprocess;
 
 ReaderThread::ReaderThread(float err_percent,
                            transport &T,
-                           size_t restart_block_cnt, StatCollector &stat) :
+                           StatCollector &stat) :
     err_percent(err_percent),
     T(T),
-    restart_block_cnt(restart_block_cnt),
     stat(stat)
 { }
 
@@ -48,8 +47,6 @@ void ReaderThread::run()
     //cout << "on port: " << port;
 
     //transport T(ip.c_str(), port);
-
-    cout<< " read started.\n"; 
 
     while (1) {
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);

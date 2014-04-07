@@ -12,7 +12,7 @@ class SenderThread : public QThread
 public:
     SenderThread(const char *ip, unsigned port,
                  transport &T,
-                 size_t restart_block_cnt, StatCollector &stat);
+                 StatCollector &stat);
 
     void Kill() { killed = true; }
 protected:
@@ -21,7 +21,6 @@ private:
     std::string ip;
     unsigned port;
     transport &T;
-    size_t restart_block_cnt;
     StatCollector &stat;
     bool killed;
 };
