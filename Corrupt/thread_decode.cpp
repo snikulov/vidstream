@@ -28,7 +28,6 @@ void DecoderThread::run()
     message_queue output_que(open_or_create, TO_OUT_MSG, NUM_OF_PKGS, PKG_MAX_SIZE);
 
     std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
-    //std::unique_ptr<uint8_t[]> send_buf(new uint8_t[PKG_MAX_SIZE]);
     DecodedBlock send_buf;
     size_t recvd, out_lnt;
     unsigned int priority;

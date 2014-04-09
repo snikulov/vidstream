@@ -30,6 +30,7 @@
 #include <QPixmap>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <opencv2/opencv.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     broken_channel(false),
     image_buffer_size(50000),
     res_buffer(new uint8_t[2 * image_buffer_size]),
-    jpeg_header(res_buffer.get()),
+    jpeg_info(res_buffer.get()),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
@@ -54,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     sender_tp(),
     //reader_tp("127.0.0.1", port),
     reader_tp(),
-    loader(stat, transmit_restart_count, res_buffer, jpeg_header),
+    //loader(stat, transmit_restart_count, jpeg_info),
     encoder(new EncoderThread(*enc_s, stat)),
     sender(new SenderThread("127.0.0.1", port, sender_tp, stat)),
     reader(new ReaderThread(0.0, reader_tp, stat)),
@@ -122,10 +123,10 @@ void MainWindow::on_startButton_clicked()
     if (!running) {
         running = true;
         ui->startButton->setText("Pause");
-        loader.start();
+        loader->start();
         //processFrames(256);
     } else {
-        loader.terminate();
+        loader->terminate();
         running = false;
         ui->startButton->setText("Continue");
     }
@@ -173,32 +174,40 @@ void MainWindow::processFrames(unsigned frame_count)
 
 bool MainWindow::loadImageFile()
 {
-    return loader.loadImageFile();
+    return loader->loadImageFile();
 }
 
 void MainWindow::corruptImage(uint8_t frame_number)
 {
-    loader.corruptImage(frame_number);
+    loader->corruptImage(frame_number);
 }
 
 void MainWindow::drawImage()
 {
     try {
         displayStatistics();
-        ComposeJpeg(res_buffer.get() + jpeg_header.size, history, transmit_restart_count);
+        //memcpy(res_buffer.get(), jpeg_info.data, jpeg_info.size);
+        ComposeJpeg(res_buffer.get() + jpeg_info.header_size,
+                    history, transmit_restart_count);
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
-        read_JPEG_mem(recv_buffer.get(), input_width, input_height, res_buffer.get(), image_size);
-        Bitmap received(recv_buffer.get(), input_width, input_height);
+        if (!read_JPEG_mem(recv_buffer.get(), input_width, input_height,
+                           res_buffer.get(), 2 * jpeg_info.file_size)) {
+            throw std::runtime_error("Invalid JPEG");
+        }
+        cv::Mat received = cv::Mat(input_height, input_width,
+                                   CV_8UC3, recv_buffer.get());
         //if (reorder_blocks && grayscale && settings.rst_block_size == 4) {
         //    change_order(received, 8);
         //}
         stat.StopTimer(StatCollector::TIMER_JPEG_READ);
         stat.StartTimer(StatCollector::TIMER_SCALING);
         // resize bitmap back to full size
-        std::unique_ptr<Bitmap> res_raster(bilinear_resize(received, image_width, image_height));
+        cv::Mat res_raster;
+        cv::resize(received, res_raster, cv::Size(image_width, image_height),
+                   0, 0, cv::INTER_LINEAR);
         stat.StopTimer(StatCollector::TIMER_SCALING);
-        QImage image(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
+        QImage image(res_raster.data, res_raster.cols, res_raster.rows,
                      QImage::Format_RGB888);
         ui->image_corrupt->setPixmap(QPixmap::fromImage(image));
         static size_t cur_frame = 0;
@@ -207,7 +216,7 @@ void MainWindow::drawImage()
         snprintf(out_filename, sizeof(out_filename),
                  "res_frames/frame%03lu.jpg", cur_frame);
         stat.StartTimer(StatCollector::TIMER_FILEIO);
-        write_JPEG_file(res_raster->GetData(), res_raster->GetWidth(), res_raster->GetHeight(),
+        write_JPEG_file(res_raster.data, res_raster.cols, res_raster.rows,
                         out_filename,
                         settings.lum_quality, settings.chrom_quality,
                         settings.rst_block_size, false);
@@ -240,6 +249,8 @@ void MainWindow::on_openButton_clicked()
         ui->image_corrupt->setText("Failed to open video file");
     } else {
         video_opened = true;
+        loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count,
+                                                                jpeg_info));
     }
 }
 

@@ -98,7 +98,7 @@ private:
     size_t image_buffer_size;
     std::unique_ptr<uint8_t[]> recv_buffer;
     std::unique_ptr<uint8_t[]> res_buffer;
-    JpegHeader jpeg_header;
+    JpegInfo jpeg_info;
     bool hdr_buf_initialized;
 
     std::unique_ptr<Bitmap> recv_raster;
@@ -111,7 +111,7 @@ private:
     unsigned port;
     transport sender_tp, reader_tp;
 
-    LoaderThread loader;
+    std::unique_ptr<LoaderThread> loader;
     std::unique_ptr<EncoderThread> encoder;
     std::unique_ptr<SenderThread>  sender;
     std::unique_ptr<ReaderThread>  reader;
