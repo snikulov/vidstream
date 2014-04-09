@@ -193,7 +193,7 @@ void  NextInpPos()
             {
 
 
-                    // put bytes to block
+                // put bytes to block
                 rTmpRST[0] = rFrameNum;
                 rTmpRST[1] = rRSTNum / 256;
                 rTmpRST[2] = rRSTNum % 256;
@@ -251,6 +251,7 @@ using std::cout;
     DecodedBlock send_buf;
     size_t recvd, out_lnt;
     unsigned int priority;
+    // decoded[i] = 1 => i'th data byte has been decoded successfully
     std::vector<char> decoded;
 
     while (!killed) {
@@ -258,7 +259,7 @@ using std::cout;
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
         uint8_t* out_data = (uint8_t*)coder.decode((char *)(recv_buf.get()), recvd,
-                                             out_lnt, send_buf.decoded_ok);
+                                             out_lnt, decoded, send_buf.decoded_ok);
         //stat.AddPacket(recvd, send_buf.decoded_ok);
         sprintf(rlogstr,"Receive New paket len=%d",out_lnt);
         rlog(rlogstr);

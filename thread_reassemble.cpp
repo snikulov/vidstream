@@ -61,8 +61,8 @@ void ReassemblerThread::run()
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
         rarawlog(recv_block.data,recv_block.data_len);
-        //bool decoded_ok = recv_block.decoded_ok;
-        bool decoded_ok = true;
+        bool decoded_ok = recv_block.decoded_ok;
+        //bool decoded_ok = true;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
