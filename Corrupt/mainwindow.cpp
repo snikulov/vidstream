@@ -126,7 +126,9 @@ void MainWindow::on_startButton_clicked()
         loader->start();
         //processFrames(256);
     } else {
-        loader->terminate();
+        loader->Kill();
+        //loader->terminate();
+        loader->wait();
         running = false;
         ui->startButton->setText("Continue");
     }

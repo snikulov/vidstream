@@ -15,6 +15,7 @@
 
 LoaderThread::LoaderThread(StatCollector &stat, size_t &rst_count,
                            JpegInfo& jpeg_info) :
+    killed(false),
     image_width(1280),
     image_height(720),
     scaled_width(image_width / 2),
@@ -207,8 +208,9 @@ void LoaderThread::corruptImage(uint8_t frame_number)
 
 void LoaderThread::run()
 {
+    killed = false;
     unsigned cur = 0;
-    while (1) {
+    while (!killed) {
         cur++;
         if (!loadImageFile()) {
             break;

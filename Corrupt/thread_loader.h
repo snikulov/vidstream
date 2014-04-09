@@ -23,10 +23,13 @@ public:
                  JpegInfo &jpeg_info);
     bool loadImageFile();
     void corruptImage(uint8_t frame_number);
+    void Kill() { killed = true; }
 protected:
     void run();
 private:
     constexpr static size_t MAX_IMAGE_SIZE = 50000;
+
+    bool killed;
 
     std::ifstream fin;
 
