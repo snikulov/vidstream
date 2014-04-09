@@ -9,6 +9,20 @@
 #include <QDebug>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
+char* raRawFileName = "##RArawdata.log";
+bool raRawLogFirstEnter = true;
+void rarawlog(const void *lstr, int len)
+{
+    FILE* logfile;
+    if (raRawLogFirstEnter){
+        remove(raRawFileName);
+        raRawLogFirstEnter = false;
+    }
+    logfile = fopen(raRawFileName, "a");
+    fwrite(lstr,len,1,logfile);
+    fclose(logfile);
+}
+
 namespace bipc = boost::interprocess;
 
 ReassemblerThread::ReassemblerThread(uint8_t *buffer,
@@ -43,8 +57,10 @@ void ReassemblerThread::run()
     // put all received and successfully decoded blocks in history
     while (!killed) {
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
+
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
+        rarawlog(recv_block.data,recv_block.data_len);
         //bool decoded_ok = recv_block.decoded_ok;
         bool decoded_ok = true;
 

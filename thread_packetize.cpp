@@ -11,7 +11,7 @@
 
 #include "interlace.h"
 #include "split.h"
-
+#include <stdio.h>
 
 uint32_t RSTCount;
 uint32_t MaxLenRST;
@@ -45,7 +45,31 @@ uint32_t RSTStartNum;
 bool FirstInSub, FirstPacket, PacketReadyForSend, FirstPackOfFrame;
 uint32_t IDD;
 uint8_t PackFrame;
+bool LogFirstEnter = true;
+char* LogFileName = "##packetize.log";
 
+void log(char* logstr){
+    FILE* logfile;
+    if (LogFirstEnter){
+        remove(LogFileName);
+        LogFirstEnter = false;
+    }
+    logfile = fopen(LogFileName, "a");
+    fprintf(logfile,"%s \n",logstr);
+    fclose(logfile);
+}
+
+void xlog(u_int8_t lstr)
+{
+    FILE* logfile;
+    if (LogFirstEnter){
+        remove(LogFileName);
+        LogFirstEnter = false;
+    }
+    logfile = fopen(LogFileName, "a");
+    fprintf(logfile,"%X ",lstr);
+    fclose(logfile);
+}
 void  PutToPacket(char b)
 {
     Packet[PacketLen] = b;
@@ -62,7 +86,7 @@ void InitRSTPack()
 {
     using std::cout;
        using std::flush;
-    cout << "Init Pack \n";
+    log( "Init Pack ");
     FirstInSub = false; //First frp in pack not need
     PacketReadyForSend = false;
     PrevRSTLen = 0;
@@ -86,7 +110,7 @@ void FlushGroup()
 {
     using std::cout;
        using std::flush;
-    cout << "Flush group \n";
+    log("Flush group ");
 
     if (LastGRP > 0)
     {
@@ -113,7 +137,7 @@ void AddRSTToGroup()
     int i1;
     using std::cout;
        using std::flush;
-    cout << "Add RST To group \n";
+    log("Add RST To group");
     if (LastGRP == 0)   {
         LenPos = PacketLen;
         PutToPacket(0);
@@ -158,12 +182,20 @@ void PacketizerThread::AddRSTBlock(bipc::message_queue &mq)
 {
     using std::cout;
        using std::flush;
-    cout << "ADD RST Frame="<<CurFrameNum<<" RST=" <<CurRSTNum<<" Len="<<cur_rst_len << "\n"<<flush;
+    char logstr[1000];
+    sprintf(logstr,"ADD RST Frame=%d  RST=%d  Len=%d " ,CurFrameNum, CurRSTNum, cur_rst_len);
+    log(logstr);
     bool ChangeGroup;
     if ((PacketLen + cur_rst_len) > MaxPacketSize)
     {
         FlushGroup();
         Packet[6]=PacketLen;
+        log("Send packet");
+        for (int i1=0; i1< PacketLen;i1++)
+        {
+            xlog(Packet[i1]);
+        }
+        log("");
         mq.send(&Packet, PacketLen, 0);
         InitRSTPack();
     };
@@ -204,7 +236,7 @@ void PacketizerThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
-//                    TransmitBlock(block, mq);
+                    //ss TransmitBlock(block, mq); //SS
                     CurRSTNum = rst_cnt;
                     CurFrameNum = frame_number;
                     cur_rst_len = block.data_length();
@@ -218,7 +250,7 @@ void PacketizerThread::run()
                         InitRSTPack();
                         FirstPackOfFrame = false;
                     }
-                    AddRSTBlock(mq);
+                    AddRSTBlock(mq); //ss
 
                 }
                 block.clear();
@@ -236,7 +268,7 @@ void PacketizerThread::run()
 
     if (block.pushbacks_count() > 0) {
         block.set_info(frame_number, rst_cnt,block.pushbacks_count());
-        //        TransmitBlock(block, mq);
+//          TransmitBlock(block, mq); //SS
         CurRSTNum = rst_cnt;
         CurFrameNum = frame_number;
         cur_rst_len = block.data_length();
@@ -246,11 +278,11 @@ void PacketizerThread::run()
         for (unsigned TmpLen = 0; TmpLen < len; TmpLen++) {
             TmpRST[TmpLen] = data[TmpLen];
         }
-        AddRSTBlock(mq);
+         AddRSTBlock(mq);//SS
     }
     FlushGroup();
     if (PacketLen>PacketHeaderLen+1){
-        mq.send(&Packet[0], PacketLen, 0);
+        mq.send(&Packet[0], 100, 0);
     }
 }
 
