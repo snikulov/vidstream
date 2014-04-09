@@ -24,6 +24,7 @@ public:
     bool loadImageFile();
     void corruptImage(uint8_t frame_number);
     void Kill() { killed = true; }
+    void SetGrayscale(bool f) { grayscale = f; }
 protected:
     void run();
 private:

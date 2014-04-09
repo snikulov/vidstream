@@ -51,16 +51,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="settingsButton">
+       <widget class="QPushButton" name="startButton">
         <property name="text">
-         <string>Settings</string>
+         <string>Start</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="startButton">
+       <widget class="QPushButton" name="recordButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Start</string>
+         <string>Compile Video</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -91,23 +97,6 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QRadioButton" name="mode1_radioButton">
-        <property name="text">
-         <string>Mode 1</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="mode2_radioButton">
-        <property name="text">
-         <string>Mode 2</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QCheckBox" name="breakChannelCheckBox">
         <property name="text">

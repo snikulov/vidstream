@@ -64,6 +64,8 @@ private slots:
 
     void on_errorSpinBox_valueChanged(int arg1);
 
+    void on_recordButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

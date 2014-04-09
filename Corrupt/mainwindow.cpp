@@ -80,7 +80,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QDir folder(QDir::currentPath()+"/res_frames");
     if (!folder.exists()) {
         folder.mkdir(QDir::currentPath()+"/res_frames");
+        system("rm res_frames/*");
     }
+    system("rm res_frames/*");
+
     try {
         LoadSettingsFromFile("settings.conf", stored_settings[0],
                                               stored_settings[1]);
@@ -122,6 +125,7 @@ void MainWindow::on_startButton_clicked()
     }
     if (!running) {
         running = true;
+        ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
         loader->start();
         //processFrames(256);
@@ -130,6 +134,7 @@ void MainWindow::on_startButton_clicked()
         //loader->terminate();
         loader->wait();
         running = false;
+        ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
     }
     //SendBytes = 0;
@@ -235,4 +240,11 @@ void MainWindow::on_errorSpinBox_valueChanged(int arg1)
     if (reader) {
         reader->SetErrPercent(arg1);
     }
+}
+
+void MainWindow::on_recordButton_clicked()
+{
+   if (!running) {
+       system("ffmpeg -i res_frames/frame%03d.jpg -c:v huffyuv video.avi");
+   }
 }

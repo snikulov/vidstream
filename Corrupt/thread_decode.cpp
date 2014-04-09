@@ -38,7 +38,7 @@ void DecoderThread::run()
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
         char* out_data = (char*)coder.decode((char *)(recv_buf.get()), recvd,
-                                             out_lnt, send_buf.decoded_ok);
+                                             out_lnt, decoded, send_buf.decoded_ok);
         //stat.AddPacket(recvd, send_buf.decoded_ok);
         send_buf.data_len = out_lnt;
         memcpy(send_buf.data, out_data, out_lnt);
