@@ -58,10 +58,11 @@ private:
 
     unsigned total_bch_pkg_cnt;
     unsigned failed_bch_pkg_cnt;
-    clock_t total_time[TIMER_CNT];
-    clock_t last_time[TIMER_CNT];
-    clock_t started_time[TIMER_CNT];
-    clock_t last_shown_time[TIMER_CNT];
+    struct timeval total_time[TIMER_CNT];
+    struct timeval last_time[TIMER_CNT];
+    struct timeval started_time[TIMER_CNT];
+    struct timeval last_shown_time[TIMER_CNT];
+
 
     float avg_packet_size;
     float avg_frame_size;

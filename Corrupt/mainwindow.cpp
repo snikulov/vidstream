@@ -140,52 +140,20 @@ void MainWindow::SaveSettings()
     SaveSettingsToFile("settings.conf", stored_settings[0], stored_settings[1]);
 }
 
-void MainWindow::processFrames(unsigned frame_count)
-{
-    clock_t st = clock();
-    filename = "frame";
-    std::string in_prefix  = std::string("src_frames/");
-    std::string out_prefix = std::string("res_frames/")
-                 /*  + std::to_string(ui->errorSlider->value())  */
-                     + "out_";
-    unsigned cur = 0;
-    recv_raster->Clear();
-    while (running) {
-        displayStatistics();
-        stat.Reset();
-        stat.StartTimer(StatCollector::TIMER_FRAME);
-        st = clock();
-        if (!loadImageFile()) {
-            break;
-        }
-        qDebug() << cur << " frames processed";
-        char buf[5];
-        snprintf(buf, 5, "%03d", cur + 1);
-        out_filename = out_prefix + filename + buf + ".jpg";
-        corruptImage(cur);
-        cur = (cur + 1) % frame_count;
-        interlace_rows->Advance();
-        interlace_blocks->Advance();
-        stat.StopTimer(StatCollector::TIMER_FRAME);
-        qDebug("time elapsed: %.5f s\n", (clock() - st) / (1.0 * CLOCKS_PER_SEC));
-        QCoreApplication::processEvents();
-    }
-}
-
-bool MainWindow::loadImageFile()
-{
-    return loader->loadImageFile();
-}
-
-void MainWindow::corruptImage(uint8_t frame_number)
-{
-    loader->corruptImage(frame_number);
-}
-
 void MainWindow::drawImage()
 {
     try {
+        static bool f = false;
+        if (f) {
+            stat.StopTimer(StatCollector::TIMER_FRAME);
+        } else {
+            f = true;
+        }
+        stat.FinishFrame();
         displayStatistics();
+        stat.Reset();
+        stat.StartFrame();
+        stat.StartTimer(StatCollector::TIMER_FRAME);
         //memcpy(res_buffer.get(), jpeg_info.data, jpeg_info.size);
         ComposeJpeg(res_buffer.get() + jpeg_info.header_size,
                     history, transmit_restart_count);
@@ -230,7 +198,6 @@ void MainWindow::drawImage()
 
 void MainWindow::displayStatistics()
 {
-    //ui->infoLabel1->setText(QString::fromStdString(stat.GetStats()));
     ui->infoLabel1->setText(QString::fromStdString(
                                 stat.GetPacketSizeStats() + "\n" +
                                 stat.GetFrameSizeStats()  + "\n" +

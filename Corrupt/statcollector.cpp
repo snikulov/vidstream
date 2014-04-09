@@ -3,6 +3,9 @@
 #include <QDebug>
 
 #include <cstring>
+#include <sys/time.h>
+
+//#define NO_COLLECT_STATS
 
 StatCollector::StatCollector() :
     avg_packet_size(0),
@@ -13,6 +16,8 @@ StatCollector::StatCollector() :
     memset(last_shown_time,  0, TIMER_CNT * sizeof(last_shown_time[0]));
     Reset();
 }
+
+#ifndef NO_COLLECT_STATS
 
 void StatCollector::Reset()
 {
@@ -50,8 +55,8 @@ void StatCollector::AddBchPkg(unsigned long long cnt, unsigned long long failed_
 void StatCollector::StartFrame()
 {
     cur_frame_size = 0;
-    total_time[TIMER_ENCODE] = 0;
-    total_time[TIMER_DECODE] = 0;
+    memset(&total_time[TIMER_ENCODE], 0, sizeof(total_time[0]));
+    memset(&total_time[TIMER_DECODE], 0, sizeof(total_time[0]));
 }
 
 void StatCollector::FinishFrame()
@@ -63,13 +68,16 @@ void StatCollector::FinishFrame()
 
 void StatCollector::StartTimer(Timers id)
 {
-    started_time[id] = clock();
+    gettimeofday(&started_time[id], NULL);
 }
 
 void StatCollector::StopTimer(Timers id)
 {
-    last_time[id] = clock() - started_time[id];
-    total_time[id] += last_time[id];
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    timersub(&tv, &started_time[id], &last_time[id]);
+    total_time[id].tv_usec += last_time[id].tv_usec;
+    total_time[id].tv_sec += last_time[id].tv_sec;
 }
 
 std::string StatCollector::GetStats() {
@@ -150,18 +158,74 @@ std::string StatCollector::GetTimerStats()
 {
     std::string res;
     for (int i = 0; i < TIMER_CNT; i++) {
-        float cur_time = inertness * last_shown_time[i];
-        float coeff = last_shown_time[i] ? (1.0 - inertness) : 1.0;
-        cur_time += coeff * total_time[i];
-        res += desc[i] + std::to_string(cur_time / CLOCKS_PER_SEC);
+        float cur_time = inertness * last_shown_time[i].tv_usec;
+        float coeff = last_shown_time[i].tv_usec ? (1.0 - inertness) : 1.0;
+        cur_time += coeff * total_time[i].tv_usec;
+        res += desc[i] + std::to_string(cur_time / 1e+6);
         if (i != TIMER_FRAME) { // print % of total frame time
-            float percentage = cur_time * 100.0 / last_time[TIMER_FRAME];
+            float percentage = cur_time * 100.0 / last_time[TIMER_FRAME].tv_usec;
             res += " (" + std::to_string(percentage) + "%)";
         } else { // print fps
-            res += " (" + std::to_string(CLOCKS_PER_SEC / (1.0 * cur_time)) + " fps)";
+            res += " (" + std::to_string(1e+6 / cur_time) + " fps)";
         }
         res += "\n";
-        last_shown_time[i] = static_cast<clock_t>(cur_time);
+        last_shown_time[i].tv_usec = static_cast<long>(cur_time);
     }
     return res;
 }
+
+#else
+
+void StatCollector::Reset()
+{
+}
+
+void StatCollector::AddPacket(unsigned long long size, bool decoded_ok)
+{
+}
+
+void StatCollector::AddBchPkg(unsigned long long cnt, unsigned long long failed_cnt)
+{
+}
+
+void StatCollector::StartFrame()
+{
+}
+
+void StatCollector::FinishFrame()
+{
+}
+
+void StatCollector::StartTimer(Timers id)
+{
+}
+
+void StatCollector::StopTimer(Timers id)
+{
+}
+
+std::string StatCollector::GetStats() {
+    return "Statistics turned off";
+}
+
+std::string StatCollector::GetPacketSizeStats()
+{
+    return "Statistics turned off";
+}
+
+std::string StatCollector::GetFrameSizeStats()
+{
+    return "Statistics turned off";
+}
+
+std::string StatCollector::GetErrorStats()
+{
+    return "Statistics turned off";
+}
+
+std::string StatCollector::GetTimerStats()
+{
+    return "Statistics turned off";
+}
+
+#endif

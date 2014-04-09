@@ -120,9 +120,6 @@ private:
 
     std::unique_ptr<InterlaceControl> interlace_rows, interlace_blocks;
 
-    bool loadImageFile();
-    void corruptImage(uint8_t frame_number);
-    void processFrames(unsigned frame_count);
     void displayStatistics();
 };
 
