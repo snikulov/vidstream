@@ -6,11 +6,10 @@
 #include "pthread.h"
 #include "threaded_coder.h"
 #include "transport.h"
+
 #include <sys/types.h>
-#include <sys/errno.h>
-#include <sys/msg.h>
-#include <sys/ipc.h>
 #include <boost/interprocess/ipc/message_queue.hpp>
+#include <QDebug>
 
 using namespace boost::interprocess;
 
@@ -39,7 +38,7 @@ void SenderThread::run()
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
         //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
-        output_que.send(recv_buf.get(), PKG_MAX_SIZE, 0);
+        output_que.send(recv_buf.get(), recvd, 0);
     }
 
     return;

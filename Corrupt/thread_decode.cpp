@@ -39,7 +39,7 @@ void DecoderThread::run()
 
         char* out_data = (char*)coder.decode((char *)(recv_buf.get()), recvd,
                                              out_lnt, decoded, send_buf.decoded_ok);
-        //stat.AddPacket(recvd, send_buf.decoded_ok);
+        stat.AddPacket(recvd, send_buf.decoded_ok);
         send_buf.data_len = out_lnt;
         memcpy(send_buf.data, out_data, out_lnt);
         free(out_data);

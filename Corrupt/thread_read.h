@@ -14,7 +14,7 @@ public:
                  StatCollector &stat);
 
     void SetErrPercent(float p)   { err_percent = p; }
-    bool SetBrokenChannel(bool f) { broken_channel = f; }
+    void SetBrokenChannel(bool f) { broken_channel = f; }
 protected:
     void run();
 private:

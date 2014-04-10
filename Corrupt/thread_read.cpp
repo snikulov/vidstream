@@ -59,7 +59,7 @@ void ReaderThread::run()
             memset(recv_buf.get(), 0, recvd);
         }
 
-        output_que.send(recv_buf.get(), recvd, 0);
+        output_que.send(recv_buf.get(), PKG_MAX_SIZE, 0);
     }
 
     cout << "read quit\n";
