@@ -19,16 +19,17 @@ class LoaderThread : public QThread
     Q_OBJECT
 
 public:
+    constexpr static size_t MAX_IMAGE_SIZE = 50000;
+
     LoaderThread(StatCollector &stat, size_t &rst_cout,
                  JpegInfo &jpeg_info);
     bool loadImageFile();
     void corruptImage(uint8_t frame_number);
     void Kill() { killed = true; }
-    void SetGrayscale(bool f) { grayscale = f; }
+    void SetGrayscale(bool f) { grayscale = f; hdr_buf_initialized = false; }
 protected:
     void run();
 private:
-    constexpr static size_t MAX_IMAGE_SIZE = 50000;
 
     bool killed;
 

@@ -167,7 +167,7 @@ void MainWindow::drawImage()
         size_t input_width, input_height;
         stat.StartTimer(StatCollector::TIMER_JPEG_READ);
         if (!read_JPEG_mem(recv_buffer.get(), input_width, input_height,
-                           res_buffer.get(), 2 * jpeg_info.file_size)) {
+                           res_buffer.get(), LoaderThread::MAX_IMAGE_SIZE)) {
             throw std::runtime_error("Invalid JPEG");
         }
         cv::Mat received = cv::Mat(input_height, input_width,

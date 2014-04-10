@@ -68,7 +68,9 @@ void EncoderThread::run()
         //    break;
         //}
 
+        stat.StartTimer(StatCollector::TIMER_ENCODE);
         char* out_data = (char*)coder.encode((char *)(recv_buf.get()), recvd, out_lnt);
+        stat.StopTimer(StatCollector::TIMER_ENCODE);
         memcpy(send_buf.get(), out_data, out_lnt);
         free(out_data);
 
