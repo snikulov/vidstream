@@ -23,6 +23,7 @@ using namespace boost::interprocess;
 ReaderThread::ReaderThread(float err_percent,
                            transport &T,
                            StatCollector &stat) :
+    broken_channel(false),
     err_percent(err_percent),
     T(T),
     stat(stat)
@@ -52,7 +53,11 @@ void ReaderThread::run()
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
-        Corruptor::add_err(recv_buf.get(), recvd, err_percent);
+        if (!broken_channel) {
+            Corruptor::add_err(recv_buf.get(), recvd, err_percent);
+        } else {
+            memset(recv_buf.get(), 0, recvd);
+        }
 
         output_que.send(recv_buf.get(), recvd, 0);
     }

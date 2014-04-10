@@ -68,6 +68,8 @@ private slots:
 
     void on_grayscaleCheckBox_clicked(bool checked);
 
+    void on_breakChannelCheckBox_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

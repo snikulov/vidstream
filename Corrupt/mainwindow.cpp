@@ -256,3 +256,8 @@ void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
        loader->SetGrayscale(checked);
    }
 }
+
+void MainWindow::on_breakChannelCheckBox_clicked(bool checked)
+{
+    reader->SetBrokenChannel(checked);
+}
