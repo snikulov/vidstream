@@ -15,6 +15,31 @@
 
 #include <QDebug>
 
+uint32_t StartTime = 0;
+uint64_t SendBytes = 0;
+struct timespec start_time, cur_time;
+uint32_t ChannelSpeed = 10000000/8;
+
+int64_t diff_time(struct timespec *timeA_p, struct timespec *timeB_p)
+{
+    clock_gettime(CLOCK_MONOTONIC, timeA_p);
+    return (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
+           ((timeB_p->tv_sec * 1000000000) + timeB_p->tv_nsec)) /1000 ;
+}
+
+void shape_channel()
+{
+
+    if (  diff_time(&cur_time,&start_time)  > 0 ) {
+
+       while  ( SendBytes*1000000/diff_time(&cur_time,&start_time) > ChannelSpeed)
+       {
+          usleep(1000);
+       }
+
+    }
+}
+
 using namespace boost::interprocess;
 
 EncoderThread::EncoderThread(ecc &coder,
@@ -47,6 +72,17 @@ void EncoderThread::run()
         memcpy(send_buf.get(), out_data, out_lnt);
         free(out_data);
 
+        // Set start time at first enter
+        if (StartTime == 0) {
+            clock_gettime(CLOCK_MONOTONIC, &start_time);
+            StartTime = 1;
+        }
+        SendBytes = SendBytes + out_lnt;
+        shape_channel();
+
+        if (diff_time(&cur_time,&start_time) >1) {
+        //    cout << ChannelSpeed <<" SendBytes= "<< SendBytes << " Diff Time= " << diff_time(&cur_time,&start_time)<< " speed= " << (SendBytes*1000000/(diff_time(&cur_time,&start_time) ))<< "\n";
+        }
         output_que.send(send_buf.get(), out_lnt, 0);
     }
 

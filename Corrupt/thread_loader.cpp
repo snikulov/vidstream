@@ -199,11 +199,6 @@ void LoaderThread::corruptImage(uint8_t frame_number)
                                 stat, *interlace_blocks);
     packetizer.start();
     packetizer.wait();
-    //packetizer.run();
-    //while (packetizer.isRunning()) {
-    //    usleep(1000);
-    //    QCoreApplication::processEvents();
-    //}
 }
 
 void LoaderThread::run()

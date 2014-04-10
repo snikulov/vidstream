@@ -121,7 +121,7 @@
       <item>
        <widget class="QSpinBox" name="bandwidthSpinBox">
         <property name="suffix">
-         <string> MBit/s</string>
+         <string> bytes/s</string>
         </property>
         <property name="minimum">
          <number>1</number>

@@ -66,6 +66,8 @@ private slots:
 
     void on_recordButton_clicked();
 
+    void on_grayscaleCheckBox_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

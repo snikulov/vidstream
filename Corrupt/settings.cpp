@@ -1,5 +1,6 @@
 #include "settings.h"
 
+#include <stdexcept>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -9,7 +10,7 @@ void LoadSettingsFromFile(std::string filename, Settings &mode1, Settings &mode2
 {
     std::ifstream fin(filename);
     if (!fin) {
-        return;
+        throw std::runtime_error("File doesn't exist");
     }
     Settings *cur = &mode1;
     std::string line, line_copy;

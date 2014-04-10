@@ -55,7 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
     sender_tp(),
     //reader_tp("127.0.0.1", port),
     reader_tp(),
-    //loader(stat, transmit_restart_count, jpeg_info),
     encoder(new EncoderThread(*enc_s, stat)),
     sender(new SenderThread("127.0.0.1", port, sender_tp, stat)),
     reader(new ReaderThread(0.0, reader_tp, stat)),
@@ -89,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
                                               stored_settings[1]);
         settings = stored_settings[0];
     } catch(...) {
+        SaveSettings();
     }
 
     // queues created by a dead process may hang
@@ -128,17 +128,17 @@ void MainWindow::on_startButton_clicked()
         ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
         loader->start();
+        loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
         //processFrames(256);
     } else {
         loader->Kill();
-        //loader->terminate();
         loader->wait();
         running = false;
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
     }
-    //SendBytes = 0;
-    //StartTime = 0;
+    SendBytes = 0;
+    StartTime = 0;
 }
 
 void MainWindow::SaveSettings()
@@ -225,14 +225,15 @@ void MainWindow::on_openButton_clicked()
         video_opened = true;
         loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count,
                                                                 jpeg_info));
+        loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
     }
 }
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
 {
-    //ChannelSpeed = arg1 / 8;
-    //SendBytes = 0;
-    //StartTime = 0;
+    ChannelSpeed = arg1 / 8;
+    SendBytes = 0;
+    StartTime = 0;
 }
 
 void MainWindow::on_errorSpinBox_valueChanged(int arg1)
@@ -246,5 +247,12 @@ void MainWindow::on_recordButton_clicked()
 {
    if (!running) {
        system("ffmpeg -i res_frames/frame%03d.jpg -c:v huffyuv video.avi");
+   }
+}
+
+void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
+{
+   if (loader) {
+       loader->SetGrayscale(checked);
    }
 }
