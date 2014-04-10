@@ -277,7 +277,8 @@ using std::cout;
 //        cout <<"\n rawlen="<<rawlen<<flush;
 //        rrawlog(out_data,rawlen);
         free(out_data);
-
+        
+        memcpy(send_buf.data, out_data, out_lnt); 
 //ss        output_que.send(&send_buf, out_lnt, 0); //SS
     }
 
