@@ -71,7 +71,7 @@ void ReassemblerThread::run()
         }
         time_since_last_frame++;
         if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&
-            time_since_last_frame >= rst_block_count / 2) {
+            time_since_last_frame >= rst_block_count) {
             stat.FinishFrame();
             emit frameReady(); // unlocks history_mutex when finishes
             history_mutex.lock();

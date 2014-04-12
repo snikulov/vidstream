@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     thread_packetize.cpp \
     thread_reassemble.cpp \
     settings.cpp \
-    thread_loader.cpp
+    thread_loader.cpp \
+    settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
@@ -55,7 +56,8 @@ HEADERS  += mainwindow.h \
     thread_send.h \
     thread_read.h \
     settings.h \
-    thread_loader.h
+    thread_loader.h \
+    settingsdialog.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt \
         -lopencv_core -lopencv_imgproc -lopencv_video -lopencv_highgui

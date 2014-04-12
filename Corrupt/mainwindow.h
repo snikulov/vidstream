@@ -37,6 +37,21 @@ public:
     }
     void SetChannelState(bool ok) { broken_channel = !ok;   }
     bool GetChannelState() const  { return !broken_channel; }
+    bool SetJpegQuality(int lum, int chrom);
+
+    size_t GetBlockSize() const { return settings.rst_block_size; }
+    bool SetBlockSize(size_t rst_block_size);
+    void GetBchParams(int &bch_m, int &bch_t) const;
+    bool SetBchParams(int bch_m, int bch_t);
+    void GetRowInterlace(size_t &num, size_t &denom) const;
+    bool SetRowInterlace(size_t num, size_t denom);
+    void GetBlockInterlace(size_t &num, size_t &denom) const;
+    bool SetBlockInterlace(size_t num, size_t denom);
+    Settings GetSettings() const;
+    int SetSettings(const Settings &new_s);
+
+    void GetScalingResolution(size_t &w, size_t &h) const;
+    bool SetScalingResolution(size_t w, size_t h);
 
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
@@ -69,6 +84,8 @@ private slots:
     void on_grayscaleCheckBox_clicked(bool checked);
 
     void on_breakChannelCheckBox_clicked(bool checked);
+
+    void on_settingsButton_clicked();
 
 private:
     Ui::MainWindow *ui;

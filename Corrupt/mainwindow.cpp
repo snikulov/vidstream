@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//#include "settingsdialog.h"
+#include "settingsdialog.h"
 
 #include "avhandler.h"
 #include "interlace.h"
@@ -114,6 +114,156 @@ MainWindow::~MainWindow()
 {
     delete ui;
     exit(0);
+}
+
+bool MainWindow::SetJpegQuality(int lum, int chrom)
+{
+    if ((lum > 0 && lum <= 100) ||
+        (chrom > 0 && chrom <= 100)) {
+        settings.lum_quality = lum;
+        settings.chrom_quality = chrom;
+        hdr_buf_initialized = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool MainWindow::SetBlockSize(size_t rst_block_size)
+{
+    if (rst_block_size < 1) {
+        return false;
+    }
+    settings.rst_block_size = rst_block_size;
+    hdr_buf_initialized = false;
+    return true;
+}
+
+void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
+{
+    bch_m = settings.bch_m;
+    bch_t = settings.bch_t;
+}
+
+bool MainWindow::SetBchParams(int bch_m, int bch_t)
+{
+    try {
+        ecc a(bch_m, bch_t, NULL);
+    } catch (...) { // failed to initialize bch
+        return false;
+    }
+    settings.bch_m = bch_m;
+    settings.bch_t = bch_t;
+    return true;
+}
+
+void MainWindow::GetRowInterlace(size_t &num, size_t &denom) const
+{
+    num = interlace_rows->GetNum();
+    denom = interlace_rows->GetDenom();
+}
+
+bool MainWindow::SetRowInterlace(size_t num, size_t denom)
+{
+    try {
+        interlace_rows = std::unique_ptr<InterlaceControl>
+                         (new InterlaceControl(num, denom));
+    } catch (const std::invalid_argument &e) {
+        qDebug() << "Failed to create InterlaceControl: " << e.what();
+        return false;
+    }
+    settings.row_num = num;
+    settings.row_denom = denom;
+    return true;
+}
+
+void MainWindow::GetBlockInterlace(size_t &num, size_t &denom) const
+{
+    num = interlace_blocks->GetNum();
+    denom = interlace_blocks->GetDenom();
+}
+
+bool MainWindow::SetBlockInterlace(size_t num, size_t denom)
+{
+    try {
+        interlace_blocks = std::unique_ptr<InterlaceControl>
+                           (new InterlaceControl(num, denom));
+    } catch (const std::invalid_argument &e) {
+        qDebug() << "Failed to create InterlaceControl: " << e.what();
+        return false;
+    }
+    settings.block_num = num;
+    settings.block_denom = denom;
+    return true;
+}
+
+Settings MainWindow::GetSettings() const
+{
+    return Settings(settings.lum_quality,
+                    settings.chrom_quality,
+                    settings.bch_m, settings.bch_t,
+                    interlace_rows->GetNum(),
+                    interlace_rows->GetDenom(),
+                    interlace_blocks->GetNum(),
+                    interlace_blocks->GetDenom(),
+                    settings.rst_block_size);
+}
+
+int MainWindow::SetSettings(const Settings &new_s)
+{
+    if ((settings.lum_quality != new_s.lum_quality ||
+         settings.chrom_quality != new_s.chrom_quality) &&
+        !SetJpegQuality(new_s.lum_quality, new_s.chrom_quality)) {
+        return false;
+    }
+    settings.lum_quality = new_s.lum_quality;
+    settings.chrom_quality = new_s.chrom_quality;
+    if ((settings.bch_m != new_s.bch_m  ||
+         settings.bch_t != new_s.bch_t) &&
+        !SetBchParams(new_s.bch_m, new_s.bch_t)) {
+        return false;
+    }
+    settings.bch_m = new_s.bch_m;
+    settings.bch_t = new_s.bch_t;
+    if ((settings.row_num != new_s.row_num ||
+         settings.row_denom != new_s.row_denom) &&
+        !SetRowInterlace(new_s.row_num, new_s.row_denom)) {
+        return false;
+    }
+    settings.row_num = new_s.row_num;
+    settings.row_denom = new_s.row_denom;
+    if ((settings.block_num != new_s.block_num ||
+         settings.block_denom != new_s.block_denom) &&
+        !SetBlockInterlace(new_s.block_num, new_s.block_denom)) {
+        return false;
+    }
+    settings.block_num = new_s.block_num;
+    settings.block_denom = new_s.block_denom;
+    settings.rst_block_size = new_s.rst_block_size;
+    return true;
+}
+
+void MainWindow::GetScalingResolution(size_t &w, size_t &h) const
+{
+    w = scaled_width;
+    h = scaled_height;
+}
+
+bool MainWindow::SetScalingResolution(size_t w, size_t h)
+{
+    scaled_width = w;
+    scaled_height = h;
+    recv_raster = std::unique_ptr<Bitmap>(new Bitmap(scaled_width, scaled_height));
+    return true;
+}
+
+bool MainWindow::SwitchMode()
+{
+    // save current settings
+    stored_settings[cur_mode] = settings;
+    // now apply new settings
+    cur_mode = 1 - cur_mode;
+    return SetSettings(stored_settings[cur_mode]);
 }
 
 void MainWindow::on_startButton_clicked()
@@ -260,4 +410,10 @@ void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 void MainWindow::on_breakChannelCheckBox_clicked(bool checked)
 {
     reader->SetBrokenChannel(checked);
+}
+
+void MainWindow::on_settingsButton_clicked()
+{
+    SettingsDialog *dialog = new SettingsDialog(this);
+    dialog->show();
 }

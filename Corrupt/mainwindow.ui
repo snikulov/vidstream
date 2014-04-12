@@ -39,7 +39,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,0">
       <property name="topMargin">
        <number>9</number>
       </property>
@@ -47,6 +47,13 @@
        <widget class="QPushButton" name="openButton">
         <property name="text">
          <string>Open Video...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="settingsButton">
+        <property name="text">
+         <string>Settings</string>
         </property>
        </widget>
       </item>
