@@ -49,6 +49,7 @@ bool LogFirstEnter = true;
 char* LogFileName = "##packetize.log";
 
 void log(char* logstr){
+    return;
     FILE* logfile;
     if (LogFirstEnter){
         remove(LogFileName);
@@ -61,6 +62,7 @@ void log(char* logstr){
 
 void xlog(u_int8_t lstr)
 {
+      return;
     FILE* logfile;
     if (LogFirstEnter){
         remove(LogFileName);

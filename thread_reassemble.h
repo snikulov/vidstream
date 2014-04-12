@@ -48,7 +48,7 @@ public:
 
     void Kill() { killed = true; }
 
-    static constexpr uint8_t MAX_HISTORY_DIFF = 5;
+    static constexpr uint8_t MAX_HISTORY_DIFF = 15;
 signals:
     void frameReady();
 protected:
