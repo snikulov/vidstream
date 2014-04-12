@@ -226,6 +226,8 @@ void MainWindow::on_openButton_clicked()
         loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count,
                                                                 jpeg_info));
         loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
+        ui->openButton->setVisible(false);
+
     }
 }
 

@@ -32,13 +32,13 @@ void SenderThread::run()
     std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     size_t recvd = 0;
     unsigned priority;
+    transport T_out;
 
     while (!killed) {
-
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+        T_out.send("127.0.0.1", 32000,(char*)&recv_buf[0], recvd); //отсылаем пакет
+//TCP        output_que.send(recv_buf.get(), recvd, 0);
 
-        //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
-        output_que.send(recv_buf.get(), recvd, 0);
     }
 
     return;

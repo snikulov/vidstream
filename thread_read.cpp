@@ -43,18 +43,25 @@ void ReaderThread::run()
     size_t recvd = 0;
     unsigned priority;
 
-    //transport P;
-    //int port = P.get_free_port();
-    //cout << "on port: " << port;
+    int port = 32000;
+    int readed;
+    size_t  loc_size = 0;
+    transport T_inp("127.0.0.1", port);
 
-    //transport T(ip.c_str(), port);
 
     while (1) {
-        //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
-        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+        //change to TCP        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+        readed = T_inp.read((char*)&recv_buf[0], PKG_MAX_SIZE);
+        if (readed>0)
+        {
+            recvd = readed;
+        } else {
+            continue;
+        }
 
         if (!broken_channel) {
             Corruptor::add_err(recv_buf.get(), recvd, err_percent);
+
         } else {
             memset(recv_buf.get(), 0, recvd);
         }
