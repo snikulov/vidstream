@@ -24,7 +24,7 @@ uint32_t ChannelSpeed = 10000000/8;
 int64_t diff_time(struct timespec *timeA_p, struct timespec *timeB_p)
 {
     clock_gettime(CLOCK_MONOTONIC, timeA_p);
-  return (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
+    return (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
            ((timeB_p->tv_sec * 1000000000) + timeB_p->tv_nsec)) /1000 ;
 }
 
@@ -38,7 +38,7 @@ void shape_channel()
           usleep(1000);
        }
 
- }
+    }
 }
 
 namespace bipc = boost::interprocess;
