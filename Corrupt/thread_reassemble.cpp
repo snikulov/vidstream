@@ -44,8 +44,8 @@ void ReassemblerThread::run()
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
-        //bool decoded_ok = recv_block.decoded_ok;
-        bool decoded_ok = true;
+        bool decoded_ok = recv_block.decoded_ok;
+        //bool decoded_ok = true;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
@@ -71,7 +71,7 @@ void ReassemblerThread::run()
         }
         time_since_last_frame++;
         if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&
-            time_since_last_frame >= rst_block_count / 2) {
+            time_since_last_frame >= rst_block_count) {
             stat.FinishFrame();
             emit frameReady(); // unlocks history_mutex when finishes
             history_mutex.lock();

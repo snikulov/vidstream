@@ -30,9 +30,6 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
 void PacketizerThread::TransmitBlock(RestartBlock& block,
                                     bipc::message_queue &mq)
 {
-    //send_data msg;
-    //msg.in_buff_lnt = block.raw_length();
-    //memcpy(msg.in_buff, block.raw_ptr(), block.raw_length());
     mq.send(block.raw_ptr(), block.raw_length(), 0);
 }
 

@@ -37,6 +37,21 @@ public:
     }
     void SetChannelState(bool ok) { broken_channel = !ok;   }
     bool GetChannelState() const  { return !broken_channel; }
+    bool SetJpegQuality(int lum, int chrom);
+
+    size_t GetBlockSize() const { return settings.rst_block_size; }
+    bool SetBlockSize(size_t rst_block_size);
+    void GetBchParams(int &bch_m, int &bch_t) const;
+    bool SetBchParams(int bch_m, int bch_t);
+    void GetRowInterlace(size_t &num, size_t &denom) const;
+    bool SetRowInterlace(size_t num, size_t denom);
+    void GetBlockInterlace(size_t &num, size_t &denom) const;
+    bool SetBlockInterlace(size_t num, size_t denom);
+    Settings GetSettings() const;
+    int SetSettings(const Settings &new_s);
+
+    void GetScalingResolution(size_t &w, size_t &h) const;
+    bool SetScalingResolution(size_t w, size_t h);
 
     bool SwitchMode();
     size_t GetMode() const { return cur_mode; }
@@ -63,6 +78,14 @@ private slots:
     void on_bandwidthSpinBox_valueChanged(int arg1);
 
     void on_errorSpinBox_valueChanged(int arg1);
+
+    void on_recordButton_clicked();
+
+    void on_grayscaleCheckBox_clicked(bool checked);
+
+    void on_breakChannelCheckBox_clicked(bool checked);
+
+    void on_settingsButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -98,7 +121,7 @@ private:
     size_t image_buffer_size;
     std::unique_ptr<uint8_t[]> recv_buffer;
     std::unique_ptr<uint8_t[]> res_buffer;
-    JpegHeader jpeg_header;
+    JpegInfo jpeg_info;
     bool hdr_buf_initialized;
 
     std::unique_ptr<Bitmap> recv_raster;
@@ -111,7 +134,7 @@ private:
     unsigned port;
     transport sender_tp, reader_tp;
 
-    LoaderThread loader;
+    std::unique_ptr<LoaderThread> loader;
     std::unique_ptr<EncoderThread> encoder;
     std::unique_ptr<SenderThread>  sender;
     std::unique_ptr<ReaderThread>  reader;
@@ -120,9 +143,6 @@ private:
 
     std::unique_ptr<InterlaceControl> interlace_rows, interlace_blocks;
 
-    bool loadImageFile();
-    void corruptImage(uint8_t frame_number);
-    void processFrames(unsigned frame_count);
     void displayStatistics();
 };
 

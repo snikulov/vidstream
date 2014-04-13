@@ -32,6 +32,8 @@ void decompress_JPEG(jpeg_decompress_struct &cinfo,
               JSAMPLE *image_buffer)
 {
     jpeg_read_header(&cinfo, TRUE);
+    //cinfo.image_width = 640;
+    //cinfo.image_height = 360;
     cinfo.out_color_space = JCS_RGB;
     jpeg_start_decompress(&cinfo);
 

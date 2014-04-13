@@ -14,8 +14,6 @@
 class HistoryElement
 {
 public:
-    HistoryElement() : age(-1) { }
-    HistoryElement(const RestartBlock &rst) : b(rst), age(0) { }
     HistoryElement &operator=(RestartBlock &&rst) {
         b = std::move(rst);
         age = 0;
@@ -48,7 +46,7 @@ public:
 
     void Kill() { killed = true; }
 
-    static constexpr uint8_t MAX_HISTORY_DIFF = 5;
+    static constexpr uint8_t MAX_HISTORY_DIFF = 10;
 signals:
     void frameReady();
 protected:
