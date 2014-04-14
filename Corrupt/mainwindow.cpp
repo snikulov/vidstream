@@ -96,6 +96,11 @@ MainWindow::MainWindow(QWidget *parent) :
         settings = stored_settings[0];
         ui->bandwidthSpinBox->setValue(settings.channel_width*8);
         ui->grayscaleCheckBox->setChecked(settings.BW);
+        if (settings.BW)
+        {
+        transmit_restart_count = 3600;
+        }
+
     } catch(...) {
         SaveSettings();
     }
@@ -289,6 +294,8 @@ void MainWindow::on_startButton_clicked()
     }
     if (!running) {
         running = true;
+        ui->settingsButton->setEnabled(false);
+
         ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
         //processFrames(256);
@@ -303,6 +310,8 @@ void MainWindow::on_startButton_clicked()
             exit(0);
         }
     } else {
+        ui->settingsButton->setEnabled(true);
+
         kill(transmitter_pid, SIGTERM);
         transmitter_pid = 0;
         running = false;
@@ -428,6 +437,7 @@ void MainWindow::on_recordButton_clicked()
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
     settings.BW = checked;
+    transmit_restart_count = 3600;
     SaveSettings();
 }
 
