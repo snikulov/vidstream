@@ -427,6 +427,8 @@ void MainWindow::on_recordButton_clicked()
 
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
+    settings.BW = checked;
+    SaveSettings();
 }
 
 void MainWindow::on_breakChannelCheckBox_clicked(bool checked)

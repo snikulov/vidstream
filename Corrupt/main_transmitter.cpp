@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
         LoadSettingsFromFile("settings.conf", stored_settings[0],
                                               stored_settings[1]);
         settings = stored_settings[0];
+        grayscale = settings.BW;
+        ChannelSpeed = settings.channel_width;
     } catch(...) {
         qDebug() << "Failed to load settings";
     }
