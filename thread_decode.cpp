@@ -116,6 +116,7 @@ void  NextInpPos()
     int32_t   rRSTStartNum;
     int32_t   rGrpCount;
     int32_t   TmpLen;
+    DecodedBlock send_buf;
     rGetPos = 0;
     rlog("check packet header");
     for (i1 = 0; i1<=rPacketHeaderLen; i1++){
@@ -205,7 +206,15 @@ void  NextInpPos()
                     rxlog(rTmpRST[i1]);
                 }
                 rlog("");
-                output_que.send(&rTmpRST, 100, 0);
+                send_buf.data_len = TmpLen;
+
+
+
+        //        cout <<"\n rawlen="<<rawlen<<flush;
+
+                memcpy(send_buf.data, rTmpRST, TmpLen);
+        //ss        output_que.send(&send_buf, out_lnt, 0); //SS
+                output_que.send(&send_buf, 100, 0); //SS
 
                 //for (int j1 = 0; j1 <  TmpLen-1; j1++){
                  //   PutOut(rTmpRST[j1])
