@@ -14,6 +14,9 @@
 #include <QFile>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
+
+
+
 void sigterm_handler(int n)
 {
     AVHandler::Instance()->save_timestamp(TIMESTAMP_FILE);

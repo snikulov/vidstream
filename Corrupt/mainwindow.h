@@ -119,7 +119,7 @@ private:
 
     bool broken_channel;
 
-    std::string filename;
+    std::string filename = "";
     std::string out_filename;
 
     std::ifstream fin;

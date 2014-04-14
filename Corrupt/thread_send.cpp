@@ -11,6 +11,24 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
 #include <QDebug>
 
+char* sLogFileName = "##send.log";
+char slogstr[1000];
+bool sLogFirstEnter = true;
+bool sRawLogFirstEnter = true;
+
+void slog(char* lstr)
+{
+    FILE* logfile;
+    if (sLogFirstEnter){
+        remove(sLogFileName);
+        sLogFirstEnter = false;
+    }
+    logfile = fopen(sLogFileName, "a");
+    fprintf(logfile,"%s \n",lstr);
+    fclose(logfile);
+}
+
+
 using namespace boost::interprocess;
 
 SenderThread::SenderThread(const char *ip, unsigned port,
@@ -34,12 +52,20 @@ void SenderThread::run()
     unsigned priority;
 
     while (!killed) {
-
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
-
-        //T.send(ip.c_str(), port, loc_buff, loc_size); //отсылаем пакет
+//        slog("send get RST ");
         output_que.send(recv_buf.get(), recvd, 0);
+  //      slog("send put RST \n");
     }
+
+//    transport T_out;
+
+//    while (!killed)
+//    {
+//        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+//        T_out.send("127.0.0.1", 32000,(char*)&recv_buf[0], recvd); //отсылаем пакет
+//    }
+
 
     return;
 }

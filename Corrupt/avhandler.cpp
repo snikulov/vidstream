@@ -180,7 +180,7 @@ void AVHandler::load_timestamp(const char *filename)
     std::ofstream log("log.txt", std::ios_base::app);
     if (fin) {
         fin >> timestamp;
-        log << "timestamp read: "  << timestamp << std::endl;
+  //      log << "timestamp read: "  << timestamp << std::endl;
     } else {
         timestamp = 0;
         log << "failed to read timestamp\n";

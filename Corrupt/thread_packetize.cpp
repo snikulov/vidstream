@@ -12,6 +12,25 @@
 #include "interlace.h"
 #include "split.h"
 
+
+char* pkLogFileName = "##pktzr.log";
+char pkLogstr[1000];
+bool pkLogFirstEnter = true;
+
+void pkLog(char* lstr)
+{
+
+    FILE* logfile;
+    if (pkLogFirstEnter){
+        remove(pkLogFileName);
+        pkLogFirstEnter = false;
+    }
+    logfile = fopen(pkLogFileName, "a");
+    fprintf(logfile,"%s \n",lstr);
+    fclose(logfile);
+}
+
+
 namespace bipc = boost::interprocess;
 
 PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_size,
@@ -30,7 +49,10 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
 void PacketizerThread::TransmitBlock(RestartBlock& block,
                                     bipc::message_queue &mq)
 {
+ //   pkLog("transmit block \n");
+
     mq.send(block.raw_ptr(), block.raw_length(), 0);
+//     pkLog("transmit block ok\n");
 }
 
 void PacketizerThread::run()
@@ -40,6 +62,8 @@ void PacketizerThread::run()
     uint8_t p = 0, c;
     uint16_t rst_cnt = 0;
     RestartBlock block;
+  //  pkLog("Begin select RST from img \n");
+    try{
     for (size_t i = 0; i < buffer_size; i++) {
         c = buffer[i];
         // section can only contain FF 00 and RST markers
@@ -48,7 +72,10 @@ void PacketizerThread::run()
                 // send buffer
                 if (interlace_refresh_block(rst_cnt, interlace)) {
                     block.set_info(frame_number, rst_cnt, block.pushbacks_count());
+  //                  pkLog(" transmit block \n");
                     TransmitBlock(block, mq);
+  //                    pkLog(" transmit block ok \n");
+
                 }
                 block.clear();
                 rst_cnt++;
@@ -62,6 +89,10 @@ void PacketizerThread::run()
         }
         p = c;
     }
+    } catch(...) {
+        pkLog(" Except ot packetizer \n");
+    }
+ //   pkLog("END select RST from img \n");
 
     if (block.pushbacks_count() > 0) {
         block.set_info(frame_number, rst_cnt,block.pushbacks_count());

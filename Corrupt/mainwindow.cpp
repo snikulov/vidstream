@@ -98,7 +98,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->grayscaleCheckBox->setChecked(settings.BW);
         if (settings.BW)
         {
-        transmit_restart_count = 3600;
+            transmit_restart_count = 3600;
+        } else {
+            transmit_restart_count = 920;
         }
 
     } catch(...) {
@@ -123,6 +125,7 @@ MainWindow::~MainWindow()
 {
     if (transmitter_pid) {
         kill(transmitter_pid, SIGTERM);
+
         transmitter_pid = 0;
     }
     delete ui;
@@ -294,12 +297,14 @@ void MainWindow::on_startButton_clicked()
     }
     if (!running) {
         running = true;
-        ui->settingsButton->setEnabled(false);
+        ui->settingsButton->setEnabled(!running);
+        ui->grayscaleCheckBox->setEnabled(!running);
 
         ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
         //processFrames(256);
         transmitter_pid = fork();
+
         if (!transmitter_pid) {
             execl(TRANSMITTER_EXECUTABLE, TRANSMITTER_EXECUTABLE,
                    filename.c_str(), NULL);
@@ -308,13 +313,18 @@ void MainWindow::on_startButton_clicked()
             ui->image_corrupt->setText("Failed to start transmitter process");
             qDebug() << "Failed to execute transmitter";
             exit(0);
+        } else {
+            fprintf(stderr, " Fork ok\n");
         }
     } else {
-        ui->settingsButton->setEnabled(true);
+         running = false;
+        ui->settingsButton->setEnabled(!running);
+        ui->grayscaleCheckBox->setEnabled(!running);
 
-        kill(transmitter_pid, SIGTERM);
+        kill(transmitter_pid, SIGTERM); //SIGTERM
+
         transmitter_pid = 0;
-        running = false;
+
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
     }
@@ -409,6 +419,9 @@ void MainWindow::on_openButton_clicked()
     video_opened = false;
     filename = QFileDialog::getOpenFileName(this, tr("Open File"), ".",
                tr("Any files (*.*);;mp4 video (*.mp4);;avi video (*.avi)")).toStdString();
+    if (filename != ""){
+        ui->startButton->setEnabled(true);
+    }
 }
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
@@ -437,7 +450,13 @@ void MainWindow::on_recordButton_clicked()
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
     settings.BW = checked;
-    transmit_restart_count = 3600;
+    if (checked){
+        transmit_restart_count = 3600;
+
+    } else {
+        transmit_restart_count = 920;
+
+    }
     SaveSettings();
 }
 

@@ -13,6 +13,24 @@
 
 #define SETTINGS_FILE "settings.conf"
 
+char* tmLogFileName = "##tmain.log";
+char tmlogstr[1000];
+bool tmLogFirstEnter = true;
+bool tmRawLogFirstEnter = true;
+
+void tmlog(char* lstr)
+{
+
+    FILE* logfile;
+    if (tmLogFirstEnter){
+        remove(tmLogFileName);
+        tmLogFirstEnter = false;
+    }
+    logfile = fopen(tmLogFileName, "a");
+    fprintf(logfile,"%s \n",lstr);
+    fclose(logfile);
+}
+
 LoaderThread::LoaderThread(StatCollector &stat, size_t &rst_count) :
     killed(false),
     image_width(1280),
@@ -178,7 +196,10 @@ void LoaderThread::corruptImage(uint8_t frame_number)
     PacketizerThread packetizer(body_buffer.get(), body_size,
                                 frame_number, transmit_restart_count,
                                 stat, *interlace_blocks);
+ //   tmlog("Packetizer start \n");
     packetizer.start();
+ //   tmlog("Packetizer wait \n");
+
     packetizer.wait();
 }
 
@@ -186,11 +207,16 @@ void LoaderThread::run()
 {
     killed = false;
     unsigned cur = 0;
+    tmlog("Start loader");
     while (!killed) {
         cur++;
         if (!loadImageFile()) {
+            tmlog("Fail to load image\n");
             break;
         }
+    //    tmlog("Currupt image \n");
         corruptImage(cur);
+   //     tmlog("fin Currupt image \n");
+
     }
 }

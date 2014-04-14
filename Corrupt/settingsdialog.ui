@@ -295,6 +295,9 @@
         </item>
         <item>
          <widget class="QSpinBox" name="blockSizeSpinBox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="suffix">
            <string/>
           </property>
