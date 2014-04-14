@@ -13,8 +13,7 @@
 
 #define SETTINGS_FILE "settings.conf"
 
-LoaderThread::LoaderThread(StatCollector &stat, size_t &rst_count,
-                           JpegInfo& jpeg_info) :
+LoaderThread::LoaderThread(StatCollector &stat, size_t &rst_count) :
     killed(false),
     image_width(1280),
     image_height(720),
@@ -23,7 +22,6 @@ LoaderThread::LoaderThread(StatCollector &stat, size_t &rst_count,
     transmit_restart_count(rst_count),
     image_buffer_size(MAX_IMAGE_SIZE),
     body_size(0),
-    jpeg_info(jpeg_info),
     hdr_buf_initialized(false),
     reorder_blocks(false),
     grayscale(false),
@@ -114,11 +112,11 @@ bool LoaderThread::loadImageFile()
 
     // get image size
     fin.seekg(0, std::ios::end);
-    jpeg_info.file_size = fin.tellg();
+    size_t file_size = fin.tellg();
     fin.seekg(0);
 
     // check whether imafge fits in buffer
-    if (jpeg_info.file_size > image_buffer_size) {
+    if (file_size > image_buffer_size) {
         try {
             throw std::runtime_error("JPEG size larger than buffer size");
         } catch (const std::exception &e) {
@@ -129,17 +127,16 @@ bool LoaderThread::loadImageFile()
 
         hdr_buf_initialized = false;
     }
-    membuf sbuf_body((char *) body_buffer.get(), jpeg_info.file_size);
+    membuf sbuf_body((char *) body_buffer.get(), file_size);
     std::ostream fbdy(&sbuf_body);
 
 #ifdef GENERATE_HEADER
-    std::unique_ptr<std::ostream> fhdr;
+    std::unique_ptr<std::ofstream> fhdr;
     std::unique_ptr<membuf> sbuf_res;
     //hdr_buf_initialized = false;
     if (!hdr_buf_initialized) {
-        sbuf_res = std::unique_ptr<membuf>
-                   (new membuf((char *) jpeg_info.header, jpeg_info.file_size));
-        fhdr = std::unique_ptr<std::ostream> (new std::ostream(sbuf_res.get()));
+        fhdr = std::unique_ptr<std::ofstream>
+                (new std::ofstream("header", std::ios_base::binary));
     }
     stat.StartTimer(StatCollector::TIMER_FILEIO);
     size_t temp_restart_count = 0;
@@ -156,25 +153,9 @@ bool LoaderThread::loadImageFile()
 
     stat.StopTimer(StatCollector::TIMER_FILEIO);
     if (!hdr_buf_initialized) {
-        jpeg_info.header_size = sbuf_res->written();
         hdr_buf_initialized = true;
-        //std::ofstream ofs("header", std::ios_base::binary);
-        //ofs.write((const char *)jpeg_info.header, jpeg_info.header_size);
-        //ofs.close();
     }
 #else
-    if (!hdr_buf_initialized) {
-        std::ifstream fhdr("header", std::ios::binary);
-        fhdr.seekg(0, std::ios::end);
-        jpeg_info.header_size = fhdr.tellg();
-        if (jpeg_info.header_size > jpeg_info.file_size) {
-            qDebug() << "Error: header file is too large";
-            throw std::length_error("header file is too large");
-            return false;
-        }
-        fhdr.seekg(0, std::ios::beg);
-        fhdr.read((char *) jpeg_info.header, jpeg_info.header_size);
-    }
     stat.StartTimer(StatCollector::TIMER_FILEIO);
     if (!split_file(fin, NULL, fbdy, 1, transmit_restart_count)) {
         ui->image_corrupt->setText("Error occurred while parsing image");

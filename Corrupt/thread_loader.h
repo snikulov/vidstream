@@ -21,8 +21,7 @@ class LoaderThread : public QThread
 public:
     constexpr static size_t MAX_IMAGE_SIZE = 50000;
 
-    LoaderThread(StatCollector &stat, size_t &rst_cout,
-                 JpegInfo &jpeg_info);
+    LoaderThread(StatCollector &stat, size_t &rst_cout);
     bool loadImageFile();
     void corruptImage(uint8_t frame_number);
     void Kill() { killed = true; }
@@ -40,7 +39,6 @@ private:
     size_t &transmit_restart_count;
     size_t image_buffer_size;
     size_t body_size;
-    JpegInfo &jpeg_info;
     bool hdr_buf_initialized;
     bool reorder_blocks;
     bool grayscale;

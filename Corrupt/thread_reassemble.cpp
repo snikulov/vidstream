@@ -42,6 +42,7 @@ void ReassemblerThread::run()
     // put all received and successfully decoded blocks in history
     while (!killed) {
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
+        qDebug() << "reassemble received packet";
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
         bool decoded_ok = recv_block.decoded_ok;
@@ -71,7 +72,7 @@ void ReassemblerThread::run()
         }
         time_since_last_frame++;
         if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&
-            time_since_last_frame >= rst_block_count) {
+            time_since_last_frame >= MAX_TIME_SINCE_LAST_FRAME) {
             stat.FinishFrame();
             emit frameReady(); // unlocks history_mutex when finishes
             history_mutex.lock();

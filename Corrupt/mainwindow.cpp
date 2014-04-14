@@ -39,13 +39,14 @@ MainWindow::MainWindow(QWidget *parent) :
     image_height(720),
     scaled_width(image_width / 2),
     scaled_height(image_height / 2),
+    transmit_restart_count(920),
     running(false),
     video_opened(false),
     cur_mode(0),
     broken_channel(false),
     image_buffer_size(50000),
     res_buffer(new uint8_t[2 * image_buffer_size]),
-    jpeg_info(res_buffer.get()),
+    jpeg_info(),
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
@@ -79,7 +80,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QDir folder(QDir::currentPath()+"/res_frames");
     if (!folder.exists()) {
         folder.mkdir(QDir::currentPath()+"/res_frames");
-        system("rm res_frames/*");
     }
     system("rm res_frames/*");
 
@@ -92,11 +92,11 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // queues created by a dead process may hang
-    boost::interprocess::message_queue::remove(TO_READ_MSG);
-    boost::interprocess::message_queue::remove(TO_SEND_MSG);
-    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
-    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
-    boost::interprocess::message_queue::remove(TO_OUT_MSG);
+    //boost::interprocess::message_queue::remove(TO_READ_MSG);
+    //boost::interprocess::message_queue::remove(TO_SEND_MSG);
+    //boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
+    //boost::interprocess::message_queue::remove(TO_DECODE_MSG);
+    //boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
     //connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()),
     //        Qt::DirectConnection);
@@ -104,8 +104,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     decoder->start();
     reader->start();
-    sender->start();
-    encoder->start();
     reassembler->start();
 }
 
@@ -267,6 +265,7 @@ bool MainWindow::SwitchMode()
 
 void MainWindow::on_startButton_clicked()
 {
+    video_opened = true;
     if (!video_opened) {
         // doing nothing
         QMessageBox::warning(this, "", "No video file opened");
@@ -276,12 +275,12 @@ void MainWindow::on_startButton_clicked()
         running = true;
         ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
-        loader->start();
-        loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
+        //loader->start();
+        //loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
         //processFrames(256);
     } else {
-        loader->Kill();
-        loader->wait();
+        //loader->Kill();
+        //loader->wait();
         running = false;
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
@@ -310,6 +309,17 @@ void MainWindow::drawImage()
         stat.Reset();
         stat.StartFrame();
         stat.StartTimer(StatCollector::TIMER_FRAME);
+        QFile file("header");
+        if (!file.exists()) {
+            qDebug() << "Header file doesn't exist";
+            throw std::runtime_error("header file not found");
+            return;
+        }
+        std::ifstream fhdr("header", std::ios_base::binary);
+        fhdr.seekg(0, std::ios::end);
+        jpeg_info.header_size = fhdr.tellg();
+        fhdr.seekg(0,std::ios::beg);
+        fhdr.read((char *) res_buffer.get(), jpeg_info.header_size);
         //memcpy(res_buffer.get(), jpeg_info.data, jpeg_info.size);
         ComposeJpeg(res_buffer.get() + jpeg_info.header_size,
                     history, transmit_restart_count);
@@ -372,8 +382,7 @@ void MainWindow::on_openButton_clicked()
         ui->image_corrupt->setText("Failed to open video file");
     } else {
         video_opened = true;
-        loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count,
-                                                                jpeg_info));
+        loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count));
         loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
     }
 }

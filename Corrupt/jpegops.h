@@ -8,8 +8,6 @@ struct JpegInfo
 {
     size_t header_size;
     size_t file_size;
-    uint8_t *header;
-    JpegInfo(uint8_t *header) : header(header) { }
 };
 
 // (JSAMPLE *) image_buffer points to large array of R,G,B-order data
