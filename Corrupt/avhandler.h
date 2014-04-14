@@ -28,6 +28,8 @@ public:
 
   int open_input_file(const char *filename);
   bool ReadFrame2QImage(int64_t frame_timestamp, QImage& image);
+  void save_timestamp(const char *filename);
+  void load_timestamp(const char *filename);
 
 // Other non-static member functions
 private:
@@ -51,6 +53,7 @@ private:
     //static AVFilterGraph *filter_graph;
     int video_stream_index;
     //int64_t last_pts = AV_NOPTS_VALUE;
+    int64_t timestamp;
 };
 
 #endif // AVHANDLER_H

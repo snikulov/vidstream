@@ -1,5 +1,7 @@
 #include "avhandler.h"
 
+#include <fstream>
+
 // Singletone implementation
 AVHandler* AVHandler::_instance = NULL;
 
@@ -13,7 +15,8 @@ AVHandler* AVHandler::Instance() {
 AVHandler::AVHandler() :
     fmt_ctx(avformat_alloc_context()),
     //dec_ctx(), // not sure if we need to init this
-    frame(avcodec_alloc_frame())
+    frame(avcodec_alloc_frame()),
+    timestamp(0)
 
 {
     avcodec_register_all();
@@ -57,12 +60,19 @@ int AVHandler::open_input_file(const char *filename)
         qCritical() << "Cannot open video decoder\n";
         return ret;
     }
-
-    // Seek to the beginning
-    av_seek_frame(fmt_ctx, video_stream_index, 0, AVSEEK_FLAG_ANY);
+    if (timestamp > 0) {
+        av_seek_frame(fmt_ctx, video_stream_index, timestamp, AVSEEK_FLAG_BYTE);
+    } else {
+        std::ofstream log("log.txt", std::ios_base::app);
+        log << "timestamp = 0!\n";
+        log.close();
+        // Seek to the beginning
+        av_seek_frame(fmt_ctx, video_stream_index, 0, AVSEEK_FLAG_ANY);
+    }
 
     return 0;
 }
+
 
 bool AVHandler::ReadFrame2QImage(int64_t frame_timestamp, QImage& image)
 {
@@ -155,6 +165,28 @@ bool AVHandler::ReadFrame2QImage(int64_t frame_timestamp, QImage& image)
         av_free_packet(&packet);
     }
     return false;
+}
+
+void AVHandler::save_timestamp(const char *filename)
+{
+    std::ofstream fout(filename, std::ios_base::trunc);
+    fout << fmt_ctx->pb->pos;
+    fout.close();
+}
+
+void AVHandler::load_timestamp(const char *filename)
+{
+    std::ifstream fin(filename);
+    std::ofstream log("log.txt", std::ios_base::app);
+    if (fin) {
+        fin >> timestamp;
+        log << "timestamp read: "  << timestamp << std::endl;
+    } else {
+        timestamp = 0;
+        log << "failed to read timestamp\n";
+    }
+    log.close();
+    fin.close();
 }
 
 QRgb AVHandler::fromYuv(qint16 y, qint16 u, qint16 v)

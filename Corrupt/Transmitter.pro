@@ -52,7 +52,8 @@ HEADERS += \
     split.h \
     statcollector.h \
     threaded_coder.h \
-    transport.h
+    transport.h \
+    params.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt \
         -lopencv_core -lopencv_imgproc -lopencv_video -lopencv_highgui

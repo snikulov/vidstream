@@ -5,12 +5,20 @@
 #include "thread_packetize.h"
 #include "thread_encode.h"
 #include "thread_send.h"
-#include "threaded_coder.h"
+#include "params.h"
 
+#include <sys/types.h>
+#include <signal.h>
 #include <iostream>
 #include <QString>
 #include <QFile>
 #include <boost/interprocess/ipc/message_queue.hpp>
+
+void sigterm_handler(int n)
+{
+    AVHandler::Instance()->save_timestamp(TIMESTAMP_FILE);
+    exit(0);
+}
 
 int main(int argc, char *argv[])
 {
@@ -21,12 +29,14 @@ int main(int argc, char *argv[])
     bool grayscale = false;
     // open video file
     std::string filename = argv[1];
+    AVHandler::Instance()->load_timestamp(TIMESTAMP_FILE);
     int ret;
     if ((ret = AVHandler::Instance()->open_input_file(filename.c_str()))) {
         qDebug() << "Failed to open file " << filename.c_str();
         qDebug() << "Error code " << ret;
         return -1;
     }
+    signal(SIGTERM, sigterm_handler);
     // load settings
     Settings stored_settings[2];
     Settings settings;
@@ -38,12 +48,6 @@ int main(int argc, char *argv[])
         qDebug() << "Failed to load settings";
     }
 
-    // queues created by a dead process may hang
-    boost::interprocess::message_queue::remove(TO_READ_MSG);
-    boost::interprocess::message_queue::remove(TO_SEND_MSG);
-    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
-    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
-    boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
     StatCollector stat;
     // start threads

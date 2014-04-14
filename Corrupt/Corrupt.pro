@@ -48,7 +48,6 @@ HEADERS  += mainwindow.h \
     avhandler.h \
     interlace.h \
     transport.h \
-    threaded_coder.h \
     thread_packetize.h \
     thread_reassemble.h \
     thread_encode.h \
@@ -57,7 +56,8 @@ HEADERS  += mainwindow.h \
     thread_read.h \
     settings.h \
     thread_loader.h \
-    settingsdialog.h
+    settingsdialog.h \
+    params.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt \
         -lopencv_core -lopencv_imgproc -lopencv_video -lopencv_highgui

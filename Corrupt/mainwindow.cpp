@@ -14,15 +14,19 @@
 #include "thread_read.h"
 #include "thread_decode.h"
 #include "thread_reassemble.h"
-#include "threaded_coder.h"
+#include "params.h"
 #include "transport.h"
 
+#include <sys/types.h>
+#include <signal.h>
 #include <unistd.h>
+
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <stdexcept>
+
 #include <QByteArray>
 #include <QDebug>
 #include <QFile>
@@ -30,6 +34,7 @@
 #include <QPixmap>
 #include <QFileDialog>
 #include <QMessageBox>
+
 #include <opencv2/opencv.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -56,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     sender_tp(),
     //reader_tp("127.0.0.1", port),
     reader_tp(),
+    transmitter_pid(0),
     encoder(new EncoderThread(*enc_s, stat)),
     sender(new SenderThread("127.0.0.1", port, sender_tp, stat)),
     reader(new ReaderThread(0.0, reader_tp, stat)),
@@ -94,14 +100,12 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // queues created by a dead process may hang
-    //boost::interprocess::message_queue::remove(TO_READ_MSG);
-    //boost::interprocess::message_queue::remove(TO_SEND_MSG);
-    //boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
-    //boost::interprocess::message_queue::remove(TO_DECODE_MSG);
-    //boost::interprocess::message_queue::remove(TO_OUT_MSG);
+    boost::interprocess::message_queue::remove(TO_READ_MSG);
+    boost::interprocess::message_queue::remove(TO_SEND_MSG);
+    boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
+    boost::interprocess::message_queue::remove(TO_DECODE_MSG);
+    boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
-    //connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()),
-    //        Qt::DirectConnection);
     connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
 
     decoder->start();
@@ -282,12 +286,19 @@ void MainWindow::on_startButton_clicked()
         running = true;
         ui->recordButton->setEnabled(false);
         ui->startButton->setText("Pause");
-        //loader->start();
-        //loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
         //processFrames(256);
+        transmitter_pid = fork();
+        if (!transmitter_pid) {
+            execl(TRANSMITTER_EXECUTABLE, TRANSMITTER_EXECUTABLE,
+                   filename.c_str(), NULL);
+            int saved_errno = errno;
+            fprintf(stderr, "errno = %d (%s)\n", saved_errno, strerror(saved_errno));
+            ui->image_corrupt->setText("Failed to start transmitter process");
+            qDebug() << "Failed to execute transmitter";
+            exit(0);
+        }
     } else {
-        //loader->Kill();
-        //loader->wait();
+        kill(transmitter_pid, SIGTERM);
         running = false;
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
@@ -381,17 +392,8 @@ void MainWindow::displayStatistics()
 void MainWindow::on_openButton_clicked()
 {
     video_opened = false;
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Any files (*.*);;mp4 video (*.mp4);;avi video (*.avi)"));
-    int ret;
-    if ((ret = AVHandler::Instance()->open_input_file(filename.toStdString().c_str()))) {
-        qDebug() << "Failed to open file " << filename;
-        qDebug() << "Error code " << ret;
-        ui->image_corrupt->setText("Failed to open video file");
-    } else {
-        video_opened = true;
-        loader = std::unique_ptr<LoaderThread>(new LoaderThread(stat, transmit_restart_count));
-        loader->SetGrayscale(ui->grayscaleCheckBox->isChecked());
-    }
+    filename = QFileDialog::getOpenFileName(this, tr("Open File"), ".",
+               tr("Any files (*.*);;mp4 video (*.mp4);;avi video (*.avi)")).toStdString();
 }
 
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
@@ -419,12 +421,6 @@ void MainWindow::on_recordButton_clicked()
 
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
-    using std::cout;
-   if (loader) {
-       loader->SetGrayscale(checked);
-       SaveSettings();
-
-   }
 }
 
 void MainWindow::on_breakChannelCheckBox_clicked(bool checked)

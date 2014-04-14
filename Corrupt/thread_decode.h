@@ -5,7 +5,7 @@
 
 #include "ecc.h"
 #include "statcollector.h"
-#include "threaded_coder.h"
+#include "params.h"
 
 struct DecodedBlock
 {

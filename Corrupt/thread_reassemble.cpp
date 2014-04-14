@@ -4,7 +4,7 @@
 #include "membuf.h"
 #include "split.h"
 #include "thread_decode.h"
-#include "threaded_coder.h"
+#include "params.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -42,11 +42,9 @@ void ReassemblerThread::run()
     // put all received and successfully decoded blocks in history
     while (!killed) {
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
-        qDebug() << "reassemble received packet";
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;
         bool decoded_ok = recv_block.decoded_ok;
-        //bool decoded_ok = true;
 
         if (broken_channel) {
             memset(ptr, 0, decoded_size);
@@ -59,7 +57,6 @@ void ReassemblerThread::run()
             continue;
         }
         HistoryElement &hsblock = history[RestartBlock::get_rst_block_number(ptr)];
-        //mask[RestartBlock::get_rst_block_number(ptr)] = hsblock.get_age() <= MAX_HISTORY_DIFF;
 
         //replace hsblock with new block if new block is good or hsblock is old
         if (decoded_ok || hsblock.get_age() > MAX_HISTORY_DIFF) {
@@ -68,7 +65,6 @@ void ReassemblerThread::run()
             hsblock.get_b().set_info(RestartBlock::get_frame_number(ptr),
                                      RestartBlock::get_rst_block_number(ptr),
                                      RestartBlock::get_data_length(ptr));
-            //mask[RestartBlock::get_rst_block_number(ptr)] = true;
         }
         time_since_last_frame++;
         if (RestartBlock::get_frame_number(ptr) != prev_frame_number &&

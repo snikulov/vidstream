@@ -6,7 +6,7 @@
 
 #include <QDebug>
 
-#include <threaded_coder.h>
+#include <params.h>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 #include "interlace.h"

@@ -4,7 +4,7 @@
 #include "ecc.h"
 #include "err.h"
 #include "pthread.h"
-#include "threaded_coder.h"
+#include "params.h"
 #include "transport.h"
 #include <sys/types.h>
 #include <sys/errno.h>
