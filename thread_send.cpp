@@ -33,16 +33,14 @@ void SenderThread::run()
     std::unique_ptr<uint8_t[]> recv_buf(new uint8_t[PKG_MAX_SIZE]);
     size_t recvd = 0;
     unsigned priority;
-    char loc_buff[1500]; // 4 bytes for start key
+
     size_t  loc_size = 0;
 
     while (!killed) {
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
         loc_size = recvd;
-        memcpy(loc_buff, recv_buf.get(), loc_size);
-
-        T_out.send("127.0.0.1", 32000, loc_buff, loc_size); //отсылаем пакет
+        T_out.send("127.0.0.1", 32000,(char*)&recv_buf[0], loc_size); //отсылаем пакет
 //        output_que.send(recv_buf.get(), recvd, 0);
     }
 

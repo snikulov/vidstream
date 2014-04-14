@@ -45,20 +45,16 @@ void ReaderThread::run()
 
     int port = 32000;
     int readed;
-    char loc_buff[1500]; // 4 bytes for start key
     size_t  loc_size = 0;
-
-    cout << "on port: " << port;
-
     transport T_inp("127.0.0.1", port);
 
     while (1) {
-        readed = T_inp.read(loc_buff, PKG_MAX_SIZE);
-        cout <<"readed=" <<readed<< "\n"<< flush;
+        readed = T_inp.read((char*)&recv_buf[0], PKG_MAX_SIZE);
+
 //        input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
         if (readed>0)
         {
-                memcpy(recv_buf.get(),loc_buff,readed);
+
         } else {
             continue;
         }
