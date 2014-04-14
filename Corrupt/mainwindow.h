@@ -87,6 +87,12 @@ private slots:
 
     void on_settingsButton_clicked();
 
+    void on_grayscaleCheckBox_clicked();
+
+    void on_grayscaleCheckBox_stateChanged(int arg1);
+
+    void on_bandwidthSpinBox_valueChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 

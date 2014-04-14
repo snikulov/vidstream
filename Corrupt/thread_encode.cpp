@@ -79,8 +79,8 @@ void EncoderThread::run()
             clock_gettime(CLOCK_MONOTONIC, &start_time);
             StartTime = 1;
         }
-        SendBytes = SendBytes + out_lnt;
-        shape_channel();
+//        SendBytes = SendBytes + out_lnt;
+//        shape_channel();
 
         if (diff_time(&cur_time,&start_time) >1) {
         //    cout << ChannelSpeed <<" SendBytes= "<< SendBytes << " Diff Time= " << diff_time(&cur_time,&start_time)<< " speed= " << (SendBytes*1000000/(diff_time(&cur_time,&start_time) ))<< "\n";

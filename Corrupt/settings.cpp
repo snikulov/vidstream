@@ -56,6 +56,10 @@ void LoadSettingsFromFile(std::string filename, Settings &mode1, Settings &mode2
             ss >> cur->row_denom;
         } else if (varname == "rst_block_size") {
             ss >> cur->rst_block_size;
+        } else if (varname == "BW") {
+            ss >> cur->BW;
+        } else if (varname == "channel_width") {
+            ss >> cur->channel_width;
         } else {
             std::cerr << "Error reading " << filename << ", line " << line_number;
             std::cerr << ":" << std::endl << line_copy << std::endl;
@@ -78,6 +82,8 @@ void SaveSettingsToFile(std::ofstream &fout, const Settings &s)
     fout << "interlace_row_num=" << s.row_num << std::endl;
     fout << "interlace_row_denom=" << s.row_denom << std::endl;
     fout << "rst_block_size=" << s.rst_block_size << std::endl;
+    fout << "BW=" << s.BW << std::endl;
+    fout << "channel_width=" << s.channel_width << std::endl;
 }
 
 void SaveSettingsToFile(std::string filename,

@@ -87,6 +87,8 @@ MainWindow::MainWindow(QWidget *parent) :
         LoadSettingsFromFile("settings.conf", stored_settings[0],
                                               stored_settings[1]);
         settings = stored_settings[0];
+        ui->bandwidthSpinBox->setValue(settings.channel_width*8);
+        ui->grayscaleCheckBox->setChecked(settings.BW);
     } catch(...) {
         SaveSettings();
     }
@@ -141,6 +143,7 @@ void MainWindow::GetBchParams(int &bch_m, int &bch_t) const
     bch_m = settings.bch_m;
     bch_t = settings.bch_t;
 }
+
 
 bool MainWindow::SetBchParams(int bch_m, int bch_t)
 {
@@ -203,7 +206,9 @@ Settings MainWindow::GetSettings() const
                     interlace_rows->GetDenom(),
                     interlace_blocks->GetNum(),
                     interlace_blocks->GetDenom(),
-                    settings.rst_block_size);
+                    settings.rst_block_size,
+                    settings.BW,
+                    settings.channel_width);
 }
 
 int MainWindow::SetSettings(const Settings &new_s)
@@ -237,6 +242,8 @@ int MainWindow::SetSettings(const Settings &new_s)
     settings.block_num = new_s.block_num;
     settings.block_denom = new_s.block_denom;
     settings.rst_block_size = new_s.rst_block_size;
+    settings.BW = new_s.BW;
+    settings.channel_width = new_s.channel_width;
     return true;
 }
 
@@ -390,6 +397,8 @@ void MainWindow::on_openButton_clicked()
 void MainWindow::on_bandwidthSpinBox_valueChanged(int arg1)
 {
     ChannelSpeed = arg1 / 8;
+    settings.channel_width = ChannelSpeed;
+    SaveSettings();
     SendBytes = 0;
     StartTime = 0;
 }
@@ -410,8 +419,11 @@ void MainWindow::on_recordButton_clicked()
 
 void MainWindow::on_grayscaleCheckBox_clicked(bool checked)
 {
+    using std::cout;
    if (loader) {
        loader->SetGrayscale(checked);
+       SaveSettings();
+
    }
 }
 
@@ -424,4 +436,19 @@ void MainWindow::on_settingsButton_clicked()
 {
     SettingsDialog *dialog = new SettingsDialog(this);
     dialog->show();
+}
+
+void MainWindow::on_grayscaleCheckBox_clicked()
+{
+
+}
+
+void MainWindow::on_grayscaleCheckBox_stateChanged(int arg1)
+{
+
+}
+
+void MainWindow::on_bandwidthSpinBox_valueChanged(const QString &arg1)
+{
+
 }
