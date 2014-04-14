@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
     bool grayscale = false;
     // open video file
     std::string filename = argv[1];
-    AVHandler::Instance()->load_timestamp(TIMESTAMP_FILE);
+    // this doesn't work yet
+    //AVHandler::Instance()->load_timestamp(TIMESTAMP_FILE);
     int ret;
     if ((ret = AVHandler::Instance()->open_input_file(filename.c_str()))) {
         qDebug() << "Failed to open file " << filename.c_str();

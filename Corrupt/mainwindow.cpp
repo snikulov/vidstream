@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
         folder.mkdir(QDir::currentPath()+"/res_frames");
     }
     system("rm res_frames/*");
+    system("rm timestamp");
 
     try {
         LoadSettingsFromFile("settings.conf", stored_settings[0],
@@ -115,6 +116,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if (transmitter_pid) {
+        kill(transmitter_pid, SIGTERM);
+        transmitter_pid = 0;
+    }
     delete ui;
     exit(0);
 }
@@ -299,6 +304,7 @@ void MainWindow::on_startButton_clicked()
         }
     } else {
         kill(transmitter_pid, SIGTERM);
+        transmitter_pid = 0;
         running = false;
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");
