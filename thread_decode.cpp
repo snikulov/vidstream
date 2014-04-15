@@ -43,6 +43,8 @@ void DecoderThread::run()
         memcpy(send_buf.data, out_data, out_lnt);
         free(out_data);
 
+        stat.AddPacket(recvd, send_buf.decoded_ok);
+
         output_que.send(&send_buf, out_lnt, 0);
     }
 
