@@ -117,7 +117,7 @@ std::string StatCollector::GetFrameSizeStats()
                std::to_string(avg_frame_size) +
                "\n" +
                "Required bandwith at 25 fps: " +
-                std::to_string((avg_frame_size * 25 * 8) / (1024 * 1024)) +
+                std::to_string((avg_frame_size * 25 * 8*3) / (1024 * 1024)) +
                " Mbit/s";
     }
 }

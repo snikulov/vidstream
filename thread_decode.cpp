@@ -32,7 +32,7 @@ void DecoderThread::run()
     size_t recvd, out_lnt;
     unsigned int priority;
     std::vector<char> decoded;
-
+    int rst_len;
     while (!killed) {
 
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
@@ -42,8 +42,8 @@ void DecoderThread::run()
         send_buf.data_len = out_lnt;
         memcpy(send_buf.data, out_data, out_lnt);
         free(out_data);
-
-        stat.AddPacket(recvd, send_buf.decoded_ok);
+        rst_len = send_buf.data[4]+2;
+        stat.AddPacket(rst_len, send_buf.decoded_ok);
 
         output_que.send(&send_buf, out_lnt, 0);
     }
