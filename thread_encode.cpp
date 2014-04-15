@@ -42,6 +42,23 @@ using std::flush;
     }
 }
 
+char* enLogFileName = "##encode.log";
+char enLogstr[1000];
+bool enLogFirstEnter = true;
+  FILE* enlogfile;
+
+void enLog(char* lstr)
+{
+
+
+    if (enLogFirstEnter){
+        remove(enLogFileName);
+        enLogFirstEnter = false;
+        enlogfile = fopen(enLogFileName, "a");
+    }
+    fprintf(enlogfile,"%s \n",lstr);
+}
+
 using namespace boost::interprocess;
 
 EncoderThread::EncoderThread(ecc &coder,
@@ -61,9 +78,11 @@ void EncoderThread::run()
     std::unique_ptr<uint8_t[]> send_buf(new uint8_t[PKG_MAX_SIZE]);
     size_t recvd, out_lnt;
     unsigned priority;
-
+    int qlen ;
     while (!killed) {
-
+        qlen = input_que.get_num_msg();
+        sprintf(enLogstr,"rec block lq=%d",qlen);
+        enLog(enLogstr);
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
         //boost::posix_time::ptime timeout = boost::posix_time::microsec_clock::universal_time() + boost::posix_time::milliseconds(100);
         //if (!input_que.timed_receive(buf.get(), PKG_MAX_SIZE, recvd, priority, timeout)) {
@@ -83,11 +102,17 @@ void EncoderThread::run()
         }
         SendBytes = SendBytes + out_lnt;
         shape_channel();
-
+        enLog("shaped");
         if (diff_time(&cur_time,&start_time) >1) {
         //    cout << ChannelSpeed <<" SendBytes= "<< SendBytes << " Diff Time= " << diff_time(&cur_time,&start_time)<< " speed= " << (SendBytes*1000000/(diff_time(&cur_time,&start_time) ))<< "\n";
         }
         stat.AddPacket(out_lnt, true);
+        enLog("addstat");
+
+        qlen = output_que.get_num_msg();
+        sprintf(enLogstr,"output block lq=%d",qlen);
+        enLog(enLogstr);
+
         output_que.send(send_buf.get(), out_lnt, 0);
     }
 

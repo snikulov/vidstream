@@ -53,9 +53,9 @@ void SenderThread::run()
 
     while (!killed) {
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
-//        slog("send get RST ");
+
         output_que.send(recv_buf.get(), recvd, 0);
-  //      slog("send put RST \n");
+
     }
 
 //    transport T_out;

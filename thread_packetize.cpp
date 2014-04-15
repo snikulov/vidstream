@@ -49,9 +49,13 @@ PacketizerThread::PacketizerThread(const uint8_t *buffer, const size_t buffer_si
 void PacketizerThread::TransmitBlock(RestartBlock& block,
                                     bipc::message_queue &mq)
 {
- //   pkLog("transmit block \n");
-
+    int qlen = mq.get_num_msg();
+//    sprintf(pkLogstr,"transmit block lq=%d",qlen);
+//   fprintf(stderr,"transmit block lq=%d \n",qlen);
+//   pkLog(pkLogstr);
     mq.send(block.raw_ptr(), block.raw_length(), 0);
+
+
 //     pkLog("transmit block ok\n");
 }
 

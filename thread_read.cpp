@@ -67,6 +67,8 @@ void ReaderThread::run()
 //        output_que.send(recv_buf.get(), PKG_MAX_SIZE, 0);
 //    }
 
+
+
     while (1) {
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);

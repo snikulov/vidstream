@@ -14,7 +14,7 @@
 #include <QFile>
 #include <boost/interprocess/ipc/message_queue.hpp>
 
-
+using namespace boost::interprocess;
 
 
 void sigterm_handler(int n)
@@ -54,20 +54,23 @@ int main(int argc, char *argv[])
         qDebug() << "Failed to load settings";
     }
 
-
+    message_queue::remove(TO_ENCODE_MSG);
+    message_queue::remove(TO_SEND_MSG);
     StatCollector stat;
     // start threads
     int port = 0;
     ecc coder(settings.bch_m, settings.bch_t);
     transport sender_tp;
+
     SenderThread sender("127.0.0.1", port, sender_tp, stat);
     EncoderThread encoder(coder, stat);
     size_t transmit_restart_count;
     LoaderThread loader(stat, transmit_restart_count);
     loader.SetGrayscale(grayscale);
-    sender.start();
     encoder.start();
+    sender.start();
     loader.start();
+
     loader.wait();
     encoder.wait();
     sender.wait();
