@@ -297,6 +297,7 @@ void MainWindow::on_startButton_clicked()
         return;
     }
     if (!running) {
+
         running = true;
         ui->settingsButton->setEnabled(!running);
         ui->grayscaleCheckBox->setEnabled(!running);
@@ -334,6 +335,38 @@ void MainWindow::on_startButton_clicked()
 
         }
         transmitter_pid = 0;
+//        SetBchParams(settings.bch_m,settings.bch_t);
+//        stat.Reset();
+//        decoder->terminate();
+//        reader->terminate();
+//        //reassembler->terminate();
+//        decoder->wait();
+//        reader->wait();
+//        //reassembler->wait();
+//        boost::interprocess::message_queue::remove(TO_READ_MSG);
+//        boost::interprocess::message_queue::remove(TO_SEND_MSG);
+//        boost::interprocess::message_queue::remove(TO_ENCODE_MSG);
+//        boost::interprocess::message_queue::remove(TO_DECODE_MSG);
+//          boost::interprocess::message_queue::remove(TO_OUT_MSG);
+
+//        reader = std::unique_ptr<ReaderThread>(new ReaderThread(0.0, reader_tp, stat));
+//          enc_r = std::unique_ptr<ecc>(new ecc(settings.bch_m, settings.bch_t, &stat));
+//          decoder = std::unique_ptr<DecoderThread>(new DecoderThread(*enc_r, stat)) ;
+// //        reassembler = std::unique_ptr<ReassemblerThread>(new ReassemblerThread(history, transmit_restart_count,
+// //                                                                               history_mutex, stat, false)) ;
+
+
+
+//        connect(reassembler.get(), SIGNAL(frameReady()), this, SLOT(drawImage()));
+
+//        decoder->start();
+//        reader->start();
+//        reassembler->start();
+
+
+
+
+
 
         ui->recordButton->setEnabled(true);
         ui->startButton->setText("Continue");

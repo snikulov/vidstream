@@ -114,11 +114,10 @@ std::string StatCollector::GetFrameSizeStats()
         }
         avg_frame_size += (coeff * total_frame_size) / total_frame_cnt;
         return "Average frame size: " +
-               std::to_string(avg_frame_size) +
-               "\n" +
-               "Required bandwith at 25 fps: " +
-                std::to_string((avg_frame_size * 25 * 8*3) / (1024 * 1024)) +
-               " Mbit/s";
+               std::to_string(avg_frame_size) +               "\n";
+//                + "Required bandwith at 25 fps: " +
+//                std::to_string((avg_frame_size * 25 * 8*3) / (1024 * 1024)) +
+//               " Mbit/s";
     }
 }
 

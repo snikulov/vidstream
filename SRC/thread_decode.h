@@ -18,7 +18,7 @@ class DecoderThread : public QThread
 {
 public:
     DecoderThread(ecc &coder, StatCollector &stat);
-
+    void RecreateCoder(int bch_t, int bch_m);
     void Kill() { killed = true; }
 protected:
     void run();

@@ -14,13 +14,16 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
 
 using namespace boost::interprocess;
-
 DecoderThread::DecoderThread(ecc &coder,
                              StatCollector &stat) :
     coder(coder),
     stat(stat),
     killed(false)
 { }
+void DecoderThread::RecreateCoder(int bch_m, int bch_t)
+{
+    coder = ecc(bch_m, bch_t, &stat);
+}
 
 void DecoderThread::run()
 {

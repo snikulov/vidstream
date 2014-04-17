@@ -91,6 +91,7 @@ void EncoderThread::run()
 
         stat.StartTimer(StatCollector::TIMER_ENCODE);
         char* out_data = (char*)coder.encode((char *)(recv_buf.get()), recvd, out_lnt);
+        enLog(" coder encode\n");
         stat.StopTimer(StatCollector::TIMER_ENCODE);
         memcpy(send_buf.get(), out_data, out_lnt);
         free(out_data);
@@ -100,7 +101,7 @@ void EncoderThread::run()
             clock_gettime(CLOCK_MONOTONIC, &start_time);
             StartTime = 1;
         }
-        SendBytes = SendBytes + out_lnt;
+        SendBytes = SendBytes + out_lnt-12;
         shape_channel();
         enLog("shaped");
         if (diff_time(&cur_time,&start_time) >1) {
