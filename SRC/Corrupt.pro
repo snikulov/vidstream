@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     thread_reassemble.cpp \
     settings.cpp \
     thread_loader.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    common_vt.cpp
 
 HEADERS  += mainwindow.h \
     bch.h \
@@ -57,7 +58,8 @@ HEADERS  += mainwindow.h \
     settings.h \
     thread_loader.h \
     settingsdialog.h \
-    params.h
+    params.h \
+    commn_vt.h
 
 LIBS += -ljpeg -lavcodec -lavformat -lavdevice -lavutil -lswscale -lrt \
         -lopencv_core -lopencv_imgproc -lopencv_video -lopencv_highgui

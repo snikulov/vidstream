@@ -16,7 +16,7 @@
 #include "thread_reassemble.h"
 #include "params.h"
 #include "transport.h"
-
+#include "commn_vt.h"
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>
@@ -351,6 +351,22 @@ void MainWindow::on_startButton_clicked()
 
 //        reader = std::unique_ptr<ReaderThread>(new ReaderThread(0.0, reader_tp, stat));
         decoder->RecreateCoder(settings.bch_m,settings.bch_t);
+        FlushReadQ = true;
+        FlushDecodeQ = true;
+        FlushOutMSGQ = true;
+        for (int i = 0; i<10000; i++ ){
+            usleep(1);
+            if (FlushReadQ || FlushDecodeQ ||FlushReadQ) {
+                continue;
+            }
+            break;
+        }
+        qDebug() << " Очереди - состояние(FlushReadQ FlushDecodeQ FlushReadQ)"<<FlushReadQ<< FlushDecodeQ <<FlushReadQ;
+        if (FlushReadQ || FlushDecodeQ ||FlushReadQ) {
+            qDebug() << " Очереди не очищены - состояние(FlushReadQ FlushDecodeQ FlushReadQ)"<<FlushReadQ<< FlushDecodeQ <<FlushReadQ;
+        }
+
+
 //          decoder = std::unique_ptr<DecoderThread>(new DecoderThread(*enc_r, stat)) ;
 // //        reassembler = std::unique_ptr<ReassemblerThread>(new ReassemblerThread(history, transmit_restart_count,
 // //                                                                               history_mutex, stat, false)) ;

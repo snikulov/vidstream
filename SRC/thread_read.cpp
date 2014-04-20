@@ -6,6 +6,7 @@
 #include "pthread.h"
 #include "params.h"
 #include "transport.h"
+#include "commn_vt.h"
 
 #include <errno.h>
 #include <sys/types.h>
@@ -19,6 +20,25 @@
 #include <QDebug>
 
 using namespace boost::interprocess;
+
+char* rdLogFileName = "##read.log";
+char rdLogstr[1000];
+bool rdLogFirstEnter = true;
+FILE* rdlogfile;
+
+void rdLog(char* lstr)
+{
+
+
+    if (rdLogFirstEnter){
+        remove(rdLogFileName);
+        rdLogFirstEnter = false;
+        rdlogfile = fopen(rdLogFileName, "a");
+    }
+    fprintf(rdlogfile,"%s \n",lstr);
+}
+
+
 
 ReaderThread::ReaderThread(float err_percent,
                            transport &T,
@@ -78,6 +98,19 @@ void ReaderThread::run()
 
 
     while (1) {
+        sprintf(rdLogstr,"Normal mode: num in queue %d %d",input_que.get_num_msg(), FlushReadQ);
+        rdLog(rdLogstr);
+
+        if (FlushReadQ){
+            while (input_que.get_num_msg()>0){
+                sprintf(rdLogstr,"Flush num in queue %d",input_que.get_num_msg());
+                rdLog(rdLogstr);
+                input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+                sprintf(rdLogstr,"num in queue %d",input_que.get_num_msg());
+                rdLog(rdLogstr);
+            }
+            FlushReadQ = false;
+        }
         //msg.in_buff_lnt = readed = T.read(msg.in_buff, msg.in_buff_lnt);
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 

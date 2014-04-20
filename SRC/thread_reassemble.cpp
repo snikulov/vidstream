@@ -5,6 +5,7 @@
 #include "split.h"
 #include "thread_decode.h"
 #include "params.h"
+#include "commn_vt.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -41,6 +42,14 @@ void ReassemblerThread::run()
     // receive a block
     // put all received and successfully decoded blocks in history
     while (!killed) {
+        if (FlushOutMSGQ){
+            while (mq.get_num_msg()>0){
+                mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
+
+            }
+            FlushOutMSGQ = false;
+        }
+
         mq.receive(&recv_block, PKG_MAX_SIZE, recv_size, priority);
         ptr = recv_block.data;
         decoded_size = recv_block.data_len;

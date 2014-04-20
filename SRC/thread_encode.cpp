@@ -45,7 +45,7 @@ using std::flush;
 char* enLogFileName = "##encode.log";
 char enLogstr[1000];
 bool enLogFirstEnter = true;
-  FILE* enlogfile;
+FILE* enlogfile;
 
 void enLog(char* lstr)
 {

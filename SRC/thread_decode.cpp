@@ -5,6 +5,8 @@
 #include "err.h"
 #include "pthread.h"
 #include "params.h"
+#include "commn_vt.h"
+
 #include "transport.h"
 #include <sys/types.h>
 #include <sys/errno.h>
@@ -46,6 +48,14 @@ void DecoderThread::run()
             coder = new ecc(bch_m, bch_t, &stat);
             BCHParametersChanged = false;
         }
+        if (FlushDecodeQ){
+            while (input_que.get_num_msg()>0){
+                input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
+
+            }
+            FlushDecodeQ = false;
+        }
+
         input_que.receive(recv_buf.get(), PKG_MAX_SIZE, recvd, priority);
 
         char* out_data = (char*)coder->decode((char *)(recv_buf.get()), recvd,
