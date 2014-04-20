@@ -354,7 +354,7 @@ void MainWindow::on_startButton_clicked()
         FlushReadQ = true;
         FlushDecodeQ = true;
         FlushOutMSGQ = true;
-        for (int i = 0; i<10000; i++ ){
+        for (int i = 0; i<1000; i++ ){
             usleep(1);
             if (FlushReadQ || FlushDecodeQ ||FlushReadQ) {
                 continue;

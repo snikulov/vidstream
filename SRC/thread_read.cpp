@@ -98,8 +98,8 @@ void ReaderThread::run()
 
 
     while (1) {
-        sprintf(rdLogstr,"Normal mode: num in queue %d %d",input_que.get_num_msg(), FlushReadQ);
-        rdLog(rdLogstr);
+ //       sprintf(rdLogstr,"Normal mode: num in queue %d %d",input_que.get_num_msg(), FlushReadQ);
+//        rdLog(rdLogstr);
 
         if (FlushReadQ){
             while (input_que.get_num_msg()>0){
