@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     hdr_buf_initialized(false),
     recv_raster(new Bitmap(scaled_width, scaled_height)),
     enc_s(new ecc(settings.bch_m, settings.bch_t, &stat)),
-    enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
+//    enc_r(new ecc(settings.bch_m, settings.bch_t, &stat)),
     history(MAX_RESTART_BLOCKS),
     port(transport().get_free_port()),
     sender_tp(),
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     encoder(new EncoderThread(*enc_s, stat)),
     sender(new SenderThread("127.0.0.1", port, sender_tp, stat)),
     reader(new ReaderThread(0.0, reader_tp, stat)),
-    decoder(new DecoderThread(*enc_r, stat)),
+    decoder(new DecoderThread(new ecc(settings.bch_m, settings.bch_t, &stat), stat)),
     reassembler(new ReassemblerThread(history, transmit_restart_count,
                                       history_mutex, stat, false)),
     interlace_rows  (new InterlaceControl(settings.row_num,
@@ -335,7 +335,7 @@ void MainWindow::on_startButton_clicked()
 
         }
         transmitter_pid = 0;
-//        SetBchParams(settings.bch_m,settings.bch_t);
+        SetBchParams(settings.bch_m,settings.bch_t);
 //        stat.Reset();
 //        decoder->terminate();
 //        reader->terminate();
@@ -350,7 +350,7 @@ void MainWindow::on_startButton_clicked()
 //          boost::interprocess::message_queue::remove(TO_OUT_MSG);
 
 //        reader = std::unique_ptr<ReaderThread>(new ReaderThread(0.0, reader_tp, stat));
-//          enc_r = std::unique_ptr<ecc>(new ecc(settings.bch_m, settings.bch_t, &stat));
+        decoder->RecreateCoder(settings.bch_m,settings.bch_t);
 //          decoder = std::unique_ptr<DecoderThread>(new DecoderThread(*enc_r, stat)) ;
 // //        reassembler = std::unique_ptr<ReassemblerThread>(new ReassemblerThread(history, transmit_restart_count,
 // //                                                                               history_mutex, stat, false)) ;

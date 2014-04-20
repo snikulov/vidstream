@@ -59,7 +59,9 @@ int main(int argc, char *argv[])
     StatCollector stat;
     // start threads
     int port = 0;
+
     ecc coder(settings.bch_m, settings.bch_t);
+      qDebug() << "BCH" <<settings.bch_m<<settings.bch_t;
     transport sender_tp;
 
     SenderThread sender("127.0.0.1", port, sender_tp, stat);

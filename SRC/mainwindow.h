@@ -143,6 +143,7 @@ private:
 
     pid_t transmitter_pid;
 
+
     std::unique_ptr<EncoderThread> encoder;
     std::unique_ptr<SenderThread>  sender;
     std::unique_ptr<ReaderThread>  reader;
