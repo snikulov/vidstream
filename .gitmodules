@@ -1,0 +1,9 @@
+[submodule "vidstream/ext/ffmpeg"]
+	path = vidstream/ext/ffmpeg
+	url = git://source.ffmpeg.org/ffmpeg.git
+[submodule "vidstream/ext/libjpeg-turbo"]
+	path = vidstream/ext/libjpeg-turbo
+	url = https://github.com/snikulov/libjpeg-turbo.git
+[submodule "vidstream/ext/opencv"]
+	path = vidstream/ext/opencv
+	url = https://github.com/snikulov/opencv.git
