@@ -15,3 +15,9 @@ ext/libjpeg-turbo - for some jpeg manipulation, will be used in opencv
 # ./configure --with-jpeg8 --prefix=/usr/local
 # make
 # sudo make install
+
+ext/opencv - for video capture and image manipulation
+- build
+# cmake <path to opencv source> -DBUILD_JPEG=OFF -DCMAKE_INSTALL_PREFIX=/usr/local -DJPEG_INCLUDE_DIR=/usr/local -DJPEG_LIBRARY=/usr/local/lib64/libjpeg.so.8
+# make
+# sudo make install
