@@ -15,7 +15,7 @@ class monitor_queue : private boost::noncopyable
         void enqueue(element d) {
             boost::mutex::scoped_lock lock(mx_);
             q_.push(d);
-            notify_consumer();
+            cond_.notify_one();
         }
 
         element dequeue() {
@@ -32,11 +32,6 @@ class monitor_queue : private boost::noncopyable
             boost::mutex::scoped_lock lock(mx_);
             return q_.empty();
         }
-
-        void notify_consumer() {
-            cond_.notify_one();
-        }
-
 
     private:
         boost::mutex        mx_;
