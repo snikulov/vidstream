@@ -1,41 +1,25 @@
-#include <memory>
 #include <iostream>
-#include "opencv2/opencv.hpp"
+#include <boost/scoped_ptr.hpp>
+#include <camera.hpp>
 
-using namespace cv;
+#include <opencv2/opencv.hpp>
+
+using vidstream::camera;
+using vidstream::camera_frame_t;
 
 int main(int argc, char** argv)
 {
-    std::unique_ptr<VideoCapture> cap;
-    if (argc > 1) {
-        cap.reset(new VideoCapture(argv[1]));
-    }
-    else {
-        cap.reset(new VideoCapture(0));
-    }
+    boost::scoped_ptr<camera> cam(argc > 1 ? new camera(argv[1]) : new camera());
+    camera& c = *cam;
 
-    if(!cap->isOpened())  // check if we succeeded
-        return -1;
-
-    std::cout << "Capture width = " << cap->get(CV_CAP_PROP_FRAME_WIDTH) 
-              << " height = " << cap->get(CV_CAP_PROP_FRAME_HEIGHT) << std::endl;
-
-    if(!cap->set(CV_CAP_PROP_FRAME_WIDTH, 640)) std::cout << "failed to set width" << std::endl;
-    if(!cap->set(CV_CAP_PROP_FRAME_HEIGHT, 480))  std::cout << "failed to set height" << std::endl;
-
-    Size size_(cap->get(CV_CAP_PROP_FRAME_WIDTH)/2, cap->get(CV_CAP_PROP_FRAME_HEIGHT)/2);
-
-    namedWindow("Capture",1);
-    Mat frame;
+    cv::namedWindow("Capture",1);
     for(;;)
     {
-        if(cap->read(frame)) {
-            resize(frame, frame, size_);
-            imshow("Capture", frame);
-        }
-        if(waitKey(30) >= 0) break;
+        camera_frame_t frame = c.get_frame();
+        if (frame)
+            cv::imshow("Capture", *frame);
+        if(cv::waitKey(30) >= 0) break;
     }
-    // the camera will be deinitialized automatically in VideoCapture destructor
     return 0;
 }
 
