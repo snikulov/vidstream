@@ -12,13 +12,22 @@ template<typename element>
 class monitor_queue : private boost::noncopyable
 {
     public:
+        monitor_queue(std::size_t max_size = 100)
+            : max_size_(max_size)
+        {
+        }
+
         void enqueue(element d) {
             boost::mutex::scoped_lock lock(mx_);
-            q_.push(d);
+            if (q_.size() < max_size_)
+            {
+                q_.push(d);
+            } // else silently skip for now
             cond_.notify_one();
         }
 
-        element dequeue() {
+        element dequeue()
+        {
             boost::mutex::scoped_lock lock(mx_);
             if(q_.empty()) {
                 cond_.wait(lock); // unlock mutex and wait for data
@@ -28,15 +37,17 @@ class monitor_queue : private boost::noncopyable
             return ret_val;
         }
 
-        bool empty() const {
+        bool empty() const
+        {
             boost::mutex::scoped_lock lock(mx_);
             return q_.empty();
         }
 
     private:
-        boost::mutex        mx_;
-        boost::condition    cond_;
-        std::queue<element> q_;
+        std::size_t               max_size_;
+        boost::mutex              mx_;
+        boost::condition_variable cond_;
+        std::queue<element>       q_;
 
 };
 #endif

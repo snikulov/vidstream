@@ -39,7 +39,8 @@ public:
         {
             return ret_val;
         }
-        return camera_frame_t();
+        ret_val.reset();
+        return ret_val;
     }
 
 private:
