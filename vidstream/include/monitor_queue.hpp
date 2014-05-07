@@ -22,8 +22,8 @@ class monitor_queue : private boost::noncopyable
             if (q_.size() < max_size_)
             {
                 q_.push(d);
+	            cond_.notify_one();
             } // else silently skip for now
-            cond_.notify_one();
         }
 
         element dequeue()
@@ -32,8 +32,13 @@ class monitor_queue : private boost::noncopyable
             if(q_.empty()) {
                 cond_.wait(lock); // unlock mutex and wait for data
             }
-            element ret_val(q_.front());
-            q_.pop();
+			element ret_val;
+
+			if (!q_.empty())
+			{
+	            ret_val = q_.front();
+		        q_.pop();
+			}
             return ret_val;
         }
 
