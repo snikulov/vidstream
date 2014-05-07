@@ -1,3 +1,5 @@
-add_subdirectory(bch)
+if(NOT MSVC)
+    add_subdirectory(bch)
+endif()
 add_subdirectory(capture)
 add_subdirectory(split)

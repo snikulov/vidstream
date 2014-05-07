@@ -11,5 +11,10 @@ if(Boost_FOUND)
 endif()
 
 include_directories(include)
+include_directories(include)
 
 add_subdirectory(src)
+
+# UT
+enable_testing()
+add_subdirectory(test)

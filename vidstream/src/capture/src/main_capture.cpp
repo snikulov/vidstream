@@ -55,10 +55,7 @@ int main(int argc, char** argv)
 				o.write(reinterpret_cast<const char*>(&buf[0]), buf.size()*sizeof(unsigned char));
 				o.close();
 			}
-			else
-			{
-				std::cout << "imencode return false" << std::endl;
-			}
+
             cv::imshow("Capture", *frame);
         }
         else

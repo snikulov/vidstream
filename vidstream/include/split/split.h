@@ -1,9 +1,7 @@
 #ifndef __SPLIT_H
 #define __SPLIT_H
 
-#include <iostream>
-
-class MainWindow;
+#include <iosfwd>
 
 enum Markers {
     SOI = 0xD8,
@@ -30,6 +28,6 @@ typedef struct {
 // otherwise SOS header goes with body
 int split_file(std::istream &fin, std::ostream *fhead, std::ostream &fbody, char safe, size_t &restart_count);
 
-int is_rst(int c);
+//int is_rst(int c);
 
 #endif

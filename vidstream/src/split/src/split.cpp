@@ -1,9 +1,6 @@
-#include "split.h"
+#include "split_int.h"
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
+#include <iostream>
 
 const int ERR_PARSING = -2;
 const int ERR_MEMORY  = -3;
