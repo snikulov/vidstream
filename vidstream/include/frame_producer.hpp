@@ -4,7 +4,8 @@
 #include <camera.hpp>
 #include <monitor_queue.hpp>
 
-namespace vidstream {
+namespace vidstream
+{
 
 class frame_producer
 {

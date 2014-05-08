@@ -9,5 +9,5 @@ set(SRC_FILES
 add_executable(test_split ${SRC_FILES})
 target_link_libraries(test_split split)
 
-add_test(NAME test_split COMMAND test_split ${CMAKE_SOURCE_DIR}/test/data/img_test_split.jpg)
+add_test(NAME test_split COMMAND test_split --log_level=message ${CMAKE_SOURCE_DIR}/test/data/img_test_split.jpg)
 

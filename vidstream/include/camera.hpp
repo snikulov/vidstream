@@ -9,7 +9,8 @@
 
 using cv::VideoCapture;
 
-namespace vidstream {
+namespace vidstream
+{
 
 typedef boost::shared_ptr<cv::Mat> camera_frame_t;
 
@@ -37,7 +38,7 @@ public:
         camera_frame_t ret_val(new cv::Mat());
         if (src_->read(*ret_val))
         {
-			int type = ret_val->type();
+            int type = ret_val->type();
             return ret_val;
         }
         ret_val.reset();
