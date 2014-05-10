@@ -10,4 +10,4 @@ set(SRC_FILES
 )
 
 add_executable(capture ${SRC_FILES})
-target_link_libraries(capture ${OpenCV_LIBS})
+target_link_libraries(capture ${OpenCV_LIBS} ${Boost_LIBRARIES})
