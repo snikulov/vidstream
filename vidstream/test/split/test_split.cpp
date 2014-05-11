@@ -28,6 +28,7 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
+    // TODO: replace to opencv reading from file
     std::ifstream input(framework::master_test_suite().argv[1], std::ios::binary);
     input.unsetf(std::ios::skipws);  // not eat newlines
     std::istream_iterator<unsigned char> start(input), end;

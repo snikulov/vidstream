@@ -24,7 +24,7 @@ public:
     void operator()() const
     {
         cv::namedWindow("Capture",1);
-        jpeg_builder jpeg;
+        jpeg_builder jbuilder;
 
         while(!stop_)
         {
@@ -35,7 +35,8 @@ public:
                 cv::imshow("Capture", *frame);
 
                 // pack frame into jpeg with rst
-                jpeg_data_t d = jpeg.from_cvmat(frame);
+                jpeg_data_t     jpg(jbuilder.from_cvmat(frame));
+                jpeg_rst_idxs_t rst(jbuilder.rst_idxs(jpg));
             }
             else
             {

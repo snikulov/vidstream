@@ -6,11 +6,17 @@
 //
 
 #include <frame.hpp>
+#include <split/split.h>
 
 namespace vidstream
 {
 
 typedef boost::shared_ptr<std::vector<unsigned char> > jpeg_data_t;
+typedef boost::shared_ptr<std::vector<std::size_t> >  jpeg_rst_idxs_t;
+
+// TODO: add interface to access jpeg parameters
+// - get/set
+
 class jpeg_builder
 {
 public:
@@ -30,14 +36,38 @@ public:
     {
     }
 
+    jpeg_rst_idxs_t rst_idxs(jpeg_data_t data)
+    {
+        jpeg_rst_idxs_t ret_val(new std::vector<std::size_t>);
+        if (data && !data->empty())
+        {
+            (void)get_all_rst_blocks(*data, *ret_val);
+        }
+        return ret_val;
+    }
+
     jpeg_data_t from_cvmat(const camera_frame_t frame)
     {
         jpeg_data_t ret_buf(new std::vector<unsigned char>);
         if (frame && !frame->empty())
         {
             bool res = cv::imencode(".jpg", *frame, *ret_buf, params_);
+            // TODO: need to decide what must I do in this case
         }
         return ret_buf;
+    }
+
+    // TODO: should it be in debug only?
+    // write to file named "img[num].jpg"
+    static void write(const jpeg_data_t data, unsigned long num)
+    {
+        std::ostringstream fn;
+        fn << "img" << std::setfill ('0') << std::setw(8)
+           << num << ".jpg";
+        std::ofstream of(fn.str().c_str(), std::ios_base::binary);
+        of.write(reinterpret_cast<const char*>((*data)[0]),
+                data->size()*sizeof(unsigned char));
+        of.close();
     }
 
 private:
