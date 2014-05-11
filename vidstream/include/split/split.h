@@ -38,6 +38,6 @@ int is_rst(int c);
 // input const std::vector<unsigned char> - buffer with jpeg data
 // do following
 // check if it jpeg, find DRI and check it non zero, then first, last RST (our data)
-bool get_rst_block(const std::vector<unsigned char>&, std::vector<std::size_t>&);
+bool get_all_rst_blocks(const std::vector<unsigned char>&, std::vector<std::size_t>&);
 
 #endif

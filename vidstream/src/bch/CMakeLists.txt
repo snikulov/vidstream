@@ -1,12 +1,17 @@
 cmake_minimum_required(VERSION 2.8)
-
-project(bch CXX)
+set(TARGET_NAME bch)
+project(${TARGET_NAME} CXX)
 
 include_directories(hdr)
 
+set(HDR_FILES
+    hdr/bch.h
+    hdr/ecc.h
+    )
 set(SRC_FILES
     src/bch.cpp
     src/ecc.cpp
-)
+    )
 
-add_library(bch ${SRC_FILES})
+add_library(${TARGET_NAME} ${SRC_FILES} ${HDR_FILES})
+

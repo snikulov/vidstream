@@ -39,10 +39,18 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
 
     std::vector<size_t> outidx;
     BOOST_REQUIRE(outidx.empty());
-    BOOST_REQUIRE(get_rst_block(buf, outidx));
+    BOOST_REQUIRE(get_all_rst_blocks(buf, outidx));
     BOOST_REQUIRE(!outidx.empty());
 
     BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
+
+    for(size_t i = 0; i < outidx.size(); i++ )
+    {
+        size_t idx1 = outidx[i];
+        size_t idx2 = idx1+1;
+        BOOST_CHECK_MESSAGE(buf[idx1] == 0xFF, "buf[" << idx1 << "] != 0xFF");
+        BOOST_CHECK_MESSAGE(is_rst(buf[idx2]), "buf[" << idx2 << "] =" << static_cast<int>(buf[i+1]));
+    }
 
 }
 

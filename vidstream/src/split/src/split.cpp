@@ -267,17 +267,23 @@ bool is_rst_int(unsigned char c)
     return ((c >= 0xd0) && (c <= 0xd7));
 }
 
-bool get_rst_block(const std::vector<unsigned char>& buf, std::vector<std::size_t>& out_idx)
+bool is_valid_marker(unsigned char c)
+{
+    // get only rst blocks
+    return is_rst_int(c);
+}
+
+bool get_all_rst_blocks(const std::vector<unsigned char>& buf, std::vector<std::size_t>& out_idx)
 {
     for(std::size_t i = 0; i < buf.size(); i++)
     {
         if (0xff == buf[i])
         {
-            if (is_dri_int(buf[i+1]) || is_rst_int(buf[i+1]))
+            if (is_valid_marker(buf[i+1]))
             {
                 out_idx.push_back(i);
-                i++;
             }
+            i++;
         }
     }
     return true;
