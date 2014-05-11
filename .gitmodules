@@ -7,6 +7,6 @@
 [submodule "vidstream/ext/opencv"]
 	path = vidstream/ext/opencv
 	url = https://github.com/snikulov/opencv.git
-[submodule "vidstream\\ext\\nanomsg"]
-	path = vidstream\\ext\\nanomsg
+[submodule "vidstream/ext/nanomsg"]
+	path = vidstream/ext/nanomsg
 	url = https://github.com/snikulov/nanomsg.git
