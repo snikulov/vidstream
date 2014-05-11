@@ -5,15 +5,19 @@
 
 #include <vector>
 #include <boost/scoped_ptr.hpp>
+
+#include <opencv2/opencv.hpp>
+
 #include <camera.hpp>
 
 #include <frame_producer.hpp>
+#include <frame_processor.hpp>
 
-#include <opencv2/opencv.hpp>
 
 using vidstream::camera;
 using vidstream::camera_frame_t;
 using vidstream::frame_producer;
+using vidstream::frame_processor;
 
 int main(int argc, char** argv)
 {
@@ -21,10 +25,13 @@ int main(int argc, char** argv)
     monitor_queue<camera_frame_t> mq(10);
     camera& c = *cam;
     int stop_flag = 0;
-    frame_producer fp(c, mq, stop_flag);
 
-    boost::thread t(fp);
+    frame_producer producer(c, mq, stop_flag);
+    frame_processor processor(mq, stop_flag);
 
+    boost::thread tproducer(producer);
+    boost::thread tprocess(processor);
+#if 0
     std::vector<int> param;
     param.push_back(CV_IMWRITE_JPEG_QUALITY);
     param.push_back(100);
@@ -35,7 +42,6 @@ int main(int argc, char** argv)
     param.push_back(CV_IMWRITE_JPEG_CHROM_QUALITY);
     param.push_back(20);
 
-    cv::namedWindow("Capture",1);
 
     static unsigned long name_count = 0;
     bool cnf_write_frame_to_file = false;
@@ -66,7 +72,9 @@ int main(int argc, char** argv)
         if(cv::waitKey(30) >= 0) break;
     }
     stop_flag = 1;
-    t.join();
+#endif
+    tproducer.join();
+    tprocess.join();
 
     return 0;
 }

@@ -24,7 +24,7 @@ public:
         {
             q_.push(d);
             cond_.notify_one();
-        } // else silently skip for now
+        }
     }
 
     element dequeue()

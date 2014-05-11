@@ -267,10 +267,14 @@ bool is_rst_int(unsigned char c)
     return ((c >= 0xd0) && (c <= 0xd7));
 }
 
+bool is_eoi_int(unsigned char c)
+{
+    return (0xd9 == c);
+}
+
 bool is_valid_marker(unsigned char c)
 {
-    // get only rst blocks
-    return is_rst_int(c);
+    return (is_rst_int(c) || is_eoi_int(c));
 }
 
 bool get_all_rst_blocks(const std::vector<unsigned char>& buf, std::vector<std::size_t>& out_idx)

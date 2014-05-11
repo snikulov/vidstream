@@ -1,30 +1,32 @@
 #ifndef CAMERA_HPP__
 #define CAMERA_HPP__
 
+#include "frame.hpp"
+
 #include <string>
 #include <exception>
-#include <boost/shared_ptr.hpp>
 
 #include <opencv2/opencv.hpp>
+
+
 
 using cv::VideoCapture;
 
 namespace vidstream
 {
 
-typedef boost::shared_ptr<cv::Mat> camera_frame_t;
-
 class camera
 {
 public:
-    camera() :
-        src_(new VideoCapture()), fname_(), is_hw_cam_(true)
+    camera(int w = 640, int h = 480) :
+        src_(new VideoCapture()), fname_(), is_hw_cam_(true), req_size_(cv::Size(w,h))
     {
         open();
     }
 
-    camera(const std::string& fname) :
-        src_(new VideoCapture()), fname_(fname), is_hw_cam_(false)
+    camera(const std::string& fname, int w = 640, int h = 480) :
+        src_(new VideoCapture()), fname_(fname), is_hw_cam_(false),
+        req_size_(cv::Size(w,h))
     {
         open();
     }
@@ -38,7 +40,10 @@ public:
         camera_frame_t ret_val(new cv::Mat());
         if (src_->read(*ret_val))
         {
-            int type = ret_val->type();
+            if(ret_val->size() != req_size_)
+            {
+                cv::resize(*ret_val, *ret_val, req_size_);
+            }
             return ret_val;
         }
         ret_val.reset();
@@ -64,15 +69,15 @@ private:
             throw std::runtime_error(source +": Unable to open");
         }
 
-        width_  = src_->get(CV_CAP_PROP_FRAME_WIDTH);
-        height_ = src_->get(CV_CAP_PROP_FRAME_HEIGHT);
+// TODO: should reconsider to set hw capture prop instead of resize
+//        width_  = src_->get(CV_CAP_PROP_FRAME_WIDTH);
+//        height_ = src_->get(CV_CAP_PROP_FRAME_HEIGHT);
     }
     /* data */
     boost::scoped_ptr<VideoCapture> src_;
     std::string fname_;
     bool is_hw_cam_;
-    double height_;
-    double width_;
+    cv::Size req_size_;
 };
 
 } /* namespace vidstream */

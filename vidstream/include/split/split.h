@@ -40,4 +40,7 @@ int is_rst(int c);
 // check if it jpeg, find DRI and check it non zero, then first, last RST (our data)
 bool get_all_rst_blocks(const std::vector<unsigned char>&, std::vector<std::size_t>&);
 
+bool is_valid_marker(unsigned char c);
+
+
 #endif

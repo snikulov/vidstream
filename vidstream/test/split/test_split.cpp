@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
         size_t idx1 = outidx[i];
         size_t idx2 = idx1+1;
         BOOST_CHECK_MESSAGE(buf[idx1] == 0xFF, "buf[" << idx1 << "] != 0xFF");
-        BOOST_CHECK_MESSAGE(is_rst(buf[idx2]), "buf[" << idx2 << "] =" << static_cast<int>(buf[i+1]));
+        BOOST_CHECK_MESSAGE(is_valid_marker(buf[idx2]), "buf[" << idx2 << "] =" << static_cast<int>(buf[i+1]));
     }
 
 }
