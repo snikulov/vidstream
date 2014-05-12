@@ -12,9 +12,9 @@ endif()
 
 # externals project
 add_subdirectory(ext/nanomsg)
+include_directories(ext/nanomsg/src)
 
 include_directories(include)
-include_directories(ext/nanomsg/src)
 add_subdirectory(src)
 
 # UT

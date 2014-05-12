@@ -1,7 +1,8 @@
 #ifndef __CORRUPT_H
 #define __CORRUPT_H
 
-#include <cstdint>
+#include <types.hpp>
+
 
 class Corruptor
 {
