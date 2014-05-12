@@ -18,9 +18,9 @@ class ecc{
         ecc(uint8_t m, uint8_t t);
 
         ~ecc();
-        void* encode(char* in_data, size_t in_data_len, size_t &out_data_len);
+        char* encode(const char* in_data, size_t in_data_len, size_t &out_data_len);
         //кодирует данные, возвращает указатель на закодированный массив и его размер помещает в out_data_len
-        void* decode(char* in_data, size_t in_data_len, size_t &out_data_len,
+        char* decode(const char* in_data, size_t in_data_len, size_t &out_data_len,
                      std::vector<char> &successful, bool &decoded_ok);
         //раскодирует данные и исправляет по возможности ошибки, возвращает указатель на раскодированный массив и его размер помещает в out_data_len
         //

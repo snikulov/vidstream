@@ -29,6 +29,8 @@ int main(int argc, char** argv)
         ("url,u", po::value<std::string>()->default_value("tcp://127.0.0.1:9999"),
             "url for publising data {tcp://<local IP>:<local PORT>}")
         ("file,f", po::value<std::string>()->default_value(""), "path to input video file")
+        ("bm", po::value<unsigned char>()->default_value(5), "BCH m")
+        ("bt", po::value<unsigned char>()->default_value(4), "BCH t")
         ("help,?", "produce help message");
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -45,6 +47,10 @@ int main(int argc, char** argv)
     int h = vm["height"].as<int>();
     std::string infile = vm["file"].as<std::string>();
     std::string url = vm["url"].as<std::string>();
+    unsigned char bm = vm["bm"].as<unsigned char>();
+    unsigned char bt = vm["bt"].as<unsigned char>();
+
+    boost::shared_ptr<ecc> bch_ecc(new ecc(bm, bt));
 
     boost::scoped_ptr<camera> cam(infile.size() == 0
             ? new camera(w,h)
@@ -55,7 +61,7 @@ int main(int argc, char** argv)
     int stop_flag = 0;
 
     frame_producer producer(c, mq, stop_flag);
-    frame_processor processor(mq, stop_flag, url);
+    frame_processor processor(mq, stop_flag, url, bch_ecc);
 
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);

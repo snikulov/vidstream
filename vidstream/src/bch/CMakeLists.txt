@@ -6,7 +6,6 @@ include_directories(hdr)
 
 set(HDR_FILES
     hdr/bch.h
-    hdr/ecc.h
     )
 set(SRC_FILES
     src/bch.cpp

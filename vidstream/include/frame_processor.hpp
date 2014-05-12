@@ -5,14 +5,17 @@
 #include <jpeg_builder.hpp>
 #include <transport.hpp>
 
+#include <ecc/ecc.h>
+
 namespace vidstream
 {
 
 class frame_processor
 {
 public:
-    frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag, const std::string& url = "")
-        : q_(q), stop_(stop_flag), url_(url)
+    frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag,
+           const std::string& url, boost::shared_ptr<ecc> ecc)
+        : q_(q), stop_(stop_flag), url_(url), ecc_(ecc)
     {
     }
 
@@ -24,7 +27,7 @@ public:
         boost::scoped_ptr<transport> trans;
         if (url_.size() != 0)
         {
-            trans.reset(new transport(url_));
+            trans.reset(new transport(url_, ecc_));
         }
 
         while(!stop_)
@@ -61,6 +64,7 @@ private:
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
+    boost::shared_ptr<ecc> ecc_;
 
 };
 
