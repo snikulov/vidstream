@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-find_package(Boost COMPONENTS thread system unit_test_framework REQUIRED)
+find_package(Boost COMPONENTS thread system program_options unit_test_framework REQUIRED)
 find_package(OpenCV REQUIRED)
 
 if(Boost_FOUND)
