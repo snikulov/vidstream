@@ -3,6 +3,7 @@
 
 #include <monitor_queue.hpp>
 #include <jpeg_builder.hpp>
+#include <transport.hpp>
 
 namespace vidstream
 {
@@ -25,6 +26,7 @@ public:
     {
         cv::namedWindow("Capture",1);
         jpeg_builder jbuilder;
+        transport    trans("tcp://127.0.0.1:9999");
 
         while(!stop_)
         {
@@ -37,6 +39,8 @@ public:
                 // pack frame into jpeg with rst
                 jpeg_data_t     jpg(jbuilder.from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jbuilder.rst_idxs(jpg));
+
+                trans.send(jpg, rst);
             }
             else
             {

@@ -10,9 +10,11 @@ if(Boost_FOUND)
     link_directories(${Boost_LIBRARY_DIRS})
 endif()
 
-include_directories(include)
-include_directories(include)
+# externals project
+add_subdirectory(ext/nanomsg)
 
+include_directories(include)
+include_directories(ext/nanomsg/src)
 add_subdirectory(src)
 
 # UT

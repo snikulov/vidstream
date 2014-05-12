@@ -6,13 +6,13 @@
 //
 
 #include <frame.hpp>
+#include <types.hpp>
+
 #include <split/split.h>
 
 namespace vidstream
 {
 
-typedef boost::shared_ptr<std::vector<unsigned char> > jpeg_data_t;
-typedef boost::shared_ptr<std::vector<std::size_t> >  jpeg_rst_idxs_t;
 
 // TODO: add interface to access jpeg parameters
 // - get/set
