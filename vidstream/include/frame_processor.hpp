@@ -8,17 +8,11 @@
 namespace vidstream
 {
 
-typedef struct
-{
-    std::vector<unsigned char> buf;
-    std::vector<unsigned int> rst_marks;
-} data_holder_t;
-
 class frame_processor
 {
 public:
-    frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag)
-        : q_(q), stop_(stop_flag)
+    frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag, const std::string& url = "")
+        : q_(q), stop_(stop_flag), url_(url)
     {
     }
 
@@ -26,7 +20,12 @@ public:
     {
         cv::namedWindow("Capture",1);
         jpeg_builder jbuilder;
-        transport    trans("tcp://127.0.0.1:9999");
+
+        boost::scoped_ptr<transport> trans;
+        if (url_.size() != 0)
+        {
+            trans.reset(new transport(url_));
+        }
 
         while(!stop_)
         {
@@ -40,7 +39,10 @@ public:
                 jpeg_data_t     jpg(jbuilder.from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jbuilder.rst_idxs(jpg));
 
-                trans.send(jpg, rst);
+                if (trans)
+                {
+                    trans->send(jpg, rst);
+                }
             }
             else
             {
@@ -58,6 +60,7 @@ private:
     /* data */
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
+    std::string url_;
 
 };
 

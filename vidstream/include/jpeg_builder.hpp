@@ -4,6 +4,8 @@
 //
 // Stateless builder for jpeg memory buffer with specific parameters
 //
+#include <fstream>
+#include <sstream>
 
 #include <frame.hpp>
 #include <types.hpp>

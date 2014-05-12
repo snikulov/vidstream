@@ -44,7 +44,13 @@ namespace vidstream {
         {
             std::vector<std::size_t>& ridx = *idxs;
             std::vector<unsigned char>& rdata = *data;
+
+            const std::string mstart("jpegstart");
+            const std::string mend("jpegend");
+
 // send start file marker
+            (void)nn_send(socket_, mstart.c_str(), mstart.size(), NN_DONTWAIT);
+// send rst blocks
             for(size_t i = 1; i < ridx.size(); i++ )
             {
                 size_t blk_size = ridx[i] - ridx[i-1];
@@ -56,6 +62,7 @@ namespace vidstream {
                 }
             }
 // send end file marker
+            (void)nn_send(socket_, mend.c_str(), mend.size(), NN_DONTWAIT);
         }
 
     private:
