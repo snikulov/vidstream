@@ -4,7 +4,8 @@
 #include <types.hpp>
 #include <ecc/ecc.h>
 #include <nn.h>
-#include <pubsub.h>
+//#include <pubsub.h>
+#include <pipeline.h>
 
 namespace vidstream {
     class transport
@@ -19,12 +20,13 @@ namespace vidstream {
 #endif
         {
             std::string err_msg("Error: ");
-            socket_   = nn_socket(AF_SP, NN_PUB);
+            socket_   = nn_socket(AF_SP, NN_PUSH);
             if (socket_ < 0)
             {
                 throw std::runtime_error(err_msg + nn_strerror(nn_errno()));
             }
-            endpoint_ = nn_bind(socket_, url_.c_str());
+//            endpoint_ = nn_bind(socket_, url_.c_str());
+            endpoint_ = nn_connect(socket_, url_.c_str());
             if (endpoint_ < 0)
             {
                 throw std::runtime_error(err_msg + nn_strerror(nn_errno()));
@@ -50,6 +52,10 @@ namespace vidstream {
         {
             std::vector<std::size_t>& ridx = *idxs;
             std::vector<unsigned char>& rdata = *data;
+
+            std::cout << "send jpeg data size=" 
+                << rdata.size() << " rst_count=" 
+                << ridx.size() << std::endl;
 
             const std::string mstart("jpegstart");
             const std::string mend("jpegend");
@@ -80,16 +86,16 @@ namespace vidstream {
                 buf = ecc_->encode(data, len, buf_len);
             }
 #endif
-            int bytes = nn_send(socket_, buf, buf_len, NN_DONTWAIT);
+            int bytes = nn_send(socket_, buf, buf_len, 0);
             if(bytes < 0)
             {
-                std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
+                // std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
             }
 
 #if defined(BUILD_FOR_LINUX)
             if (ecc_)
             {
-                free(buf);
+                free(const_cast<void*>(buf));
             }
 #endif
         }

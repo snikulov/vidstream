@@ -13,5 +13,6 @@ add_executable(${TARGET_NAME} ${SRC_FILES})
 
 target_link_libraries(${TARGET_NAME}
     ${OpenCV_LIBS} ${Boost_LIBRARIES}
+    split
     nanomsg
     )

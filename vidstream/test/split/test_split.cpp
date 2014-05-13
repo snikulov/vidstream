@@ -36,19 +36,16 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
-    // TODO: replace to opencv reading from file
-    std::ifstream input(framework::master_test_suite().argv[1], std::ios::binary);
-    input.unsetf(std::ios::skipws);  // not eat newlines
-    std::istream_iterator<unsigned char> start(input), end;
-    std::vector<unsigned char> buf(start, end);
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 
-    BOOST_REQUIRE(!buf.empty());
+    BOOST_REQUIRE( data );
+    BOOST_REQUIRE( !data->empty() );
     // jpeg header check
-    BOOST_REQUIRE( (buf[0] == 0xff) && (buf[1] == 0xd8) );
+    BOOST_REQUIRE( (data->at(0) == 0xff) && (data->at(1) == 0xd8) );
 
     std::vector<size_t> outidx;
     BOOST_REQUIRE(outidx.empty());
-    BOOST_REQUIRE(get_all_rst_blocks(buf, outidx));
+    BOOST_REQUIRE(get_all_rst_blocks(*data, outidx));
     BOOST_REQUIRE(!outidx.empty());
 
     BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
@@ -57,20 +54,33 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
     {
         size_t idx1 = outidx[i];
         size_t idx2 = idx1+1;
-        BOOST_CHECK_MESSAGE(buf[idx1] == 0xFF, "buf[" << idx1 << "] != 0xFF");
-        BOOST_CHECK_MESSAGE(is_valid_marker(buf[idx2]), "buf[" << idx2 << "] =" << static_cast<int>(buf[i+1]));
+        BOOST_CHECK_MESSAGE(data->at(idx1) == 0xFF, "buf[" << idx1 << "] != 0xFF");
+        BOOST_CHECK_MESSAGE(is_valid_marker(data->at(idx2)), "buf[" << idx2 << "] =" << static_cast<int>(data->at(i+1)));
     }
 }
 
 BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
-
-    camera_frame_t dst(new cv::Mat(480, 640, CV_8UC3, cv::Scalar::all(0)));
     jpeg_builder jbuilder;
 
-    jpeg_data_t out = jbuilder.from_cvmat(dst);
-    jbuilder.write(out, 512);
+    jpeg_data_t src = jpeg_builder::read(framework::master_test_suite().argv[1]);
+    BOOST_REQUIRE( src );
+    BOOST_REQUIRE( !src->empty() );
+
+    camera_frame_t frame(new cv::Mat(480, 640, CV_8UC3, cv::Scalar::all(0)));
+    jpeg_data_t dst = jbuilder.from_cvmat(frame);
+
+    std::vector<size_t> dst_idxs;
+    std::vector<size_t> src_idxs;
+
+    BOOST_REQUIRE(get_all_rst_blocks(*dst, dst_idxs));
+    BOOST_REQUIRE(get_all_rst_blocks(*src, src_idxs));
+
+    dst->erase(dst->begin()+dst_idxs[0], dst->end());
+    dst->insert(dst->end(),src->begin()+src_idxs[0], src->end());
+
+    jbuilder.write(dst, 512);
 
 }
 

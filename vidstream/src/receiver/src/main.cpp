@@ -7,8 +7,16 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>
 
+#include <opencv2/opencv.hpp>
+
+#include <types.hpp>
+#include <jpeg_builder.hpp>
+
 #include <nn.h>
-#include <pubsub.h>
+// #include <pubsub.h>
+#include <pipeline.h>
+
+using namespace vidstream;
 
 class receiver
 {
@@ -35,26 +43,26 @@ public:
 
     void operator()()
     {
-        socket_ = nn_socket (AF_SP, NN_SUB);
+        jpeg_builder jbuilder;
+
+        socket_ = nn_socket (AF_SP, NN_PULL);
         if (socket_ < 0)
         {
             std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
             return;
         }
+//        endpoint_ = nn_connect(socket_, url_.c_str());
+        endpoint_ = nn_bind(socket_, url_.c_str());
 
-        if (nn_setsockopt (socket_, NN_SUB, NN_SUB_SUBSCRIBE, "", 0) < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
-
-        endpoint_ = nn_connect(socket_, url_.c_str());
         if (endpoint_ < 0)
         {
             std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
             return;
         }
-
+        jpeg_data_t rcv_buf(new std::vector<unsigned char>);
+        const char * mstart = "jpegstart";
+        const char * mend = "jpegend";
+        unsigned long img_count = 0;
         while(!stop_)
         {
             char *buf = NULL;
@@ -63,9 +71,35 @@ public:
             int bytes = nn_recv(socket_, &buf, NN_MSG, 0);
             waiting_ = false;
 
-            std::cout << "received : " << bytes << " bytes" << std::endl;
+            if(!memcmp(buf, mstart, 9))
+            {
+                // jpeg start
+                rcv_buf.reset(new std::vector<unsigned char>());
+//                std::cout << "started new image data..." << std::endl;
+            }
+            else if(!memcmp(buf, mend, 7))
+            {
+                // jpeg end
+                // need to reassemble
+                img_count++;
+                std::vector<size_t> rst_idxs;
+                get_all_rst_blocks(*rcv_buf, rst_idxs);
+                std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
+                
+                jpeg_data_t jpg = jbuilder.build_jpeg_from_rst(rcv_buf);
+                cv::Mat m = cv::imdecode(*jpg, CV_LOAD_IMAGE_COLOR);
+                cv::namedWindow( "img", CV_WINDOW_AUTOSIZE );
+                cv::imshow("img", m);
+            }
+            else
+            {
+                rcv_buf->insert(rcv_buf->end(), buf, buf+bytes);
+            }
+
+//            std::cout << "received : " << bytes << " bytes" << std::endl;
 
             nn_freemsg(buf);
+            buf = NULL;
         }
     }
 
