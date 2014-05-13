@@ -4,6 +4,7 @@
 //
 // Stateless builder for jpeg memory buffer with specific parameters
 //
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 
@@ -59,6 +60,11 @@ public:
         return ret_buf;
     }
 
+    std::vector<int> get_params()
+    {
+        return params_;
+    }
+
     // TODO: should it be in debug only?
     // write to file named "img[num].jpg"
     static void write(const jpeg_data_t data, unsigned long num)
@@ -67,9 +73,38 @@ public:
         fn << "img" << std::setfill ('0') << std::setw(8)
            << num << ".jpg";
         std::ofstream of(fn.str().c_str(), std::ios_base::binary);
-        of.write(reinterpret_cast<const char*>((*data)[0]),
-                data->size()*sizeof(unsigned char));
+        const char * p_buf = reinterpret_cast<const char*>(&((*data)[0]));
+        of.write(p_buf, data->size()*sizeof(unsigned char));
         of.close();
+    }
+
+    static jpeg_data_t read(const std::string& fname)
+    {
+        jpeg_data_t ret_val;
+        std::ifstream in(fname.c_str(), std::ios::binary);
+        if (in)
+        {
+            in.unsetf(std::ios::skipws);
+            std::istream_iterator<unsigned char> start(in), end;
+            ret_val.reset(new std::vector<unsigned char>(start, end));
+        }
+        return ret_val;
+    }
+
+    jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
+    {
+        // Hard coded for now
+        camera_frame_t frame(new cv::Mat(480, 640, CV_8UC3, cv::Scalar::all(0)));
+
+        jpeg_data_t dst = from_cvmat(frame);
+        std::vector<size_t> dst_idxs;
+        (void)get_all_rst_blocks(*dst, dst_idxs);
+
+
+        dst->erase(dst->begin()+dst_idxs[0], dst->end());
+        dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
+
+        return dst;
     }
 
 private:

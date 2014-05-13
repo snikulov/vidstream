@@ -7,15 +7,27 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>
 
-#include <nn.h>
-#include <pubsub.h>
+#include <opencv2/opencv.hpp>
+
+#include <types.hpp>
+#include <jpeg_builder.hpp>
+#include <transport.hpp>
+
+using namespace vidstream;
 
 class receiver
 {
 public:
-    receiver(const std::string& url)
+    receiver(const std::string& url
+#if defined(BUILD_FOR_LINUX)
+                , boost::shared_ptr<ecc> bch
+#endif
+            )
         : url_(url), socket_(-1),
           endpoint_(-1), stop_(false), waiting_(false)
+#if defined(BUILD_FOR_LINUX)
+          , ecc_(bch)
+#endif
     {
     }
     ~receiver()
@@ -35,37 +47,65 @@ public:
 
     void operator()()
     {
-        socket_ = nn_socket (AF_SP, NN_SUB);
-        if (socket_ < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
+        jpeg_builder jbuilder;
+        boost::scoped_ptr<transport> rcv(
+                new transport(TRANSPORT_RECEIVE, url_
+#if defined(BUILD_FOR_LINUX)
+                        , ecc_
+#endif
+                    )
+                );
+        cv::namedWindow("mm",1);
 
-        if (nn_setsockopt (socket_, NN_SUB, NN_SUB_SUBSCRIBE, "", 0) < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
-
-        endpoint_ = nn_connect(socket_, url_.c_str());
-        if (endpoint_ < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
-
+        jpeg_data_t rcv_buf(new std::vector<unsigned char>);
+        const char * mstart = "jpegstart";
+        const char * mend = "jpegend";
+        unsigned long img_count = 0;
         while(!stop_)
         {
-            char *buf = NULL;
-
             waiting_ = true;
-            int bytes = nn_recv(socket_, &buf, NN_MSG, 0);
+            std::vector<unsigned char> buf;
+            rcv->receive(buf);
             waiting_ = false;
 
-            std::cout << "received : " << bytes << " bytes" << std::endl;
+            if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
+            {
+                // jpeg start
+                rcv_buf.reset(new std::vector<unsigned char>());
+//                std::cout << "started new image data..." << std::endl;
+            }
+            else if(buf.end() != std::search(buf.begin(), buf.end(), mend, mend+7))
+            {
+                // jpeg end
+                // need to reassemble
+                rcv_buf->push_back(0xff);
+                rcv_buf->push_back(0xd9);
+                img_count++;
+                std::vector<size_t> rst_idxs;
+                get_all_rst_blocks(*rcv_buf, rst_idxs);
+                std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
 
-            nn_freemsg(buf);
+                jpeg_data_t jpg = jbuilder.build_jpeg_from_rst(rcv_buf);
+                jbuilder.write(jpg, img_count);
+                cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
+                if (!m.empty())
+                {
+                    cv::imshow("mm", m);
+                    boost::thread::yield();
+                }
+                else
+                {
+                    std::cout << "m is empty" << std::endl;
+                }
+            }
+            else
+            {
+                rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
+            }
+
+//            std::cout << "received : " << bytes << " bytes" << std::endl;
+
+            boost::thread::yield();
         }
     }
 
@@ -85,12 +125,22 @@ private:
     int endpoint_;
     bool stop_;
     bool waiting_;
+#if defined(BUILD_FOR_LINUX)
+    boost::shared_ptr<ecc> ecc_;
+#endif
+
 };
 
 int main(int argc, char** argv)
 {
     const std::string url("tcp://127.0.0.1:9999");
+#if defined(BUILD_FOR_LINUX)
+    boost::shared_ptr<ecc> bch_ecc(new ecc(5, 4)); // bm, bt
+    receiver rcv(url, bch_ecc);
+#else
     receiver rcv(url);
+#endif
+
 
     boost::thread t(rcv);
     t.join();

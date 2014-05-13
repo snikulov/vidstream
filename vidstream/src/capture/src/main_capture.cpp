@@ -49,8 +49,9 @@ int main(int argc, char** argv)
     std::string url = vm["url"].as<std::string>();
     unsigned char bm = vm["bm"].as<unsigned char>();
     unsigned char bt = vm["bt"].as<unsigned char>();
-
+#if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> bch_ecc(new ecc(bm, bt));
+#endif
 
     boost::scoped_ptr<camera> cam(infile.size() == 0
             ? new camera(w,h)
@@ -61,8 +62,12 @@ int main(int argc, char** argv)
     int stop_flag = 0;
 
     frame_producer producer(c, mq, stop_flag);
-    frame_processor processor(mq, stop_flag, url, bch_ecc);
 
+#if defined(BUILD_FOR_LINUX)
+    frame_processor processor(mq, stop_flag, url, bch_ecc);
+#else
+    frame_processor processor(mq, stop_flag, url);
+#endif
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);
 
