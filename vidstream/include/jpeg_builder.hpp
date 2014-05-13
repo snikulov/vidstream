@@ -59,6 +59,11 @@ public:
         return ret_buf;
     }
 
+    std::vector<int> get_params()
+    {
+        return params_;
+    }
+
     // TODO: should it be in debug only?
     // write to file named "img[num].jpg"
     static void write(const jpeg_data_t data, unsigned long num)
@@ -67,8 +72,8 @@ public:
         fn << "img" << std::setfill ('0') << std::setw(8)
            << num << ".jpg";
         std::ofstream of(fn.str().c_str(), std::ios_base::binary);
-        of.write(reinterpret_cast<const char*>((*data)[0]),
-                data->size()*sizeof(unsigned char));
+        const char * p_buf = reinterpret_cast<const char*>(&((*data)[0]));
+        of.write(p_buf, data->size()*sizeof(unsigned char));
         of.close();
     }
 

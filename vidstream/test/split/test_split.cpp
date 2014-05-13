@@ -1,9 +1,17 @@
 #define BOOST_TEST_MODULE test_split
 #include <boost/test/included/unit_test.hpp>
 
-#include "split/split.h"
+#include <opencv2/opencv.hpp>
+
+#include <frame.hpp>
+#include <types.hpp>
+
+#include <split/split.h>
+#include <jpeg_builder.hpp>
 
 using namespace boost::unit_test;
+using namespace vidstream;
+using namespace cv;
 
 BOOST_AUTO_TEST_SUITE(test_suite_split)
 
@@ -52,8 +60,20 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
         BOOST_CHECK_MESSAGE(buf[idx1] == 0xFF, "buf[" << idx1 << "] != 0xFF");
         BOOST_CHECK_MESSAGE(is_valid_marker(buf[idx2]), "buf[" << idx2 << "] =" << static_cast<int>(buf[i+1]));
     }
+}
+
+BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
+{
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    camera_frame_t dst(new cv::Mat(480, 640, CV_8UC3, cv::Scalar::all(0)));
+    jpeg_builder jbuilder;
+
+    jpeg_data_t out = jbuilder.from_cvmat(dst);
+    jbuilder.write(out, 512);
 
 }
+
 
 
 BOOST_AUTO_TEST_SUITE_END()

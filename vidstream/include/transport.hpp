@@ -10,8 +10,13 @@ namespace vidstream {
     class transport
     {
     public:
+#if defined(BUILD_FOR_LINUX)
         transport(const std::string& url, boost::shared_ptr<ecc> ecc)
             : url_(url), ecc_(ecc)
+#else
+        transport(const std::string& url)
+            : url_(url)
+#endif
         {
             std::string err_msg("Error: ");
             socket_   = nn_socket(AF_SP, NN_PUB);
@@ -41,7 +46,7 @@ namespace vidstream {
             }
         }
 
-        void send(jpeg_data_t data, jpeg_rst_idxs_t idxs)
+        void send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs)
         {
             std::vector<std::size_t>& ridx = *idxs;
             std::vector<unsigned char>& rdata = *data;
@@ -50,40 +55,50 @@ namespace vidstream {
             const std::string mend("jpegend");
 
 // send start file marker
-            encoded_send(mstart.c_str(), mstart.size());
+            send_block(mstart.c_str(), mstart.size());
 
 // send rst blocks
             for(size_t i = 1; i < ridx.size(); i++ )
             {
                 size_t blk_size = ridx[i] - ridx[i-1];
                 const char * p_data = reinterpret_cast<const char*>(&(rdata[ridx[i-1]]));
-                encoded_send(p_data, blk_size);
+                send_block(p_data, blk_size);
             }
 // send end file marker
-            encoded_send(mend.c_str(), mend.size());
+            send_block(mend.c_str(), mend.size());
         }
 
     private:
 
-        void encoded_send(const char* data, size_t len)
+        void send_block(const char* data, size_t len)
         {
-            char* buf;
-            size_t buf_len;
-
-            buf = ecc_->encode(data, len, buf_len);
-
+            const char* buf = data;
+            size_t buf_len = len;
+#if defined(BUILD_FOR_LINUX)
+            if (ecc_)
+            {
+                buf = ecc_->encode(data, len, buf_len);
+            }
+#endif
             int bytes = nn_send(socket_, buf, buf_len, NN_DONTWAIT);
             if(bytes < 0)
             {
                 std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
             }
-            free(buf);
 
+#if defined(BUILD_FOR_LINUX)
+            if (ecc_)
+            {
+                free(buf);
+            }
+#endif
         }
 
         /* data */
         std::string url_;
+#if defined(BUILD_FOR_LINUX)
         boost::shared_ptr<ecc> ecc_;
+#endif
         int socket_;
         int endpoint_;
 
