@@ -114,7 +114,7 @@ namespace vidstream {
 #if defined(BUILD_FOR_LINUX)
             if (ecc_)
             {
-                free(const_cast<void*>(buf));
+                free(const_cast<char*>(buf));
             }
 #endif
         }

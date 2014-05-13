@@ -16,3 +16,8 @@ target_link_libraries(${TARGET_NAME}
     split
     nanomsg
     )
+if(UNIX)
+    target_link_libraries(${TARGET_NAME}
+        bch
+    )
+endif()

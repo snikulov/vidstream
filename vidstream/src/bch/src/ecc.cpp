@@ -93,7 +93,7 @@ char* ecc::encode(const char* in_data, size_t in_data_len, size_t &out_data_len)
 }
 
 //==================================================================
-char* ecc::decode(const char* in_data, size_t in_data_len, size_t &out_data_len,
+char* ecc::decode(const unsigned char* in_data, size_t in_data_len, size_t &out_data_len,
                   std::vector<char> &successful, bool &decoded_ok){
     unsigned data_blocks = in_data_len / pkg_len;
     char *data_out = (char *) calloc(data_blocks, data_len);

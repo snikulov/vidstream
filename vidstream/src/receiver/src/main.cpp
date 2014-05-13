@@ -18,9 +18,16 @@ using namespace vidstream;
 class receiver
 {
 public:
-    receiver(const std::string& url)
+    receiver(const std::string& url
+#if defined(BUILD_FOR_LINUX)
+                , boost::shared_ptr<ecc> bch
+#endif
+            )
         : url_(url), socket_(-1),
           endpoint_(-1), stop_(false), waiting_(false)
+#if defined(BUILD_FOR_LINUX)
+          , ecc_(bch)
+#endif
     {
     }
     ~receiver()
@@ -41,7 +48,13 @@ public:
     void operator()()
     {
         jpeg_builder jbuilder;
-        boost::scoped_ptr<transport> rcv(new transport(TRANSPORT_RECEIVE, url_));
+        boost::scoped_ptr<transport> rcv(
+                new transport(TRANSPORT_RECEIVE, url_
+#if defined(BUILD_FOR_LINUX)
+                        , ecc_
+#endif
+                    )
+                );
         cv::namedWindow("mm",1);
 
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
@@ -80,8 +93,10 @@ public:
                     cv::imshow("mm", m);
                     boost::thread::yield();
                 }
-//
-//                cv::imshow("img", m);
+                else
+                {
+                    std::cout << "m is empty" << std::endl;
+                }
             }
             else
             {
@@ -110,12 +125,22 @@ private:
     int endpoint_;
     bool stop_;
     bool waiting_;
+#if defined(BUILD_FOR_LINUX)
+    boost::shared_ptr<ecc> ecc_;
+#endif
+
 };
 
 int main(int argc, char** argv)
 {
     const std::string url("tcp://127.0.0.1:9999");
+#if defined(BUILD_FOR_LINUX)
+    boost::shared_ptr<ecc> bch_ecc(new ecc(5, 4)); // bm, bt
+    receiver rcv(url, bch_ecc);
+#else
     receiver rcv(url);
+#endif
+
 
     boost::thread t(rcv);
     t.join();

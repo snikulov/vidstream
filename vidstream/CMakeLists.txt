@@ -7,7 +7,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-set( Boost_USE_STATIC_LIBS ON )
+if(WIN32)
+    set( Boost_USE_STATIC_LIBS ON )
+endif()
+
 find_package(Boost COMPONENTS thread system program_options unit_test_framework REQUIRED)
 find_package(OpenCV REQUIRED)
 
