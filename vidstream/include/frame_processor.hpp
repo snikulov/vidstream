@@ -37,9 +37,9 @@ public:
         if (url_.size() != 0)
         {
 #if defined(BUILD_FOR_LINUX)
-            trans.reset(new transport(url_, ecc_));
+            trans.reset(new transport(TRANSPORT_SEND, url_, ecc_));
 #else
-            trans.reset(new transport(url_));
+            trans.reset(new transport(TRANSPORT_SEND, url_));
 #endif
         }
 

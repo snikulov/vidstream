@@ -11,10 +11,7 @@
 
 #include <types.hpp>
 #include <jpeg_builder.hpp>
-
-#include <nn.h>
-// #include <pubsub.h>
-#include <pipeline.h>
+#include <transport.hpp>
 
 using namespace vidstream;
 
@@ -44,62 +41,56 @@ public:
     void operator()()
     {
         jpeg_builder jbuilder;
+        boost::scoped_ptr<transport> rcv(new transport(TRANSPORT_RECEIVE, url_));
+        cv::namedWindow("mm",1);
 
-        socket_ = nn_socket (AF_SP, NN_PULL);
-        if (socket_ < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
-//        endpoint_ = nn_connect(socket_, url_.c_str());
-        endpoint_ = nn_bind(socket_, url_.c_str());
-
-        if (endpoint_ < 0)
-        {
-            std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            return;
-        }
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
         const char * mstart = "jpegstart";
         const char * mend = "jpegend";
         unsigned long img_count = 0;
         while(!stop_)
         {
-            char *buf = NULL;
-
             waiting_ = true;
-            int bytes = nn_recv(socket_, &buf, NN_MSG, 0);
+            std::vector<unsigned char> buf;
+            rcv->receive(buf);
             waiting_ = false;
 
-            if(!memcmp(buf, mstart, 9))
+            if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
             {
                 // jpeg start
                 rcv_buf.reset(new std::vector<unsigned char>());
 //                std::cout << "started new image data..." << std::endl;
             }
-            else if(!memcmp(buf, mend, 7))
+            else if(buf.end() != std::search(buf.begin(), buf.end(), mend, mend+7))
             {
                 // jpeg end
                 // need to reassemble
+                rcv_buf->push_back(0xff);
+                rcv_buf->push_back(0xd9);
                 img_count++;
                 std::vector<size_t> rst_idxs;
                 get_all_rst_blocks(*rcv_buf, rst_idxs);
                 std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
-                
+
                 jpeg_data_t jpg = jbuilder.build_jpeg_from_rst(rcv_buf);
-                cv::Mat m = cv::imdecode(*jpg, CV_LOAD_IMAGE_COLOR);
-                cv::namedWindow( "img", CV_WINDOW_AUTOSIZE );
-                cv::imshow("img", m);
+                jbuilder.write(jpg, img_count);
+                cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
+                if (!m.empty())
+                {
+                    cv::imshow("mm", m);
+                    boost::thread::yield();
+                }
+//
+//                cv::imshow("img", m);
             }
             else
             {
-                rcv_buf->insert(rcv_buf->end(), buf, buf+bytes);
+                rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
             }
 
 //            std::cout << "received : " << bytes << " bytes" << std::endl;
 
-            nn_freemsg(buf);
-            buf = NULL;
+            boost::thread::yield();
         }
     }
 

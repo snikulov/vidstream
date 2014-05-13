@@ -26,6 +26,7 @@ endif()
 
 
 # externals project
+set(WITH_NANOMSG_UT OFF)
 add_subdirectory(ext/nanomsg)
 include_directories(ext/nanomsg/src)
 
