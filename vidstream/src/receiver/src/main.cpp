@@ -13,18 +13,22 @@
 #include <jpeg_builder.hpp>
 #include <transport.hpp>
 
+#include <ocv_output.hpp>
+
+
+
 using namespace vidstream;
 
 class receiver
 {
 public:
-    receiver(const std::string& url
+    receiver(const std::string& url, ocv_output* win
 #if defined(BUILD_FOR_LINUX)
                 , boost::shared_ptr<ecc> bch
 #endif
             )
         : url_(url), socket_(-1),
-          endpoint_(-1), stop_(false), waiting_(false)
+          endpoint_(-1), stop_(false), waiting_(false), win_(win)
 #if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
 #endif
@@ -55,7 +59,6 @@ public:
 #endif
                     )
                 );
-        cv::namedWindow("mm",1);
 
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
         const char * mstart = "jpegstart";
@@ -90,7 +93,7 @@ public:
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
-                    cv::imshow("mm", m);
+                    win_->show(m);
                 }
                 else
                 {
@@ -102,14 +105,13 @@ public:
                 rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
             }
 
-//            std::cout << "received : " << bytes << " bytes" << std::endl;
-            cv::waitKey(5);
         }
     }
 
     void stop()
     {
         stop_ = true;
+        win_->stop();
         if (waiting_)
         {
             nn_term();
@@ -123,24 +125,29 @@ private:
     int endpoint_;
     bool stop_;
     bool waiting_;
+    ocv_output* win_;
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> ecc_;
 #endif
-
 };
 
 int main(int argc, char** argv)
 {
     const std::string url("tcp://127.0.0.1:9999");
+    monitor_queue<cv::Mat> mq(10);
+    ocv_output win("received", mq);
+
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> bch_ecc(new ecc(5, 4)); // bm, bt
-    receiver rcv(url, bch_ecc);
+    receiver rcv(url, bch_ecc, &win);
 #else
-    receiver rcv(url);
+    receiver rcv(url, &win);
 #endif
 
-
+    boost::thread display(win);
     boost::thread t(rcv);
+
+    display.join();
     t.join();
 
     return 0;
