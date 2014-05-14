@@ -139,7 +139,7 @@ int main(int argc, char** argv)
 
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> bch_ecc(new ecc(5, 4)); // bm, bt
-    receiver rcv(url, bch_ecc, &win);
+    receiver rcv(url, &win, bch_ecc);
 #else
     receiver rcv(url, &win);
 #endif
