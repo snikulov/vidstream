@@ -86,12 +86,11 @@ public:
                 std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
 
                 jpeg_data_t jpg = jbuilder.build_jpeg_from_rst(rcv_buf);
-                jbuilder.write(jpg, img_count);
+//                jbuilder.write(jpg, img_count);
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
                     cv::imshow("mm", m);
-                    boost::thread::yield();
                 }
                 else
                 {
@@ -104,8 +103,7 @@ public:
             }
 
 //            std::cout << "received : " << bytes << " bytes" << std::endl;
-
-            boost::thread::yield();
+            cv::waitKey(5);
         }
     }
 
