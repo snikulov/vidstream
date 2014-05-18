@@ -60,6 +60,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_2 )
     BOOST_CHECK(false == pt.get<bool>("cfg.img.bw"));
 
     std::ostringstream out;
+    out << "configure|";
     write_json(out, pt, false);
     BOOST_TEST_MESSAGE(out.str());
 }

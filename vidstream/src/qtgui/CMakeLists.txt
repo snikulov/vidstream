@@ -5,6 +5,7 @@ project(${TARGET_NAME} CXX)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+
 find_package(Qt5Widgets REQUIRED)
 
 include_directories(${Qt5Widgets_INCLUDES})
@@ -29,5 +30,8 @@ qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
 
 add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES})
 
-target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES})
+target_link_libraries(${TARGET_NAME}
+   ${Qt5Widgets_LIBRARIES}
+   ${Boost_LIBRARIES}
+   )
 

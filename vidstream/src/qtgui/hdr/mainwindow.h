@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+#include <boost/shared_ptr.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
 namespace Ui {
 class MainWindow;
 }
@@ -46,6 +50,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool is_srv_running_;
+    boost::shared_ptr<boost::property_tree::ptree> cfg_;
 };
 
 #endif // MAINWINDOW_H

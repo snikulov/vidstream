@@ -7,25 +7,63 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     is_srv_running_(false)
+    , cfg_(new boost::property_tree::ptree())
 {
+    bool file_exist = false;
+    try
+    {
+        boost::property_tree::read_json("settings.json", *cfg_);
+        file_exist = true;
+    }
+    catch(std::exception ex)
+    {
+    }
+
     ui->setupUi(this);
+
+    if (file_exist)
+    {
+        // TODO: reload values from file
+    }
+
 }
 
 MainWindow::~MainWindow()
 {
+    boost::property_tree::write_json("settings.json", *cfg_);
     delete ui;
 }
 
 void MainWindow::on_checkBox_is_gray_stateChanged(int arg1)
 {
     // grayscale toggled
-    std::cerr << "grayscale changed: " << arg1 << std::endl;
+    bool val = arg1 ? true : false;
+    cfg_->put("cfg.img.bw", val);
 }
 
 void MainWindow::on_comboBox_camera_resolution_currentIndexChanged(int index)
 {
     // current resolution changed
-    std::cerr << "camera resulutio index changed: " << index << std::endl;
+    typedef struct
+    {
+        int width;
+        int height;
+    } scr_size_t;
+
+    static const scr_size_t modes[] = {{1280,800},{1024,780},{640,480},{320,240},{0, 0}};
+    size_t max_size = sizeof(modes)/sizeof(modes[0]);
+
+    if (index >= 0 && index < max_size)
+    {
+        int w = modes[index].width;
+        int h = modes[index].height;
+        cfg_->put("cfg.img.width", w);
+        cfg_->put("cfg.img.height", h);
+    }
+    else
+    {
+        std::cerr << "camera resulution wrong index ! " << index << std::endl;
+    }
 }
 
 void MainWindow::on_pushButton_operate_clicked()
@@ -33,7 +71,7 @@ void MainWindow::on_pushButton_operate_clicked()
     // run the program
 
     // toggle flag
-    is_srv_running_ = is_srv_running_ ? !is_srv_running_ : !is_srv_running_;
+    is_srv_running_ = !is_srv_running_;
     if (is_srv_running_)
     {
         ui->pushButton_operate->setText("Стоп");
@@ -42,6 +80,7 @@ void MainWindow::on_pushButton_operate_clicked()
     {
         ui->pushButton_operate->setText("Запуск");
     }
+    // disable changes for prots
     ui->spinBox_port_cmd->setDisabled(is_srv_running_);
     ui->spinBox_port_data->setDisabled(is_srv_running_);
 }
@@ -49,19 +88,19 @@ void MainWindow::on_pushButton_operate_clicked()
 void MainWindow::on_spinBox_rst_num_valueChanged(int arg1)
 {
     // rst value
-    std::cerr << "rst value changed: " << arg1 << std::endl;
+    cfg_->put("cfg.img.rst", arg1);
 }
 
 void MainWindow::on_spinBox_port_cmd_valueChanged(int arg1)
 {
     // control port
-    std::cerr << "control port value changed: " << arg1 << std::endl;
+    cfg_->put("cfg.cmdport", arg1);
 }
 
 void MainWindow::on_spinBox_port_data_valueChanged(int arg1)
 {
     // data port
-    std::cerr << "data port value changed: " << arg1 << std::endl;
+    cfg_->put("cfg.dataport", arg1);
 }
 
 void MainWindow::on_lineEdit_channel_speed_textChanged(const QString &arg1)
@@ -79,13 +118,13 @@ void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 void MainWindow::on_spinBox_bch_m_valueChanged(int arg1)
 {
     // bch m value
-    std::cerr << "bch m = " << arg1 << std::endl;
+    cfg_->put("cfg.bch.m", arg1);
 }
 
 void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
 {
     // bch t value
-    std::cerr << "bch t = " << arg1 << std::endl;
+    cfg_->put("cfg.bch.t", arg1);
 }
 
 void MainWindow::on_spinBox_error_persent_valueChanged(int arg1)
@@ -97,11 +136,11 @@ void MainWindow::on_spinBox_error_persent_valueChanged(int arg1)
 void MainWindow::on_spinBox_lum_quality_valueChanged(int arg1)
 {
     // lum value changed
-    std::cerr << "lum value = " << arg1 << std::endl;
+    cfg_->put("cfg.img.lum", arg1);
 }
 
 void MainWindow::on_spinBox_chrome_quality_valueChanged(int arg1)
 {
     // chrome
-    std::cerr << "lum value = " << arg1 << std::endl;
+    cfg_->put("cfg.img.chrom", arg1);
 }
