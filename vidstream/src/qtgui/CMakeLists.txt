@@ -16,11 +16,14 @@ include_directories(hdr)
 
 set(HDR_FILES
     hdr/mainwindow.h
+    hdr/worker.hpp
+    hdr/service_worker.hpp
 )
 
 set(SRC_FILES
     src/main.cpp
-    src/mainwindow.cpp 
+    src/mainwindow.cpp
+    src/service_worker.cpp 
 )
 
 set(UI_FILES
@@ -33,5 +36,12 @@ add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILE
 target_link_libraries(${TARGET_NAME}
    ${Qt5Widgets_LIBRARIES}
    ${Boost_LIBRARIES}
+   ${OpenCV_LIBS}
+   nanomsg
+   split
    )
-
+if(UNIX)
+    target_link_libraries(${TARGET_NAME}
+        bch
+    )
+endif()

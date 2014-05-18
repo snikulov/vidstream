@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <iostream>
+#include <service_worker.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         // TODO: reload values from file
     }
+
+    // pass configuration to logic
+    logic_.reset(new service_worker(cfg_));
 
 }
 
@@ -75,10 +79,12 @@ void MainWindow::on_pushButton_operate_clicked()
     if (is_srv_running_)
     {
         ui->pushButton_operate->setText("Стоп");
+        logic_->start();
     }
     else
     {
         ui->pushButton_operate->setText("Запуск");
+        logic_->stop();
     }
     // disable changes for prots
     ui->spinBox_port_cmd->setDisabled(is_srv_running_);
