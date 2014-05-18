@@ -50,10 +50,15 @@ private slots:
     void on_spinBox_chrome_quality_valueChanged(int arg1);
 
 private:
+    typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
     Ui::MainWindow *ui;
     bool is_srv_running_;
-    boost::shared_ptr<boost::property_tree::ptree> cfg_;
+    config_ptr_t cfg_;
     boost::shared_ptr<worker> logic_;
+
+    // methods
+    bool update_ui(Ui::MainWindow *, const boost::property_tree::ptree&);
+    void update_cfg(boost::property_tree::ptree&, const Ui::MainWindow*);
 };
 
 #endif // MAINWINDOW_H

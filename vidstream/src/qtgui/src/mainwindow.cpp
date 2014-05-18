@@ -1,8 +1,33 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <boost/foreach.hpp>
+
 #include <iostream>
 #include <service_worker.hpp>
+
+
+
+void display(const int depth, const boost::property_tree::ptree& tree)
+{
+    using namespace boost::property_tree;
+    using namespace std;
+
+    BOOST_FOREACH( ptree::value_type const&v, tree.get_child("") ) {
+        ptree subtree = v.second;
+        string nodestr = tree.get<string>(v.first);
+
+        // print current node
+        cout << string("").assign(depth*2,' ') << "* ";
+        cout << v.first;
+        if ( nodestr.length() > 0 )
+            cout << "=\"" << tree.get<string>(v.first) << "\"";
+        cout << endl;
+
+        // recursive go down the hierarchy
+        display(depth+1,subtree);
+    }
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     try
     {
         boost::property_tree::read_json("settings.json", *cfg_);
+        display(3, *cfg_);
         file_exist = true;
     }
     catch(std::exception ex)
@@ -25,11 +51,51 @@ MainWindow::MainWindow(QWidget *parent) :
     if (file_exist)
     {
         // TODO: reload values from file
+        if(!update_ui(ui, *cfg_))
+        {
+            update_cfg(*cfg_, ui);
+        }
+    }
+    else
+    {
+        update_cfg(*cfg_, ui);
     }
 
     // pass configuration to logic
     logic_.reset(new service_worker(cfg_));
 
+}
+
+bool MainWindow::update_ui(Ui::MainWindow *gui, const boost::property_tree::ptree& cfg)
+{
+    // stupid mechanical work
+    bool is_good_cfg = false;
+    try
+    {
+        gui->spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.m"));
+        gui->spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
+        gui->spinBox_chrome_quality->setValue(cfg.get<int>("cfg.img.chrom"));
+        gui->spinBox_lum_quality->setValue(cfg.get<int>("cfg.img.lum"));
+        gui->spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
+        gui->spinBox_rst_num->setValue(cfg.get<int>("cfg.img.rst"));
+        gui->checkBox_is_gray->setEnabled(cfg.get<bool>("cfg.img.bw"));
+        is_good_cfg = true;
+    }
+    catch (std::exception ex)
+    {
+    }
+    return is_good_cfg;
+}
+
+void MainWindow::update_cfg(boost::property_tree::ptree& cfg, const Ui::MainWindow *gui)
+{
+    cfg.put("cfg.bch.m", gui->spinBox_bch_m->value());
+    cfg.put("cfg.bch.t", gui->spinBox_bch_t->value());
+    cfg.put("cfg.img.chrom", gui->spinBox_chrome_quality->value());
+    cfg.put("cfg.img.lum", gui->spinBox_lum_quality->value());
+    cfg.put("cfg.dataport", gui->spinBox_port_data->value());
+    cfg.put("cfg.img.rst", gui->spinBox_rst_num->value());
+    cfg.put("cfg.img.bw", gui->checkBox_is_gray->isChecked());
 }
 
 MainWindow::~MainWindow()
