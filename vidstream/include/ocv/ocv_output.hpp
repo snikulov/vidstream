@@ -7,8 +7,8 @@
 class ocv_output
 {
 public:
-    ocv_output(const std::string& winname, monitor_queue<cv::Mat>& mq)
-        : winname_(winname), stop_(false), mq_(mq)
+    ocv_output(bool& stop, const std::string& winname, monitor_queue<cv::Mat>& mq)
+        : stop_(stop), winname_(winname), mq_(mq)
     {
     }
     ~ocv_output()
@@ -48,8 +48,9 @@ public:
 
 private:
     /* data */
+    bool& stop_;
     std::string winname_;
-    bool stop_;
+
     monitor_queue<cv::Mat>& mq_;
 };
 #endif

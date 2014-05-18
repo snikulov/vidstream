@@ -33,6 +33,7 @@ private:
 
     boost::shared_ptr<boost::thread> output_;
     boost::shared_ptr<boost::thread> process_;
+    bool stop_;
 };
 
 #endif // SERVICE_WORKER_HPP__

@@ -26,13 +26,13 @@ using namespace vidstream;
 class receiver
 {
 public:
-    receiver(const std::string& url, boost::shared_ptr<ocv_output> win
+    receiver(bool& stop, const std::string& url, boost::shared_ptr<ocv_output> win
 #if defined(BUILD_FOR_LINUX)
                 , boost::shared_ptr<ecc> bch
 #endif
             )
-        : url_(url), socket_(-1),
-          endpoint_(-1), stop_(false), waiting_(false), win_(win)
+        : stop_(stop), url_(url), socket_(-1),
+          endpoint_(-1), waiting_(false), win_(win)
 #if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
 #endif
@@ -72,6 +72,7 @@ public:
         {
             waiting_ = true;
             std::vector<unsigned char> buf;
+            if (stop_) break;
             rcv->receive(buf);
             waiting_ = false;
 
@@ -124,10 +125,11 @@ public:
 
 private:
     /* data */
+    bool& stop_;
     std::string url_;
     int socket_;
     int endpoint_;
-    bool stop_;
+
     bool waiting_;
     boost::shared_ptr<ocv_output> win_;
 #if defined(BUILD_FOR_LINUX)
