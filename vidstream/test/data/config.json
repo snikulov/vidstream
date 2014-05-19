@@ -1,0 +1,18 @@
+{
+    "cfg": {
+        "dataport": 9955,
+        "bch": {
+            "m": 5,
+            "t": 103
+        },
+        "img": {
+            "width": 640,
+            "height": 480,
+            "rst": 1,
+            "lum": 20,
+            "chrom": 20,
+            "bw": false
+        }
+    }
+}
+

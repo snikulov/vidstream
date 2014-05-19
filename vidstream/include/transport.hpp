@@ -3,9 +3,8 @@
 
 #include <types.hpp>
 #include <ecc/ecc.h>
-#include <nn.h>
-//#include <pubsub.h>
-#include <pipeline.h>
+
+#include <nanopp/nn.hpp>
 
 namespace vidstream {
 
@@ -20,50 +19,34 @@ namespace vidstream {
     public:
 #if defined(BUILD_FOR_LINUX)
         transport(transport_t type, const std::string& url, boost::shared_ptr<ecc> ecc)
-            : type_(type), url_(url), ecc_(ecc), socket_(-1), endpoint_(-1)
+            : type_(type), url_(url), ecc_(ecc), socket_(AF_SP, type_)
 #else
         transport(transport_t type, const std::string& url)
-            : type_(type), url_(url), socket_(-1), endpoint_(-1)
+            : type_(type), url_(url), socket_(AF_SP, type_)
 #endif
         {
-            std::string err_msg("Error: ");
-            socket_   = nn_socket(AF_SP, type);
-            if (socket_ < 0)
-            {
-                throw std::runtime_error(err_msg + nn_strerror(nn_errno()));
-            }
+            int opt = 250; // ms 
+            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
+            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
+
             if (type_ == TRANSPORT_RECEIVE)
             {
-                endpoint_ = nn_bind(socket_, url_.c_str());
+                socket_.bind(url_.c_str());
             }
             else if (type == TRANSPORT_SEND)
             {
-                endpoint_ = nn_connect(socket_, url_.c_str());
-            }
-            if (endpoint_ < 0)
-            {
-                throw std::runtime_error(err_msg + nn_strerror(nn_errno()));
+                socket_.connect(url_.c_str());
             }
         }
 
         ~transport()
         {
-            if (endpoint_ >= 0 && socket_ >= 0)
-            {
-                nn_shutdown(socket_, endpoint_);
-                endpoint_ = -1;
-            }
-
-            if (socket_ >= 0)
-            {
-                nn_close(socket_);
-                socket_ = -1;
-            }
         }
 
         // utility function
-        void send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs)
+        int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs)
         {
+            int res = 0;
             std::vector<std::size_t>& ridx = *idxs;
             std::vector<unsigned char>& rdata = *data;
 #if 0
@@ -75,7 +58,11 @@ namespace vidstream {
             const std::string mstart("jpegstart");
             const std::string mend("jpegend");
 // send start file marker
-            send(mstart.c_str(), mstart.size());
+            res = send(mstart.c_str(), mstart.size());
+            if (res == -1)
+            {
+                return res;
+            }
 
 // send rst blocks
             size_t ridx_len = ridx.size()-1;
@@ -88,15 +75,22 @@ namespace vidstream {
                 blk_size = ridx.at(i+1) - ridx.at(i);
                 blk_idx = ridx.at(i);
                 p_data = reinterpret_cast<const char*>(&(rdata[blk_idx]));
-                send(p_data, blk_size);
+
+                res = send(p_data, blk_size);
+                if (res == -1)
+                {
+                    return res;
+                }
+
             }
 // send end file marker
-            send(mend.c_str(), mend.size());
+            return send(mend.c_str(), mend.size());
         }
 
 
-        void send(const char* data, size_t len)
+        int send(const char* data, size_t len)
         {
+            int bytes = 0;
             const char* buf = data;
             size_t buf_len = len;
 #if defined(BUILD_FOR_LINUX)
@@ -105,11 +99,8 @@ namespace vidstream {
                 buf = ecc_->encode(data, len, buf_len);
             }
 #endif
-            int bytes = nn_send(socket_, buf, buf_len, 0);
-            if(bytes < 0)
-            {
-                // std::cout << "Error: " << nn_strerror(nn_errno()) << std::endl;
-            }
+                // repeat same data on eagain(-1)
+            bytes = socket_.send(buf, buf_len, 0);
 
 #if defined(BUILD_FOR_LINUX)
             if (ecc_)
@@ -117,32 +108,39 @@ namespace vidstream {
                 free(const_cast<char*>(buf));
             }
 #endif
+            return bytes;
         }
 
-        bool receive(std::vector<unsigned char>& out)
+        int receive(std::vector<unsigned char>& out)
         {
-            bool is_error = false;
+            int bytes = 0;
             int ret_size = 0;
             char * buf = NULL;
             out.clear();
 
-            ret_size = nn_recv(socket_, &buf, NN_MSG, 0);
-            out.insert(out.end(), buf, buf+ret_size);
-            nn_freemsg(buf);
-#if defined(BUILD_FOR_LINUX)
-            if (ecc_)
-            {
-                char * decoded = NULL;
-                size_t d_len = 0;
-                std::vector<char> v;
-                decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
+            bytes = socket_.recv(&buf, NN_MSG, 0);
 
-                out.clear();
-                out.insert(out.end(), decoded, decoded+d_len);
-                free(decoded);
+            if (bytes != -1)
+            {
+                out.insert(out.end(), buf, buf+bytes);
+                nn::freemsg(buf);
+
+    #if defined(BUILD_FOR_LINUX)
+                if (ecc_)
+                {
+                    char * decoded = NULL;
+                    size_t d_len = 0;
+                    std::vector<char> v;
+                    decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
+
+                    out.clear();
+                    out.insert(out.end(), decoded, decoded+d_len);
+                    free(decoded);
+                }
+    #endif
             }
-#endif
-            return is_error;
+
+            return bytes;
         }
     private:
         /* data */
@@ -151,9 +149,7 @@ namespace vidstream {
 #if defined(BUILD_FOR_LINUX)
         boost::shared_ptr<ecc> ecc_;
 #endif
-        int socket_;
-        int endpoint_;
-
+        nn::socket socket_;
     };
 } /* namespace vidstream */
 
