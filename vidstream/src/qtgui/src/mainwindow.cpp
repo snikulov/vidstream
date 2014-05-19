@@ -7,7 +7,6 @@
 #include <service_worker.hpp>
 
 
-
 void display(const int depth, const boost::property_tree::ptree& tree)
 {
     using namespace boost::property_tree;
@@ -51,51 +50,19 @@ MainWindow::MainWindow(QWidget *parent) :
     if (file_exist)
     {
         // TODO: reload values from file
-        if(!update_ui(ui, *cfg_))
+        if(!ui_update(*ui, *cfg_))
         {
-            update_cfg(*cfg_, ui);
+            cfg_update(*cfg_, *ui);
         }
     }
     else
     {
-        update_cfg(*cfg_, ui);
+        cfg_update(*cfg_, *ui);
     }
 
     // pass configuration to logic
     logic_.reset(new service_worker(cfg_));
 
-}
-
-bool MainWindow::update_ui(Ui::MainWindow *gui, const boost::property_tree::ptree& cfg)
-{
-    // stupid mechanical work
-    bool is_good_cfg = false;
-    try
-    {
-        gui->spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.m"));
-        gui->spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
-        gui->spinBox_chrome_quality->setValue(cfg.get<int>("cfg.img.chrom"));
-        gui->spinBox_lum_quality->setValue(cfg.get<int>("cfg.img.lum"));
-        gui->spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
-        gui->spinBox_rst_num->setValue(cfg.get<int>("cfg.img.rst"));
-        gui->checkBox_is_gray->setEnabled(cfg.get<bool>("cfg.img.bw"));
-        is_good_cfg = true;
-    }
-    catch (std::exception ex)
-    {
-    }
-    return is_good_cfg;
-}
-
-void MainWindow::update_cfg(boost::property_tree::ptree& cfg, const Ui::MainWindow *gui)
-{
-    cfg.put("cfg.bch.m", gui->spinBox_bch_m->value());
-    cfg.put("cfg.bch.t", gui->spinBox_bch_t->value());
-    cfg.put("cfg.img.chrom", gui->spinBox_chrome_quality->value());
-    cfg.put("cfg.img.lum", gui->spinBox_lum_quality->value());
-    cfg.put("cfg.dataport", gui->spinBox_port_data->value());
-    cfg.put("cfg.img.rst", gui->spinBox_rst_num->value());
-    cfg.put("cfg.img.bw", gui->checkBox_is_gray->isChecked());
 }
 
 MainWindow::~MainWindow()
@@ -113,27 +80,7 @@ void MainWindow::on_checkBox_is_gray_stateChanged(int arg1)
 
 void MainWindow::on_comboBox_camera_resolution_currentIndexChanged(int index)
 {
-    // current resolution changed
-    typedef struct
-    {
-        int width;
-        int height;
-    } scr_size_t;
-
-    static const scr_size_t modes[] = {{1280,800},{1024,780},{640,480},{320,240},{0, 0}};
-    size_t max_size = sizeof(modes)/sizeof(modes[0]);
-
-    if (index >= 0 && index < max_size)
-    {
-        int w = modes[index].width;
-        int h = modes[index].height;
-        cfg_->put("cfg.img.width", w);
-        cfg_->put("cfg.img.height", h);
-    }
-    else
-    {
-        std::cerr << "camera resulution wrong index ! " << index << std::endl;
-    }
+    cfg_set_resolution_by_list_index(*cfg_, index);
 }
 
 void MainWindow::on_pushButton_operate_clicked()
@@ -184,19 +131,23 @@ void MainWindow::on_lineEdit_channel_speed_textChanged(const QString &arg1)
 void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 {
     // bch preset changed
-    std::cerr << "bch prameters changed: " << index << std::endl;
+//    std::cerr << "bch prameters changed: " << index << std::endl;
+    cfg_set_bch_values_by_list_index(*cfg_, *ui, index);
+
 }
 
 void MainWindow::on_spinBox_bch_m_valueChanged(int arg1)
 {
     // bch m value
     cfg_->put("cfg.bch.m", arg1);
+    ui_set_bch_preset_list_index(*ui, *cfg_);
 }
 
 void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
 {
     // bch t value
     cfg_->put("cfg.bch.t", arg1);
+    ui_set_bch_preset_list_index(*ui, *cfg_);
 }
 
 void MainWindow::on_spinBox_error_persent_valueChanged(int arg1)

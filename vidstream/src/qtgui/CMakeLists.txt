@@ -23,7 +23,8 @@ set(HDR_FILES
 set(SRC_FILES
     src/main.cpp
     src/mainwindow.cpp
-    src/service_worker.cpp 
+    src/service_worker.cpp
+    src/cfg_ui_utils.cpp
 )
 
 set(UI_FILES
