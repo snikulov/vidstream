@@ -9,7 +9,7 @@ set(SRC_FILES
     src/main_capture.cpp
 )
 
-add_executable(${TARGET_NAME} ${SRC_FILES})
+add_executable(${TARGET_NAME} ${SRC_FILES} ${GLB_HDR_FILES})
 
 target_link_libraries(${TARGET_NAME}
     ${OpenCV_LIBS} ${Boost_LIBRARIES}

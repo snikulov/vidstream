@@ -31,7 +31,7 @@ set(UI_FILES
 )
 qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
 
-add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES})
+add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 
 target_link_libraries(${TARGET_NAME}
    ${Qt5Widgets_LIBRARIES}

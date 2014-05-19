@@ -6,6 +6,7 @@ project(vidstream C CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
@@ -30,6 +31,8 @@ elseif(WIN32)
     message(STATUS "Build for Windows")
 endif()
 
+file(GLOB_RECURSE GLB_HDR_FILES include/*.h*)
+source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 
 # externals project
 set(WITH_NANOMSG_UT OFF)

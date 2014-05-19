@@ -36,13 +36,21 @@ public:
         boost::scoped_ptr<transport> trans;
         if (url_.size() != 0)
         {
+            try
+            {
 #if defined(BUILD_FOR_LINUX)
-            trans.reset(new transport(TRANSPORT_SEND, url_, ecc_));
+                trans.reset(new transport(TRANSPORT_SEND, url_, ecc_));
 #else
-            trans.reset(new transport(TRANSPORT_SEND, url_));
+                trans.reset(new transport(TRANSPORT_SEND, url_));
 #endif
+            }
+            catch(nn::exception& ex)
+            {
+                std::cerr << "Error initializing transport: " << ex.what() << std::endl;
+                trans.reset();
+            }
         }
-
+        int max_err_try = 0;
         while(!stop_)
         {
             camera_frame_t frame = q_.dequeue();
@@ -57,13 +65,34 @@ public:
 
                 if (trans)
                 {
-                    trans->send_jpeg(jpg, rst);
+                    try
+                    {
+                        int ret = trans->send_jpeg(jpg, rst);
+                        if (ret == -1)
+                        {
+                        //    std::cerr << "Error send jpeg... Skip" << std::endl;
+                            max_err_try++;
+                            if (max_err_try > 10)
+                            {
+                                std::cerr << "Error send jpeg... Closing transport" << std::endl;
+                                trans.reset();
+                            }
+                        }
+                        else
+                        {
+                            max_err_try = 0;
+                        }
+                    }
+                    catch(nn::exception& ex)
+                    {
+                        std::cerr << "Error sending jpeg: " << ex.what() 
+                            << " closing transport" << std::endl;
+                        // close transport - TODO: think how to reconnect
+                        trans.reset();
+                    }
                 }
             }
-            else
-            {
-                boost::thread::yield();
-            }
+
             if(cv::waitKey(30) >= 0) stop_ = true;
         }
     }
