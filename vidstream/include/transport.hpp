@@ -25,7 +25,7 @@ namespace vidstream {
             : type_(type), url_(url), socket_(AF_SP, type_)
 #endif
         {
-            int opt = 250; // ms 
+            int opt = 250; // ms
             socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
             socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
 
@@ -130,6 +130,7 @@ namespace vidstream {
                 {
                     char * decoded = NULL;
                     size_t d_len = 0;
+                    bool is_error = false;
                     std::vector<char> v;
                     decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
 
