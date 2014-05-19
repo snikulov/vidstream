@@ -12,11 +12,17 @@ Install dependencies for Ubuntu:
 2. Install dependencies for libjpeg-turbo: sudo apt-get install autoconf libtool nasm
 3. Install cmake: sudo apt-get install cmake
 4. install GTK (for openCV windows support): sudo apt-get install libgtk2.0-dev pkg-config
+5. Add PPA to install QT5:
+# sudo apt-add-repository ppa:ubuntu-sdk-team/ppa
+# sudo apt-get update
+6. Install QT5: sudo apt-get install qtdeclarative5-dev
 -------------------------------------------------
 Development tools:
 0. Installation: sudo apt-get install valgrind
 
 1. valgrind : http://valgrind.org/docs/manual/manual.html
+G_SLICE=always-malloc G_DEBUG=gc-friendly  valgrind -v --tool=memcheck --leak-check=full --num-callers=40 --log-file=valgrind.log $(which <program>) <arguments>
+
 1a. profiling: http://valgrind.org/docs/manual/cl-manual.html
 use these options for callgrind: --dump-instr=yes --simulate-cache=yes --collect-jumps=yes
 1b. 
@@ -34,9 +40,8 @@ or can also use ccmake, which provides a curses interface to configure CMake var
 
 2d. scan-build
 # apt-get install clang
-# cmake -DCMAKE_C_COMPILER=/usr/share/clang/scan-build/ccc-analyzer ..
+# cmake -DCMAKE_C_COMPILER=/usr/share/clang/scan-build/ccc-analyzer -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build/ccc-analyzer .
 # scan-build make
-
 
 3. IDE:
 
@@ -74,3 +79,5 @@ or for 32bit system:
 5. Build system 
 # cmake .
 # make
+
+./capture --file=/media/sf_share/test.avi 
