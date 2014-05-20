@@ -22,23 +22,14 @@ namespace vidstream {
 #if defined(BUILD_FOR_LINUX)
         transport(transport_t type, const std::string& url, boost::shared_ptr<ecc> ecc)
             : type_(type), url_(url), ecc_(ecc), socket_(AF_SP, type_)
-#else
+        {
+            init_socket();
+        }
+#endif
         transport(transport_t type, const std::string& url)
             : type_(type), url_(url), socket_(AF_SP, type_)
-#endif
         {
-            int opt = 250; // ms
-            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
-            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
-
-            if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
-            {
-                socket_.bind(url_.c_str());
-            }
-            else if (type == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
-            {
-                socket_.connect(url_.c_str());
-            }
+            init_socket();
         }
 
         ~transport()
@@ -150,6 +141,23 @@ namespace vidstream {
             return bytes;
         }
     private:
+
+        void init_socket()
+        {
+            int opt = 250; // ms
+            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
+            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
+
+            if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
+            {
+                socket_.bind(url_.c_str());
+            }
+            else if (type_ == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
+            {
+                socket_.connect(url_.c_str());
+            }
+        }
+
         /* data */
         transport_t type_;
         std::string url_;
