@@ -1,9 +1,9 @@
 #include <cstring>
 
 #include <ecc/ecc.h>
-
 #include "bch.h"
 
+#include <boost/property_tree/ptree.hpp>
 
 using namespace std;
 
