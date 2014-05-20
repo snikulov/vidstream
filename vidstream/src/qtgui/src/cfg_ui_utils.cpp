@@ -33,11 +33,13 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
     {
         u.spinBox_chrome_quality->setValue(cfg.get<int>("cfg.img.chrom"));
         u.spinBox_lum_quality->setValue(cfg.get<int>("cfg.img.lum"));
-        u.spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
         u.spinBox_rst_num->setValue(cfg.get<int>("cfg.img.rst"));
         u.checkBox_is_gray->setChecked(cfg.get<bool>("cfg.img.bw"));
         u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.m"));
         u.spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
+
+        u.spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
+        u.spinBox_port_cmd->setValue(cfg.get<int>("cfg.cmdport"));
 
         ui_set_resolution_index(u, cfg);
         ui_set_bch_preset_list_index(u, cfg);
@@ -59,6 +61,9 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
     cfg.put("cfg.dataport",  u.spinBox_port_data->value());
     cfg.put("cfg.img.rst",   u.spinBox_rst_num->value());
     cfg.put("cfg.img.bw",    u.checkBox_is_gray->isChecked());
+
+    cfg.put("cfg.cmdport", u.spinBox_port_cmd->value());
+    cfg.put("cfg.dataport", u.spinBox_port_data->value());
 
     cfg_set_resolution_by_list_index(cfg
                                      , u.comboBox_camera_resolution->currentIndex());

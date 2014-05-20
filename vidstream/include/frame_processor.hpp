@@ -39,9 +39,9 @@ public:
             try
             {
 #if defined(BUILD_FOR_LINUX)
-                trans.reset(new transport(TRANSPORT_SEND, url_, ecc_));
+                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
 #else
-                trans.reset(new transport(TRANSPORT_SEND, url_));
+                trans.reset(new transport(TRANSPORT_PUSH, url_));
 #endif
             }
             catch(nn::exception& ex)
@@ -74,8 +74,13 @@ public:
                             max_err_try++;
                             if (max_err_try > 10)
                             {
-                                std::cerr << "Error send jpeg... Closing transport" << std::endl;
-                                trans.reset();
+                                std::cerr << "Error send jpeg..." << std::endl;
+#if defined(BUILD_FOR_LINUX)
+                                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
+#else
+                                trans.reset(new transport(TRANSPORT_PUSH, url_));
+#endif
+                                max_err_try = 0;
                             }
                         }
                         else
@@ -88,11 +93,16 @@ public:
                         std::cerr << "Error sending jpeg: " << ex.what() 
                             << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
-                        trans.reset();
+#if defined(BUILD_FOR_LINUX)
+                        trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
+#else
+                        trans.reset(new transport(TRANSPORT_PUSH, url_));
+#endif
+                        max_err_try = 0;
+
                     }
                 }
             }
-
             if(cv::waitKey(30) >= 0) stop_ = true;
         }
     }

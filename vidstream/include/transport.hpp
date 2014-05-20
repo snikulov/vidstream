@@ -10,8 +10,10 @@ namespace vidstream {
 
     typedef enum
     {
-        TRANSPORT_SEND = NN_PUSH,
-        TRANSPORT_RECEIVE = NN_PULL
+        TRANSPORT_PUSH = NN_PUSH,
+        TRANSPORT_PULL = NN_PULL,
+        TRANSPORT_REQ = NN_REQ,
+        TRANSPORT_REP = NN_REP
     }transport_t;
 
     class transport
@@ -29,11 +31,11 @@ namespace vidstream {
             socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
             socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
 
-            if (type_ == TRANSPORT_RECEIVE)
+            if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
             {
                 socket_.bind(url_.c_str());
             }
-            else if (type == TRANSPORT_SEND)
+            else if (type == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
             {
                 socket_.connect(url_.c_str());
             }
@@ -87,6 +89,10 @@ namespace vidstream {
             return send(mend.c_str(), mend.size());
         }
 
+        int send(const std::string& data)
+        {
+            return send(data.c_str(), data.size());
+        }
 
         int send(const char* data, size_t len)
         {
@@ -99,7 +105,6 @@ namespace vidstream {
                 buf = ecc_->encode(data, len, buf_len);
             }
 #endif
-                // repeat same data on eagain(-1)
             bytes = socket_.send(buf, buf_len, 0);
 
 #if defined(BUILD_FOR_LINUX)
@@ -110,6 +115,7 @@ namespace vidstream {
 #endif
             return bytes;
         }
+
 
         int receive(std::vector<unsigned char>& out)
         {

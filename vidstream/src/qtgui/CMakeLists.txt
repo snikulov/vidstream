@@ -18,6 +18,7 @@ set(HDR_FILES
     hdr/mainwindow.h
     hdr/worker.hpp
     hdr/service_worker.hpp
+    hdr/ctrlsrv.hpp
 )
 
 set(SRC_FILES

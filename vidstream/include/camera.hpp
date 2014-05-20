@@ -8,8 +8,6 @@
 
 #include <opencv2/opencv.hpp>
 
-
-
 using cv::VideoCapture;
 
 namespace vidstream

@@ -57,7 +57,7 @@ public:
     {
         jpeg_builder jbuilder;
         boost::scoped_ptr<transport> rcv(
-                new transport(TRANSPORT_RECEIVE, url_
+                new transport(TRANSPORT_PULL, url_
 #if defined(BUILD_FOR_LINUX)
                         , ecc_
 #endif
@@ -109,7 +109,6 @@ public:
             {
                 rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
             }
-
         }
     }
 
