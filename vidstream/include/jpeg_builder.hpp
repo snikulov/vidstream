@@ -8,10 +8,14 @@
 #include <fstream>
 #include <sstream>
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
 #include <frame.hpp>
 #include <types.hpp>
 
 #include <split/split.h>
+#include <cfg/cfg_notify.hpp>
 
 namespace vidstream
 {
@@ -20,10 +24,11 @@ namespace vidstream
 // TODO: add interface to access jpeg parameters
 // - get/set
 
-class jpeg_builder
+class jpeg_builder : public cfg_notify
 {
 public:
     jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
+        : quality_(quality), csize_(cv::Size(640, 480))
     {
         params_.push_back(CV_IMWRITE_JPEG_QUALITY);
         params_.push_back(quality);
@@ -94,7 +99,7 @@ public:
     jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
     {
         // Hard coded for now
-        camera_frame_t frame(new cv::Mat(480, 640, CV_8UC3, cv::Scalar::all(0)));
+        camera_frame_t frame(new cv::Mat(csize_, CV_8UC3, cv::Scalar::all(0)));
 
         jpeg_data_t dst = from_cvmat(frame);
         std::vector<size_t> dst_idxs;
@@ -107,9 +112,38 @@ public:
         return dst;
     }
 
+    void cfg_changed(const boost::property_tree::ptree& cfg)
+    {
+        int w = cfg.get<int>("cfg.img.width");
+        int h = cfg.get<int>("cfg.img.height");
+        cv::Size tmps(w, h);
+
+        if (csize_ != tmps)
+        {
+            csize_ = tmps;
+        }
+
+        std::vector<int> tpar;
+        tpar.push_back(CV_IMWRITE_JPEG_QUALITY);
+        tpar.push_back(quality_);
+        tpar.push_back(CV_IMWRITE_JPEG_RST_INTERVAL);
+        tpar.push_back(cfg.get<int>("cfg.img.rst"));
+        tpar.push_back(CV_IMWRITE_JPEG_LUM_QUALITY);
+        tpar.push_back(cfg.get<int>("cfg.img.lum"));
+        tpar.push_back(CV_IMWRITE_JPEG_CHROM_QUALITY);
+        tpar.push_back(cfg.get<int>("cfg.img.chrom"));
+
+        if(params_ != tpar)
+        {
+            params_.swap(tpar);
+        }
+    }
+
 private:
     /* data */
+    int quality_;
     std::vector<int> params_;
+    cv::Size csize_;
 };
 } /* namespace vidstream */
 #endif // JPEG_BUILDER_HPP__

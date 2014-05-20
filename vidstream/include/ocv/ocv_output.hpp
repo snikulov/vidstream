@@ -22,7 +22,7 @@ public:
 
     void operator()()
     {
-        cv::namedWindow(winname_,1);
+        cv::namedWindow(winname_);
 
         while(!stop_)
         {

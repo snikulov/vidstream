@@ -16,12 +16,12 @@ class frame_processor
 {
 public:
     frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag,
-           const std::string& url
+           const std::string& url, boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
            , boost::shared_ptr<ecc> ecc
 #endif
            )
-        : q_(q), stop_(stop_flag), url_(url)
+        : q_(q), stop_(stop_flag), url_(url), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
         , ecc_(ecc)
 #endif
@@ -31,7 +31,6 @@ public:
     void operator()() const
     {
         cv::namedWindow("Capture",1);
-        jpeg_builder jbuilder;
 
         boost::scoped_ptr<transport> trans;
         if (url_.size() != 0)
@@ -60,8 +59,8 @@ public:
                 cv::imshow("Capture", *frame);
 
                 // pack frame into jpeg with rst
-                jpeg_data_t     jpg(jbuilder.from_cvmat(frame));
-                jpeg_rst_idxs_t rst(jbuilder.rst_idxs(jpg));
+                jpeg_data_t     jpg(jb_->from_cvmat(frame));
+                jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
                 if (trans)
                 {
@@ -116,6 +115,7 @@ private:
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
+    boost::shared_ptr<jpeg_builder> jb_;
 
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> ecc_;

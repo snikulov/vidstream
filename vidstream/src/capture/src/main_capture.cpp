@@ -16,6 +16,7 @@
 #include <frame_producer.hpp>
 #include <frame_processor.hpp>
 
+#include "cfg/cfg_subscribers.hpp"
 
 using namespace vidstream;
 
@@ -91,13 +92,19 @@ public:
                     if (-1 == ret) err_count++;
                     else err_count = 0;
                 }while(-1 == ret && err_count < 10 && !stop_);
-                
+
                 if (err_count >= 10 || stop_) continue;
 
                 // done - got data
                 std::string config(cfgdata.begin(), cfgdata.end());
                 std::stringstream ss(config);
-                boost::property_tree::read_json(ss, *cfg_);
+                boost::property_tree::ptree rhs;
+                boost::property_tree::read_json(ss, rhs);
+                if (*cfg_ != rhs)
+                {
+                    cfg_->swap(rhs);
+                    subs_.notify_change(*cfg_);
+                }
                 is_ready_ = true;
                 // will repeat each 2 sec
                 boost::this_thread::sleep_for(boost::chrono::seconds(2));
@@ -114,12 +121,19 @@ public:
 
     bool ready() {return is_ready_;}
 
+    bool subscribe(cfg_notify* sub)
+    {
+        return subs_.subscribe(sub);
+    }
+
 private:
     int & stop_;
     std::string url_;
     boost::shared_ptr<boost::property_tree::ptree> cfg_;
     boost::shared_ptr<transport> trans_;
     bool is_ready_;
+
+    cfg_subscribers subs_;
 };
 
 int main(int argc, char** argv)
@@ -143,7 +157,7 @@ int main(int argc, char** argv)
 
     std::string infile = vm["file"].as<std::string>();
     std::string cmd_url = vm["url"].as<std::string>();
-    
+
     int stop_flag = 0;
 
     boost::shared_ptr<boost::property_tree::ptree> cfg(new boost::property_tree::ptree());
@@ -166,25 +180,32 @@ int main(int argc, char** argv)
     std::string dataurl("tcp://127.0.0.1:");
     dataurl += cfg->get<std::string>("cfg.dataport");
 
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> bch_ecc(new ecc(bm, bt));
-#endif
-
     boost::scoped_ptr<camera> cam(infile.size() == 0
             ? new camera(w, h)
             : new camera(infile, w, h));
 
+    boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
+
     monitor_queue<camera_frame_t> mq(50);
     camera& c = *cam;
-    
+    // subscribe on updates
+    resync.subscribe(cam.get());
+    resync.subscribe(jb.get());
+
+#if defined(BUILD_FOR_LINUX)
+    boost::shared_ptr<ecc> bch_ecc(new ecc(bm, bt));
+    resync.subscribe(bch_ecc.get());
+#endif
+
 
     frame_producer producer(c, mq, stop_flag);
 
+    frame_processor processor(mq, stop_flag, dataurl, jb
 #if defined(BUILD_FOR_LINUX)
-    frame_processor processor(mq, stop_flag, dataurl, bch_ecc);
-#else
-    frame_processor processor(mq, stop_flag, dataurl);
+        , bch_ecc
 #endif
+        );
+
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);
 

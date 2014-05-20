@@ -5,14 +5,15 @@
 #include <iostream>
 #include <vector>
 
-
+#include "cfg/cfg_notify.hpp"
 //using namespace std;
 
 // class StatCollector;
 
 struct bch_control;
 
-class ecc{
+class ecc : public cfg_notify
+{
     public:
         //ecc(float ecc2data = 1.0);
         ecc(uint8_t m, uint8_t t);
@@ -29,6 +30,8 @@ class ecc{
         //out_data_len - в эту переменную будет помещен размер выходных данных
     private:
         void ecc_init(uint8_t m, uint8_t t);
+        uint8_t m_;
+        uint8_t t_;
         bch_control *pbch;
         unsigned int pkg_len;
         unsigned int ecc_len;

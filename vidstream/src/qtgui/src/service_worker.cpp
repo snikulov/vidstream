@@ -28,14 +28,18 @@ void service_worker::start()
     std::string cmdurl = host + cfg_->get<std::string>("cfg.cmdport");
 
     cfgsrv_.reset(new ctrlsrv(cfg_, cmdurl, stop_));
+    boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
+    cfgsrv_->subscribe(jb.get());
 
 #if defined(BUILD_FOR_LINUX)
     int m = cfg_->get<int>("cfg.bch.m");
     int t = cfg_->get<int>("cfg.bch.t");
     bch_.reset(new ecc(m, t)); // bm, bt
-    rcv_.reset(new receiver(stop_, dataurl, win_, bch_));
+    cfgsrv_->subscribe(bch_.get());
+    rcv_.reset(new receiver(stop_, dataurl, win_, jb, bch_));
+
 #else
-    rcv_.reset(new receiver(stop_, dataurl, win_));
+    rcv_.reset(new receiver(stop_, dataurl, win_, jb));
 #endif
 
     // run threads

@@ -26,13 +26,14 @@ using namespace vidstream;
 class receiver
 {
 public:
-    receiver(bool& stop, const std::string& url, boost::shared_ptr<ocv_output> win
+    receiver(bool& stop, const std::string& url
+        , boost::shared_ptr<ocv_output> win
+        , boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
                 , boost::shared_ptr<ecc> bch
 #endif
             )
-        : stop_(stop), url_(url), socket_(-1),
-          endpoint_(-1), waiting_(false), win_(win)
+        : stop_(stop), url_(url), waiting_(false), win_(win), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
 #endif
@@ -40,22 +41,10 @@ public:
     }
     ~receiver()
     {
-        if (endpoint_ >= 0 && socket_ >= 0)
-        {
-            nn_shutdown(socket_, endpoint_);
-            endpoint_ = -1;
-        }
-
-        if (socket_ >= 0)
-        {
-            nn_close(socket_);
-            socket_ = -1;
-        }
     }
 
     void operator()()
     {
-        jpeg_builder jbuilder;
         boost::scoped_ptr<transport> rcv(
                 new transport(TRANSPORT_PULL, url_
 #if defined(BUILD_FOR_LINUX)
@@ -93,7 +82,7 @@ public:
                 get_all_rst_blocks(*rcv_buf, rst_idxs);
                 std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
 
-                jpeg_data_t jpg = jbuilder.build_jpeg_from_rst(rcv_buf);
+                jpeg_data_t jpg = jb_->build_jpeg_from_rst(rcv_buf);
 //                jbuilder.write(jpg, img_count);
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
@@ -126,11 +115,9 @@ private:
     /* data */
     bool& stop_;
     std::string url_;
-    int socket_;
-    int endpoint_;
-
     bool waiting_;
     boost::shared_ptr<ocv_output> win_;
+    boost::shared_ptr<jpeg_builder> jb_;
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> ecc_;
 #endif

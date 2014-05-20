@@ -7,8 +7,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <nn.h>
-#include <reqrep.h>
+#include "cfg/cfg_subscribers.hpp"
 
 typedef boost::shared_ptr<boost::property_tree::ptree> cfg_ptr_t;
 
@@ -43,6 +42,10 @@ public:
                 {
                     std::cerr << "Error send config" << std::endl;
                 }
+                else
+                {
+                    subs_.notify_change(*cfg_);
+                }
             }
             else
             {
@@ -56,12 +59,18 @@ public:
         stop_ = true;
     }
 
+    bool subscribe(cfg_notify* listener)
+    {
+        return subs_.subscribe(listener);
+    }
+
 private:
     /* data */
     cfg_ptr_t cfg_;
     std::string url_;
     bool& stop_;
     boost::shared_ptr<transport> trans_;
+    cfg_subscribers subs_;
 };
 
 #endif // CONTROL_SRV_HPP__
