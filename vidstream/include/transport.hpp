@@ -131,6 +131,7 @@ namespace vidstream {
                     char * decoded = NULL;
                     size_t d_len = 0;
                     std::vector<char> v;
+                    bool is_error;
                     decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
 
                     out.clear();
