@@ -2,20 +2,19 @@
 #define CAMERA_HPP__
 
 #include "frame.hpp"
+#include "cfg/cfg_notify.hpp"
 
 #include <string>
 #include <exception>
 
 #include <opencv2/opencv.hpp>
 
-
-
 using cv::VideoCapture;
 
 namespace vidstream
 {
 
-class camera
+class camera : public cfg_notify
 {
 public:
     camera(int w = 640, int h = 480) :
@@ -48,6 +47,19 @@ public:
         }
         ret_val.reset();
         return ret_val;
+    }
+
+    void cfg_changed(const boost::property_tree::ptree& cfg)
+    {
+        int w = cfg.get<int>("cfg.img.width");
+        int h = cfg.get<int>("cfg.img.height");
+        bool bw = cfg.get<bool>("cfg.img.bw");
+
+        cv::Size tmp(w, h);
+        if (req_size_ != tmp)
+        {
+            req_size_ = tmp;
+        }
     }
 
 private:

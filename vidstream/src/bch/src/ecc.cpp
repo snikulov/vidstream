@@ -1,17 +1,16 @@
 #include <cstring>
 
 #include <ecc/ecc.h>
-
 #include "bch.h"
 
+#include <boost/property_tree/ptree.hpp>
 
 using namespace std;
 
 ecc::ecc(uint8_t m, uint8_t t) :
-    data_buff(NULL), errloc(NULL)
+    m_(m), t_(t), data_buff(NULL), errloc(NULL)
 {
-
-    ecc_init(m,t);
+    ecc_init(m_,t_);
 }
 //============================================================================================================================
 void ecc::ecc_init(uint8_t m, uint8_t t){
@@ -132,3 +131,15 @@ char* ecc::decode(const unsigned char* in_data, size_t in_data_len, size_t &out_
     out_data_len = data_blocks * data_len;
     return data_out;
 }
+
+void ecc::cfg_changed(const boost::property_tree::ptree& cfg)
+{
+    int m = cfg.get<int>("cfg.bch.m");
+    int t = cfg.get<int>("cfg.bch.t");
+    if (m_ != m || t_ != t)
+    {
+        // re-init bch TODO: add lock on this operation
+        ecc_init(m_, t_);
+    }
+}
+

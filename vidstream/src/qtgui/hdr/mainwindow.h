@@ -56,9 +56,27 @@ private:
     config_ptr_t cfg_;
     boost::shared_ptr<worker> logic_;
 
-    // methods
-    bool update_ui(Ui::MainWindow *, const boost::property_tree::ptree&);
-    void update_cfg(boost::property_tree::ptree&, const Ui::MainWindow*);
 };
+
+// free form functions
+bool ui_update(Ui::MainWindow &
+               , const boost::property_tree::ptree &);
+
+void cfg_update(boost::property_tree::ptree &
+                , const Ui::MainWindow &);
+
+int ui_set_resolution_index(
+    Ui::MainWindow&
+    , const boost::property_tree::ptree &);
+
+int cfg_set_resolution_by_list_index(boost::property_tree::ptree &, int );
+
+int ui_set_bch_preset_list_index(
+    Ui::MainWindow&
+    , const boost::property_tree::ptree &);
+
+int cfg_set_bch_values_by_list_index(
+    boost::property_tree::ptree&
+    , Ui::MainWindow&, int);
 
 #endif // MAINWINDOW_H

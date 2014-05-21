@@ -12,6 +12,7 @@
 class ocv_output;
 class ecc;
 class receiver;
+class ctrlsrv;
 
 class service_worker : public worker, boost::noncopyable
 {
@@ -30,9 +31,12 @@ private:
     boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<ecc> bch_;
     boost::shared_ptr<receiver> rcv_;
+    boost::shared_ptr<ctrlsrv> cfgsrv_;
 
+    boost::shared_ptr<boost::thread> cfgthread_;
     boost::shared_ptr<boost::thread> output_;
     boost::shared_ptr<boost::thread> process_;
+
     bool stop_;
 };
 

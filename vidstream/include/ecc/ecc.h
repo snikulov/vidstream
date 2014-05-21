@@ -5,19 +5,23 @@
 #include <iostream>
 #include <vector>
 
-
+#include "cfg/cfg_notify.hpp"
 //using namespace std;
 
 // class StatCollector;
 
 struct bch_control;
 
-class ecc{
+class ecc : public cfg_notify
+{
     public:
         //ecc(float ecc2data = 1.0);
         ecc(uint8_t m, uint8_t t);
 
         ~ecc();
+
+        void cfg_changed(const boost::property_tree::ptree&);
+
         char* encode(const char* in_data, size_t in_data_len, size_t &out_data_len);
         //кодирует данные, возвращает указатель на закодированный массив и его размер помещает в out_data_len
         char* decode(const unsigned char* in_data, size_t in_data_len, size_t &out_data_len,
@@ -29,6 +33,8 @@ class ecc{
         //out_data_len - в эту переменную будет помещен размер выходных данных
     private:
         void ecc_init(uint8_t m, uint8_t t);
+        uint8_t m_;
+        uint8_t t_;
         bch_control *pbch;
         unsigned int pkg_len;
         unsigned int ecc_len;

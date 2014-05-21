@@ -16,12 +16,12 @@ class frame_processor
 {
 public:
     frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag,
-           const std::string& url
+           const std::string& url, boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
            , boost::shared_ptr<ecc> ecc
 #endif
            )
-        : q_(q), stop_(stop_flag), url_(url)
+        : q_(q), stop_(stop_flag), url_(url), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
         , ecc_(ecc)
 #endif
@@ -31,7 +31,6 @@ public:
     void operator()() const
     {
         cv::namedWindow("Capture",1);
-        jpeg_builder jbuilder;
 
         boost::scoped_ptr<transport> trans;
         if (url_.size() != 0)
@@ -39,9 +38,9 @@ public:
             try
             {
 #if defined(BUILD_FOR_LINUX)
-                trans.reset(new transport(TRANSPORT_SEND, url_, ecc_));
+                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
 #else
-                trans.reset(new transport(TRANSPORT_SEND, url_));
+                trans.reset(new transport(TRANSPORT_PUSH, url_));
 #endif
             }
             catch(nn::exception& ex)
@@ -60,8 +59,8 @@ public:
                 cv::imshow("Capture", *frame);
 
                 // pack frame into jpeg with rst
-                jpeg_data_t     jpg(jbuilder.from_cvmat(frame));
-                jpeg_rst_idxs_t rst(jbuilder.rst_idxs(jpg));
+                jpeg_data_t     jpg(jb_->from_cvmat(frame));
+                jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
                 if (trans)
                 {
@@ -74,8 +73,13 @@ public:
                             max_err_try++;
                             if (max_err_try > 10)
                             {
-                                std::cerr << "Error send jpeg... Closing transport" << std::endl;
-                                trans.reset();
+                                std::cerr << "Error send jpeg..." << std::endl;
+#if defined(BUILD_FOR_LINUX)
+                                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
+#else
+                                trans.reset(new transport(TRANSPORT_PUSH, url_));
+#endif
+                                max_err_try = 0;
                             }
                         }
                         else
@@ -88,11 +92,16 @@ public:
                         std::cerr << "Error sending jpeg: " << ex.what() 
                             << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
-                        trans.reset();
+#if defined(BUILD_FOR_LINUX)
+                        trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
+#else
+                        trans.reset(new transport(TRANSPORT_PUSH, url_));
+#endif
+                        max_err_try = 0;
+
                     }
                 }
             }
-
             if(cv::waitKey(30) >= 0) stop_ = true;
         }
     }
@@ -106,6 +115,7 @@ private:
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
+    boost::shared_ptr<jpeg_builder> jb_;
 
 #if defined(BUILD_FOR_LINUX)
     boost::shared_ptr<ecc> ecc_;

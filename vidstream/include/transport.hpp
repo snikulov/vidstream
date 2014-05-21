@@ -10,8 +10,10 @@ namespace vidstream {
 
     typedef enum
     {
-        TRANSPORT_SEND = NN_PUSH,
-        TRANSPORT_RECEIVE = NN_PULL
+        TRANSPORT_PUSH = NN_PUSH,
+        TRANSPORT_PULL = NN_PULL,
+        TRANSPORT_REQ = NN_REQ,
+        TRANSPORT_REP = NN_REP
     }transport_t;
 
     class transport
@@ -20,23 +22,14 @@ namespace vidstream {
 #if defined(BUILD_FOR_LINUX)
         transport(transport_t type, const std::string& url, boost::shared_ptr<ecc> ecc)
             : type_(type), url_(url), ecc_(ecc), socket_(AF_SP, type_)
-#else
+        {
+            init_socket();
+        }
+#endif
         transport(transport_t type, const std::string& url)
             : type_(type), url_(url), socket_(AF_SP, type_)
-#endif
         {
-            int opt = 250; // ms 
-            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
-            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
-
-            if (type_ == TRANSPORT_RECEIVE)
-            {
-                socket_.bind(url_.c_str());
-            }
-            else if (type == TRANSPORT_SEND)
-            {
-                socket_.connect(url_.c_str());
-            }
+            init_socket();
         }
 
         ~transport()
@@ -87,6 +80,10 @@ namespace vidstream {
             return send(mend.c_str(), mend.size());
         }
 
+        int send(const std::string& data)
+        {
+            return send(data.c_str(), data.size());
+        }
 
         int send(const char* data, size_t len)
         {
@@ -99,7 +96,6 @@ namespace vidstream {
                 buf = ecc_->encode(data, len, buf_len);
             }
 #endif
-                // repeat same data on eagain(-1)
             bytes = socket_.send(buf, buf_len, 0);
 
 #if defined(BUILD_FOR_LINUX)
@@ -110,6 +106,7 @@ namespace vidstream {
 #endif
             return bytes;
         }
+
 
         int receive(std::vector<unsigned char>& out)
         {
@@ -130,6 +127,7 @@ namespace vidstream {
                 {
                     char * decoded = NULL;
                     size_t d_len = 0;
+                    bool is_error = false;
                     std::vector<char> v;
                     bool is_error;
                     decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
@@ -144,6 +142,23 @@ namespace vidstream {
             return bytes;
         }
     private:
+
+        void init_socket()
+        {
+            int opt = 250; // ms
+            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
+            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
+
+            if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
+            {
+                socket_.bind(url_.c_str());
+            }
+            else if (type_ == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
+            {
+                socket_.connect(url_.c_str());
+            }
+        }
+
         /* data */
         transport_t type_;
         std::string url_;

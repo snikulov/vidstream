@@ -8,6 +8,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
+option(WITH_TEST "Build UnitTests" OFF)
+
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
 endif()
@@ -43,5 +45,7 @@ include_directories(include)
 add_subdirectory(src)
 
 # UT
-enable_testing()
-add_subdirectory(test)
+if (WITH_TEST)
+    enable_testing()
+    add_subdirectory(test)
+endif()

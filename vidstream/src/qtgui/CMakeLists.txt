@@ -18,12 +18,14 @@ set(HDR_FILES
     hdr/mainwindow.h
     hdr/worker.hpp
     hdr/service_worker.hpp
+    hdr/ctrlsrv.hpp
 )
 
 set(SRC_FILES
     src/main.cpp
     src/mainwindow.cpp
-    src/service_worker.cpp 
+    src/service_worker.cpp
+    src/cfg_ui_utils.cpp
 )
 
 set(UI_FILES
