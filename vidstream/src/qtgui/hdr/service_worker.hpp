@@ -33,6 +33,7 @@ private:
     boost::shared_ptr<receiver> rcv_;
     boost::shared_ptr<ctrlsrv> cfgsrv_;
 
+
     boost::shared_ptr<boost::thread> cfgthread_;
     boost::shared_ptr<boost::thread> output_;
     boost::shared_ptr<boost::thread> process_;

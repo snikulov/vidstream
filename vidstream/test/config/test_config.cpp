@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE test_split
+#define BOOST_TEST_MODULE test_config
 #include <boost/test/included/unit_test.hpp>
 
 #include <boost/property_tree/ptree.hpp>

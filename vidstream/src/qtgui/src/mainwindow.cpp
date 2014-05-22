@@ -150,12 +150,6 @@ void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
     ui_set_bch_preset_list_index(*ui, *cfg_);
 }
 
-void MainWindow::on_spinBox_error_persent_valueChanged(int arg1)
-{
-    // line error changed
-    std::cerr << "line error " << arg1 << "%" << std::endl;
-}
-
 void MainWindow::on_spinBox_lum_quality_valueChanged(int arg1)
 {
     // lum value changed
@@ -166,4 +160,10 @@ void MainWindow::on_spinBox_chrome_quality_valueChanged(int arg1)
 {
     // chrome
     cfg_->put("cfg.img.chrom", arg1);
+}
+
+void MainWindow::on_doubleSpinBox_error_persent_valueChanged(double arg1)
+{
+    // changed error value
+    cfg_->put("cfg.error.val", arg1);
 }

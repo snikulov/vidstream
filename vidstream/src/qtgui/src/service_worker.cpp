@@ -29,17 +29,21 @@ void service_worker::start()
 
     cfgsrv_.reset(new ctrlsrv(cfg_, cmdurl, stop_));
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
+    boost::shared_ptr<corrupt_intro> err(new corrupt_intro());
+
     cfgsrv_->subscribe(jb.get());
+    cfgsrv_->subscribe(err.get());
+
 
 #if defined(BUILD_FOR_LINUX)
     int m = cfg_->get<int>("cfg.bch.m");
     int t = cfg_->get<int>("cfg.bch.t");
     bch_.reset(new ecc(m, t)); // bm, bt
     cfgsrv_->subscribe(bch_.get());
-    rcv_.reset(new receiver(stop_, dataurl, win_, jb, bch_));
+    rcv_.reset(new receiver(stop_, dataurl, err, win_, jb, bch_));
 
 #else
-    rcv_.reset(new receiver(stop_, dataurl, win_, jb));
+    rcv_.reset(new receiver(stop_, dataurl, err, win_, jb));
 #endif
 
     // run threads

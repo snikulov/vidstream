@@ -38,6 +38,8 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
         u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.m"));
         u.spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
 
+        u.doubleSpinBox_error_persent->setValue(cfg.get<double>("cfg.error.val"));
+
         u.spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
         u.spinBox_port_cmd->setValue(cfg.get<int>("cfg.cmdport"));
 
@@ -61,6 +63,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
     cfg.put("cfg.dataport",  u.spinBox_port_data->value());
     cfg.put("cfg.img.rst",   u.spinBox_rst_num->value());
     cfg.put("cfg.img.bw",    u.checkBox_is_gray->isChecked());
+    cfg.put("cfg.error.val", u.doubleSpinBox_error_persent->value());
 
     cfg.put("cfg.cmdport", u.spinBox_port_cmd->value());
     cfg.put("cfg.dataport", u.spinBox_port_data->value());

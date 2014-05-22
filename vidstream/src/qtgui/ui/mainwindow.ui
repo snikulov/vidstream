@@ -43,8 +43,8 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>501</width>
-      <height>298</height>
+      <width>511</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -117,16 +117,6 @@
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Ошибка (%)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QSpinBox" name="spinBox_error_persent">
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>0</number>
           </property>
          </widget>
         </item>
@@ -208,6 +198,9 @@
            </item>
           </layout>
          </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent"/>
         </item>
        </layout>
       </widget>

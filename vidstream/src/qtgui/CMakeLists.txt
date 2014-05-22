@@ -41,6 +41,7 @@ target_link_libraries(${TARGET_NAME}
    ${OpenCV_LIBS}
    nanomsg
    split
+   corrupt
    )
 if(UNIX)
     target_link_libraries(${TARGET_NAME}

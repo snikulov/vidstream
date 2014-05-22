@@ -18,6 +18,7 @@
 #include <transport.hpp>
 
 #include <ocv/ocv_output.hpp>
+#include <corrupt/corrupt_intro.hpp>
 
 
 
@@ -27,18 +28,20 @@ class receiver
 {
 public:
     receiver(bool& stop, const std::string& url
-        , boost::shared_ptr<ocv_output> win
-        , boost::shared_ptr<jpeg_builder> jb
+            , boost::shared_ptr<corrupt_intro> error
+            , boost::shared_ptr<ocv_output> win
+            , boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
-                , boost::shared_ptr<ecc> bch
+            , boost::shared_ptr<ecc> bch
 #endif
             )
-        : stop_(stop), url_(url), waiting_(false), win_(win), jb_(jb)
+        : stop_(stop), url_(url), waiting_(false), err_(error), win_(win), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
 #endif
     {
     }
+
     ~receiver()
     {
     }
@@ -63,6 +66,10 @@ public:
             std::vector<unsigned char> buf;
             if (stop_) break;
             rcv->receive(buf);
+            if (err_)
+            {
+                err_->corrupt(buf);
+            }
             waiting_ = false;
 
             if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
@@ -116,6 +123,7 @@ private:
     bool& stop_;
     std::string url_;
     bool waiting_;
+    boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<jpeg_builder> jb_;
 #if defined(BUILD_FOR_LINUX)
