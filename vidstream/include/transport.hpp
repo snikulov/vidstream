@@ -3,7 +3,7 @@
 
 #include <types.hpp>
 #include <ecc/ecc.h>
-
+#include <corrupt/corrupt_intro.hpp>
 #include <nanopp/nn.hpp>
 
 namespace vidstream {
@@ -19,19 +19,30 @@ namespace vidstream {
     class transport
     {
     public:
+        transport(transport_t type, const std::string& url
+            , boost::shared_ptr<corrupt_intro> err
 #if defined(BUILD_FOR_LINUX)
-        transport(transport_t type, const std::string& url, boost::shared_ptr<ecc> ecc)
-            : type_(type), url_(url), ecc_(ecc), socket_(AF_SP, type_)
+            , boost::shared_ptr<ecc> ecc
+#endif
+            )
+            : type_(type), url_(url)
+            , err_(err)
+#if defined(BUILD_FOR_LINUX)
+            , ecc_(ecc)
+#endif
+            , socket_(AF_SP, type_)
         {
             init_socket();
         }
-#endif
         transport(transport_t type, const std::string& url)
             : type_(type), url_(url), socket_(AF_SP, type_)
         {
+            err_.reset();
+#if defined(BUILD_FOR_LINUX)
+            ecc_.reset();
+#endif
             init_socket();
         }
-
         ~transport()
         {
         }
@@ -122,6 +133,12 @@ namespace vidstream {
                 out.insert(out.end(), buf, buf+bytes);
                 nn::freemsg(buf);
 
+                // introduce error if set
+                if (err_)
+                {
+                    err_->corrupt(out);
+                }
+
     #if defined(BUILD_FOR_LINUX)
                 if (ecc_)
                 {
@@ -132,8 +149,16 @@ namespace vidstream {
                     decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
 
                     out.clear();
-                    out.insert(out.end(), decoded, decoded+d_len);
-                    free(decoded);
+                    if (!is_error)
+                    {
+                        out.insert(out.end(), decoded, decoded+d_len);
+                        free(decoded);
+                        bytes = d_len;
+                    }
+                    else
+                    {
+                        bytes = -1;                        
+                    }
                 }
     #endif
             }
@@ -161,6 +186,7 @@ namespace vidstream {
         /* data */
         transport_t type_;
         std::string url_;
+        boost::shared_ptr<corrupt_intro> err_;
 #if defined(BUILD_FOR_LINUX)
         boost::shared_ptr<ecc> ecc_;
 #endif

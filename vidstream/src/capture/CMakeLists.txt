@@ -14,6 +14,7 @@ add_executable(${TARGET_NAME} ${SRC_FILES} ${GLB_HDR_FILES})
 target_link_libraries(${TARGET_NAME}
     ${OpenCV_LIBS} ${Boost_LIBRARIES}
     split
+    corrupt
     nanomsg
     )
 if(UNIX)

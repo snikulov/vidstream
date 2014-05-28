@@ -50,6 +50,7 @@ public:
     {
         boost::scoped_ptr<transport> rcv(
                 new transport(TRANSPORT_PULL, url_
+                        , err_
 #if defined(BUILD_FOR_LINUX)
                         , ecc_
 #endif
@@ -66,10 +67,7 @@ public:
             std::vector<unsigned char> buf;
             if (stop_) break;
             rcv->receive(buf);
-            if (err_)
-            {
-                err_->corrupt(buf);
-            }
+
             waiting_ = false;
 
             if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
@@ -94,6 +92,7 @@ public:
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
+                    // good frame, need to store data and rst
                     win_->show(m);
                 }
                 else
