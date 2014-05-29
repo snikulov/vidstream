@@ -20,11 +20,13 @@ public:
     void enqueue(element d)
     {
         boost::mutex::scoped_lock lock(mx_);
-        if (q_.size() < max_size_)
+        if (q_.size() >= max_size_)
         {
-            q_.push(d);
-            cond_.notify_one();
+            // drop frame
+            q_.pop();
         }
+        q_.push(d);
+        cond_.notify_one();
     }
 
     element dequeue()

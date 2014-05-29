@@ -7,6 +7,7 @@
 #include <string>
 #include <exception>
 
+#include <boost/chrono.hpp>
 #include <opencv2/opencv.hpp>
 
 using cv::VideoCapture;
@@ -14,11 +15,12 @@ using cv::VideoCapture;
 namespace vidstream
 {
 
-class camera : public cfg_notify
+class camera
 {
 public:
-    camera(int w = 640, int h = 480) :
-        src_(new VideoCapture()), fname_(), is_hw_cam_(true), req_size_(cv::Size(w,h))
+    camera(int w = 640, int h = 480)
+        : src_(new VideoCapture()), fname_(), is_hw_cam_(true)
+          , req_size_(cv::Size(w,h)), count_(0)
     {
         open();
     }
@@ -36,35 +38,40 @@ public:
 
     camera_frame_t get_frame() const
     {
+        static int err_count = 0;
+        boost::chrono::high_resolution_clock::time_point start = boost::chrono::high_resolution_clock::now();
         camera_frame_t ret_val(new cv::Mat());
         if (src_->read(*ret_val))
         {
-            if(ret_val->size() != req_size_)
-            {
-                cv::resize(*ret_val, *ret_val, req_size_);
-            }
-            return ret_val;
+            count_++;
         }
-        ret_val.reset();
+        else
+        {
+            err_count++;
+            ret_val.reset();
+            if (err_count > 5)
+            {
+                // re-open camera
+                open();
+                err_count = 0;
+            }
+        }
+        boost::chrono::high_resolution_clock::time_point end = boost::chrono::high_resolution_clock::now();
+        boost::chrono::nanoseconds ndrift = end - start;
+        ns_ += ndrift.count();
+        unsigned long s = boost::chrono::round<boost::chrono::seconds>(boost::chrono::nanoseconds(ns_)).count();
+        if (s) fps_ = count_/s;
+        double cvFPS = src_->get(CV_CAP_PROP_FPS);
+        std::cout << "Frame count: " << count_ << " FPS: " << fps_ << " cvFPS: " << cvFPS << std::endl;
+
         return ret_val;
     }
 
-    void cfg_changed(const boost::property_tree::ptree& cfg)
-    {
-        int w = cfg.get<int>("cfg.img.width");
-        int h = cfg.get<int>("cfg.img.height");
-        bool bw = cfg.get<bool>("cfg.img.bw");
 
-        cv::Size tmp(w, h);
-        if (req_size_ != tmp)
-        {
-            req_size_ = tmp;
-        }
-    }
 
 private:
     // init camera
-    void open()
+    void open() const
     {
         if(is_hw_cam_)
         {
@@ -90,6 +97,9 @@ private:
     std::string fname_;
     bool is_hw_cam_;
     cv::Size req_size_;
+    mutable unsigned long count_;
+    mutable unsigned long ns_;
+    mutable double fps_;
 };
 
 } /* namespace vidstream */

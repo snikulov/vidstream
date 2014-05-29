@@ -177,6 +177,8 @@ int main(int argc, char** argv)
     int w = cfg->get<int>("cfg.img.width");
     int h = cfg->get<int>("cfg.img.height");
 
+    cv::Size isize(w,h);
+
     std::string dataurl("tcp://127.0.0.1:");
     dataurl += cfg->get<std::string>("cfg.dataport");
 
@@ -186,10 +188,9 @@ int main(int argc, char** argv)
 
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
 
-    monitor_queue<camera_frame_t> mq(50);
+    monitor_queue<camera_frame_t> mq(5);
     camera& c = *cam;
     // subscribe on updates
-    resync.subscribe(cam.get());
     resync.subscribe(jb.get());
 
 #if defined(BUILD_FOR_LINUX)
@@ -199,12 +200,12 @@ int main(int argc, char** argv)
 
 
     frame_producer producer(c, mq, stop_flag);
-
-    frame_processor processor(mq, stop_flag, dataurl, jb
+    frame_processor processor(isize, mq, stop_flag, dataurl, jb
 #if defined(BUILD_FOR_LINUX)
         , bch_ecc
 #endif
         );
+    resync.subscribe(&processor);
 
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);

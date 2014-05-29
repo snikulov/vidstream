@@ -13,15 +13,16 @@ namespace vidstream
 {
 
 class frame_processor
+    : public cfg_notify
 {
 public:
-    frame_processor(monitor_queue<camera_frame_t>& q, int& stop_flag,
+    frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
            const std::string& url, boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
            , boost::shared_ptr<ecc> ecc
 #endif
            )
-        : q_(q), stop_(stop_flag), url_(url), jb_(jb)
+        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
         , ecc_(ecc)
 #endif
@@ -55,6 +56,11 @@ public:
             camera_frame_t frame = q_.dequeue();
             if (frame && !frame->empty())
             {
+                // resize if needed
+                if(frame->size() != *req_size_)
+                {
+                    cv::resize(*frame, *frame, *req_size_);
+                }
                 // process incoming frame from camera
                 cv::imshow("Capture", *frame);
 
@@ -110,8 +116,22 @@ public:
     {
     }
 
+    void cfg_changed(const boost::property_tree::ptree& cfg)
+    {
+        int w = cfg.get<int>("cfg.img.width");
+        int h = cfg.get<int>("cfg.img.height");
+        bool bw = cfg.get<bool>("cfg.img.bw");
+
+        cv::Size tmp(w, h);
+        if (*req_size_ != tmp)
+        {
+            *req_size_ = tmp;
+        }
+    }
+
 private:
     /* data */
+    boost::shared_ptr<cv::Size> req_size_;
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
