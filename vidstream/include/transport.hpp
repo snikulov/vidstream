@@ -34,6 +34,20 @@ namespace vidstream {
         {
             init_socket();
         }
+        transport(transport_t type, const std::string& url
+#if defined(BUILD_FOR_LINUX)
+                , boost::shared_ptr<ecc> ecc
+#endif
+                )
+            : type_(type), url_(url), socket_(AF_SP, type_)
+#if defined(BUILD_FOR_LINUX)
+              , ecc_(ecc)
+#endif
+        {
+            err_.reset();
+            init_socket();
+        }
+
         transport(transport_t type, const std::string& url)
             : type_(type), url_(url), socket_(AF_SP, type_)
         {
@@ -43,6 +57,7 @@ namespace vidstream {
 #endif
             init_socket();
         }
+
         ~transport()
         {
         }
@@ -157,7 +172,7 @@ namespace vidstream {
                     }
                     else
                     {
-                        bytes = -1;                        
+                        bytes = -1;
                     }
                 }
     #endif

@@ -17,7 +17,7 @@ if(MSVC)
     add_definitions(/EHsc)
 endif()
 add_definitions(-DBOOST_SYSTEM_NO_DEPRECATED )
-find_package(Boost COMPONENTS thread system program_options unit_test_framework REQUIRED)
+find_package(Boost COMPONENTS thread chrono system program_options unit_test_framework REQUIRED)
 find_package(OpenCV REQUIRED)
 
 if(Boost_FOUND)
