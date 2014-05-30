@@ -10,6 +10,8 @@
 #include <boost/chrono.hpp>
 #include <opencv2/opencv.hpp>
 
+#include <perf/perf_clock.hpp>
+
 using cv::VideoCapture;
 
 namespace vidstream
@@ -20,14 +22,14 @@ class camera
 public:
     camera(int w = 640, int h = 480)
         : src_(new VideoCapture()), fname_(), is_hw_cam_(true)
-          , req_size_(cv::Size(w,h)), count_(0)
+          , req_size_(cv::Size(w,h)), count_(0), sec_(0)
     {
         open();
     }
 
     camera(const std::string& fname, int w = 640, int h = 480) :
         src_(new VideoCapture()), fname_(fname), is_hw_cam_(false),
-        req_size_(cv::Size(w,h))
+        req_size_(cv::Size(w,h)), count_(0), sec_(0)
     {
         open();
     }
@@ -38,12 +40,13 @@ public:
 
     camera_frame_t get_frame() const
     {
+        timer<steady_clock> t;
         static int err_count = 0;
-        boost::chrono::high_resolution_clock::time_point start = boost::chrono::high_resolution_clock::now();
         camera_frame_t ret_val(new cv::Mat());
         if (src_->read(*ret_val))
         {
             count_++;
+            sec_ += t.seconds(); // only good attempts
         }
         else
         {
@@ -56,23 +59,26 @@ public:
                 err_count = 0;
             }
         }
-        boost::chrono::high_resolution_clock::time_point end = boost::chrono::high_resolution_clock::now();
-        boost::chrono::nanoseconds ndrift = end - start;
-        ns_ += ndrift.count();
-        unsigned long s = boost::chrono::round<boost::chrono::seconds>(boost::chrono::nanoseconds(ns_)).count();
-        if (s) fps_ = count_/s;
-        double cvFPS = src_->get(CV_CAP_PROP_FPS);
-        std::cout << "Frame count: " << count_ << " FPS: " << fps_ << " cvFPS: " << cvFPS << std::endl;
 
+        std::cout << "camera FPS: " << get_soft_fps() << " ocvFPS: " << get_ocv_fps() << std::endl;
         return ret_val;
     }
 
-
+    double get_soft_fps() const
+    {
+        return  count_/sec_;
+    }
+    double get_ocv_fps() const
+    {
+        return src_->get(CV_CAP_PROP_FPS);
+    }
 
 private:
     // init camera
     void open() const
     {
+        count_ = 0;
+        sec_ = 0.;
         if(is_hw_cam_)
         {
             src_->open(0);
@@ -98,8 +104,7 @@ private:
     bool is_hw_cam_;
     cv::Size req_size_;
     mutable unsigned long count_;
-    mutable unsigned long ns_;
-    mutable double fps_;
+    mutable double sec_;
 };
 
 } /* namespace vidstream */
