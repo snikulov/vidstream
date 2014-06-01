@@ -65,13 +65,14 @@ public:
                 // no data available - try again
                 continue;
             }
-
+#if 0
             // introduce error
             if (err_)
             {
                 err_->corrupt(buf);
             }
-
+#endif
+#if 1
             if (ecc_)
             {
                 std::vector<char> good;
@@ -89,7 +90,7 @@ public:
                     continue;
                 }
             }
-
+#endif
             waiting_ = false;
 
             if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))

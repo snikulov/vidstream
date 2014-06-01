@@ -17,7 +17,7 @@
 class bch_codec : public cfg_notify
 {
 public:
-    bch_codec(int m = 0, int t = 0)
+    bch_codec(int m = 5, int t = 3)
         : m_(m), t_(t)
     {
         codec_.reset(
