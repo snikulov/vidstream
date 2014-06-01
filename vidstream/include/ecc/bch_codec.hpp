@@ -75,7 +75,7 @@ public:
         }
         // process data
         size_t olen = 0;
-        char * buf = decode(reinterpret_cast<const char*>(&in[0])
+        char * buf = codec_->decode(reinterpret_cast<const char*>(&in[0])
                 ,in.size(), olen, successful, decoded_ok);
         std::vector<unsigned char> out(buf, buf+olen);
         free(buf);

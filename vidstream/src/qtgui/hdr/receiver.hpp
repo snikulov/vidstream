@@ -68,7 +68,13 @@ public:
 
             if (ecc_)
             {
-
+                std::vector<char> good;
+                bool is_ok = false;
+                buf = ecc_->decode(buf, good, is_ok);
+                if (!is_ok)
+                {
+                    std::cout << "failed to decode buffer" << std::endl;
+                }
             }
 
             waiting_ = false;
