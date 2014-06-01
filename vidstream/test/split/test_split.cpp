@@ -7,7 +7,7 @@
 #include <types.hpp>
 
 #include <split/split.h>
-#include <jpeg_builder.hpp>
+#include <jpeg/jpeg_builder.hpp>
 
 using namespace boost::unit_test;
 using namespace vidstream;

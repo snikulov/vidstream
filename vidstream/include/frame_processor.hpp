@@ -5,6 +5,7 @@
 #include <transport/transport.hpp>
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
+#include <ecc/bch_codec.hpp>
 
 namespace vidstream
 {
@@ -15,14 +16,9 @@ class frame_processor
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
-#if defined(BUILD_FOR_LINUX)
-                    , boost::shared_ptr<ecc> ecc
-#endif
+                    , boost::shared_ptr<bch_codec> ecc
                    )
-        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
-#if defined(BUILD_FOR_LINUX)
-        , ecc_(ecc)
-#endif
+        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb), ecc_(ecc)
     {
     }
 
@@ -121,10 +117,7 @@ private:
     int& stop_;
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
-
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> ecc_;
-#endif
+    boost::shared_ptr<bch_codec> ecc_;
 
 };
 

@@ -2,7 +2,17 @@
 #define BCH_CODEC_HPP__
 
 #include "cfg/cfg_notify.hpp"
+#if defined(BUILD_FOR_LINUX)
 #include <ecc/ecc.h>
+#else
+    // fake class
+    class ecc
+    {
+    public:
+        ecc() {}
+        ~ecc() {}
+    };
+#endif
 
 class bch_codec : public cfg_notify
 {
@@ -21,12 +31,6 @@ public:
     {
     }
 
-    std::vector<unsigned char> encode(const std::string& str)
-    {
-        std::vector<unsigned char> in(str.begin(), str.end());
-        return encode(in);
-    }
-
     std::vector<unsigned char> encode(const std::vector<unsigned char>& in)
     {
         if (!codec_)
@@ -34,7 +38,21 @@ public:
             return in;
         }
         // process data
+        throw std::runtime_error("not implemented");
     }
+
+    std::vector<unsigned char> encode(const char* pch, size_t len)
+    {
+        std::vector<unsigned char> in(pch, pch+len);
+        return encode(in);
+    }
+
+    std::vector<unsigned char> encode(const std::string& str)
+    {
+        std::vector<unsigned char> in(str.begin(), str.end());
+        return encode(in);
+    }
+
     std::vector<unsigned char> decode(const std::vector<unsigned char>& in
             ,std::vector<char> &successful, bool &decoded_ok)
     {
@@ -44,6 +62,7 @@ public:
             return in;
         }
         // process data
+        throw std::runtime_error("not implemented");
     }
 
     void cfg_changed(const boost::property_tree::ptree& cfg)

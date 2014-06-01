@@ -19,7 +19,6 @@ class ecc
 
         ~ecc();
 
-
         char* encode(const char* in_data, size_t in_data_len, size_t &out_data_len);
         //кодирует данные, возвращает указатель на закодированный массив и его размер помещает в out_data_len
         char* decode(const unsigned char* in_data, size_t in_data_len, size_t &out_data_len,

@@ -41,7 +41,8 @@ public:
             blk_idx = ridx.at(i);
             p_data = reinterpret_cast<const char*>(&(rdata[blk_idx]));
 
-            res = send(p_data, blk_size);
+            ;
+            res = trans->send(codec->encode(p_data, blk_size));
             if (res == -1)
             {
                 return res;
