@@ -33,12 +33,20 @@ public:
 
     std::vector<unsigned char> encode(const std::vector<unsigned char>& in)
     {
+#if !defined(BUILD_FOR_LINUX)
+        return in;
+#else
         if (!codec_)
         {
             return in;
         }
         // process data
-        throw std::runtime_error("not implemented");
+        size_t olen = 0;
+        char * buf = codec_->encode(reinterpret_cast<const char*>(&in[0]), in.size(), olen);
+        std::vector<unsigned char> out(buf, buf+olen);
+        free(buf);
+        return out;
+#endif
     }
 
     std::vector<unsigned char> encode(const char* pch, size_t len)
@@ -56,13 +64,23 @@ public:
     std::vector<unsigned char> decode(const std::vector<unsigned char>& in
             ,std::vector<char> &successful, bool &decoded_ok)
     {
+#if !defined(BUILD_FOR_LINUX)
+        decoded_ok = true;
+        return in;
+#else
         if (!codec_)
         {
             decoded_ok = true;
             return in;
         }
         // process data
-        throw std::runtime_error("not implemented");
+        size_t olen = 0;
+        char * buf = decode(reinterpret_cast<const char*>(&in[0])
+                ,in.size(), olen, successful, decoded_ok);
+        std::vector<unsigned char> out(buf, buf+olen);
+        free(buf);
+        return out;
+#endif
     }
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
