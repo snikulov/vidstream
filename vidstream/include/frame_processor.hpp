@@ -38,11 +38,7 @@ public:
         {
             try
             {
-#if defined(BUILD_FOR_LINUX)
-                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                 trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
             }
             catch(nn::exception& ex)
             {
@@ -80,11 +76,7 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-#if defined(BUILD_FOR_LINUX)
-                                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                                 trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
                                 max_err_try = 0;
                             }
                         }
@@ -98,11 +90,7 @@ public:
                         std::cerr << "Error sending jpeg: " << ex.what() 
                             << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
-#if defined(BUILD_FOR_LINUX)
-                        trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                         trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
                         max_err_try = 0;
 
                     }

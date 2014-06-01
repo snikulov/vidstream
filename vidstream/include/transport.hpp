@@ -19,42 +19,9 @@ namespace vidstream {
     class transport
     {
     public:
-        transport(transport_t type, const std::string& url
-            , boost::shared_ptr<corrupt_intro> err
-#if defined(BUILD_FOR_LINUX)
-            , boost::shared_ptr<ecc> ecc
-#endif
-            )
-            : type_(type), url_(url)
-            , err_(err)
-#if defined(BUILD_FOR_LINUX)
-            , ecc_(ecc)
-#endif
-            , socket_(AF_SP, type_)
-        {
-            init_socket();
-        }
-        transport(transport_t type, const std::string& url
-#if defined(BUILD_FOR_LINUX)
-                , boost::shared_ptr<ecc> ecc
-#endif
-                )
-            : type_(type), url_(url), socket_(AF_SP, type_)
-#if defined(BUILD_FOR_LINUX)
-              , ecc_(ecc)
-#endif
-        {
-            err_.reset();
-            init_socket();
-        }
-
         transport(transport_t type, const std::string& url)
             : type_(type), url_(url), socket_(AF_SP, type_)
         {
-            err_.reset();
-#if defined(BUILD_FOR_LINUX)
-            ecc_.reset();
-#endif
             init_socket();
         }
 
@@ -115,21 +82,7 @@ namespace vidstream {
         {
             int bytes = 0;
             const char* buf = data;
-            size_t buf_len = len;
-#if defined(BUILD_FOR_LINUX)
-            if (ecc_)
-            {
-                buf = ecc_->encode(data, len, buf_len);
-            }
-#endif
-            bytes = socket_.send(buf, buf_len, 0);
-
-#if defined(BUILD_FOR_LINUX)
-            if (ecc_)
-            {
-                free(const_cast<char*>(buf));
-            }
-#endif
+            bytes = socket_.send(buf, len, 0);
             return bytes;
         }
 
@@ -137,7 +90,6 @@ namespace vidstream {
         int receive(std::vector<unsigned char>& out)
         {
             int bytes = 0;
-            int ret_size = 0;
             char * buf = NULL;
             out.clear();
 
@@ -147,35 +99,6 @@ namespace vidstream {
             {
                 out.insert(out.end(), buf, buf+bytes);
                 nn::freemsg(buf);
-
-                // introduce error if set
-                if (err_)
-                {
-                    err_->corrupt(out);
-                }
-
-    #if defined(BUILD_FOR_LINUX)
-                if (ecc_)
-                {
-                    char * decoded = NULL;
-                    size_t d_len = 0;
-                    bool is_error = false;
-                    std::vector<char> v;
-                    decoded = ecc_->decode(&out[0], out.size(), d_len, v, is_error);
-
-                    out.clear();
-                    if (!is_error)
-                    {
-                        out.insert(out.end(), decoded, decoded+d_len);
-                        free(decoded);
-                        bytes = d_len;
-                    }
-                    else
-                    {
-                        bytes = -1;
-                    }
-                }
-    #endif
             }
 
             return bytes;
@@ -201,10 +124,6 @@ namespace vidstream {
         /* data */
         transport_t type_;
         std::string url_;
-        boost::shared_ptr<corrupt_intro> err_;
-#if defined(BUILD_FOR_LINUX)
-        boost::shared_ptr<ecc> ecc_;
-#endif
         nn::socket socket_;
     };
 } /* namespace vidstream */

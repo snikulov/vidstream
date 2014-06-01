@@ -49,12 +49,7 @@ public:
     void operator()()
     {
         boost::scoped_ptr<transport> rcv(
-                new transport(TRANSPORT_PULL, url_
-                        , err_
-#if defined(BUILD_FOR_LINUX)
-                        , ecc_
-#endif
-                    )
+                new transport(TRANSPORT_PULL, url_)
                 );
 
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
