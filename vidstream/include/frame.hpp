@@ -2,7 +2,11 @@
 #define FRAME_HPP__
 #include <boost/shared_ptr.hpp>
 
-class cv::Mat;
+namespace cv
+{
+class Mat;
+} /* namespace cv */
+
 namespace vidstream
 {
 
