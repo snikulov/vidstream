@@ -31,7 +31,6 @@ if(UNIX)
     add_definitions( -DBUILD_FOR_LINUX -Wall)
 elseif(WIN32)
     message(STATUS "Build for Windows")
-    add_definitions( -W4 )
 endif()
 
 file(GLOB_RECURSE GLB_HDR_FILES include/*.h*)

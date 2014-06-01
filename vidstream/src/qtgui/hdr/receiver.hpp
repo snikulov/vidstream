@@ -58,7 +58,13 @@ public:
             waiting_ = true;
             std::vector<unsigned char> buf;
             if (stop_) break;
-            rcv->receive(buf);
+            int bytes = rcv->receive(buf);
+
+            if (bytes < 0)
+            {
+                // no data available - try again
+                continue;
+            }
 
             // introduce error
             if (err_)
@@ -70,10 +76,17 @@ public:
             {
                 std::vector<char> good;
                 bool is_ok = false;
-                buf = ecc_->decode(buf, good, is_ok);
-                if (!is_ok)
+                std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
+                if (is_ok)
+                {
+                    buf.swap(dec);
+                }
+                else
                 {
                     std::cout << "failed to decode buffer" << std::endl;
+
+                    // TODO: try recovery mode here...
+                    continue;
                 }
             }
 
@@ -111,7 +124,15 @@ public:
             }
             else
             {
-                rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
+                // check rst code
+                if (0xFF == buf.at(0) && is_valid_marker(buf.at(1)))
+                {
+                    rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
+                }
+                else
+                {
+                    std::cerr << "invalid RST code" << std::endl;
+                }
             }
         }
     }
