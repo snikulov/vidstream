@@ -14,11 +14,12 @@
 #include <opencv2/opencv.hpp>
 
 #include <types.hpp>
-#include <jpeg_builder.hpp>
-#include <transport.hpp>
+#include <jpeg/jpeg_builder.hpp>
+#include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
 #include <corrupt/corrupt_intro.hpp>
+#include <ecc/bch_codec.hpp>
 
 
 
@@ -31,14 +32,10 @@ public:
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<ocv_output> win
             , boost::shared_ptr<jpeg_builder> jb
-#if defined(BUILD_FOR_LINUX)
-            , boost::shared_ptr<ecc> bch
-#endif
+            , boost::shared_ptr<bch_codec> bch
             )
         : stop_(stop), url_(url), waiting_(false), err_(error), win_(win), jb_(jb)
-#if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
-#endif
     {
     }
 
@@ -62,6 +59,17 @@ public:
             std::vector<unsigned char> buf;
             if (stop_) break;
             rcv->receive(buf);
+
+            // introduce error
+            if (err_)
+            {
+                err_->corrupt(buf);
+            }
+
+            if (ecc_)
+            {
+
+            }
 
             waiting_ = false;
 
@@ -120,9 +128,7 @@ private:
     boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<jpeg_builder> jb_;
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> ecc_;
-#endif
+    boost::shared_ptr<bch_codec> ecc_;
 };
 
 #endif

@@ -8,8 +8,8 @@
 
 namespace vidstream
 {
-    typedef boost::shared_ptr<std::vector<unsigned char> > jpeg_data_t;
-    typedef boost::shared_ptr<std::vector<std::size_t> >  jpeg_rst_idxs_t;
+typedef boost::shared_ptr<std::vector<unsigned char> > jpeg_data_t;
+typedef boost::shared_ptr<std::vector<std::size_t> >  jpeg_rst_idxs_t;
 } /* namespace vidsteram */
 
 using boost::uint8_t;

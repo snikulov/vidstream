@@ -2,12 +2,9 @@
 #define FRAME_PROCESSOR_HPP__
 
 #include <monitor_queue.hpp>
-#include <jpeg_builder.hpp>
-#include <transport.hpp>
-
-#if defined(BUILD_FOR_LINUX)
-#include <ecc/ecc.h>
-#endif
+#include <transport/transport.hpp>
+#include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_transport.hpp>
 
 namespace vidstream
 {
@@ -17,11 +14,11 @@ class frame_processor
 {
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
-           const std::string& url, boost::shared_ptr<jpeg_builder> jb
+                    const std::string& url, boost::shared_ptr<jpeg_builder> jb
 #if defined(BUILD_FOR_LINUX)
-           , boost::shared_ptr<ecc> ecc
+                    , boost::shared_ptr<ecc> ecc
 #endif
-           )
+                   )
         : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
 #if defined(BUILD_FOR_LINUX)
         , ecc_(ecc)
@@ -33,7 +30,7 @@ public:
     {
         cv::namedWindow("Capture",1);
 
-        boost::scoped_ptr<transport> trans;
+        boost::shared_ptr<transport> trans;
         if (url_.size() != 0)
         {
             try
@@ -68,10 +65,10 @@ public:
                 {
                     try
                     {
-                        int ret = trans->send_jpeg(jpg, rst);
+                        int ret = jpeg_transport::send_jpeg(jpg, rst, trans, ecc_);
                         if (ret == -1)
                         {
-                        //    std::cerr << "Error send jpeg... Skip" << std::endl;
+                            //    std::cerr << "Error send jpeg... Skip" << std::endl;
                             max_err_try++;
                             if (max_err_try > 10)
                             {
@@ -87,8 +84,8 @@ public:
                     }
                     catch(nn::exception& ex)
                     {
-                        std::cerr << "Error sending jpeg: " << ex.what() 
-                            << " closing transport" << std::endl;
+                        std::cerr << "Error sending jpeg: " << ex.what()
+                                  << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
                         trans.reset(new transport(TRANSPORT_PUSH, url_));
                         max_err_try = 0;
