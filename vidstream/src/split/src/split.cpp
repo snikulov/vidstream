@@ -274,6 +274,8 @@ bool is_eoi_int(unsigned char c)
 
 bool is_valid_marker(unsigned char c)
 {
+    // for the sake of completenes, I also put eoi marker to
+    // figure out the latest block size
     return (is_rst_int(c) || is_eoi_int(c));
 }
 

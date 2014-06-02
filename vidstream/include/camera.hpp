@@ -22,7 +22,7 @@ class camera
 public:
     camera(int w = 640, int h = 480)
         : src_(new VideoCapture()), fname_(), is_hw_cam_(true)
-          , req_size_(cv::Size(w,h)), count_(0), sec_(0)
+        , req_size_(cv::Size(w,h)), count_(0), sec_(0)
     {
         open();
     }

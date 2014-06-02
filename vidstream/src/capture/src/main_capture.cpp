@@ -193,18 +193,13 @@ int main(int argc, char** argv)
     // subscribe on updates
     resync.subscribe(jb.get());
 
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> bch_ecc(new ecc(bm, bt));
+    boost::shared_ptr<bch_codec> bch_ecc(new bch_codec(bm, bt));
     resync.subscribe(bch_ecc.get());
-#endif
 
 
     frame_producer producer(c, mq, stop_flag);
-    frame_processor processor(isize, mq, stop_flag, dataurl, jb
-#if defined(BUILD_FOR_LINUX)
-        , bch_ecc
-#endif
-        );
+    frame_processor processor(isize, mq, stop_flag, dataurl
+            , jb, bch_ecc);
     resync.subscribe(&processor);
 
     boost::thread tproducer(producer);

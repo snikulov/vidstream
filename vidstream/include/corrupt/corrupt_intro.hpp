@@ -26,7 +26,7 @@ public:
 private:
 
     corrupt_intro(const corrupt_intro&) {}
-    corrupt_intro& operator= (const corrupt_intro&) {}
+    corrupt_intro& operator= (const corrupt_intro&) { return *this; }
 
     corruptor corr_;
     double err_val_;

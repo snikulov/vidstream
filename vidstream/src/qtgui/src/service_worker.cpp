@@ -1,11 +1,9 @@
 #include <service_worker.hpp>
 #include <ocv/ocv_output.hpp>
 
-#if defined(BUILD_FOR_LINUX)
-#include <ecc/ecc.h>
-#endif
+#include <ecc/bch_codec.hpp>
 
-#include <transport/receiver.hpp>
+#include <receiver.hpp>
 #include <ctrlsrv.hpp>
 
 service_worker::service_worker(boost::shared_ptr<boost::property_tree::ptree> pcfg)
@@ -35,16 +33,11 @@ void service_worker::start()
     cfgsrv_->subscribe(err.get());
 
 
-#if defined(BUILD_FOR_LINUX)
     int m = cfg_->get<int>("cfg.bch.m");
     int t = cfg_->get<int>("cfg.bch.t");
-    bch_.reset(new ecc(m, t)); // bm, bt
+    bch_.reset(new bch_codec(m, t)); // bm, bt
     cfgsrv_->subscribe(bch_.get());
     rcv_.reset(new receiver(stop_, dataurl, err, win_, jb, bch_));
-
-#else
-    rcv_.reset(new receiver(stop_, dataurl, err, win_, jb));
-#endif
 
     // run threads
     cfgthread_.reset(new boost::thread(*cfgsrv_));

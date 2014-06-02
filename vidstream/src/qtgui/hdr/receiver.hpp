@@ -14,11 +14,13 @@
 #include <opencv2/opencv.hpp>
 
 #include <types.hpp>
-#include <jpeg_builder.hpp>
-#include <transport.hpp>
+#include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_transport.hpp>
+#include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
 #include <corrupt/corrupt_intro.hpp>
+#include <ecc/bch_codec.hpp>
 
 
 
@@ -31,14 +33,10 @@ public:
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<ocv_output> win
             , boost::shared_ptr<jpeg_builder> jb
-#if defined(BUILD_FOR_LINUX)
-            , boost::shared_ptr<ecc> bch
-#endif
+            , boost::shared_ptr<bch_codec> bch
             )
         : stop_(stop), url_(url), waiting_(false), err_(error), win_(win), jb_(jb)
-#if defined(BUILD_FOR_LINUX)
           , ecc_(bch)
-#endif
     {
     }
 
@@ -49,39 +47,61 @@ public:
     void operator()()
     {
         boost::scoped_ptr<transport> rcv(
-                new transport(TRANSPORT_PULL, url_
-                        , err_
-#if defined(BUILD_FOR_LINUX)
-                        , ecc_
-#endif
-                    )
+                new transport(TRANSPORT_PULL, url_)
                 );
 
+        jpeg_transport jt;
+        const std::vector<unsigned char>& s_mark = jt.start_mark();
+        const std::vector<unsigned char>& e_mark = jt.end_mark();
+
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
-        const char * mstart = "jpegstart";
-        const char * mend = "jpegend";
         unsigned long img_count = 0;
         while(!stop_)
         {
             waiting_ = true;
             std::vector<unsigned char> buf;
             if (stop_) break;
-            rcv->receive(buf);
+            int bytes = rcv->receive(buf);
 
+            if (bytes < 0)
+            {
+                // no data available - try again
+                continue;
+            }
+            // introduce error
+            if (err_)
+            {
+                err_->corrupt(buf);
+            }
+            if (ecc_)
+            {
+                std::vector<char> good;
+                bool is_ok = false;
+                std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
+                if (is_ok)
+                {
+                    buf.swap(dec);
+                }
+                else
+                {
+                    std::cout << "failed to decode buffer" << std::endl;
+
+                    // TODO: try recovery mode here...
+                    continue;
+                }
+            }
             waiting_ = false;
-
-            if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
+            if(buf.end() != std::search(buf.begin(), buf.end(), s_mark.begin(), s_mark.end()))
             {
                 // jpeg start
                 rcv_buf.reset(new std::vector<unsigned char>());
 //                std::cout << "started new image data..." << std::endl;
             }
-            else if(buf.end() != std::search(buf.begin(), buf.end(), mend, mend+7))
+            else if(buf.end() != std::search(buf.begin(), buf.end(), e_mark.begin(), e_mark.end()))
             {
                 // jpeg end
                 // need to reassemble
-                rcv_buf->push_back(0xff);
-                rcv_buf->push_back(0xd9);
+                rcv_buf->insert(rcv_buf->end(), e_mark.begin(), e_mark.end());
                 img_count++;
                 std::vector<size_t> rst_idxs;
                 get_all_rst_blocks(*rcv_buf, rst_idxs);
@@ -102,7 +122,29 @@ public:
             }
             else
             {
-                rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
+                // check rst code
+                if (0xFF == buf.at(0) && is_valid_marker(buf.at(1)))
+                {
+                    std::vector<unsigned char>::iterator it;
+                    it = std::find_end(
+                            buf.begin(),
+                            buf.end(),
+                            buf.begin(),
+                            buf.begin()+1
+                           );
+                    if (it != buf.end() || it != buf.begin())
+                    {
+                        rcv_buf->insert(rcv_buf->end(), buf.begin(), it);
+                    }
+                    else
+                    {
+                        // not found terminator
+                    }
+                }
+                else
+                {
+                    std::cerr << "invalid RST code" << std::endl;
+                }
             }
         }
     }
@@ -125,9 +167,7 @@ private:
     boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<jpeg_builder> jb_;
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> ecc_;
-#endif
+    boost::shared_ptr<bch_codec> ecc_;
 };
 
 #endif

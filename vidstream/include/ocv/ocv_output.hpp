@@ -27,13 +27,9 @@ public:
         while(!stop_)
         {
             cv::Mat pic = mq_.dequeue();
-
             if (!pic.empty())
             {
                 cv::imshow(winname_, pic);
-            }
-            {
-                std::cout << "got empty" << std::endl;
             }
             cv::waitKey(30);
         }

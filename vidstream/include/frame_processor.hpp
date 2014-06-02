@@ -2,12 +2,10 @@
 #define FRAME_PROCESSOR_HPP__
 
 #include <monitor_queue.hpp>
-#include <jpeg_builder.hpp>
-#include <transport.hpp>
-
-#if defined(BUILD_FOR_LINUX)
-#include <ecc/ecc.h>
-#endif
+#include <transport/transport.hpp>
+#include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_transport.hpp>
+#include <ecc/bch_codec.hpp>
 
 namespace vidstream
 {
@@ -17,15 +15,10 @@ class frame_processor
 {
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
-           const std::string& url, boost::shared_ptr<jpeg_builder> jb
-#if defined(BUILD_FOR_LINUX)
-           , boost::shared_ptr<ecc> ecc
-#endif
-           )
-        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
-#if defined(BUILD_FOR_LINUX)
-        , ecc_(ecc)
-#endif
+                    const std::string& url, boost::shared_ptr<jpeg_builder> jb
+                    , boost::shared_ptr<bch_codec> ecc
+                   )
+        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb), ecc_(ecc)
     {
     }
 
@@ -33,16 +26,14 @@ public:
     {
         cv::namedWindow("Capture",1);
 
-        boost::scoped_ptr<transport> trans;
+        boost::shared_ptr<transport> trans;
+        boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
+
         if (url_.size() != 0)
         {
             try
             {
-#if defined(BUILD_FOR_LINUX)
-                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                 trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
             }
             catch(nn::exception& ex)
             {
@@ -72,19 +63,16 @@ public:
                 {
                     try
                     {
-                        int ret = trans->send_jpeg(jpg, rst);
+                        int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
+
                         if (ret == -1)
                         {
-                        //    std::cerr << "Error send jpeg... Skip" << std::endl;
+                            //    std::cerr << "Error send jpeg... Skip" << std::endl;
                             max_err_try++;
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-#if defined(BUILD_FOR_LINUX)
-                                trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                                 trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
                                 max_err_try = 0;
                             }
                         }
@@ -95,14 +83,10 @@ public:
                     }
                     catch(nn::exception& ex)
                     {
-                        std::cerr << "Error sending jpeg: " << ex.what() 
-                            << " closing transport" << std::endl;
+                        std::cerr << "Error sending jpeg: " << ex.what()
+                                  << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
-#if defined(BUILD_FOR_LINUX)
-                        trans.reset(new transport(TRANSPORT_PUSH, url_, ecc_));
-#else
                         trans.reset(new transport(TRANSPORT_PUSH, url_));
-#endif
                         max_err_try = 0;
 
                     }
@@ -136,10 +120,7 @@ private:
     int& stop_;
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
-
-#if defined(BUILD_FOR_LINUX)
-    boost::shared_ptr<ecc> ecc_;
-#endif
+    boost::shared_ptr<bch_codec> ecc_;
 
 };
 

@@ -132,14 +132,4 @@ char* ecc::decode(const unsigned char* in_data, size_t in_data_len, size_t &out_
     return data_out;
 }
 
-void ecc::cfg_changed(const boost::property_tree::ptree& cfg)
-{
-    int m = cfg.get<int>("cfg.bch.m");
-    int t = cfg.get<int>("cfg.bch.t");
-    if (m_ != m || t_ != t)
-    {
-        // re-init bch TODO: add lock on this operation
-        ecc_init(m_, t_);
-    }
-}
 
