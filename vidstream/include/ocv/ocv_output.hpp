@@ -33,6 +33,7 @@ public:
             }
             cv::waitKey(30);
         }
+        cv::destroyWindow(winname_);
     }
 
     void stop()
