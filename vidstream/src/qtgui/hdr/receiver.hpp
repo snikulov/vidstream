@@ -15,6 +15,7 @@
 
 #include <types.hpp>
 #include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_transport.hpp>
 #include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
@@ -49,9 +50,11 @@ public:
                 new transport(TRANSPORT_PULL, url_)
                 );
 
+        jpeg_transport jt;
+        const std::vector<unsigned char>& s_mark = jt.start_mark();
+        const std::vector<unsigned char>& e_mark = jt.end_mark();
+
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
-        const char * mstart = "jpegstart";
-        const char * mend = "jpegend";
         unsigned long img_count = 0;
         while(!stop_)
         {
@@ -65,14 +68,11 @@ public:
                 // no data available - try again
                 continue;
             }
-#if 0
             // introduce error
             if (err_)
             {
                 err_->corrupt(buf);
             }
-#endif
-#if 1
             if (ecc_)
             {
                 std::vector<char> good;
@@ -90,21 +90,18 @@ public:
                     continue;
                 }
             }
-#endif
             waiting_ = false;
-
-            if(buf.end() != std::search(buf.begin(), buf.end(), mstart, mstart+9))
+            if(buf.end() != std::search(buf.begin(), buf.end(), s_mark.begin(), s_mark.end()))
             {
                 // jpeg start
                 rcv_buf.reset(new std::vector<unsigned char>());
 //                std::cout << "started new image data..." << std::endl;
             }
-            else if(buf.end() != std::search(buf.begin(), buf.end(), mend, mend+7))
+            else if(buf.end() != std::search(buf.begin(), buf.end(), e_mark.begin(), e_mark.end()))
             {
                 // jpeg end
                 // need to reassemble
-                rcv_buf->push_back(0xff);
-                rcv_buf->push_back(0xd9);
+                rcv_buf->insert(rcv_buf->end(), e_mark.begin(), e_mark.end());
                 img_count++;
                 std::vector<size_t> rst_idxs;
                 get_all_rst_blocks(*rcv_buf, rst_idxs);
@@ -128,7 +125,21 @@ public:
                 // check rst code
                 if (0xFF == buf.at(0) && is_valid_marker(buf.at(1)))
                 {
-                    rcv_buf->insert(rcv_buf->end(), buf.begin(), buf.end());
+                    std::vector<unsigned char>::iterator it;
+                    it = std::find_end(
+                            buf.begin(),
+                            buf.end(),
+                            buf.begin(),
+                            buf.begin()+1
+                           );
+                    if (it != buf.end() || it != buf.begin())
+                    {
+                        rcv_buf->insert(rcv_buf->end(), buf.begin(), it);
+                    }
+                    else
+                    {
+                        // not found terminator
+                    }
                 }
                 else
                 {

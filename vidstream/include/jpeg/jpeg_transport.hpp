@@ -10,7 +10,19 @@ namespace vidstream {
 class jpeg_transport
 {
 public:
-    static int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
+    jpeg_transport()
+    {
+        start_mark_.push_back(0xff);
+        start_mark_.push_back(0xd8);
+        end_mark_.push_back(0xff);
+        end_mark_.push_back(0xd9);
+    }
+
+    ~jpeg_transport()
+    {
+    }
+
+    int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
             ,boost::shared_ptr<transport> trans
             ,boost::shared_ptr<bch_codec> codec
             )
@@ -19,10 +31,7 @@ public:
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;
 
-        const std::string mstart("jpegstart");
-        const std::string mend("jpegend");
-        std::vector<unsigned char> out = codec->encode(mstart);
-        res = trans->send(out);
+        res = trans->send(codec->encode(start_mark_));
 // send start file marker
         if (res == -1)
         {
@@ -31,32 +40,36 @@ public:
 
 // send rst blocks
         size_t ridx_len = ridx.size()-1;
-        size_t i = 0;
-        size_t blk_size = 0;
-        size_t blk_idx = 0;
-        const char * p_data = 0;
-        for(; i < ridx_len; i++ )
+        for(size_t i = 0; i < ridx_len; i++ )
         {
-            blk_size = ridx.at(i+1) - ridx.at(i);
-            blk_idx = ridx.at(i);
-            p_data = reinterpret_cast<const char*>(&(rdata[blk_idx]));
+            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i)], &rdata[ridx.at(i+1)]);
+            // put terminal RSTn code for end of block indication
+            rst_blk.push_back(rst_blk.at(0));
+            rst_blk.push_back(rst_blk.at(1));
 
-            ;
-            res = trans->send(codec->encode(p_data, blk_size));
+            res = trans->send(codec->encode(rst_blk));
             if (res == -1)
             {
                 return res;
             }
-
         }
 // send end file marker
-        out = codec->encode(mend);
-        res = trans->send(out);
+        res = trans->send(codec->encode(end_mark_));
         return res;
     }
 
+    const std::vector<unsigned char>& start_mark() const
+    {
+        return start_mark_;
+    }
+    const std::vector<unsigned char>& end_mark() const
+    {
+        return end_mark_;
+    }
 
 private:
+    std::vector<unsigned char> start_mark_;
+    std::vector<unsigned char> end_mark_;
 };
 
 } /* namespace vidstream */

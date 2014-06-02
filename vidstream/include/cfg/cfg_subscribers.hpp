@@ -11,7 +11,7 @@ public:
 
     bool subscribe(cfg_notify* listener)
     {
-        for(int i = 0; i < subs_.size(); ++i)
+        for(size_t i = 0; i < subs_.size(); ++i)
         {
             if (subs_[i] == listener) return false;
         }
@@ -21,7 +21,7 @@ public:
 
     void notify_change(const boost::property_tree::ptree& cfg)
     {
-        for(int i = 0; i < subs_.size(); ++i)
+        for(size_t i = 0; i < subs_.size(); ++i)
         {
             subs_[i]->cfg_changed(cfg);
         }

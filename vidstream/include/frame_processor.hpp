@@ -27,6 +27,8 @@ public:
         cv::namedWindow("Capture",1);
 
         boost::shared_ptr<transport> trans;
+        boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
+
         if (url_.size() != 0)
         {
             try
@@ -61,7 +63,8 @@ public:
                 {
                     try
                     {
-                        int ret = jpeg_transport::send_jpeg(jpg, rst, trans, ecc_);
+                        int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
+
                         if (ret == -1)
                         {
                             //    std::cerr << "Error send jpeg... Skip" << std::endl;
