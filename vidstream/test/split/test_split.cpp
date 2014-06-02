@@ -50,12 +50,16 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
 
     BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
 
-    for(size_t i = 0; i < outidx.size(); i++ )
+    for(size_t i = 0; i < outidx.size()-1; i++ )
     {
         size_t idx1 = outidx[i];
         size_t idx2 = idx1+1;
-        BOOST_CHECK_MESSAGE(data->at(idx1) == 0xFF, "buf[" << idx1 << "] != 0xFF");
-        BOOST_CHECK_MESSAGE(is_valid_marker(data->at(idx2)), "buf[" << idx2 << "] =" << static_cast<int>(data->at(i+1)));
+        unsigned char val1 = data->at(idx1);
+        unsigned char val2 = data->at(idx1+1);
+        BOOST_CHECK_MESSAGE(val1 == 0xFF, "data[" << idx1 << "] != 0xFF");
+        BOOST_CHECK_MESSAGE(is_valid_marker(val2), "data[" << idx2 << "] =" << static_cast<int>(val2));
+        unsigned rstnum = val2 & 0x0F;
+        BOOST_CHECK_MESSAGE(i%8 == rstnum, "i="<< i << " rstnum=" <<rstnum);
     }
 }
 
@@ -77,7 +81,9 @@ BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
     BOOST_REQUIRE(get_all_rst_blocks(*dst, dst_idxs));
     BOOST_REQUIRE(get_all_rst_blocks(*src, src_idxs));
 
+    // erase all destination rst blocks
     dst->erase(dst->begin()+dst_idxs[0], dst->end());
+
     dst->insert(dst->end(),src->begin()+src_idxs[0], src->end());
 
     jbuilder.write(dst, 512);
