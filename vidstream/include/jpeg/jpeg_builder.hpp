@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <boost/thread/mutex.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 

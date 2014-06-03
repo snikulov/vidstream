@@ -82,8 +82,7 @@ public:
         char * buf = 0;
         {
             boost::mutex::scoped_lock lk(mx_);
-            buf = codec_->decode(&in[0]
-                    ,in.size(), olen, successful, decoded_ok);
+            buf = codec_->decode(&in[0], in.size(), olen, successful, decoded_ok);
         }
         std::vector<unsigned char> out(buf, buf+olen);
         free(buf);

@@ -1,5 +1,5 @@
-#ifndef RECEIVER_HPP__
-#define RECEIVER_HPP__
+#ifndef JPEG_RECEIVER_HPP__
+#define JPEG_RECEIVER_HPP__
 
 
 #include <iostream>
@@ -26,10 +26,10 @@
 
 using namespace vidstream;
 
-class receiver
+class jpeg_receiver
 {
 public:
-    receiver(bool& stop, const std::string& url
+    jpeg_receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
             , boost::shared_ptr<bch_codec> bch
@@ -39,7 +39,7 @@ public:
     {
     }
 
-    ~receiver()
+    ~jpeg_receiver()
     {
     }
 

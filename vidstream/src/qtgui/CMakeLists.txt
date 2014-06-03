@@ -19,7 +19,7 @@ set(HDR_FILES
     hdr/worker.hpp
     hdr/service_worker.hpp
     hdr/ctrlsrv.hpp
-    hdr/receiver.hpp
+    hdr/jpeg_receiver.hpp
 )
 
 set(SRC_FILES
