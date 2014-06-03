@@ -26,15 +26,12 @@ public:
 private:
     /* data */
     boost::shared_ptr<boost::property_tree::ptree> cfg_;
-    monitor_queue<cv::Mat> mq_;
-    boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<bch_codec> bch_;
     boost::shared_ptr<receiver> rcv_;
     boost::shared_ptr<ctrlsrv> cfgsrv_;
 
 
     boost::shared_ptr<boost::thread> cfgthread_;
-    boost::shared_ptr<boost::thread> output_;
     boost::shared_ptr<boost::thread> process_;
 
     bool stop_;

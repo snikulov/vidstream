@@ -31,11 +31,10 @@ class receiver
 public:
     receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
-            , boost::shared_ptr<ocv_output> win
             , boost::shared_ptr<jpeg_builder> jb
             , boost::shared_ptr<bch_codec> bch
             )
-        : stop_(stop), url_(url), waiting_(false), err_(error), win_(win), jb_(jb)
+        : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb)
           , ecc_(bch)
     {
     }
@@ -113,7 +112,8 @@ public:
                 if (!m.empty())
                 {
                     // good frame, need to store data and rst
-                    win_->show(m);
+                    cv::imshow("received", m);
+                    cv::waitKey(30);
                 }
                 else
                 {
@@ -152,11 +152,6 @@ public:
     void stop()
     {
         stop_ = true;
-        win_->stop();
-        if (waiting_)
-        {
-            nn_term();
-        }
     }
 
 private:
@@ -165,7 +160,6 @@ private:
     std::string url_;
     bool waiting_;
     boost::shared_ptr<corrupt_intro> err_;
-    boost::shared_ptr<ocv_output> win_;
     boost::shared_ptr<jpeg_builder> jb_;
     boost::shared_ptr<bch_codec> ecc_;
 };
