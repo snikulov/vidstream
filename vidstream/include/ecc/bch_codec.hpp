@@ -42,7 +42,11 @@ public:
         }
         // process data
         size_t olen = 0;
-        char * buf = codec_->encode(reinterpret_cast<const char*>(&in[0]), in.size(), olen);
+        char * buf = 0;
+        {
+            boost::mutex::scoped_lock lk(mx_);
+            buf = codec_->encode(reinterpret_cast<const char*>(&in[0]), in.size(), olen);
+        }
         std::vector<unsigned char> out(buf, buf+olen);
         free(buf);
         return out;
@@ -75,8 +79,12 @@ public:
         }
         // process data
         size_t olen = 0;
-        char * buf = codec_->decode(&in[0]
-                ,in.size(), olen, successful, decoded_ok);
+        char * buf = 0;
+        {
+            boost::mutex::scoped_lock lk(mx_);
+            buf = codec_->decode(&in[0]
+                    ,in.size(), olen, successful, decoded_ok);
+        }
         std::vector<unsigned char> out(buf, buf+olen);
         free(buf);
         return out;
@@ -89,7 +97,7 @@ public:
         int t = cfg.get<int>("cfg.bch.t");
         if (m_ != m || t_ != t)
         {
-            // re-init bch TODO: add lock on this operation
+            boost::mutex::scoped_lock lk(mx_);
             codec_.reset(
 #if defined(BUILD_FOR_LINUX)
                     new ecc(m_, t_)
@@ -102,6 +110,7 @@ private:
     int m_;
     int t_;
     boost::scoped_ptr<ecc> codec_;
+    boost::mutex mx_;
 };
 
 #endif
