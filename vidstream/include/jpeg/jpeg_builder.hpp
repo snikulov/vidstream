@@ -30,6 +30,7 @@ public:
     jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
         : quality_(quality), csize_(cv::Size(640, 480))
     {
+        boost::mutex::scoped_lock lk(mx_);
         params_.push_back(CV_IMWRITE_JPEG_QUALITY);
         params_.push_back(quality);
         params_.push_back(CV_IMWRITE_JPEG_RST_INTERVAL);
@@ -59,6 +60,7 @@ public:
         jpeg_data_t ret_buf(new std::vector<unsigned char>);
         if (frame && !frame->empty())
         {
+            boost::mutex::scoped_lock lk(mx_);
             bool res = cv::imencode(".jpg", *frame, *ret_buf, params_);
             // TODO: need to decide what must I do in this case
         }
@@ -67,6 +69,7 @@ public:
 
     std::vector<int> get_params()
     {
+        boost::mutex::scoped_lock lk(mx_);
         return params_;
     }
 
@@ -99,12 +102,16 @@ public:
     jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
     {
         // Hard coded for now
-        camera_frame_t frame(new cv::Mat(csize_, CV_8UC3, cv::Scalar::all(0)));
+        camera_frame_t frame;
+
+        {
+            boost::mutex::scoped_lock lk(mx_);
+            frame.reset(new cv::Mat(csize_, CV_8UC3, cv::Scalar::all(0)));
+        }
 
         jpeg_data_t dst = from_cvmat(frame);
         std::vector<size_t> dst_idxs;
         (void)get_all_rst_blocks(*dst, dst_idxs);
-
 
         dst->erase(dst->begin()+dst_idxs[0], dst->end());
         dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
@@ -120,6 +127,7 @@ public:
 
         if (csize_ != tmps)
         {
+            boost::mutex::scoped_lock lk(mx_);
             csize_ = tmps;
         }
 
@@ -135,6 +143,7 @@ public:
 
         if(params_ != tpar)
         {
+            boost::mutex::scoped_lock lk(mx_);
             params_.swap(tpar);
         }
     }
@@ -144,6 +153,7 @@ private:
     int quality_;
     std::vector<int> params_;
     cv::Size csize_;
+    boost::mutex mx_;
 };
 } /* namespace vidstream */
 #endif // JPEG_BUILDER_HPP__

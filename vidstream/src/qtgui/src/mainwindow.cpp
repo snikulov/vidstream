@@ -91,12 +91,12 @@ void MainWindow::on_pushButton_operate_clicked()
     is_srv_running_ = !is_srv_running_;
     if (is_srv_running_)
     {
-        ui->pushButton_operate->setText("Стоп");
+        ui->pushButton_operate->setText("Stop");
         logic_->start();
     }
     else
     {
-        ui->pushButton_operate->setText("Запуск");
+        ui->pushButton_operate->setText("Start");
         logic_->stop();
     }
     // disable changes for prots
