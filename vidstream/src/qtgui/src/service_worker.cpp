@@ -19,7 +19,8 @@ void service_worker::start()
 {
     stop_ = false;
     // init run
-    win_.reset(new ocv_output(stop_, "received", mq_));
+
+    cv::namedWindow("received");
 
     std::string host("tcp://127.0.0.1:");
     std::string dataurl = host + cfg_->get<std::string>("cfg.dataport");
@@ -37,11 +38,10 @@ void service_worker::start()
     int t = cfg_->get<int>("cfg.bch.t");
     bch_.reset(new bch_codec(m, t)); // bm, bt
     cfgsrv_->subscribe(bch_.get());
-    rcv_.reset(new receiver(stop_, dataurl, err, win_, jb, bch_));
+    rcv_.reset(new receiver(stop_, dataurl, err, jb, bch_));
 
     // run threads
     cfgthread_.reset(new boost::thread(*cfgsrv_));
-    output_.reset(new boost::thread(*win_));
     process_.reset(new boost::thread(*rcv_));
 
 }
@@ -51,10 +51,9 @@ void service_worker::stop()
     // terminate all work
     stop_ = true;
 
-    win_->stop();
     rcv_->stop();
 
-    cfgthread_->join();
     process_->join();
-    output_->join();
+    cfgthread_->join();
+    cv::destroyWindow("received");
 }
