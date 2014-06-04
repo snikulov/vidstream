@@ -99,6 +99,9 @@ private:
     {
         switch(state)
         {
+            case STM_DATA_READY:
+                rcv_data_->insert(rcv_data_->end(), end_.begin(), end_.end());
+                break;
             case STM_WAIT_RST:
                 rst_num_ = 0;
                 rcv_data_.reset(new std::vector<unsigned char>());

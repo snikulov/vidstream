@@ -101,6 +101,22 @@ public:
             if (STM_DATA_READY == stm.process(buf))
             {
                 jpeg_data_t jpg = stm.get_jpeg();
+                jpeg_rst_idxs_t rsts = jb_->rst_idxs(jpg);
+                std::cerr << "stm jpeg: rst count=" << std::dec << rsts->size() << std::endl;
+                std::vector<unsigned char>& rjpg = *jpg;
+                for(size_t i = 0; i < rsts->size(); ++i)
+                {
+                    size_t idx = (*rsts)[i];
+                    unsigned char val1 = rjpg[idx];
+                    unsigned char val2 = rjpg[idx+1];
+                    if (val1 != 0xff || ((val2 & 0x0f) != (i % 8)))
+                    {
+                        std::cerr << "i=" << i
+                            << " rst=0x" << std::hex
+                            << int(val1) << int(val2) << std::endl;
+                    }
+                }
+
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
