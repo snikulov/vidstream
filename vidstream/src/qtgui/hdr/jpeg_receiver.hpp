@@ -17,6 +17,7 @@
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
 #include <jpeg_history.hpp>
+#include <jpeg_rcv_stm.hpp>
 #include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
@@ -47,7 +48,7 @@ public:
     void operator()()
     {
 
-        jpeg_history history(jb_);
+        boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
         boost::scoped_ptr<transport> rcv(
                 new transport(TRANSPORT_PULL, url_)
@@ -56,6 +57,7 @@ public:
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
+        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
         unsigned long img_count = 0;
@@ -95,68 +97,18 @@ public:
                 }
             }
             waiting_ = false;
-            if(buf.end() != std::search(buf.begin(), buf.end(), s_mark.begin(), s_mark.end()))
-            {
-                // jpeg start
-                rcv_buf.reset(new std::vector<unsigned char>());
-                rst_num = 0;
-//                std::cout << "started new image data..." << std::endl;
-            }
-            else if(buf.end() != std::search(buf.begin(), buf.end(), e_mark.begin(), e_mark.end()))
-            {
-                // jpeg end
-                // need to reassemble
-                rcv_buf->insert(rcv_buf->end(), e_mark.begin(), e_mark.end());
-                img_count++;
-                rst_num = 0;
-                std::vector<size_t> rst_idxs;
-                get_all_rst_blocks(*rcv_buf, rst_idxs);
-                std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
 
-                jpeg_data_t jpg = jb_->build_jpeg_from_rst(rcv_buf);
-//                jbuilder.write(jpg, img_count);
+            if (STM_DATA_READY == stm.process(buf))
+            {
+                jpeg_data_t jpg = stm.get_jpeg();
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
                     // probably good frame, store history
-                    history.put(jpg);
+                    history->put(jpg);
                     cv::imshow("received", m);
                     cv::waitKey(30);
                 }
-                else
-                {
-
-                    std::cout << "m is empty" << std::endl;
-                }
-            }
-            else
-            {
-                // check rst code
-                unsigned char exp_rst = rst_num % 8;
-                if (0xFF == buf.at(0) && is_valid_marker(buf.at(1)))
-                {
-
-                    std::vector<unsigned char>::iterator it;
-                    it = std::find_end(
-                            buf.begin(),
-                            buf.end(),
-                            buf.begin(),
-                            buf.begin()+1
-                           );
-                    if (it != buf.end() || it != buf.begin())
-                    {
-                        rcv_buf->insert(rcv_buf->end(), buf.begin(), it);
-                    }
-                    else
-                    {
-                        // not found terminator
-                    }
-                }
-                else
-                {
-                    std::cerr << "invalid RST code" << std::endl;
-                }
-                rst_num++;
             }
         }
     }
