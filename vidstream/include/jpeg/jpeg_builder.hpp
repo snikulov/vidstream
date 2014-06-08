@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <boost/thread/mutex.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
@@ -99,17 +100,27 @@ public:
         return ret_val;
     }
 
-    jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
+    jpeg_data_t get_etalon_jpeg()
     {
-        // Hard coded for now
         camera_frame_t frame;
-
         {
             boost::mutex::scoped_lock lk(mx_);
             frame.reset(new cv::Mat(csize_, CV_8UC3, cv::Scalar::all(0)));
         }
+        return from_cvmat(frame);
+    }
 
-        jpeg_data_t dst = from_cvmat(frame);
+    size_t get_rst_num()
+    {
+        std::vector<size_t> rst_idx;
+        (void)get_all_rst_blocks(*get_etalon_jpeg(), rst_idx);
+        return rst_idx.size();
+    }
+
+    jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
+    {
+        // create jpeg with current params
+        jpeg_data_t dst = get_etalon_jpeg();
         std::vector<size_t> dst_idxs;
         (void)get_all_rst_blocks(*dst, dst_idxs);
 

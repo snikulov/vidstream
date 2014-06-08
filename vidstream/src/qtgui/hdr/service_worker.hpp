@@ -10,7 +10,7 @@
 
 class ocv_output;
 class bch_codec;
-class receiver;
+class jpeg_receiver;
 class ctrlsrv;
 
 class service_worker : public worker, boost::noncopyable
@@ -27,7 +27,7 @@ private:
     /* data */
     boost::shared_ptr<boost::property_tree::ptree> cfg_;
     boost::shared_ptr<bch_codec> bch_;
-    boost::shared_ptr<receiver> rcv_;
+    boost::shared_ptr<jpeg_receiver> rcv_;
     boost::shared_ptr<ctrlsrv> cfgsrv_;
 
 

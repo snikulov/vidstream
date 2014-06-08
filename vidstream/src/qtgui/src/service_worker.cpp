@@ -3,7 +3,7 @@
 
 #include <ecc/bch_codec.hpp>
 
-#include <receiver.hpp>
+#include <jpeg_receiver.hpp>
 #include <ctrlsrv.hpp>
 
 service_worker::service_worker(boost::shared_ptr<boost::property_tree::ptree> pcfg)
@@ -38,7 +38,7 @@ void service_worker::start()
     int t = cfg_->get<int>("cfg.bch.t");
     bch_.reset(new bch_codec(m, t)); // bm, bt
     cfgsrv_->subscribe(bch_.get());
-    rcv_.reset(new receiver(stop_, dataurl, err, jb, bch_));
+    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb, bch_));
 
     // run threads
     cfgthread_.reset(new boost::thread(*cfgsrv_));

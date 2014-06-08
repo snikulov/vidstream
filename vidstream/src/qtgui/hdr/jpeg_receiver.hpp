@@ -1,5 +1,5 @@
-#ifndef RECEIVER_HPP__
-#define RECEIVER_HPP__
+#ifndef JPEG_RECEIVER_HPP__
+#define JPEG_RECEIVER_HPP__
 
 
 #include <iostream>
@@ -16,6 +16,8 @@
 #include <types.hpp>
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
+#include <jpeg_history.hpp>
+#include <jpeg_rcv_stm.hpp>
 #include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
@@ -26,10 +28,10 @@
 
 using namespace vidstream;
 
-class receiver
+class jpeg_receiver
 {
 public:
-    receiver(bool& stop, const std::string& url
+    jpeg_receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
             , boost::shared_ptr<bch_codec> bch
@@ -39,12 +41,15 @@ public:
     {
     }
 
-    ~receiver()
+    ~jpeg_receiver()
     {
     }
 
     void operator()()
     {
+
+        boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
+
         boost::scoped_ptr<transport> rcv(
                 new transport(TRANSPORT_PULL, url_)
                 );
@@ -52,9 +57,11 @@ public:
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
+        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
         unsigned long img_count = 0;
+        size_t rst_num = 0;
         while(!stop_)
         {
             waiting_ = true;
@@ -90,60 +97,33 @@ public:
                 }
             }
             waiting_ = false;
-            if(buf.end() != std::search(buf.begin(), buf.end(), s_mark.begin(), s_mark.end()))
-            {
-                // jpeg start
-                rcv_buf.reset(new std::vector<unsigned char>());
-//                std::cout << "started new image data..." << std::endl;
-            }
-            else if(buf.end() != std::search(buf.begin(), buf.end(), e_mark.begin(), e_mark.end()))
-            {
-                // jpeg end
-                // need to reassemble
-                rcv_buf->insert(rcv_buf->end(), e_mark.begin(), e_mark.end());
-                img_count++;
-                std::vector<size_t> rst_idxs;
-                get_all_rst_blocks(*rcv_buf, rst_idxs);
-                std::cout << "img_count = "<< img_count << " rst blocks =" << rst_idxs.size() << std::endl;
 
-                jpeg_data_t jpg = jb_->build_jpeg_from_rst(rcv_buf);
-//                jbuilder.write(jpg, img_count);
+            if (STM_DATA_READY == stm.process(buf))
+            {
+                jpeg_data_t jpg = stm.get_jpeg();
+                jpeg_rst_idxs_t rsts = jb_->rst_idxs(jpg);
+                std::cerr << "stm jpeg: rst count=" << std::dec << rsts->size() << std::endl;
+                std::vector<unsigned char>& rjpg = *jpg;
+                for(size_t i = 0; i < rsts->size(); ++i)
+                {
+                    size_t idx = (*rsts)[i];
+                    unsigned char val1 = rjpg[idx];
+                    unsigned char val2 = rjpg[idx+1];
+                    if (val1 != 0xff || ((val2 & 0x0f) != (i % 8)))
+                    {
+                        std::cerr << "i=" << i
+                            << " rst=0x" << std::hex
+                            << int(val1) << int(val2) << std::endl;
+                    }
+                }
+
                 cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
                 if (!m.empty())
                 {
-                    // good frame, need to store data and rst
+                    // probably good frame, store history
+                    history->put(jpg);
                     cv::imshow("received", m);
                     cv::waitKey(30);
-                }
-                else
-                {
-                    std::cout << "m is empty" << std::endl;
-                }
-            }
-            else
-            {
-                // check rst code
-                if (0xFF == buf.at(0) && is_valid_marker(buf.at(1)))
-                {
-                    std::vector<unsigned char>::iterator it;
-                    it = std::find_end(
-                            buf.begin(),
-                            buf.end(),
-                            buf.begin(),
-                            buf.begin()+1
-                           );
-                    if (it != buf.end() || it != buf.begin())
-                    {
-                        rcv_buf->insert(rcv_buf->end(), buf.begin(), it);
-                    }
-                    else
-                    {
-                        // not found terminator
-                    }
-                }
-                else
-                {
-                    std::cerr << "invalid RST code" << std::endl;
                 }
             }
         }
