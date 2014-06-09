@@ -65,6 +65,8 @@ bool ui_update(Ui::MainWindow &
 void cfg_update(boost::property_tree::ptree &
                 , const Ui::MainWindow &);
 
+void update_stat(Ui::MainWindow &, const std::string&);
+
 int ui_set_resolution_index(
     Ui::MainWindow&
     , const boost::property_tree::ptree &);

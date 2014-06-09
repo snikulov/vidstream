@@ -1,6 +1,9 @@
 #ifndef CONTROL_SRV_HPP__
 #define CONTROL_SRV_HPP__
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
 #include <string>
 #include <sstream>
 #include <boost/property_tree/ptree.hpp>
@@ -14,8 +17,8 @@ typedef boost::shared_ptr<boost::property_tree::ptree> cfg_ptr_t;
 class ctrlsrv
 {
 public:
-    ctrlsrv(cfg_ptr_t cfg, const std::string& url, bool& stop)
-        : cfg_(cfg), url_(url), stop_(stop)
+    ctrlsrv(Ui::MainWindow &u, cfg_ptr_t cfg, const std::string& url, bool& stop)
+        : ui_(u), cfg_(cfg), url_(url), stop_(stop)
     {
     }
     ~ctrlsrv()
@@ -34,6 +37,9 @@ public:
             {
                 // got command - don't care for now
                 // later will use it for statistic
+                std::string stat(cmd.begin(), cmd.end());
+                update_stat(ui_, stat);
+
                 std::ostringstream out;
                 write_json(out, *cfg_, false);
                 std::string data(out.str());
@@ -66,6 +72,7 @@ public:
 
 private:
     /* data */
+    Ui::MainWindow &ui_;
     cfg_ptr_t cfg_;
     std::string url_;
     bool& stop_;

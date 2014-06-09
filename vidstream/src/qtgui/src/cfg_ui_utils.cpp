@@ -54,6 +54,19 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
     return is_good_cfg;
 }
 
+void update_stat(Ui::MainWindow & u, const std::string& data)
+{
+    std::stringstream ss(data);
+    boost::property_tree::ptree pt;
+    boost::property_tree::read_json(ss, pt);
+
+    u.doubleSpinBox_f_proc_time->setValue(pt.get<double>("proc.time"));
+    u.doubleSpinBox_f_send_time->setValue(pt.get<double>("send.time"));
+    u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
+    u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
+
+}
+
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 {
     cfg.put("cfg.bch.m",     u.spinBox_bch_m->value());

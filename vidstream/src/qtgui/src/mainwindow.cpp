@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // pass configuration to logic
-    logic_.reset(new service_worker(cfg_));
+    logic_.reset(new service_worker(*ui, cfg_));
 
 }
 

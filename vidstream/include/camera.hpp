@@ -40,13 +40,17 @@ public:
 
     camera_frame_t get_frame() const
     {
-        timer<steady_clock> t;
         static int err_count = 0;
+        if (!count_)
+        {
+            timer_.start();
+        }
         camera_frame_t ret_val(new cv::Mat());
         if (src_->read(*ret_val))
         {
             count_++;
-            sec_ += t.seconds(); // only good attempts
+            timer_.stop();
+            sec_ = timer_.seconds(); // only good attempts
         }
         else
         {
@@ -60,13 +64,13 @@ public:
             }
         }
 
-        std::cout << "camera FPS: " << get_soft_fps() << " ocvFPS: " << get_ocv_fps() << std::endl;
+//        std::cout << "camera FPS: " << get_soft_fps() << " ocvFPS: " << get_ocv_fps() << std::endl;
         return ret_val;
     }
 
-    double get_soft_fps() const
+    unsigned int get_soft_fps() const
     {
-        return  count_/sec_;
+        return  static_cast<unsigned int>(count_/sec_);
     }
     double get_ocv_fps() const
     {
@@ -103,8 +107,9 @@ private:
     std::string fname_;
     bool is_hw_cam_;
     cv::Size req_size_;
-    mutable unsigned long count_;
-    mutable double sec_;
+    mutable unsigned long long count_;
+    mutable long double sec_;
+    mutable timer<high_resolution_clock> timer_;
 };
 
 } /* namespace vidstream */

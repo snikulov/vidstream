@@ -16,7 +16,7 @@ class ctrlsrv;
 class service_worker : public worker, boost::noncopyable
 {
 public:
-    service_worker (boost::shared_ptr<boost::property_tree::ptree>);
+    service_worker (Ui::MainWindow &u, boost::shared_ptr<boost::property_tree::ptree>);
     ~service_worker ();
 
     void start();
@@ -25,11 +25,11 @@ public:
 
 private:
     /* data */
+    Ui::MainWindow &ui_;
     boost::shared_ptr<boost::property_tree::ptree> cfg_;
     boost::shared_ptr<bch_codec> bch_;
     boost::shared_ptr<jpeg_receiver> rcv_;
     boost::shared_ptr<ctrlsrv> cfgsrv_;
-
 
     boost::shared_ptr<boost::thread> cfgthread_;
     boost::shared_ptr<boost::thread> process_;

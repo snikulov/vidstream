@@ -16,7 +16,8 @@
 #include <frame_producer.hpp>
 #include <frame_processor.hpp>
 
-#include "cfg/cfg_subscribers.hpp"
+#include <cfg/cfg_subscribers.hpp>
+#include <stat/stat_data.hpp>
 
 using namespace vidstream;
 
@@ -48,9 +49,21 @@ void display(const int depth, const boost::property_tree::ptree& tree)
 class cfg_sync_thread : public boost::noncopyable
 {
 public:
-    cfg_sync_thread(int& stop, const std::string& url, boost::shared_ptr<boost::property_tree::ptree> cfg)
-        : stop_(stop), url_(url), cfg_(cfg), is_ready_(false)
+    cfg_sync_thread(int& stop, const std::string& url, boost::shared_ptr<boost::property_tree::ptree> cfg, stat_data_t* stat)
+        : stop_(stop), url_(url), cfg_(cfg), is_ready_(false), stat_(stat)
     {}
+
+    int send_request()
+    {
+        boost::property_tree::ptree pt;
+        pt.put("cam.fps", stat_->cam_fps_);
+        pt.put("proc.fps", stat_->process_fps_);
+        pt.put("proc.time", stat_->f_process_time_);
+        pt.put("send.time", stat_->f_send_time_);
+        std::stringstream ss;
+        boost::property_tree::write_json(ss, pt);
+        return trans_->send(ss.str());
+    }
 
     void operator()()
     {
@@ -75,7 +88,7 @@ public:
                 do
                 {
                     if(stop_) break;
-                    ret = trans_->send("getconfig");
+                    ret = send_request();
                     boost::this_thread::sleep_for(boost::chrono::milliseconds(250));
                     if (-1 == ret) err_count++;
                     else err_count = 0;
@@ -132,6 +145,7 @@ private:
     boost::shared_ptr<boost::property_tree::ptree> cfg_;
     boost::shared_ptr<transport> trans_;
     bool is_ready_;
+    stat_data_t * stat_;
 
     cfg_subscribers subs_;
 };
@@ -161,7 +175,10 @@ int main(int argc, char** argv)
     int stop_flag = 0;
 
     boost::shared_ptr<boost::property_tree::ptree> cfg(new boost::property_tree::ptree());
-    cfg_sync_thread resync(stop_flag, cmd_url, cfg);
+
+    stat_data_t stat_collect;
+
+    cfg_sync_thread resync(stop_flag, cmd_url, cfg, &stat_collect);
     boost::thread cfg_thread(boost::ref(resync));
 
     while(!resync.ready())
@@ -170,7 +187,7 @@ int main(int argc, char** argv)
         boost::this_thread::sleep_for(boost::chrono::seconds(1));
     }
 
-    display(3, *cfg);
+//    display(3, *cfg);
 
     int bm = cfg->get<int>("cfg.bch.m");
     int bt = cfg->get<int>("cfg.bch.t");
@@ -196,10 +213,9 @@ int main(int argc, char** argv)
     boost::shared_ptr<bch_codec> bch_ecc(new bch_codec(bm, bt));
     resync.subscribe(bch_ecc.get());
 
-
-    frame_producer producer(c, mq, stop_flag);
+    frame_producer producer(c, mq, stop_flag, &stat_collect);
     frame_processor processor(isize, mq, stop_flag, dataurl
-            , jb, bch_ecc);
+            , jb, bch_ecc, &stat_collect);
     resync.subscribe(&processor);
 
     boost::thread tproducer(producer);
