@@ -7,17 +7,50 @@ using namespace boost::chrono;
 template< class Clock >
 class timer
 {
-    typename Clock::time_point start;
+    typename Clock::time_point start_;
+    mutable typename Clock::duration diff_;
+
 public:
-    timer() : start( Clock::now() ) {}
+    timer() : start_( Clock::now() ) {}
+
+    void start(bool reset = true) 
+    {
+        if (reset)
+        {
+            start_ = Clock::now();
+        }
+    }
+
+    void stop()
+    {
+        diff_ = Clock::now() - start_;
+    }
+
     typename Clock::duration elapsed() const
     {
-        return Clock::now() - start;
+        return diff_;
     }
+
     double seconds() const
     {
-        return elapsed().count() * ((double)Clock::period::num/Clock::period::den);
+        return diff_.count() * ((double)Clock::period::num/Clock::period::den);
     }
+
+    unsigned long long sec() const
+    {
+        return  (boost::chrono::duration_cast<boost::chrono::seconds>( diff_ )).count();
+    }
+
+    unsigned long long nsec() const
+    {
+        return diff_.count();
+    }
+
+    unsigned long long mcsec() const
+    {
+        return  boost::chrono::duration_cast<boost::chrono::microseconds>( elapsed() ).count();
+    }
+    
 };
 
 

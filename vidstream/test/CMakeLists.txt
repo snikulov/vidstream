@@ -1,6 +1,7 @@
 add_subdirectory(split)
 add_subdirectory(config)
 add_subdirectory(corrupt)
+add_subdirectory(perf)
 if(UNIX)
     add_subdirectory(bch_codec)
 endif()

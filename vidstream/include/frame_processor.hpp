@@ -6,6 +6,8 @@
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
 #include <ecc/bch_codec.hpp>
+#include <perf/perf_clock.hpp>
+
 
 namespace vidstream
 {
@@ -17,8 +19,10 @@ public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
                     , boost::shared_ptr<bch_codec> ecc
+                    , stat_data_t * stat
                    )
         : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb), ecc_(ecc)
+          , cnt_processed_(0), cnt_sent_(0), stat_(stat)
     {
     }
 
@@ -42,11 +46,16 @@ public:
             }
         }
         int max_err_try = 0;
+
+        timer_.start();
         while(!stop_)
         {
+            timer<high_resolution_clock> pt;
+
             camera_frame_t frame = q_.dequeue();
             if (frame && !frame->empty())
             {
+                cnt_processed_++;
                 // resize if needed
                 if(frame->size() != *req_size_)
                 {
@@ -59,10 +68,15 @@ public:
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
+                pt.stop();
+//                std::cerr << "process time: " << pt.seconds() << std::endl;
+                stat_->f_process_time_ = pt.seconds();
+
                 if (trans)
                 {
                     try
                     {
+                        pt.start();
                         int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
 
                         if (ret == -1)
@@ -79,6 +93,10 @@ public:
                         else
                         {
                             max_err_try = 0;
+                            cnt_sent_++;
+                            pt.stop();
+//                            std::cerr << "send time: " << pt.seconds() << std::endl;
+                            stat_->f_send_time_ = pt.seconds();
                         }
                     }
                     catch(nn::exception& ex)
@@ -88,13 +106,34 @@ public:
                         // close transport - TODO: think how to reconnect
                         trans.reset(new transport(TRANSPORT_PUSH, url_));
                         max_err_try = 0;
-
                     }
                 }
             }
-            if(cv::waitKey(30) >= 0) stop_ = true;
+
+            if(cv::waitKey(10) >= 0)
+            {
+                stop_ = true;
+            }
+            timer_.stop();
+#if 0
+            std::cout << "process FPS: " << get_process_fps()
+                << " sent FPS: " << get_sent_fps()
+                << " sec=" << timer_.sec() << " frame count=" << cnt_processed_ << std::endl;
+#endif
+            stat_->process_fps_= get_process_fps();
         }
     }
+
+    unsigned int get_process_fps() const
+    {
+        return  static_cast<unsigned int>(cnt_processed_/timer_.seconds());
+    }
+
+    unsigned int get_sent_fps() const
+    {
+        return  static_cast<unsigned int>(cnt_sent_/timer_.seconds());
+    }
+
 
     ~frame_processor()
     {
@@ -121,6 +160,11 @@ private:
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
     boost::shared_ptr<bch_codec> ecc_;
+    mutable unsigned long long cnt_processed_;
+    mutable unsigned long long cnt_sent_;
+    mutable timer<high_resolution_clock> timer_;
+
+    stat_data_t * stat_;
 
 };
 
