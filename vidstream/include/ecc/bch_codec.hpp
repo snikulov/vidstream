@@ -1,6 +1,7 @@
 #ifndef BCH_CODEC_HPP__
 #define BCH_CODEC_HPP__
 
+#include <boost/thread/mutex.hpp>
 #include "cfg/cfg_notify.hpp"
 #if defined(BUILD_FOR_LINUX)
 #include <ecc/ecc.h>
