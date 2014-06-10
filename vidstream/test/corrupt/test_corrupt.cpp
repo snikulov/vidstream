@@ -19,13 +19,63 @@ BOOST_AUTO_TEST_CASE( test_corrupt_case_1 )
 
     BOOST_CHECK(etalon == data);
 
-    corr.add_error(data, 1.);
+    double err_persent = 1.0;
+    corr.add_error(data, err_persent);
 
     BOOST_CHECK(etalon != data);
     double err = corr.check_error(etalon, data);
-    int ret = static_cast<int>(err);
 
-    BOOST_CHECK_MESSAGE(ret == 5, "err=" << err << " ret=" << ret);
+    BOOST_CHECK_MESSAGE(err <= err_persent , "err: " << err << " error %: " << err_persent);
+
+}
+
+BOOST_AUTO_TEST_CASE( test_corrupt_case_2 )
+{
+    corruptor corr;
+    std::vector<uint8_t> b;
+    b.push_back(0xFF);
+
+    std::string bits;
+    to_string(corr.to_bitset(b),bits);
+    BOOST_CHECK_MESSAGE(bits == "11111111", "bits = " << bits);
+
+    b.clear();
+    b.push_back(0xF0);
+    to_string(corr.to_bitset(b), bits);
+    BOOST_CHECK_MESSAGE(bits == "11110000", "bits = " << bits);
+
+    b.clear();
+    b.push_back(0xF0);
+    b.push_back(0x0F);
+    to_string(corr.to_bitset(b), bits);
+    BOOST_CHECK_MESSAGE(bits == "0000111111110000", "bits = " << bits);
+
+}
+
+BOOST_AUTO_TEST_CASE( test_corrupt_case_3 )
+{
+    corruptor corr;
+
+    std::vector<uint8_t> data;
+    data.push_back(0xFF);
+
+    boost::dynamic_bitset<> bits = corr.to_bitset(data);
+
+    BOOST_CHECK(bits.size() == 8);
+    std::vector<uint8_t> conv = corr.to_bytes(bits);
+    BOOST_CHECK_MESSAGE(conv.size() == data.size(), "conv size = " << conv.size());
+    BOOST_CHECK(data == conv);
+
+    data.clear();
+    data.push_back(0xff);
+    data.push_back(0xf0);
+    data.push_back(0x0f);
+
+    bits = corr.to_bitset(data);
+    BOOST_CHECK_MESSAGE(bits.size() == (data.size() * 8), "bits size = " << bits.size()
+            << " data size = " << data.size());
+    conv = corr.to_bytes(bits);
+    BOOST_CHECK(data == conv);
 
 }
 
