@@ -29,7 +29,7 @@ class jpeg_builder : public cfg_notify
 {
 public:
     jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
-        : quality_(quality), csize_(cv::Size(640, 480))
+        : quality_(quality), csize_(cv::Size(640, 480)), num_of_rst_(0)
     {
         boost::mutex::scoped_lock lk(mx_);
         params_.push_back(CV_IMWRITE_JPEG_QUALITY);
@@ -112,9 +112,13 @@ public:
 
     size_t get_rst_num()
     {
-        std::vector<size_t> rst_idx;
-        (void)get_all_rst_blocks(*get_etalon_jpeg(), rst_idx);
-        return rst_idx.size();
+        if (!num_of_rst_)
+        {
+            std::vector<size_t> rst_idx;
+            (void)get_all_rst_blocks(*get_etalon_jpeg(), rst_idx);
+            num_of_rst_ = rst_idx.size();
+        }
+        return num_of_rst_;
     }
 
     jpeg_data_t build_jpeg_from_rst(jpeg_data_t jpeg_rst)
@@ -140,6 +144,7 @@ public:
         {
             boost::mutex::scoped_lock lk(mx_);
             csize_ = tmps;
+            num_of_rst_ = 0;
         }
 
         std::vector<int> tpar;
@@ -156,6 +161,7 @@ public:
         {
             boost::mutex::scoped_lock lk(mx_);
             params_.swap(tpar);
+            num_of_rst_ = 0;
         }
     }
 
@@ -165,6 +171,7 @@ private:
     std::vector<int> params_;
     cv::Size csize_;
     boost::mutex mx_;
+    size_t num_of_rst_;
 };
 } /* namespace vidstream */
 #endif // JPEG_BUILDER_HPP__
