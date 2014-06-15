@@ -48,12 +48,11 @@ add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILE
 target_link_libraries(${TARGET_NAME}
 #   ${Qt5Widgets_LIBRARIES}
    ${QT_LIBRARIES}
+   ${Boost_LIBRARIES}
    ${OpenCV_LIBS}
    nanomsg
    split
    corrupt
-#   boost_random
-   ${Boost_LIBRARIES}
    )
 if(UNIX)
     target_link_libraries(${TARGET_NAME}

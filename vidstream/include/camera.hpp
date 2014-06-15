@@ -7,9 +7,6 @@
 #include <string>
 #include <exception>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/thread/thread.hpp>
-
 #include <boost/chrono.hpp>
 #include <opencv2/opencv.hpp>
 
@@ -34,7 +31,7 @@ public:
         src_(new VideoCapture()), fname_(fname), is_hw_cam_(false),
         req_size_(cv::Size(w,h)), count_(0), sec_(0)
     {
-	open();
+        open();
     }
 
     ~camera()
@@ -49,19 +46,9 @@ public:
             timer_.start();
         }
         camera_frame_t ret_val(new cv::Mat());
-	
-	// Delay to get desired FPS for fast systems
-	double desired_fps = 25.0;
-
-	 
         if (src_->read(*ret_val))
         {
-	  // limit read frame rate to 25 fps
-	  while ( duration_cast<duration<double> >(high_resolution_clock::now() - frame_read_time_point).count() <= 1.0/desired_fps ) 
-	      boost::this_thread::sleep(boost::posix_time::milliseconds(1)); 
-
-	    frame_read_time_point = boost::chrono::high_resolution_clock::now();
-	    count_++;
+            count_++;
             timer_.stop();
             sec_ = timer_.seconds(); // only good attempts
         }
@@ -103,8 +90,6 @@ private:
         else
         {
             src_->open(fname_);
-	    // limit capture FPS from file
-	    // src_->set(CV_CAP_PROP_FPS, 25);
         }
 
         if (!src_->isOpened())
@@ -125,7 +110,6 @@ private:
     mutable unsigned long long count_;
     mutable long double sec_;
     mutable timer<high_resolution_clock> timer_;
-    mutable boost::chrono::high_resolution_clock::time_point frame_read_time_point =  boost::chrono::high_resolution_clock::now();
 };
 
 } /* namespace vidstream */
