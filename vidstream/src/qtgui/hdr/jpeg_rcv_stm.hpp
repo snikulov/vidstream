@@ -135,7 +135,11 @@ private:
 
     bool is_rstblock(const std::vector<unsigned char>& buf, size_t& rst_num)
     {
-        if(0xFF == buf.at(0) && is_rst(buf.at(1)))
+      //  if (get_err_count(start_, data) <= MAX_NUM_OF_ERROR)
+        //if(0xFF == buf.at(0) && is_rst(buf.at(1)))
+      std::vector<unsigned char> xff;
+      xff.push_back(0xff);
+      if( (get_err_count(buf, xff) <= MAX_NUM_OF_ERROR) && is_rst(buf.at(1)))
         {
             rst_num = buf[1] & 0x0F;
             return true;

@@ -27,6 +27,7 @@ public:
             ,boost::shared_ptr<bch_codec> codec
             )
     {
+	trans->start_frame();
         int res = 0;
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;

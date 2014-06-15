@@ -29,6 +29,12 @@ public:
     {
     }
 
+    int start_frame()
+    {
+      std::cout << "Frame bytes: " << frame_size << std::endl;
+      frame_size = 0;
+    }
+    
     int send(const std::vector<unsigned char>& data)
     {
         return send(reinterpret_cast<const char*>(&data[0]), data.size());
@@ -44,6 +50,7 @@ public:
         int bytes = 0;
         const char* buf = data;
         bytes = socket_.send(buf, len, 0);
+	frame_size += bytes;
         return bytes;
     }
 
@@ -86,6 +93,7 @@ private:
     transport_t type_;
     std::string url_;
     nn::socket socket_;
+    int frame_size = 0;
 };
 } /* namespace vidstream */
 
