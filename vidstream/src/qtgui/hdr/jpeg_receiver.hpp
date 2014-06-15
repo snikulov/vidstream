@@ -16,8 +16,8 @@
 #include <types.hpp>
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
-#include <jpeg_history.hpp>
-#include <jpeg_rcv_stm.hpp>
+#include <jpeg/jpeg_history.hpp>
+#include <jpeg/jpeg_rcv_stm.hpp>
 #include <transport/transport.hpp>
 
 #include <ocv/ocv_output.hpp>
@@ -107,7 +107,9 @@ public:
             }
             waiting_ = false;
 
-            if (STM_DATA_READY == stm.process(buf))
+            stm.process(buf);
+            
+            if (stm.has_data())
             {
                 jpeg_data_t jpg = stm.get_jpeg();
                 jpeg_rst_idxs_t rsts = jb_->rst_idxs(jpg);

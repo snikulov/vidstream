@@ -12,10 +12,16 @@ class jpeg_transport
 public:
     jpeg_transport()
     {
+#if 0
         start_mark_.push_back(0xff);
         start_mark_.push_back(0xd8);
         end_mark_.push_back(0xff);
         end_mark_.push_back(0xd9);
+#endif
+        start_mark_.push_back(0xff);
+        start_mark_.push_back(0xff);
+        start_mark_.push_back(0xff);
+        start_mark_.push_back(0xff);
     }
 
     ~jpeg_transport()
@@ -43,19 +49,21 @@ public:
         size_t ridx_len = ridx.size()-1;
         for(size_t i = 0; i < ridx_len; i++ )
         {
-            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i)], &rdata[ridx.at(i+1)]);
+            // send only data, without RST mark
+            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i)+2], &rdata[ridx.at(i+1)]);
             // put terminal RSTn code for end of block indication
-            rst_blk.push_back(rst_blk.at(0));
-            rst_blk.push_back(rst_blk.at(1));
+//            rst_blk.push_back(rst_blk.at(0));
+//            rst_blk.push_back(rst_blk.at(1));
 
             res = trans->send(codec->encode(rst_blk));
+
             if (res == -1)
             {
                 return res;
             }
         }
 // send end file marker
-        res = trans->send(codec->encode(end_mark_));
+//        res = trans->send(codec->encode(end_mark_));
         return res;
     }
 
