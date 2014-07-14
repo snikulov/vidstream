@@ -21,7 +21,7 @@ void service_worker::start()
     stop_ = false;
     // init run
 
-    cv::namedWindow("received");
+    //cv::namedWindow("received");
 
     std::string host("tcp://127.0.0.1:");
     std::string dataurl = host + cfg_->get<std::string>("cfg.dataport");

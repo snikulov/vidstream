@@ -28,6 +28,12 @@
 
 using namespace vidstream;
 
+int MyErrorHandler(int status, const char* func_name, const char* err_msg, const char* file_name, int line, void*)
+{
+    std::cerr << "Woohoo, my own custom error handler" << std::endl;
+    return 0;
+} 
+
 class jpeg_receiver
 {
 public:
@@ -39,6 +45,7 @@ public:
         : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb)
           , ecc_(bch)
     {
+      cv::namedWindow("received");
     }
 
     ~jpeg_receiver()
@@ -84,6 +91,8 @@ public:
                 std::vector<char> good;
                 bool is_ok = false;
                 std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
+		// hack TODO: try to decode everytime
+		is_ok = true;
                 if (is_ok)
                 {
                     buf.swap(dec);
@@ -118,14 +127,25 @@ public:
                             << int(val1) << int(val2) << std::endl;
                     }
                 }
-
-                cv::Mat m = cv::imdecode(cv::Mat(*jpg), 1);
+		// write rebuilt frame
+		static int nn = 0;
+                jb_->write(jpg,nn);
+                cvSetErrMode(CV_ErrModeParent);
+		//cvRedirectError(MyErrorHandler);
+		//cv::Mat imgbuf = cv::Mat(1, jpg->size(), CV_8U, &((*jpg)[0]));
+		//cv::Mat m = cv::imdecode(imgbuf, CV_LOAD_IMAGE_COLOR);
+		
+                //cv::Mat m = cv::imdecode(cv::Mat(*jpg), CV_LOAD_IMAGE_COLOR);
+		cv::Mat m = cv::imread("img00000000.jpg", CV_LOAD_IMAGE_COLOR);
+		
                 if (!m.empty())
                 {
-                    // probably good frame, store history
+                    std::cerr << "new frame" << std::endl;
+
+		  // probably good frame, store history
                     history->put(jpg);
                     cv::imshow("received", m);
-                    cv::waitKey(30);
+                    cv::waitKey(10);
                 }
             }
         }

@@ -127,7 +127,6 @@ public:
         jpeg_data_t dst = get_etalon_jpeg();
         std::vector<size_t> dst_idxs;
         (void)get_all_rst_blocks(*dst, dst_idxs);
-
         dst->erase(dst->begin()+dst_idxs[0], dst->end());
         dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
 

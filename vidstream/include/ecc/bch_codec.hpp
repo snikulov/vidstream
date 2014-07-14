@@ -3,6 +3,9 @@
 
 #include <boost/thread/mutex.hpp>
 #include "cfg/cfg_notify.hpp"
+
+//#undef BUILD_FOR_LINUX
+
 #if defined(BUILD_FOR_LINUX)
 #include <ecc/ecc.h>
 #else
