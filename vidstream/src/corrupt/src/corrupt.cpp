@@ -7,59 +7,18 @@
 #include <boost/random/uniform_int_distribution.hpp>
 #include <boost/math/special_functions/round.hpp>
 
-corruptor::corruptor()
-{
-    srand (time(NULL));
-}
 
-corruptor::corruptor(const corruptor& rhs)
-{
-    srand (time(NULL));
-}
-
-corruptor& corruptor::operator= (const corruptor& rhs)
-{
-    srand (time(NULL));
-    return *this;
-}
-
-
-float corruptor::check_err(uint8_t *etalon, uint8_t *data, unsigned len)
-{
-    float bad_bytes = 0;
-    for(unsigned ii = 0; ii < len; ii++)
-        if(etalon[ii] != data[ii])
-            bad_bytes += 1.0;
-
-    return 100.0* bad_bytes /(float)len;
-}
-
-void corruptor::add_err(uint8_t *data, unsigned len, float err_prcnt)
-{
-    int prob = err_prcnt;
-    if (!prob)
-    {
-        return;
-    }
-    for (unsigned i1 = 0; i1 < len; i1++)
-    {
-        for (unsigned i2 = 1; i2 != 256; i2 <<= 1)
-        {
-            if (prob > (rand() % 100))
-            {
-                data[i1] ^= i2;
-            }
-        }
-    }
-}
-
-double corruptor::check_error(const std::vector<uint8_t>& etalon, const std::vector<uint8_t>& data)
+size_t get_err_count(const std::vector<uint8_t>& etalon, const std::vector<uint8_t>& data)
 {
     boost::dynamic_bitset<> eb = to_bitset(etalon);
     boost::dynamic_bitset<> db = to_bitset(data);
     db ^= eb;
-    size_t corrupted = db.count();
-    return (((double)corrupted * 100.0)/(double)eb.size());
+    return db.count();
+}
+
+double get_err_persent(size_t bits_len, size_t num_err)
+{
+    return (((double)num_err * 100.) / (double)bits_len);
 }
 
 void corruptor::add_error(std::vector<uint8_t>& data, double err_p)
@@ -68,7 +27,7 @@ void corruptor::add_error(std::vector<uint8_t>& data, double err_p)
     size_t bitlen = db.size();
 
     // TODO: make it more precise
-    size_t num_errors = boost::math::lround(bitlen/100 * err_p);
+    size_t num_errors = boost::math::lround((double)bitlen/100. * err_p);
 
     boost::random::random_device rng;
     boost::random::uniform_int_distribution<> index_dist(0, bitlen - 1);
@@ -82,9 +41,15 @@ void corruptor::add_error(std::vector<uint8_t>& data, double err_p)
     data.swap(res);
 }
 
-boost::dynamic_bitset<> corruptor::to_bitset(const std::vector<uint8_t>& data)
+size_t size_in_bits(const std::vector<uint8_t>& data)
 {
-    const size_t bitlen = data.size() * (sizeof(uint8_t) * 8);
+    return data.size() * sizeof(uint8_t) * CHAR_BIT;
+}
+
+boost::dynamic_bitset<> to_bitset(const std::vector<uint8_t>& data)
+{
+    const size_t bitlen = size_in_bits(data);
+
     boost::dynamic_bitset<> ret(bitlen);
 
     for(size_t i=0; i < data.size();++i)
@@ -104,7 +69,7 @@ boost::dynamic_bitset<> corruptor::to_bitset(const std::vector<uint8_t>& data)
     return ret;
 }
 
-std::vector<uint8_t> corruptor::to_bytes(const boost::dynamic_bitset<>& bits)
+std::vector<uint8_t> to_bytes(const boost::dynamic_bitset<>& bits)
 {
     const size_t capa = bits.size()/8 + 1;
     std::vector<uint8_t> ret;

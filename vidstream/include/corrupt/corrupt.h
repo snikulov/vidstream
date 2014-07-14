@@ -8,18 +8,17 @@
 class corruptor
 {
 public:
-    corruptor();
-    corruptor(const corruptor&);
-    corruptor& operator= (const corruptor&);
+    corruptor(){}
 
-    float check_err(uint8_t *etalon, uint8_t *data, unsigned len);
-    void add_err(uint8_t* data, unsigned len, float err_prcnt);
+    void add_error(std::vector<uint8_t>& data, double persent);
 
-    double check_error(const std::vector<uint8_t>& etalon, const std::vector<uint8_t>& data);
-    void add_error(std::vector<uint8_t>& data, double err_p);
-
-    boost::dynamic_bitset<> to_bitset(const std::vector<uint8_t>& data);
-    std::vector<uint8_t> to_bytes(const boost::dynamic_bitset<>& bits);
 };
+
+
+double get_err_persent(size_t bits_len, size_t num_err);
+size_t get_err_count(const std::vector<uint8_t>& etalon, const std::vector<uint8_t>& data);
+size_t size_in_bits(const std::vector<uint8_t>& data);
+boost::dynamic_bitset<> to_bitset(const std::vector<uint8_t>& data);
+std::vector<uint8_t> to_bytes(const boost::dynamic_bitset<>& bits);
 
 #endif

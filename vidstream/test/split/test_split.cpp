@@ -8,6 +8,10 @@
 
 #include <split/split.h>
 #include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_rcv_stm.hpp>
+#include <jpeg/jpeg_transport.hpp>
+#include <jpeg/jpeg_builder.hpp>
+#include <jpeg/jpeg_history.hpp>
 
 using namespace boost::unit_test;
 using namespace vidstream;
@@ -83,10 +87,43 @@ BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
 
     // erase all destination rst blocks
     dst->erase(dst->begin()+dst_idxs[0], dst->end());
-
     dst->insert(dst->end(),src->begin()+src_idxs[0], src->end());
 
     jbuilder.write(dst, 512);
+
+}
+
+BOOST_AUTO_TEST_CASE( test_get_rst_block_2 )
+{
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
+
+    BOOST_REQUIRE( data );
+    BOOST_REQUIRE( !data->empty() );
+
+    // jpeg header check
+    std::vector<size_t> outidx;
+    BOOST_REQUIRE(get_all_rst_blocks(*data, outidx));
+    BOOST_REQUIRE(!outidx.empty());
+    BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
+
+    boost::shared_ptr<jpeg_builder> jb_(new jpeg_builder());
+    boost::shared_ptr<jpeg_history> history;
+    jpeg_transport jt;
+    const std::vector<unsigned char>& s_mark = jt.start_mark();
+    const std::vector<unsigned char>& e_mark = jt.end_mark();
+    jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
+
+    BOOST_REQUIRE(STM_WAIT_RST == stm.process(s_mark));
+
+    for(size_t i=0; i<outidx.size()-1; ++i)
+    {
+        std::vector<uint8_t> buf(data->begin()+outidx[i]+2, data->begin()+outidx[i+1]);
+        BOOST_CHECK(STM_WAIT_RST == stm.process(buf));
+    }
+    BOOST_CHECK(stm.has_data());
+    jb_->write(stm.get_jpeg(), 522);
 
 }
 
