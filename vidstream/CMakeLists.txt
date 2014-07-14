@@ -9,6 +9,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(WITH_TEST "Build UnitTests" OFF)
+option(USE_QT5 "Use qt5 for build" OFF)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
