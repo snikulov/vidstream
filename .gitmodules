@@ -13,3 +13,7 @@
 [submodule "vidstream/ext/log4cplus"]
 	path = vidstream/ext/log4cplus
 	url = https://github.com/log4cplus/log4cplus.git
+[submodule "vidstream/ext/itpp"]
+	path = vidstream/ext/itpp
+	url = git://git.code.sf.net/u/snikulov/itpp
+	branch = cmake_updates

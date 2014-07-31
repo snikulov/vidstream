@@ -58,6 +58,11 @@ add_subdirectory(ext/log4cplus)
 include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
 set(LOG4CPLUS_LIBRARIES log4cplusS)
 
+#-------------------------------------------
+# itpp build from ext/itpp
+#-------------------------------------------
+add_subdirectory(ext/itpp)
+
 include_directories(include)
 add_subdirectory(src)
 
