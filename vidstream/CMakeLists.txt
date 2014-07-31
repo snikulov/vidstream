@@ -37,10 +37,26 @@ endif()
 file(GLOB_RECURSE GLB_HDR_FILES include/*.h*)
 source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 
-# externals project
+#-------------------------------------------
+# external projects
+#-------------------------------------------
+
+#-------------------------------------------
+# nanomsg build from ext/nanomsg
+#-------------------------------------------
 set(WITH_NANOMSG_UT OFF)
 add_subdirectory(ext/nanomsg)
 include_directories(ext/nanomsg/src)
+
+#-------------------------------------------
+# log4cplus build from ext/log4cplus
+#-------------------------------------------
+set(BUILD_SHARED_LIBS FALSE)
+set(UNICODE_DEFAULT OFF)
+set(UNICODE OFF)
+add_subdirectory(ext/log4cplus)
+include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
+set(LOG4CPLUS_LIBRARIES log4cplusS)
 
 include_directories(include)
 add_subdirectory(src)
