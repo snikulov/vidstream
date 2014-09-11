@@ -20,6 +20,7 @@ endif()
 add_definitions(-DNOMINMAX)
 
 include_directories(hdr)
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(HDR_FILES
     hdr/mainwindow.h
