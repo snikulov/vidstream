@@ -8,8 +8,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(WITH_TEST "Build UnitTests" OFF)
+option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
+option(WITH_LOG4CPLUS "Build and use log4cplus" OFF)
+option(WITH_ITPP "Build and use ITPP" OFF)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
@@ -51,17 +53,20 @@ include_directories(ext/nanomsg/src)
 #-------------------------------------------
 # log4cplus build from ext/log4cplus
 #-------------------------------------------
-set(BUILD_SHARED_LIBS FALSE)
-set(UNICODE_DEFAULT OFF)
-set(UNICODE OFF)
-add_subdirectory(ext/log4cplus)
-include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
-set(LOG4CPLUS_LIBRARIES log4cplusS)
-
+if(WITH_LOG4CPLUS)
+    set(BUILD_SHARED_LIBS FALSE)
+    set(UNICODE_DEFAULT OFF)
+    set(UNICODE OFF)
+    add_subdirectory(ext/log4cplus)
+    include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
+    set(LOG4CPLUS_LIBRARIES log4cplusS)
+endif()
 #-------------------------------------------
 # itpp build from ext/itpp
 #-------------------------------------------
-add_subdirectory(ext/itpp)
+if(WITH_ITPP)
+    add_subdirectory(ext/itpp)
+endif()
 
 include_directories(include)
 add_subdirectory(src)

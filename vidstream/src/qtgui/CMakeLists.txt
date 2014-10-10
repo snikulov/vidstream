@@ -4,7 +4,9 @@ project(${TARGET_NAME} CXX)
 
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
+
+# TODO: check on windows - something wrong with moc on CentOS
+# set(CMAKE_AUTOMOC ON)
 
 if(USE_QT5)
     find_package(Qt5Widgets REQUIRED)
@@ -20,6 +22,7 @@ endif()
 add_definitions(-DNOMINMAX)
 
 include_directories(hdr)
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(HDR_FILES
     hdr/mainwindow.h

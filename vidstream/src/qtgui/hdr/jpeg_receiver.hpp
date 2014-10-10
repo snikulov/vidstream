@@ -130,13 +130,15 @@ public:
 		// write rebuilt frame
 		static int nn = 0;
                 jb_->write(jpg,nn);
-                cvSetErrMode(CV_ErrModeParent);
+                
+		// TODO: NEED TO INVESTIGATE!!!
+                //cvSetErrMode(CV_ErrModeParent);
 		//cvRedirectError(MyErrorHandler);
 		//cv::Mat imgbuf = cv::Mat(1, jpg->size(), CV_8U, &((*jpg)[0]));
 		//cv::Mat m = cv::imdecode(imgbuf, CV_LOAD_IMAGE_COLOR);
 		
                 //cv::Mat m = cv::imdecode(cv::Mat(*jpg), CV_LOAD_IMAGE_COLOR);
-		cv::Mat m = cv::imread("img00000000.jpg", CV_LOAD_IMAGE_COLOR);
+		cv::Mat m = cv::imread("img00000000.jpg", cv::IMREAD_COLOR);
 		
                 if (!m.empty())
                 {

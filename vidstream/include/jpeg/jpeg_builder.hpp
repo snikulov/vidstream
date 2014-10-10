@@ -32,13 +32,13 @@ public:
         : quality_(quality), csize_(cv::Size(640, 480)), num_of_rst_(0)
     {
         boost::mutex::scoped_lock lk(mx_);
-        params_.push_back(CV_IMWRITE_JPEG_QUALITY);
+        params_.push_back(cv::IMWRITE_JPEG_QUALITY);
         params_.push_back(quality);
-        params_.push_back(CV_IMWRITE_JPEG_RST_INTERVAL);
+        params_.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
         params_.push_back(rst_interval);
-        params_.push_back(CV_IMWRITE_JPEG_LUM_QUALITY);
+        params_.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
         params_.push_back(lum);
-        params_.push_back(CV_IMWRITE_JPEG_CHROM_QUALITY);
+        params_.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
         params_.push_back(chrom);
     }
 
@@ -147,13 +147,13 @@ public:
         }
 
         std::vector<int> tpar;
-        tpar.push_back(CV_IMWRITE_JPEG_QUALITY);
+        tpar.push_back(cv::IMWRITE_JPEG_QUALITY);
         tpar.push_back(quality_);
-        tpar.push_back(CV_IMWRITE_JPEG_RST_INTERVAL);
+        tpar.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
         tpar.push_back(cfg.get<int>("cfg.img.rst"));
-        tpar.push_back(CV_IMWRITE_JPEG_LUM_QUALITY);
+        tpar.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
         tpar.push_back(cfg.get<int>("cfg.img.lum"));
-        tpar.push_back(CV_IMWRITE_JPEG_CHROM_QUALITY);
+        tpar.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
         tpar.push_back(cfg.get<int>("cfg.img.chrom"));
 
         if(params_ != tpar)

@@ -89,7 +89,7 @@ public:
     }
     double get_ocv_fps() const
     {
-        return src_->get(CV_CAP_PROP_FPS);
+        return src_->get(cv::CAP_PROP_FPS);
     }
 
 private:
