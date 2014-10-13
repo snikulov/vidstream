@@ -6,7 +6,9 @@ project(${TARGET_NAME} CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # TODO: check on windows - something wrong with moc on CentOS
-# set(CMAKE_AUTOMOC ON)
+if(WIN32)
+    set(CMAKE_AUTOMOC ON)
+endif()
 
 if(USE_QT5)
     find_package(Qt5Widgets REQUIRED)
