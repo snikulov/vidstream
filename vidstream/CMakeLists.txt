@@ -11,7 +11,7 @@ set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" OFF)
-option(WITH_ITPP "Build and use ITPP" OFF)
+option(WITH_ITPP "Build and use ITPP" ON)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
@@ -65,7 +65,9 @@ endif()
 # itpp build from ext/itpp
 #-------------------------------------------
 if(WITH_ITPP)
+    set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
+    include_directories(ext/itpp ${CMAKE_BINARY_DIR})
 endif()
 
 include_directories(include)

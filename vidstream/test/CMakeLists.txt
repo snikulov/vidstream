@@ -5,3 +5,7 @@ add_subdirectory(perf)
 if(UNIX)
     add_subdirectory(bch_codec)
 endif()
+
+if(WITH_ITPP)
+    add_subdirectory(itpp)
+endif()
