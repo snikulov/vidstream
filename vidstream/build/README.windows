@@ -1,0 +1,70 @@
+Для того чтобы собрать проект под Windows 7+ потребуется 
+
+1. Visual Studio 2012+
+2. NASM (http://www.nasm.us/pub/nasm/releasebuilds/2.11.05/win32/)
+3. CMake (http://www.cmake.org/files/v3.0/cmake-3.0.2-win32-x86.exe)
+4. Git (http://git-scm.com/download/win)
+5. Для удобства работы в консоли - Far Manager (http://www.farmanager.com/files/Far30b4040.x64.20140810.msi)
+6. Библиотеку Qt (http://qt-project.org/downloads) для сборки UI
+7. Библиотеку Boost C++ libraries (http://sourceforge.net/projects/boost/files/boost/1.56.0/)
+
+Все должно быть установленно на машине разработчика.
+Boost C++ строиться по инструкции http://www.boost.org/doc/libs/1_56_0/more/getting_started/windows.html
+
+nasm, cmake, git - должны быть в переменной PATH
+
+иными словами при наборе в командной строки Far-а команд указанных ниже 
+обязаны видеть примерно следующий вывод в консоли
+
+--------------------- example console output ------------------------------
+C:\WORK\bin>cmake --version
+cmake version 3.0.2
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+C:\WORK\bin>nasm -version
+NASM version 2.11.05 compiled on May 21 2014
+C:\WORK\bin>git --version
+git version 1.9.4.msysgit.2
+--------------------- example console output ------------------------------
+
+На bitbucket & github должны быть созданны аккаунты.
+
+Клонируем себе локально на машину срез исходного кода
+
+C:\WORK>git clone --recurse-submodules git@bitbucket.org:snikulov/vidstream.git
+
+Данная команда клонирует проект в папку vidstream и все необходимые зависимости в vidstream/vidstream/ext
+
+Далее начинаем собирать зависимости
+
+1. vidstream/vidstream/ext/libjpeg-turbo
+    нужна для OpenCV
+    a) создаем папку vidstream/vidstream/ext/build-libjpeg и переходим в нее
+    b) запускаем оттуда команду 
+       cmake ..\libjpeg-turbo -DWITH_JPEG8=ON -DCMAKE_INSTALL_PREFIX=<путь, куда хотим инсталлировать библиотеку>
+       обычно использую C:\WORK\MSVC2013.LIB\libjpeg
+    c) cmake --build . --config Release --target INSTALL
+    d) если все соберется хорошо - в папку указанную CMAKE_INSTALL_PREFIX будут скопированны хидеры и библиотеки (папку vidstream/vidstream/ext/build-libjpeg можно удалять)
+    Желательно указать путь до <jpeg_root>/include в переменной окружения INCLUDE,  а путь до <jpeg_root>/lib в переменной LIB, чтобы автопоиск OpenCV нашел эту библиотеку
+
+2. vidstream/vidstream/ext/opencv
+    нужна для проекта
+    a) создаем папку vidstream/vidstream/ext/build-opencv и переходим в нее
+    b) запускаем оттуда команду 
+       cmake ..\opencv -DBUILD_JPEG=OFF -DCMAKE_INSTALL_PREFIX=<путь, куда хотим инсталлировать библиотеку>
+       обычно использую C:\WORK\MSVC2013.LIB\opencv
+    c) cmake --build . --config Release --target INSTALL
+    d) если все соберется хорошо - в папку указанную CMAKE_INSTALL_PREFIX будут скопированны хидеры и библиотеки (папку vidstream/vidstream/ext/build-opencv можно удалять)
+
+ Собственно, все готово для сборки проекта
+
+ устанавливаем переменные указывающие на библиотеки
+ set OpenCV_DIR=<путь до корня билиотеки OpenCV, например C:\WORK\MSVC2013.LIB\opencv>
+ set QT_DIR=<путь до корня билиотеки Qt> 
+ set BOOST_ROOT=<путь до корня библиотеки Boost C++>
+
+идем в папку vidstream/vidstream/build
+cmake ..
+и затем, либо строим
+cmake --build . --target Release
+либо открываем в Visual Studio и тоже строим и дебажим
