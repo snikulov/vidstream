@@ -11,6 +11,10 @@ set(SRC_FILES
 
 add_executable(${TARGET_NAME} ${SRC_FILES} ${GLB_HDR_FILES})
 
+if(WITH_CAPTURE_UI)
+    set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "CAPTURE_UI")
+endif()
+
 target_link_libraries(${TARGET_NAME}
     ${OpenCV_LIBS} ${Boost_LIBRARIES}
     split

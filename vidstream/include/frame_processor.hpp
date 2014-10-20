@@ -28,8 +28,9 @@ public:
 
     void operator()() const
     {
+#if defined(CAPTURE_UI)
         cv::namedWindow("Capture",1);
-
+#endif
         boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
@@ -61,9 +62,10 @@ public:
                 {
                     cv::resize(*frame, *frame, *req_size_);
                 }
+#if defined(CAPTURE_UI)
                 // process incoming frame from camera
                 cv::imshow("Capture", *frame);
-
+#endif
                 // pack frame into jpeg with rst
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
@@ -109,11 +111,12 @@ public:
                     }
                 }
             }
-
+#if defined(CAPTURE_UI)
             if(cv::waitKey(10) >= 0)
             {
                 stop_ = true;
             }
+#endif
             timer_.stop();
 #if 0
             std::cout << "process FPS: " << get_process_fps()

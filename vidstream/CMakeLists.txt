@@ -12,6 +12,8 @@ option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
+option(WITH_CAPTURE_UI "Build with capture window" ON)
+
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )

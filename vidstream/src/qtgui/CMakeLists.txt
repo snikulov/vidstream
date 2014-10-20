@@ -11,6 +11,8 @@ if(WIN32)
 endif()
 
 if(USE_QT5)
+    cmake_policy(SET CMP0020 OLD)
+
     find_package(Qt5Widgets REQUIRED)
     include_directories(${Qt5Widgets_INCLUDES})
     add_definitions(${Qt5Widgets_DEFINITIONS})
