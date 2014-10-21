@@ -1,5 +1,5 @@
-#ifndef TRANSPORT_HPP__
-#define TRANSPORT_HPP__
+#ifndef TRANSPORT_INT_HPP__
+#define TRANSPORT_INT_HPP__
 
 #include <types.hpp>
 #include <nanopp/nn.hpp>
