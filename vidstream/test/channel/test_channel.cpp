@@ -20,13 +20,42 @@ BOOST_AUTO_TEST_CASE( test_channel_case_1 )
     std::vector<uint8_t> src;
     boost::shared_ptr< std::vector<uint8_t> > dst;
     uint8_t s = 0xFF;
-    for (size_t i = 0; i < 20000; ++i)
+    for (size_t i = 0; i < 200; ++i)
     {
         src.push_back(s);
         ch.put(src);
         dst = ch.get();
         BOOST_REQUIRE(dst);
         BOOST_REQUIRE(src == *dst);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_channel_case_2)
+{
+    channel ch1("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9001");
+    channel ch2("tcp://127.0.0.1:9001", "tcp://127.0.0.1:9000");
+
+    boost::this_thread::sleep_for(boost::chrono::microseconds(200));
+    BOOST_MESSAGE("test case with two channel");
+
+    std::vector<uint8_t> src;
+    boost::shared_ptr< std::vector<uint8_t> > dst1;
+    boost::shared_ptr< std::vector<uint8_t> > dst2;
+    uint8_t s = 0xFF;
+
+    for (size_t i = 0; i < 200; ++i)
+    {
+        src.push_back(s);
+        ch1.put(src);
+        ch2.put(src);
+
+        dst1 = ch1.get();
+        dst2 = ch2.get();
+
+        BOOST_REQUIRE(dst1);
+        BOOST_REQUIRE(dst2);
+        BOOST_REQUIRE(src == *dst1);
+        BOOST_REQUIRE(src == *dst2);
     }
 }
 
