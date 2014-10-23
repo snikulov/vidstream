@@ -7,24 +7,35 @@
 #include <boost/cstdint.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
+#include <boost/shared_ptr.hpp>
 
 class channel : private boost::noncopyable
 {
 public:
-    channel();
+    channel(const std::string& inurl, const std::string& outurl);
     ~channel();
 
     void put(const std::vector<uint8_t>& src);
-    void get(std::vector<uint8_t>& dst);
+    boost::shared_ptr< std::vector<uint8_t> > get();
     
 private:
+    channel();
 
-    void worker();
+    void processor();
     bool is_running_;
 
-    boost::mutex mx_;
-    boost::condition_variable cond_;
-    std::deque<uint8_t> data_;
+    std::string inurl_;
+    std::string outurl_;
+
+    // input data
+    boost::mutex inmx_;
+    boost::condition_variable incond_;
+    std::deque< boost::shared_ptr< std::vector<uint8_t> > > indata_;
+
+    // output data
+    boost::mutex outmx_;
+    boost::condition_variable outcond_;
+    std::deque< boost::shared_ptr< std::vector<uint8_t> > > outdata_;
 
     boost::thread wt_;
 
