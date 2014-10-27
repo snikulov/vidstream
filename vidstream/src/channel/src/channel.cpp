@@ -107,7 +107,7 @@ boost::shared_ptr< std::vector<uint8_t> > channel::get()
 
     if (!indata_.empty())
     {
-        data->insert(data->end(), indata_.begin(), indata_.end());
+        data.reset(new std::vector<uint8_t>(indata_.begin(), indata_.end()));
         indata_.clear();
     }
 
