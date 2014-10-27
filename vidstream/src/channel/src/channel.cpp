@@ -19,6 +19,12 @@ channel::~channel()
     wt_.join();
 }
 
+void channel::set_codec(boost::shared_ptr< itpp::Channel_Code > codec)
+{
+    // TODO: add lock
+    codec_ = codec;
+}
+
 void channel::processor()
 {
 
@@ -58,7 +64,18 @@ void channel::processor()
                 {
                     uint8_t * data_ptr = static_cast<uint8_t*>(buf);
                     boost::mutex::scoped_lock lock(inmx_);
-                    indata_.insert(indata_.end(), data_ptr, data_ptr + nbytes);
+
+                    if (codec_)
+                    {
+                        std::string enc_data(data_ptr + 1, data_ptr + nbytes -1);
+                        itpp::bvec coded(enc_data);
+                        itpp::bvec decoded = codec_->decode(coded);
+                        indata_.insert(indata_.end(), itpp::bin2dec(decoded));
+                    }
+                    else
+                    {
+                        indata_.insert(indata_.end(), data_ptr, data_ptr + nbytes);
+                    }
                     nn_freemsg(buf);
                     incond_.notify_one();
                 }
@@ -71,7 +88,14 @@ void channel::processor()
                 if (!outdata_.empty())
                 {
                     std::vector<uint8_t>& data = *outdata_.front();
-                    nn_send(out_s, &data[0], data.size(), 0);
+                    if (codec_)
+                    {
+                        send_encoded(out_s, data);
+                    }
+                    else
+                    {
+                        nn_send(out_s, &data[0], data.size(), 0);
+                    }
                     outdata_.pop_front();
                 }
             }
@@ -85,6 +109,19 @@ void channel::processor()
     nn_close(in_s);
 }
 
+void channel::send_encoded(int s, const std::vector<uint8_t>& src)
+{
+    size_t len = src.size();
+    for (size_t i = 0; i < len; ++i)
+    {
+        itpp::bvec bv = itpp::dec2bin(src[i]);
+        std::string to_send = itpp::to_str(codec_->encode(bv));
+        nn_send(s, to_send.c_str(), to_send.size(), NN_DONTWAIT);
+
+        // TODO: add error checking
+    }
+}
+
 void channel::put(const std::vector<uint8_t>& src)
 {
     if (!src.empty())
@@ -95,12 +132,24 @@ void channel::put(const std::vector<uint8_t>& src)
     }
 }
 
-boost::shared_ptr< std::vector<uint8_t> > channel::get()
+bool channel::is_data_ready()
+{
+    boost::mutex::scoped_lock lock(inmx_);
+    return !indata_.empty();
+}
+
+size_t channel::in_data_size()
+{
+    boost::mutex::scoped_lock lock(inmx_);
+    return indata_.size();
+}
+
+boost::shared_ptr< std::vector<uint8_t> > channel::get(bool wait)
 {
     boost::shared_ptr< std::vector<uint8_t> > data;
 
     boost::mutex::scoped_lock lock(inmx_);
-    if (indata_.empty())
+    if (indata_.empty() && wait)
     {
         incond_.wait(lock);
     }

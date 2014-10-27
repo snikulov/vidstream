@@ -18,10 +18,18 @@ public:
     ~channel();
 
     void put(const std::vector<uint8_t>& src);
-    boost::shared_ptr< std::vector<uint8_t> > get();
+    boost::shared_ptr< std::vector<uint8_t> > get(bool wait = true);
+
+    void set_codec(boost::shared_ptr< itpp::Channel_Code > codec);
+
+    bool is_data_ready();
+
+    size_t in_data_size();
     
 private:
     channel();
+
+    void send_encoded(int s, const std::vector<uint8_t>& src);
 
     void processor();
 
