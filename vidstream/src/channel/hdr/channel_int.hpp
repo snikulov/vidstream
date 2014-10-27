@@ -9,6 +9,8 @@
 #include <boost/thread.hpp>
 #include <boost/shared_ptr.hpp>
 
+#include <itpp/itcomm.h>
+
 class channel : private boost::noncopyable
 {
 public:
@@ -22,6 +24,7 @@ private:
     channel();
 
     void processor();
+
     bool is_running_;
 
     std::string inurl_;
@@ -30,7 +33,7 @@ private:
     // input data
     boost::mutex inmx_;
     boost::condition_variable incond_;
-    std::deque< boost::shared_ptr< std::vector<uint8_t> > > indata_;
+    std::deque< uint8_t > indata_;
 
     // output data
     boost::mutex outmx_;
@@ -38,6 +41,8 @@ private:
     std::deque< boost::shared_ptr< std::vector<uint8_t> > > outdata_;
 
     boost::thread wt_;
+
+    boost::shared_ptr< itpp::Channel_Code > codec_;
 
 };
 

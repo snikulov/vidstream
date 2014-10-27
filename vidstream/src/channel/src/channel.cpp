@@ -21,6 +21,9 @@ channel::~channel()
 
 void channel::processor()
 {
+
+    // TODO: more error handlers !!!
+
     int in_s  = nn_socket(AF_SP, NN_PULL);
     int out_s = nn_socket(AF_SP, NN_PUSH);
 
@@ -48,13 +51,14 @@ void channel::processor()
 
                 if (nbytes < 0) 
                 {
+                    // error... currently skip for next try
+                    // TODO: will re-create socket...
                 }
                 else 
                 {
                     uint8_t * data_ptr = static_cast<uint8_t*>(buf);
-                    boost::shared_ptr< std::vector<uint8_t> > data(new std::vector<uint8_t>(data_ptr, data_ptr + nbytes));
                     boost::mutex::scoped_lock lock(inmx_);
-                    indata_.insert(indata_.end(), data);
+                    indata_.insert(indata_.end(), data_ptr, data_ptr + nbytes);
                     nn_freemsg(buf);
                     incond_.notify_one();
                 }
@@ -103,8 +107,8 @@ boost::shared_ptr< std::vector<uint8_t> > channel::get()
 
     if (!indata_.empty())
     {
-        data = indata_.front();
-        indata_.pop_front();
+        data->insert(data->end(), indata_.begin(), indata_.end());
+        indata_.clear();
     }
 
     return data;
