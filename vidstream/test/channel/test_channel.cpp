@@ -83,6 +83,33 @@ BOOST_AUTO_TEST_CASE(test_channel_case_3)
     }
 }
 
+BOOST_AUTO_TEST_CASE(test_channel_case_4)
+{
+    channel ch("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9000");
+    boost::this_thread::sleep_for(boost::chrono::microseconds(100));
+    BOOST_MESSAGE("test case with channel");
+
+    boost::shared_ptr<itpp::Channel_Code> codec(new itpp::BCH(7, 3));
+    ch.set_codec(codec);
+
+
+    boost::shared_ptr< std::vector<uint8_t> > dst;
+    std::vector<uint8_t> src;
+    uint8_t s = 0xFF;
+    for (size_t i = 0; i < s; ++i)
+    {
+        src.push_back(i);
+        ch.put(src);
+        while (ch.in_data_size() != src.size())
+        {
+            // sleep
+            // boost::this_thread::sleep_for(boost::chrono::nanoseconds(5));
+        }
+        dst = ch.get();
+        BOOST_REQUIRE(dst);
+        BOOST_REQUIRE(src == *dst);
+    }
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 
