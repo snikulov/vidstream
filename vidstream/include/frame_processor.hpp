@@ -34,7 +34,9 @@ public:
 //        boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, 0));
+        boost::shared_ptr<itpp::Channel_Code> empty_codec;
+
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, empty_codec));
 #if 0
         if (url_.size() != 0)
         {
@@ -92,7 +94,7 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-                                outsink.reset(new out_channel(url_, 0));
+                                outsink.reset(new out_channel(url_, empty_codec));
                                 //trans.reset(new transport(TRANSPORT_PUSH, url_));
                                 max_err_try = 0;
                             }
@@ -112,17 +114,15 @@ public:
                                   << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
                         // trans.reset(new transport(TRANSPORT_PUSH, url_));
-                        outsink.reset(new out_channel(url_, 0));
+                        outsink.reset(new out_channel(url_, empty_codec));
                         max_err_try = 0;
                     }
                 }
             }
-#if defined(CAPTURE_UI)
             if(cv::waitKey(10) >= 0)
             {
                 stop_ = true;
             }
-#endif
             timer_.stop();
 #if 0
             std::cout << "process FPS: " << get_process_fps()
