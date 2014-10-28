@@ -19,9 +19,9 @@ class out_channel
         out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
         ~out_channel();
 
-        void send(boost::shared_ptr< std::vector<uint8_t> > data);
-        void send(const std::vector<uint8_t>& data);
-        void send(const uint8_t* data, size_t len);
+        void put(boost::shared_ptr< std::vector<uint8_t> > data);
+        void put(const std::vector<uint8_t>& data);
+        void put(const uint8_t* data, size_t len);
 
     private:
         out_channel();

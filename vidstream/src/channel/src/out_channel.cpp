@@ -1,7 +1,7 @@
 #include "out_channel_int.hpp"
 
+#include <iostream>
 #include <nanopp/nn.hpp>
-
 #include <boost/make_shared.hpp>
 
 out_channel::out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)   
@@ -31,6 +31,7 @@ void out_channel::connect()
         catch (std::exception& e)
         {
             is_connected_ = false;
+            std::cerr << "[E] connect: " << e.what() << std::endl;
         }
     }
 }
@@ -60,11 +61,28 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
 
 void out_channel::send_data()
 {
-    boost::mutex::scoped_lock lk(outmx_);
+    bool empty = true;
+    boost::shared_ptr< std::vector<uint8_t> > data_ptr;
 
-    if (!outdata_.empty())
     {
-        std::vector<uint8_t>& data = *outdata_.front();
+        boost::mutex::scoped_lock lk(outmx_);
+        empty = outdata_.empty();
+
+        if (empty)
+        {
+            outcond_.wait(lk);
+        }
+
+        empty = outdata_.empty();
+        if (!empty)
+        {
+            data_ptr = outdata_.front();
+        }
+    }
+    
+    if (data_ptr)
+    {
+        std::vector<uint8_t>& data = *data_ptr;
         size_t len = data.size();
         int sent = 0;
         if (codec_)
@@ -79,6 +97,7 @@ void out_channel::send_data()
         if (sent >= 0 && sent == len)
         {
             // remove from queue
+            boost::mutex::scoped_lock lk(outmx_);
             outdata_.pop_front();
         }
         else
@@ -87,10 +106,8 @@ void out_channel::send_data()
             // now - will try again
         }
     }
-    else
-    {
-        outcond_.wait(lk);
-    }
+
+  
 }
 
 void out_channel::processor()
@@ -106,26 +123,26 @@ void out_channel::processor()
         }
         else
         {
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(5));
         }
     }
 }
 
-void out_channel::send(boost::shared_ptr< std::vector<uint8_t> > data)
+void out_channel::put(boost::shared_ptr< std::vector<uint8_t> > data)
 {
     boost::mutex::scoped_lock lock(outmx_);
     outdata_.push_back(data);
     outcond_.notify_one();
 }
 
-void out_channel::send(const std::vector<uint8_t>& data)
+void out_channel::put(const std::vector<uint8_t>& data)
 {
     boost::shared_ptr< std::vector<uint8_t> > buf(new std::vector<uint8_t>(data.begin(), data.end()));
-    send(buf);
+    put(buf);
 }
 
-void out_channel::send(const uint8_t * data, size_t len)
+void out_channel::put(const uint8_t * data, size_t len)
 {
     std::vector<uint8_t> buf(data, data + len);
-    send(buf);
+    put(buf);
 }

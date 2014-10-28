@@ -34,7 +34,7 @@ public:
 //        boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, boost::shared_ptr<itpp::Channel_Code>()));
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, 0));
 #if 0
         if (url_.size() != 0)
         {

@@ -38,7 +38,7 @@ public:
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;
 
-        outsink->send(start_mark_);
+        outsink->put(start_mark_);
 
         // send rst blocks
         size_t ridx_len = ridx.size() - 1;
@@ -47,7 +47,7 @@ public:
             // send only data, without RST mark
             std::vector<unsigned char> rst_blk(&rdata[ridx.at(i) + 2], &rdata[ridx.at(i + 1)]);
 
-            outsink->send(rst_blk);
+            outsink->put(rst_blk);
         }
 
         return res;
