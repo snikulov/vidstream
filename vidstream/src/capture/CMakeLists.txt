@@ -20,6 +20,8 @@ target_link_libraries(${TARGET_NAME}
     split
     corrupt
     nanomsg
+    itpp
+    channel
     )
 if(UNIX)
     target_link_libraries(${TARGET_NAME}

@@ -9,7 +9,13 @@ set(SRC_FILES
 )
 
 add_executable(test_split ${SRC_FILES})
-target_link_libraries(test_split split corrupt ${Boost_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(test_split
+    split
+    corrupt
+    ${Boost_LIBRARIES}
+    ${OpenCV_LIBS}
+    itpp
+    )
 
 add_test(NAME test_split COMMAND test_split --log_level=message ${CMAKE_SOURCE_DIR}/test/data/img_test_split.jpg)
 

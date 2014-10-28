@@ -31,9 +31,11 @@ public:
 #if defined(CAPTURE_UI)
         cv::namedWindow("Capture",1);
 #endif
-        boost::shared_ptr<transport> trans;
+//        boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, boost::shared_ptr<itpp::Channel_Code>()));
+#if 0
         if (url_.size() != 0)
         {
             try
@@ -46,6 +48,7 @@ public:
                 trans.reset();
             }
         }
+#endif
         int max_err_try = 0;
 
         timer_.start();
@@ -74,12 +77,13 @@ public:
 //                std::cerr << "process time: " << pt.seconds() << std::endl;
                 stat_->f_process_time_ = pt.seconds();
 
-                if (trans)
+                if (outsink)
                 {
                     try
                     {
                         pt.start();
-                        int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
+//                        int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
+                        int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
 
                         if (ret == -1)
                         {
@@ -88,7 +92,8 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-                                trans.reset(new transport(TRANSPORT_PUSH, url_));
+                                outsink.reset(new out_channel(url_, 0));
+                                //trans.reset(new transport(TRANSPORT_PUSH, url_));
                                 max_err_try = 0;
                             }
                         }
@@ -106,7 +111,8 @@ public:
                         std::cerr << "Error sending jpeg: " << ex.what()
                                   << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
-                        trans.reset(new transport(TRANSPORT_PUSH, url_));
+                        // trans.reset(new transport(TRANSPORT_PUSH, url_));
+                        outsink.reset(new out_channel(url_, 0));
                         max_err_try = 0;
                     }
                 }

@@ -5,6 +5,8 @@
 #include <transport/transport.hpp>
 #include <ecc/bch_codec.hpp>
 
+#include <channel/out_channel.hpp>
+
 namespace vidstream {
 
 class jpeg_transport
@@ -26,6 +28,29 @@ public:
 
     ~jpeg_transport()
     {
+    }
+
+
+    int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
+        , boost::shared_ptr<out_channel> outsink)
+    {
+        int res = 0;
+        std::vector<std::size_t>& ridx = *idxs;
+        std::vector<unsigned char>& rdata = *data;
+
+        outsink->send(start_mark_);
+
+        // send rst blocks
+        size_t ridx_len = ridx.size() - 1;
+        for (size_t i = 0; i < ridx_len; i++)
+        {
+            // send only data, without RST mark
+            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i) + 2], &rdata[ridx.at(i + 1)]);
+
+            outsink->send(rst_blk);
+        }
+
+        return res;
     }
 
     int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
