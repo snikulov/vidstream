@@ -5,8 +5,10 @@
 #include <transport/transport.hpp>
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_transport.hpp>
-#include <ecc/bch_codec.hpp>
+
 #include <perf/perf_clock.hpp>
+
+#include <boost/atomic.hpp>
 
 
 namespace vidstream
@@ -18,10 +20,9 @@ class frame_processor
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
-                    , boost::shared_ptr<bch_codec> ecc
                     , stat_data_t * stat
                    )
-        : req_size_(new cv::Size(sz)), q_(q), stop_(stop_flag), url_(url), jb_(jb), ecc_(ecc)
+        : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
           , cnt_processed_(0), cnt_sent_(0), stat_(stat)
     {
     }
@@ -67,6 +68,15 @@ public:
                 {
                     cv::resize(*frame, *frame, *req_size_);
                 }
+
+                if (*is_bw_)
+                {
+                    std::cerr << "convert to BW" << std::endl;
+                    boost::shared_ptr<cv::Mat> gs(new cv::Mat());
+                    cvtColor(*frame, *gs, cv::COLOR_RGB2GRAY);
+                    frame.swap(gs);
+                }
+
 #if defined(CAPTURE_UI)
                 // process incoming frame from camera
                 cv::imshow("Capture", *frame);
@@ -159,16 +169,22 @@ public:
         {
             *req_size_ = tmp;
         }
+
+        if (*is_bw_ != bw)
+        {
+            *is_bw_ = bw;
+        }
+
     }
 
 private:
     /* data */
     boost::shared_ptr<cv::Size> req_size_;
+    boost::shared_ptr<bool> is_bw_;
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
-    boost::shared_ptr<bch_codec> ecc_;
     mutable unsigned long long cnt_processed_;
     mutable unsigned long long cnt_sent_;
     mutable timer<high_resolution_clock> timer_;

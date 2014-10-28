@@ -4,9 +4,7 @@ add_subdirectory(corrupt)
 add_subdirectory(perf)
 add_subdirectory(channel)
 
-if(UNIX)
-    add_subdirectory(bch_codec)
-endif()
+#add_subdirectory(bch_codec)
 
 if(WITH_ITPP)
     add_subdirectory(itpp)

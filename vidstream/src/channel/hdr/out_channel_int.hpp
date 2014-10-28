@@ -34,6 +34,8 @@ class out_channel
 
         int send_encoded(const std::vector<uint8_t>& data);
 
+        boost::shared_ptr< std::vector<uint8_t> > getdata();
+
         std::string url_;
         boost::shared_ptr<itpp::Channel_Code> codec_;
 

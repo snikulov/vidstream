@@ -22,9 +22,6 @@
 
 #include <ocv/ocv_output.hpp>
 #include <corrupt/corrupt_intro.hpp>
-#include <ecc/bch_codec.hpp>
-
-
 
 using namespace vidstream;
 
@@ -40,10 +37,8 @@ public:
     jpeg_receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
-            , boost::shared_ptr<bch_codec> bch
             )
         : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb)
-          , ecc_(bch)
     {
       cv::namedWindow("received");
     }
@@ -82,17 +77,20 @@ public:
                 continue;
             }
             // introduce error
+#if 0 
             if (err_)
             {
                 err_->corrupt(buf);
             }
+#endif
+#if 0
             if (ecc_)
             {
                 std::vector<char> good;
                 bool is_ok = false;
                 std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
 		// hack TODO: try to decode everytime
-		is_ok = true;
+        		is_ok = true;
                 if (is_ok)
                 {
                     buf.swap(dec);
@@ -105,6 +103,7 @@ public:
                     continue;
                 }
             }
+#endif
             waiting_ = false;
 
             stm.process(buf);

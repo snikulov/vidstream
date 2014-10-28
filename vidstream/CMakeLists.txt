@@ -31,9 +31,13 @@ if(Boost_FOUND)
     link_directories(${Boost_LIBRARY_DIRS})
 endif()
 
+
+# now enabled to cleanup old code
+add_definitions( -DBUILD_FOR_LINUX )
+
 if(UNIX)
     message(STATUS "Build for Linux")
-    add_definitions( -DBUILD_FOR_LINUX -Wall)
+    add_definitions(-Wall)
 elseif(WIN32)
     message(STATUS "Build for Windows")
 endif()

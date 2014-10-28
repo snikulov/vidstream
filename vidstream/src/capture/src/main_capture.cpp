@@ -210,12 +210,9 @@ int main(int argc, char** argv)
     // subscribe on updates
     resync.subscribe(jb.get());
 
-    boost::shared_ptr<bch_codec> bch_ecc(new bch_codec(bm, bt));
-    resync.subscribe(bch_ecc.get());
-
     frame_producer producer(c, mq, stop_flag, &stat_collect);
     frame_processor processor(isize, mq, stop_flag, dataurl
-            , jb, bch_ecc, &stat_collect);
+            , jb, &stat_collect);
     resync.subscribe(&processor);
 
     boost::thread tproducer(producer);

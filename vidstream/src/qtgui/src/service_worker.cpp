@@ -3,7 +3,7 @@
 
 #include <service_worker.hpp>
 #include <ocv/ocv_output.hpp>
-#include <ecc/bch_codec.hpp>
+
 #include <jpeg_receiver.hpp>
 #include <ctrlsrv.hpp>
 
@@ -37,9 +37,9 @@ void service_worker::start()
 
     int m = cfg_->get<int>("cfg.bch.m");
     int t = cfg_->get<int>("cfg.bch.t");
-    bch_.reset(new bch_codec(m, t)); // bm, bt
-    cfgsrv_->subscribe(bch_.get());
-    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb, bch_));
+//    bch_.reset(new bch_codec(m, t)); // bm, bt
+//    cfgsrv_->subscribe(bch_.get());
+    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb));
 
     // run threads
     cfgthread_.reset(new boost::thread(*cfgsrv_));

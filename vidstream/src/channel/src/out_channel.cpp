@@ -56,30 +56,32 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
             return sent;
         }
     }
-    return res;
+    return static_cast<int>(res);
+}
+
+boost::shared_ptr< std::vector<uint8_t> > out_channel::getdata()
+{
+
+    boost::mutex::scoped_lock lk(outmx_);
+
+    if (outdata_.empty())
+    {
+        outcond_.wait(lk);
+    }
+
+    boost::shared_ptr< std::vector<uint8_t> > data_ptr;
+    if (!outdata_.empty())
+    {
+        data_ptr = outdata_.front();
+    }
+    return data_ptr;
 }
 
 void out_channel::send_data()
 {
     bool empty = true;
-    boost::shared_ptr< std::vector<uint8_t> > data_ptr;
+    boost::shared_ptr< std::vector<uint8_t> > data_ptr = getdata();
 
-    {
-        boost::mutex::scoped_lock lk(outmx_);
-        empty = outdata_.empty();
-
-        if (empty)
-        {
-            outcond_.wait(lk);
-        }
-
-        empty = outdata_.empty();
-        if (!empty)
-        {
-            data_ptr = outdata_.front();
-        }
-    }
-    
     if (data_ptr)
     {
         std::vector<uint8_t>& data = *data_ptr;

@@ -3,7 +3,6 @@
 
 #include <types.hpp>
 #include <transport/transport.hpp>
-#include <ecc/bch_codec.hpp>
 
 #include <channel/out_channel.hpp>
 
@@ -53,6 +52,7 @@ public:
         return res;
     }
 
+#if 0
     int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
             ,boost::shared_ptr<transport> trans
             ,boost::shared_ptr<bch_codec> codec
@@ -91,6 +91,7 @@ public:
 //        res = trans->send(codec->encode(end_mark_));
         return res;
     }
+#endif
 
     const std::vector<unsigned char>& start_mark() const
     {
