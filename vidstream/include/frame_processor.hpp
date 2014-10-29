@@ -23,7 +23,7 @@ public:
                     , stat_data_t * stat
                    )
         : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
-          , cnt_processed_(0), cnt_sent_(0), stat_(stat)
+        , cnt_processed_(0), cnt_sent_(0), stat_(stat)
     {
     }
 
@@ -136,8 +136,8 @@ public:
             timer_.stop();
 #if 0
             std::cout << "process FPS: " << get_process_fps()
-                << " sent FPS: " << get_sent_fps()
-                << " sec=" << timer_.sec() << " frame count=" << cnt_processed_ << std::endl;
+                      << " sent FPS: " << get_sent_fps()
+                      << " sec=" << timer_.sec() << " frame count=" << cnt_processed_ << std::endl;
 #endif
             stat_->process_fps_= get_process_fps();
         }

@@ -6,7 +6,7 @@
 #include <pipeline.h>
 
 channel::channel(const std::string& inurl, const std::string& outurl)
-: inurl_(inurl), outurl_(outurl)
+    : inurl_(inurl), outurl_(outurl)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&channel::processor, this));
@@ -35,7 +35,7 @@ void channel::processor()
 
     int in_edp = nn_bind(in_s, inurl_.c_str());
     int out_edp = nn_connect(out_s, outurl_.c_str());
-    
+
     nn_pollfd poll[2];
 
     poll[0].fd = in_s;
@@ -55,12 +55,12 @@ void channel::processor()
                 void *buf = NULL;
                 int nbytes = nn_recv(in_s, &buf, NN_MSG, 0);
 
-                if (nbytes < 0) 
+                if (nbytes < 0)
                 {
                     // error... currently skip for next try
                     // TODO: will re-create socket...
                 }
-                else 
+                else
                 {
                     uint8_t * data_ptr = static_cast<uint8_t*>(buf);
                     boost::mutex::scoped_lock lock(inmx_);

@@ -15,40 +15,40 @@
 class out_channel
     : private boost::noncopyable
 {
-    public:
-        out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
-        ~out_channel();
+public:
+    out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
+    ~out_channel();
 
-        void put(boost::shared_ptr< std::vector<uint8_t> > data);
-        void put(const std::vector<uint8_t>& data);
-        void put(const uint8_t* data, size_t len);
+    void put(boost::shared_ptr< std::vector<uint8_t> > data);
+    void put(const std::vector<uint8_t>& data);
+    void put(const uint8_t* data, size_t len);
 
-    private:
-        out_channel();
+private:
+    out_channel();
 
-        void processor();
+    void processor();
 
-        void connect();
+    void connect();
 
-        void send_data();
+    void send_data();
 
-        int send_encoded(const std::vector<uint8_t>& data);
+    int send_encoded(const std::vector<uint8_t>& data);
 
-        boost::shared_ptr< std::vector<uint8_t> > getdata();
+    boost::shared_ptr< std::vector<uint8_t> > getdata();
 
-        std::string url_;
-        boost::shared_ptr<itpp::Channel_Code> codec_;
+    std::string url_;
+    boost::shared_ptr<itpp::Channel_Code> codec_;
 
-        // internal cbuff
-        boost::mutex outmx_;
-        boost::condition_variable outcond_;
-        std::deque< boost::shared_ptr< std::vector<uint8_t> > > outdata_;
+    // internal cbuff
+    boost::mutex outmx_;
+    boost::condition_variable outcond_;
+    std::deque< boost::shared_ptr< std::vector<uint8_t> > > outdata_;
 
-        bool is_running_;
-        nn::socket sock_;
-        bool is_connected_;
+    bool is_running_;
+    nn::socket sock_;
+    bool is_connected_;
 
-        boost::thread wt_;
+    boost::thread wt_;
 };
 
 

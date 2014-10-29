@@ -31,8 +31,8 @@ public:
     int start_frame()
     {
 //      std::cout << "Frame bytes: " << frame_size_ << std::endl;
-      frame_size_ = 0;
-      return frame_size_;
+        frame_size_ = 0;
+        return frame_size_;
     }
 
     int send(const std::vector<unsigned char>& data)

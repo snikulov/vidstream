@@ -4,8 +4,8 @@
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
-out_channel::out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)   
-: url_(url), codec_(codec), is_running_(false), sock_(AF_SP, NN_PUSH), is_connected_(false)
+out_channel::out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)
+    : url_(url), codec_(codec), is_running_(false), sock_(AF_SP, NN_PUSH), is_connected_(false)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&out_channel::processor, this));
@@ -109,7 +109,7 @@ void out_channel::send_data()
         }
     }
 
-  
+
 }
 
 void out_channel::processor()

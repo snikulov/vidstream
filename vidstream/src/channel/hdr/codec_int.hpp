@@ -5,7 +5,7 @@
 
 namespace itpp
 {
-    class Channel_Code;
+class Channel_Code;
 }
 
 class itpp_codec

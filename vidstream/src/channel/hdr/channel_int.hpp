@@ -25,7 +25,7 @@ public:
     bool is_data_ready();
 
     size_t in_data_size();
-    
+
 private:
     channel();
 
