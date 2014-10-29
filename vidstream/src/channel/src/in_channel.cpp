@@ -26,7 +26,7 @@ void in_channel::processor()
     {
         connect();
 
-        if (is_connected_ && is_data_on_socket())
+        if (is_connected_)
         {
             // read data to queue
             read_data();
@@ -45,6 +45,10 @@ void in_channel::connect()
         try
         {
             sock_.reset(new nn::socket(AF_SP, NN_PULL));
+
+            int opt = 250; // ms
+            sock_->setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
+
             if (sock_->bind(url_.c_str()) >= 0)
             {
                 is_connected_ = true;
@@ -103,7 +107,7 @@ void in_channel::read_data()
             boost::mutex::scoped_lock lk(inmx_);
             indata_.push_back(data);
             incond_.notify_one();
-            
+
         }
         else
         {
@@ -116,7 +120,7 @@ void in_channel::read_data()
     {
         // ???
     }
-        
+
 }
 
 boost::shared_ptr< std::vector< uint8_t > > in_channel::get()

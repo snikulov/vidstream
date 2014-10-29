@@ -70,8 +70,3 @@ target_link_libraries(${TARGET_NAME}
    corrupt
    itpp
    )
-if(UNIX)
-    target_link_libraries(${TARGET_NAME}
-        bch
-    )
-endif()

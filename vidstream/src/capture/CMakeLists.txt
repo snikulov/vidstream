@@ -23,8 +23,3 @@ target_link_libraries(${TARGET_NAME}
     itpp
     channel
     )
-if(UNIX)
-    target_link_libraries(${TARGET_NAME}
-        bch
-    )
-endif()
