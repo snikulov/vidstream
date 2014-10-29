@@ -22,6 +22,7 @@
 
 #include <ocv/ocv_output.hpp>
 #include <corrupt/corrupt_intro.hpp>
+#include <channel/in_channel.hpp>
 
 using namespace vidstream;
 
@@ -52,26 +53,32 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        boost::scoped_ptr<transport> rcv(
-                new transport(TRANSPORT_PULL, url_)
-                );
+        boost::scoped_ptr<in_channel> input(new in_channel(url_, boost::shared_ptr<itpp::Channel_Code>()));
+//        boost::scoped_ptr<transport> rcv(
+//                new transport(TRANSPORT_PULL, url_)
+//                );
 
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
-        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
+        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
+
         unsigned long img_count = 0;
         size_t rst_num = 0;
+
+        boost::shared_ptr< std::vector< uint8_t > > indata;
+
         while(!stop_)
         {
             waiting_ = true;
-            std::vector<unsigned char> buf;
+//            std::vector<unsigned char> buf;
             if (stop_) break;
-            int bytes = rcv->receive(buf);
 
-            if (bytes < 0)
+            indata = input->get();
+
+            if (!indata)
             {
                 // no data available - try again
                 continue;
@@ -106,7 +113,7 @@ public:
 #endif
             waiting_ = false;
 
-            stm.process(buf);
+            stm.process(*indata);
             
             if (stm.has_data())
             {
