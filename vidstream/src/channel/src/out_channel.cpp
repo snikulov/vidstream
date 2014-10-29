@@ -5,7 +5,7 @@
 #include <boost/make_shared.hpp>
 
 out_channel::out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)
-    : url_(url), codec_(codec), is_running_(false), sock_(AF_SP, NN_PUSH), is_connected_(false)
+    : url_(url), codec_(codec), is_running_(false), is_connected_(false)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&out_channel::processor, this));
@@ -25,8 +25,12 @@ void out_channel::connect()
     {
         try
         {
-            sock_.connect(url_.c_str());
-            is_connected_ = true;
+            sock_.reset(new nn::socket(AF_SP, NN_PUSH));
+
+            if (sock_->connect(url_.c_str()) >= 0)
+            {
+                is_connected_ = true;
+            }
         }
         catch (std::exception& e)
         {
@@ -46,7 +50,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
         itpp::bvec encoded = codec_->encode(bits);
         std::string str = itpp::to_str(encoded);
         size_t strl = str.size();
-        int sent = sock_.send(str.c_str(), strl, NN_DONTWAIT);
+        int sent = sock_->send(str.c_str(), strl, NN_DONTWAIT);
         if (sent >= 0 && sent == strl)
         {
             res += sent;
@@ -93,7 +97,7 @@ void out_channel::send_data()
         }
         else
         {
-            sent = sock_.send(reinterpret_cast<const char*>(&data[0]), data.size(), NN_DONTWAIT);
+            sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), NN_DONTWAIT);
         }
 
         if (sent >= 0 && sent == len)
@@ -106,6 +110,9 @@ void out_channel::send_data()
         {
             // reconnect?
             // now - will try again
+            sock_.reset();
+            is_connected_ = false;
+
         }
     }
 

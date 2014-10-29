@@ -37,8 +37,7 @@ void service_worker::start()
 
     int m = cfg_->get<int>("cfg.bch.m");
     int t = cfg_->get<int>("cfg.bch.t");
-//    bch_.reset(new bch_codec(m, t)); // bm, bt
-//    cfgsrv_->subscribe(bch_.get());
+
     rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb));
 
     // run threads

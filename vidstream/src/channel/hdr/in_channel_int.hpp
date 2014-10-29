@@ -1,6 +1,6 @@
-#ifndef OUT_CHANNEL_INT_HPP__
+#ifndef IN_CHANNEL_INT_HPP__
 
-#define OUT_CHANNEL_INT_HPP__
+#define IN_CHANNEL_INT_HPP__
 
 #include <vector>
 #include <deque>
@@ -12,25 +12,26 @@
 #include <nanopp/nn.hpp>
 #include <itpp/itcomm.h>
 
-class out_channel
+class in_channel
     : private boost::noncopyable
 {
 public:
-    out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
-    ~out_channel();
+    in_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
+    ~in_channel();
 
-    void put(boost::shared_ptr< std::vector<uint8_t> > data);
-    void put(const std::vector<uint8_t>& data);
-    void put(const uint8_t* data, size_t len);
+    // blocks on wait if no data
+    boost::shared_ptr< std::vector< uint8_t > > get();
 
 private:
-    out_channel();
+    in_channel();
 
     void processor();
 
     void connect();
 
-    void send_data();
+    bool is_data_on_socket();
+
+    void read_data();
 
     int send_encoded(const std::vector<uint8_t>& data);
 
@@ -40,9 +41,9 @@ private:
     boost::shared_ptr<itpp::Channel_Code> codec_;
 
     // internal cbuff
-    boost::mutex outmx_;
-    boost::condition_variable outcond_;
-    std::deque< boost::shared_ptr< std::vector<uint8_t> > > outdata_;
+    boost::mutex inmx_;
+    boost::condition_variable incond_;
+    std::deque< uint8_t > indata_;
 
     bool is_running_;
     boost::shared_ptr<nn::socket> sock_;
@@ -52,4 +53,4 @@ private:
 };
 
 
-#endif /* end of include guard: OUT_CHANNEL_INT_HPP__ */
+#endif /* end of include guard: IN_CHANNEL_INT_HPP__ */
