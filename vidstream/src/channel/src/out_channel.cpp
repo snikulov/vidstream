@@ -27,9 +27,15 @@ void out_channel::connect()
         {
             sock_.reset(new nn::socket(AF_SP, NN_PUSH));
 
+            int opt = 150;
+            sock_->setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
             if (sock_->connect(url_.c_str()) >= 0)
             {
                 is_connected_ = true;
+            }
+            else
+            {
+                std::cerr << "[E] connect: " << nn_strerror(nn_errno()) << std::endl;
             }
         }
         catch (std::exception& e)
@@ -51,12 +57,16 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
         std::string str = itpp::to_str(encoded);
         size_t strl = str.size();
         int sent = sock_->send(str.c_str(), strl, NN_DONTWAIT);
-        if (sent >= 0 && sent == strl)
+        if (sent > 0 && sent == strl)
         {
             res += sent;
         }
         else
         {
+
+            std::cerr << "[E] send: sent=" << sent << " "
+                << nn_strerror(nn_errno()) << std::endl;
+
             return sent;
         }
     }
@@ -98,9 +108,14 @@ void out_channel::send_data()
         else
         {
             sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), NN_DONTWAIT);
+
+            if (sent < 0)
+            {
+                std::cerr << "[E] sent=" << sent << " " << nn_strerror(nn_errno()) << std::endl;
+            }
         }
 
-        if (sent >= 0 && sent == len)
+        if (sent > 0)
         {
             // remove from queue
             boost::mutex::scoped_lock lk(outmx_);
@@ -108,11 +123,8 @@ void out_channel::send_data()
         }
         else
         {
-            // reconnect?
-            // now - will try again
-            sock_.reset();
-            is_connected_ = false;
-
+            std::cerr << "[I] sent = " << sent << " len = " << len << std::endl;
+            // sleep or poll???
         }
     }
 

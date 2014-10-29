@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_3)
     boost::shared_ptr<itpp::Channel_Code> codec(new itpp::BCH(7, 3));
     ch.set_codec(codec);
 
-    
+
     boost::shared_ptr< std::vector<uint8_t> > dst;
     uint8_t s = 0xFF;
     for (size_t i = 0; i < s; ++i)
@@ -90,8 +90,6 @@ BOOST_AUTO_TEST_CASE(test_channel_case_4)
 {
     channel ch("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9000");
     boost::this_thread::sleep_for(boost::chrono::microseconds(100));
-    BOOST_MESSAGE("test case with channel");
-
     boost::shared_ptr<itpp::Channel_Code> codec(new itpp::BCH(7, 3));
     ch.set_codec(codec);
 
@@ -117,14 +115,15 @@ BOOST_AUTO_TEST_CASE(test_channel_case_4)
 
 BOOST_AUTO_TEST_CASE(test_channel_case_5)
 {
-    boost::shared_ptr<itpp::Channel_Code> bch_codec(new itpp::BCH(7, 3));
     boost::shared_ptr<itpp::Channel_Code> empty_codec;
 
     in_channel in_plain("tcp://127.0.0.1:9000", empty_codec);
-    boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
+
+    // setle the server connect
+    // TODO: need fix it later
+    boost::this_thread::sleep_for(boost::chrono::seconds(1));
 
     out_channel out_plain("tcp://127.0.0.1:9000", empty_codec);
-
 
     std::vector<uint8_t> test1(20, 0xff);
     out_plain.put(test1);
@@ -134,6 +133,36 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
     BOOST_REQUIRE(test1 == *received);
 
 }
+
+BOOST_AUTO_TEST_CASE(test_channel_case_6)
+{
+    boost::shared_ptr<itpp::Channel_Code> bch_codec(new itpp::BCH(7, 3));
+
+    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
+
+    // setle the server connect
+    // TODO: need fix it later
+    boost::this_thread::sleep_for(boost::chrono::seconds(1));
+
+    out_channel out_plain("tcp://127.0.0.1:9000", bch_codec);
+
+    std::vector<uint8_t> test1(20, 0xff);
+    out_plain.put(test1);
+
+    std::vector<uint8_t> target;
+    while(target.size() != test1.size())
+    {
+
+        boost::shared_ptr< std::vector<uint8_t> > received = in_plain.get();
+        target.insert(target.end(), received->begin(), received->end());
+    }
+
+    BOOST_CHECK_MESSAGE(test1 == target,
+            "test1.size()=" << test1.size() << " received.size()=" << target.size());
+
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

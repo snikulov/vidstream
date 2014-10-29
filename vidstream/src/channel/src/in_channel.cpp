@@ -26,7 +26,7 @@ void in_channel::processor()
     {
         connect();
 
-        if (is_connected_)
+        if (is_connected_ && is_data_on_socket())
         {
             // read data to queue
             read_data();
@@ -44,14 +44,20 @@ void in_channel::connect()
     {
         try
         {
+            int ret = 0;
             sock_.reset(new nn::socket(AF_SP, NN_PULL));
 
-            int opt = 250; // ms
+            int opt = 150; // ms
             sock_->setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
 
-            if (sock_->bind(url_.c_str()) >= 0)
+            ret = sock_->bind(url_.c_str());
+            if (ret >= 0)
             {
                 is_connected_ = true;
+            }
+            else
+            {
+                std::cerr << "[E] bind: " << ret << std::endl;
             }
         }
         catch (std::exception& e)
@@ -70,18 +76,20 @@ bool in_channel::is_data_on_socket()
     poll[0].fd = sock_->get_sock_val();
     poll[0].events = NN_POLLIN;
 
-    int rc = nn_poll(poll, 1, 2000);
+    int rc = nn_poll(poll, 1, 200);
 
-    if (rc >= 0 && poll[0].revents & NN_POLLIN)
+    if (rc > 0 && poll[0].revents & NN_POLLIN)
     {
         ret_val = true;
     }
     else
     {
+        std::cerr << "rc = " << rc << std::endl;
         if (rc < 0)
         {
             // socket error occurred
             is_connected_ = false;
+            std::cerr << "[E] poll : " << nn_strerror(nn_errno()) << std::endl;
         }
         // else timeout gets trigged... repeat
     }
@@ -119,6 +127,8 @@ void in_channel::read_data()
     else
     {
         // ???
+        std::cerr << "[E] recv : " << bytes << " " << nn_strerror(nn_errno())<< std::endl;
+        boost::this_thread::sleep_for(boost::chrono::microseconds(100));
     }
 
 }
