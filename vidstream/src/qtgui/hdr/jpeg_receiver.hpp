@@ -24,6 +24,8 @@
 #include <corrupt/corrupt_intro.hpp>
 #include <channel/in_channel.hpp>
 
+#include <jpeg/jpeg_stream_parser.hpp>
+
 using namespace vidstream;
 
 int MyErrorHandler(int status, const char* func_name, const char* err_msg, const char* file_name, int line, void*)
@@ -62,6 +64,8 @@ public:
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
 
+        jpeg_stream_parser jstp(s_mark);
+
 //        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
 
@@ -84,9 +88,26 @@ public:
                 continue;
             }
 
+            jpeg_stream_parser::parse_status_t ps = jstp.parse(*indata);
+
+            while (ps == jpeg_stream_parser::jpeg_ready)
+            {
+                jpeg_data_t rsts = jstp.get_jpeg();
+                if (rsts)
+                {
+                    jpeg_data_t jpg = jb_->build_jpeg_from_rst(rsts);
+                    cv::Mat m = cv::imdecode(cv::Mat(*jpg), cv::IMREAD_UNCHANGED);
+                    if (!m.empty())
+                    {
+                        cv::imshow("received", m);
+                        cv::waitKey(5);
+                    }
+                }
+                ps = jstp.parse();
+            }
 
             waiting_ = false;
-
+#if 0
             if (*indata != s_mark)
             {
                 // IMREAD_UNCHANGED
@@ -98,6 +119,8 @@ public:
                     cv::waitKey(5);
                 }
             }
+#endif
+
 #if 0
             stm.process(*indata);
             

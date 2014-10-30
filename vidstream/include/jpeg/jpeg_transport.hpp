@@ -43,6 +43,7 @@ public:
         std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
         outsink->put(rst_blocks);
 
+        outsink->put(start_mark_);
 #if 0
         // send rst blocks
         size_t ridx_len = ridx.size() - 1;
