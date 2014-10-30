@@ -55,7 +55,7 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        boost::scoped_ptr<in_channel> input(new in_channel(url_, boost::shared_ptr<itpp::Channel_Code>()));
+        boost::scoped_ptr<in_channel> input(new in_channel(url_, boost::shared_ptr<itpp::BCH>(new itpp::BCH(7, 3))));
 //        boost::scoped_ptr<transport> rcv(
 //                new transport(TRANSPORT_PULL, url_)
 //                );

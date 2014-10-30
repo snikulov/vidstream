@@ -19,6 +19,34 @@ out_channel::~out_channel()
     wt_.join();
 }
 
+bool out_channel::can_send_data()
+{
+    bool ret_val = false;
+
+    nn_pollfd poll[1] = { 0 };
+    poll[0].fd = sock_->get_sock_val();
+    poll[0].events = NN_POLLOUT;
+
+    int rc = nn_poll(poll, 1, 200);
+
+    if (rc > 0 && poll[0].revents & NN_POLLOUT)
+    {
+        ret_val = true;
+    }
+    else
+    {
+        std::cerr << "rc = " << rc << std::endl;
+        if (rc < 0)
+        {
+            // socket error occurred
+            is_connected_ = false;
+            std::cerr << "[E] can_send_data poll : " << nn_strerror(nn_errno()) << std::endl;
+        }
+        // else timeout gets trigged... repeat
+    }
+    return ret_val;
+}
+
 void out_channel::connect()
 {
     if (!is_connected_)
@@ -49,8 +77,9 @@ void out_channel::connect()
 int out_channel::send_encoded(const std::vector<uint8_t>& data)
 {
     size_t len = data.size();
+
     size_t res = 0;
-    for (size_t i = 0; i < len; i++)
+    for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bits = itpp::dec2bin(data[i]);
         itpp::bvec encoded = codec_->encode(bits);
@@ -64,10 +93,13 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
         else
         {
 
-            std::cerr << "[E] send: sent=" << sent << " "
+            std::cerr << "[E] send_encoded: sent=" << sent << " "
                 << nn_strerror(nn_errno()) << std::endl;
 
-            return sent;
+            while (is_running_ && !can_send_data())
+            {
+                // wait for unblocking...
+            }
         }
     }
     return static_cast<int>(res);
@@ -152,6 +184,11 @@ void out_channel::processor()
 void out_channel::put(boost::shared_ptr< std::vector<uint8_t> > data)
 {
     boost::mutex::scoped_lock lock(outmx_);
+    if (outdata_.size() > 20)
+    {
+        std::cerr << "[W] more then limit in output queue - dropping frame" << std::endl;
+        return;
+    }
     outdata_.push_back(data);
     outcond_.notify_one();
 }
