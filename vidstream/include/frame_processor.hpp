@@ -36,22 +36,10 @@ public:
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
         boost::shared_ptr<itpp::Channel_Code> empty_codec;
+        boost::shared_ptr<itpp::BCH> bch_codec(new itpp::BCH(7, 3));
 
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, empty_codec));
-#if 0
-        if (url_.size() != 0)
-        {
-            try
-            {
-                trans.reset(new transport(TRANSPORT_PUSH, url_));
-            }
-            catch(nn::exception& ex)
-            {
-                std::cerr << "Error initializing transport: " << ex.what() << std::endl;
-                trans.reset();
-            }
-        }
-#endif
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, bch_codec));
+
         int max_err_try = 0;
 
         timer_.start();

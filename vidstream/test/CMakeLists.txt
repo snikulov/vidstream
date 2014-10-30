@@ -3,8 +3,7 @@ add_subdirectory(config)
 add_subdirectory(corrupt)
 add_subdirectory(perf)
 add_subdirectory(channel)
-
-#add_subdirectory(bch_codec)
+add_subdirectory(parser)
 
 if(WITH_ITPP)
     add_subdirectory(itpp)

@@ -36,6 +36,8 @@ private:
 
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 
+    bool can_send_data();
+
     std::string url_;
     boost::shared_ptr<itpp::Channel_Code> codec_;
 
