@@ -62,7 +62,7 @@ public:
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
 
-        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
+//        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
         jpeg_data_t rcv_buf(new std::vector<unsigned char>);
 
         unsigned long img_count = 0;
@@ -73,7 +73,7 @@ public:
         while(!stop_)
         {
             waiting_ = true;
-//            std::vector<unsigned char> buf;
+
             if (stop_) break;
 
             indata = input->get();
@@ -83,36 +83,21 @@ public:
                 // no data available - try again
                 continue;
             }
-            // introduce error
-#if 0 
-            if (err_)
-            {
-                err_->corrupt(buf);
-            }
-#endif
-#if 0
-            if (ecc_)
-            {
-                std::vector<char> good;
-                bool is_ok = false;
-                std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
-		// hack TODO: try to decode everytime
-        		is_ok = true;
-                if (is_ok)
-                {
-                    buf.swap(dec);
-                }
-                else
-                {
-                    std::cout << "failed to decode buffer" << std::endl;
 
-                    // TODO: try recovery mode here...
-                    continue;
-                }
-            }
-#endif
+
             waiting_ = false;
 
+            if (*indata != s_mark)
+            {
+                // IMREAD_UNCHANGED
+                cv::Mat m = cv::imdecode(cv::Mat(*indata), cv::IMREAD_UNCHANGED);
+                if (!m.empty())
+                {
+                    cv::imshow("received", m);
+                    cv::waitKey(5);
+                }
+            }
+#if 0
             stm.process(*indata);
             
             if (stm.has_data())
@@ -156,6 +141,7 @@ public:
                     cv::waitKey(10);
                 }
             }
+#endif
         }
     }
 
