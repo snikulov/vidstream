@@ -39,8 +39,9 @@ public:
 
         outsink->put(start_mark_);
 
-        // send whole jpeg
-        outsink->put(data);
+        // send whole jpeg RST
+        std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
+        outsink->put(rst_blocks);
 
 #if 0
         // send rst blocks

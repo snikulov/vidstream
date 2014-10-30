@@ -90,7 +90,8 @@ public:
             if (*indata != s_mark)
             {
                 // IMREAD_UNCHANGED
-                cv::Mat m = cv::imdecode(cv::Mat(*indata), cv::IMREAD_UNCHANGED);
+                jpeg_data_t jpg = jb_->build_jpeg_from_rst(indata);
+                cv::Mat m = cv::imdecode(cv::Mat(*jpg), cv::IMREAD_UNCHANGED);
                 if (!m.empty())
                 {
                     cv::imshow("received", m);
