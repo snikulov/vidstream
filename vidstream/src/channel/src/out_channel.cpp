@@ -85,7 +85,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
         itpp::bvec encoded = codec_->encode(bits);
         std::string str = itpp::to_str(encoded);
         size_t strl = str.size();
-        int sent = sock_->send(str.c_str(), strl, NN_DONTWAIT);
+        int sent = sock_->send(str.c_str(), strl, 0);
         if (sent > 0 && sent == strl)
         {
             res += sent;
@@ -139,7 +139,7 @@ void out_channel::send_data()
         }
         else
         {
-            sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), NN_DONTWAIT);
+            sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), 0);
 
             if (sent < 0)
             {

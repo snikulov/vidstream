@@ -55,7 +55,9 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        boost::scoped_ptr<in_channel> input(new in_channel(url_, boost::shared_ptr<itpp::BCH>(new itpp::BCH(7, 3))));
+        boost::shared_ptr<itpp::Channel_Code> empty_codec;
+        boost::shared_ptr<itpp::Channel_Code> bch_codec(new itpp::BCH(7, 3));
+        boost::scoped_ptr<in_channel> input(new in_channel(url_, bch_codec));
 //        boost::scoped_ptr<transport> rcv(
 //                new transport(TRANSPORT_PULL, url_)
 //                );
@@ -66,8 +68,7 @@ public:
 
         jpeg_stream_parser jstp(s_mark);
 
-//        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
-        jpeg_data_t rcv_buf(new std::vector<unsigned char>);
+        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
         unsigned long img_count = 0;
         size_t rst_num = 0;
@@ -76,34 +77,33 @@ public:
 
         while(!stop_)
         {
-            waiting_ = true;
 
             if (stop_) break;
 
-            indata = input->get();
+
+            indata = input->get(false);
 
             if (!indata)
             {
-                // no data available - try again
-                continue;
+                jstp.parse();
+            }
+            else
+            {
+                jstp.parse(*indata);
             }
 
-            jpeg_stream_parser::parse_status_t ps = jstp.parse(*indata);
-
-            while (ps == jpeg_stream_parser::jpeg_ready)
+            while (jstp.num_jpegs())
             {
-                jpeg_data_t rsts = jstp.get_jpeg();
-                if (rsts)
+                jpeg_data_t jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
+                if (jpeg)
                 {
-                    jpeg_data_t jpg = jb_->build_jpeg_from_rst(rsts);
-                    cv::Mat m = cv::imdecode(cv::Mat(*jpg), cv::IMREAD_UNCHANGED);
+                    cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
                     if (!m.empty())
                     {
                         cv::imshow("received", m);
                         cv::waitKey(5);
                     }
                 }
-                ps = jstp.parse();
             }
 
             waiting_ = false;

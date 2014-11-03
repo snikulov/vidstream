@@ -131,6 +131,9 @@ public:
         dst->erase(dst->begin()+dst_idxs[0], dst->end());
         dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
 
+        // add missing terminator
+        dst->push_back(0xFF);
+        dst->push_back(0xD9);
         return dst;
     }
 

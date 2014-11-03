@@ -20,7 +20,7 @@ public:
     ~in_channel();
 
     // blocks on wait if no data
-    boost::shared_ptr< std::vector< uint8_t > > get();
+    boost::shared_ptr< std::vector< uint8_t > > get(bool wait=true);
 
 private:
     in_channel();

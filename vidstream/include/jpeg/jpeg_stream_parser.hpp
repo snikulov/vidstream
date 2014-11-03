@@ -30,7 +30,7 @@ public:
 
     size_t int_buf_size() const
     {
-        return cbuff->size();
+        return cbuff.size();
     }
 
     size_t num_jpegs() const
@@ -42,11 +42,13 @@ private:
     jpeg_stream_parser();
 
     std::vector<uint8_t> mark_;
-    std::deque<uint8_t> workq_;
+    std::deque<uint8_t>  workq_;
     std::deque<vidstream::jpeg_data_t> jpegs_;
 
-    // boost 
-    boost::scoped_ptr< boost::circular_buffer< uint8_t > > cbuff;
+    typedef std::deque< uint8_t > cbuff_type;
+
+    // TODO: play with boost::circular_buf 
+    cbuff_type cbuff;
 
 
 };

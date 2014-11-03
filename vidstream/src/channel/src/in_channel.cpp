@@ -134,12 +134,12 @@ void in_channel::read_data()
 
 }
 
-boost::shared_ptr< std::vector< uint8_t > > in_channel::get()
+boost::shared_ptr< std::vector< uint8_t > > in_channel::get(bool wait)
 {
     boost::shared_ptr< std::vector< uint8_t > > ret_val;
     boost::mutex::scoped_lock lk(inmx_);
 
-    if (indata_.empty())
+    if (indata_.empty() && wait)
     {
         incond_.wait(lk);
     }

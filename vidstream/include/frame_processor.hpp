@@ -59,7 +59,6 @@ public:
 
                 if (*is_bw_)
                 {
-                    std::cerr << "convert to BW" << std::endl;
                     boost::shared_ptr<cv::Mat> gs(new cv::Mat());
                     cvtColor(*frame, *gs, cv::COLOR_RGB2GRAY);
                     frame.swap(gs);

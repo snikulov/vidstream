@@ -10,8 +10,9 @@
 #include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_rcv_stm.hpp>
 #include <jpeg/jpeg_transport.hpp>
-#include <jpeg/jpeg_builder.hpp>
 #include <jpeg/jpeg_history.hpp>
+
+#include <jpeg/jpeg_stream_parser.hpp>
 
 using namespace boost::unit_test;
 using namespace vidstream;
@@ -93,6 +94,7 @@ BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
 
 }
 
+#if 0 
 BOOST_AUTO_TEST_CASE( test_get_rst_block_2 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
@@ -124,6 +126,42 @@ BOOST_AUTO_TEST_CASE( test_get_rst_block_2 )
     }
     BOOST_CHECK(stm.has_data());
     jb_->write(stm.get_jpeg(), 522);
+
+}
+#endif
+
+BOOST_AUTO_TEST_CASE(test_get_rst_block_3)
+{
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
+
+    BOOST_REQUIRE(data);
+    BOOST_REQUIRE(!data->empty());
+
+    // jpeg header check
+    std::vector<size_t> outidx;
+    BOOST_REQUIRE(get_all_rst_blocks(*data, outidx));
+    BOOST_REQUIRE(!outidx.empty());
+    BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
+
+
+    boost::shared_ptr<jpeg_builder> jb_(new jpeg_builder());
+    boost::shared_ptr<jpeg_history> history;
+    jpeg_transport jt;
+    const std::vector<unsigned char>& s_mark = jt.start_mark();
+
+    std::vector<uint8_t> data_to_parse(s_mark.begin(), s_mark.end());
+    std::vector<uint8_t>& dref = *data;
+    data_to_parse.insert(data_to_parse.end(), &dref[outidx[0]], &dref[outidx[outidx.size()-1]]);
+    data_to_parse.insert(data_to_parse.end(), s_mark.begin(), s_mark.end());
+
+    jpeg_stream_parser stream_parser(jt.start_mark());
+
+    BOOST_CHECK(jpeg_stream_parser::jpeg_ready == stream_parser.parse(data_to_parse));
+
+
+    jb_->write(jb_->build_jpeg_from_rst(stream_parser.get_jpeg()), 533);
 
 }
 
