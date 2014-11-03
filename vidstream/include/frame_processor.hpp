@@ -8,7 +8,7 @@
 
 #include <perf/perf_clock.hpp>
 
-#include <boost/atomic.hpp>
+#include <boost/smart_ptr.hpp>
 
 
 namespace vidstream

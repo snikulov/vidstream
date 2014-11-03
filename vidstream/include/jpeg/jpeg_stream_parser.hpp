@@ -6,26 +6,31 @@
 
 #include <types.hpp>
 
+#include <boost/smart_ptr.hpp>
+#include <boost/circular_buffer.hpp>
+
 class jpeg_stream_parser
 {
 public:
     enum parse_status_t
     {
         need_more_data,
-        jpeg_ready
+        jpeg_ready,
+        overflow
     };
 
     jpeg_stream_parser(const std::vector<uint8_t>& mark);
     ~jpeg_stream_parser() {}
 
     parse_status_t parse(const std::vector<uint8_t>& data);
+    parse_status_t parse(uint8_t data);
     parse_status_t parse();
 
     vidstream::jpeg_data_t get_jpeg();
 
     size_t int_buf_size() const
     {
-        return workq_.size();
+        return cbuff->size();
     }
 
     size_t num_jpegs() const
@@ -39,6 +44,10 @@ private:
     std::vector<uint8_t> mark_;
     std::deque<uint8_t> workq_;
     std::deque<vidstream::jpeg_data_t> jpegs_;
+
+    // boost 
+    boost::scoped_ptr< boost::circular_buffer< uint8_t > > cbuff;
+
 
 };
 
