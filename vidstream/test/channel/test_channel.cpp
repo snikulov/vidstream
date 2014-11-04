@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     // use jpeg for test
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
-    bchwrapper bch_codec(7, 1);
+    bchwrapper bch_codec(7, 3);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
 
     // settle the server connect
@@ -207,10 +207,51 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
 
         jb_->write(jb_->build_jpeg_from_rst(stream_parser.get_jpeg()), idx);
     }
-
-
 }
 
+BOOST_AUTO_TEST_CASE(test_channel_case_7)
+{
+    int i = 0;
+    // use jpeg for test
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    bchwrapper bch_codec(7, 2);
+    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
+
+    // settle the server connect
+    // TODO: need fix it later
+    boost::this_thread::sleep_for(boost::chrono::seconds(1));
+
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
+
+    BOOST_REQUIRE(data);
+    BOOST_REQUIRE(!data->empty());
+
+    std::vector<uint8_t>& data_ref = *data;
+
+    for(size_t idx = 0; idx < data_ref.size(); ++idx)
+    {
+        uint8_t in = data_ref[idx];
+        itpp::bvec invec   = itpp::dec2bin(in);
+        itpp::bvec encoded = bch_codec.get()->encode(invec);
+
+        std::string to_send = itpp::to_str(encoded);
+
+        std::string received(to_send.c_str()+1, to_send.c_str()+to_send.size()-1);
+
+        itpp::bvec rcv_signal(received);
+        BOOST_CHECK(encoded == rcv_signal);
+
+        itpp::bvec decoded;
+        bch_codec.get()->decode(rcv_signal, decoded);
+
+        BOOST_CHECK_MESSAGE(invec == decoded, "Failure: data=" << std::hex << (unsigned int)in << " " << invec << " " << decoded);
+
+    }
+
+}
 
 
 BOOST_AUTO_TEST_SUITE_END()

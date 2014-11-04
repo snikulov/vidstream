@@ -13,6 +13,7 @@ option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
+option(WITH_CH_DBG "Build transport debug facility" OFF)
 
 
 if(WIN32)
@@ -74,6 +75,10 @@ if(WITH_ITPP)
     set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
     include_directories(ext/itpp ${CMAKE_BINARY_DIR})
+endif()
+
+if(WITH_CH_DBG)
+    add_definitions(-DCHANNEL_DEBUG)
 endif()
 
 include_directories(include)

@@ -22,6 +22,10 @@ in_channel::~in_channel()
 void in_channel::processor()
 {
 
+#if defined(CHANNEL_DEBUG)
+    dbgfile_.open("in_channel_dbg.dat", std::ios::binary|std::ios::trunc );
+#endif
+
     while (is_running_)
     {
         connect();
@@ -105,21 +109,36 @@ void in_channel::read_data()
 
     if (bytes > 0)
     {
+
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
 
+#if defined(CHANNEL_DEBUG)
+       dbgfile_.write(buf, bytes);
+#endif
         std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
         itpp::bvec rcv_signal(rcv_data);
         uint8_t data = 0;
         if (codec)
         {
+
+            std::cerr << "[I] " << __FUNCTION__ << " decode data" << std::endl;
+
             itpp::bvec decoded;
             codec->decode(rcv_signal, decoded);
-            data = static_cast<uint8_t>(itpp::bin2dec(decoded));
+            int conv = itpp::bin2dec(decoded);
+            conv &= 0xFF;
+            data = static_cast<uint8_t>(conv);
         }
         else
         {
-            data = static_cast<uint8_t>(itpp::bin2dec(rcv_signal));
+            int conv = itpp::bin2dec(rcv_signal);
+            conv &= 0xFF;
+            data = static_cast<uint8_t>(conv);
         }
+
+#if defined(CHANNEL_DEBUG)
+//        dbgfile_.write(reinterpret_cast<const char*>(&data), sizeof(data));
+#endif
         boost::mutex::scoped_lock lk(inmx_);
         indata_.push_back(data);
         incond_.notify_one();

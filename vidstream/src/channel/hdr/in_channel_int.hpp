@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <deque>
+#include <fstream>
 
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
@@ -57,6 +58,9 @@ private:
     bool is_connected_;
 
     boost::thread wt_;
+#if defined(CHANNEL_DEBUG)
+    std::ofstream dbgfile_;
+#endif
 };
 
 
