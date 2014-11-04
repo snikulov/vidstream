@@ -23,7 +23,7 @@ public:
     // blocks on wait if no data
     boost::shared_ptr< std::vector< uint8_t > > get(bool wait=true);
 
-    void in_channel::set_codec(boost::shared_ptr<itpp::Channel_Code> codec)
+    void set_codec(boost::shared_ptr<itpp::Channel_Code> codec)
     {
         boost::mutex::scoped_lock lk(codec_lk_);
         codec_ = codec;
