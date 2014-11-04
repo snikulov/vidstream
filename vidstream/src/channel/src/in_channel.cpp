@@ -61,13 +61,17 @@ void in_channel::connect()
             }
             else
             {
+#if defined(CHANNEL_DEBUG)
                 std::cerr << "[E] bind: " << ret << std::endl;
+#endif
             }
         }
         catch (std::exception& e)
         {
             is_connected_ = false;
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[E] bind: " << e.what() << std::endl;
+#endif
         }
     }
 }
@@ -88,12 +92,16 @@ bool in_channel::is_data_on_socket()
     }
     else
     {
+#if defined(CHANNEL_DEBUG)
         std::cerr << "rc = " << rc << std::endl;
+#endif
         if (rc < 0)
         {
             // socket error occurred
             is_connected_ = false;
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[E] poll : " << nn_strerror(nn_errno()) << std::endl;
+#endif
         }
         // else timeout gets trigged... repeat
     }
@@ -124,9 +132,9 @@ void in_channel::read_data()
         uint8_t data = 0;
         if (codec)
         {
-
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[I] " << __FUNCTION__ << " decode data" << std::endl;
-
+#endif
             itpp::bvec decoded;
             codec->decode(chsignal, decoded);
             int conv = itpp::bin2dec(decoded);
@@ -173,7 +181,9 @@ void in_channel::read_data()
     else
     {
         // ???
+#if defined(CHANNEL_DEBUG)
         std::cerr << "[E] recv : " << bytes << " " << nn_strerror(nn_errno())<< std::endl;
+#endif
         boost::this_thread::sleep_for(boost::chrono::microseconds(100));
     }
 

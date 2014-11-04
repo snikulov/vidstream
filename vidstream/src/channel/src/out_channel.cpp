@@ -36,12 +36,16 @@ bool out_channel::can_send_data()
     }
     else
     {
+#if defined(CHANNEL_DEBUG)
         std::cerr << "rc = " << rc << std::endl;
+#endif
         if (rc < 0)
         {
             // socket error occurred
             is_connected_ = false;
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[E] can_send_data poll : " << nn_strerror(nn_errno()) << std::endl;
+#endif
         }
         // else timeout gets trigged... repeat
     }
@@ -64,13 +68,17 @@ void out_channel::connect()
             }
             else
             {
+#if defined(CHANNEL_DEBUG)
                 std::cerr << "[E] connect: " << nn_strerror(nn_errno()) << std::endl;
+#endif
             }
         }
         catch (std::exception& e)
         {
             is_connected_ = false;
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[E] connect: " << e.what() << std::endl;
+#endif
         }
     }
 }
@@ -86,7 +94,9 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
         std::string to_send;
         if (codec)
         {
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[I] " << __FUNCTION__ << " encode data" << std::endl;
+#endif
             to_send = itpp::to_str(codec->encode(bits));
         }
         else
@@ -102,10 +112,10 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
         }
         else
         {
-
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[E] send_encoded: sent=" << sent << " "
                 << nn_strerror(nn_errno()) << std::endl;
-
+#endif
             while (is_running_ && !can_send_data())
             {
                 // wait for unblocking...
@@ -183,8 +193,10 @@ void out_channel::send_data()
         }
         else
         {
+#if defined(CHANNEL_DEBUG)
             std::cerr << "[I] sent = " << sent << " len = " << len << std::endl;
             // sleep or poll???
+#endif
         }
     }
 }
@@ -218,7 +230,9 @@ void out_channel::put(boost::shared_ptr< std::vector<uint8_t> > data)
     boost::mutex::scoped_lock lock(outmx_);
     if (outdata_.size() > 20)
     {
+#if defined(CHANNEL_DEBUG)
         std::cerr << "[W] more then limit in output queue - dropping frame" << std::endl;
+#endif
         return;
     }
     outdata_.push_back(data);

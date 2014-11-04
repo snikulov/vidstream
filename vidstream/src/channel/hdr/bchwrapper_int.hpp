@@ -29,7 +29,9 @@ public:
 
     boost::shared_ptr<itpp::Channel_Code> get()
     {
+#if defined(CHANNEL_DEBUG)
         std::cerr << "[I] get bch with n_=" << n_ << " t_=" << t_ << std::endl;
+#endif
         boost::mutex::scoped_lock lk(mx_);
         if (n_ != 0 && t_ != 0 && !codec_)
         {
@@ -42,7 +44,9 @@ private:
 
     void init_bch_codec()
     {
+#if defined(CHANNEL_DEBUG)
         std::cerr << "[I] inited bch with n_=" << n_ << " t_=" << t_ << std::endl;
+#endif
         boost::mutex::scoped_lock lk(mx_);
         if (n_ != 0 && t_ != 0)
         {
