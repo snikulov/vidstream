@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE( test_itpp_case_1 )
     std::string bvstring = itpp::to_str(decoded);
     BOOST_MESSAGE("decoded = " << bvstring);
 
-    std::string bbb(bvstring.begin()+1, bvstring.end()-1);
+    std::string bbb(bvstring.begin() + 1, bvstring.end() - 1);
     itpp::bvec k(bbb);
     BOOST_CHECK_MESSAGE(k == decoded, "k = " << k);
 }

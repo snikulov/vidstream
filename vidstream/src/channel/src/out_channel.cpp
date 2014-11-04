@@ -82,10 +82,17 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
     for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bits = itpp::dec2bin(data[i]);
-        itpp::bvec encoded = codec->encode(bits);
-        std::string str = itpp::to_str(encoded);
-        size_t strl = str.size();
-        int sent = sock_->send(str.c_str(), strl, 0);
+        std::string to_send;
+        if (codec)
+        {
+            to_send = itpp::to_str(codec->encode(bits));
+        }
+        else
+        {
+            to_send = itpp::to_str(bits);
+        }
+        size_t strl = to_send.size();
+        int sent = sock_->send(to_send.c_str(), strl, 0);
         if (sent > 0 && sent == strl)
         {
             res += sent;
@@ -134,17 +141,20 @@ void out_channel::send_data()
         size_t len = data.size();
         int sent = 0;
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+#if 0
         if (codec)
         {
 //            std::cerr << "[I] send encoded with BCH" << std::endl;
+#endif
             sent = send_encoded(data, codec);
+#if 0
         }
         else
         {
 //            std::cerr << "[I] send without encoding" << std::endl;
             sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), 0);
         }
-
+#endif
         if (sent > 0)
         {
             // remove from queue

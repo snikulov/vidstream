@@ -107,6 +107,23 @@ void in_channel::read_data()
     {
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
 
+        std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
+        itpp::bvec rcv_signal(rcv_data);
+        uint8_t data = 0;
+        if (codec)
+        {
+            itpp::bvec decoded;
+            codec->decode(rcv_signal, decoded);
+            data = static_cast<uint8_t>(itpp::bin2dec(decoded));
+        }
+        else
+        {
+            data = static_cast<uint8_t>(itpp::bin2dec(rcv_signal));
+        }
+        boost::mutex::scoped_lock lk(inmx_);
+        indata_.push_back(data);
+        incond_.notify_one();
+#if 0
         if (codec && buf[0] == '[')
         {
             std::string rcv_string(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
@@ -127,6 +144,8 @@ void in_channel::read_data()
             indata_.insert(indata_.end(), buf, buf + bytes);
             incond_.notify_one();
         }
+#endif
+
     }
     else
     {
