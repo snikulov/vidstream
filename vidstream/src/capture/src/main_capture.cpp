@@ -189,8 +189,8 @@ int main(int argc, char** argv)
 
 //    display(3, *cfg);
 
-    int bm = cfg->get<int>("cfg.bch.m");
-    int bt = cfg->get<int>("cfg.bch.t");
+    int bch_n = cfg->get<int>("cfg.bch.n");
+    int bch_t = cfg->get<int>("cfg.bch.t");
     int w = cfg->get<int>("cfg.img.width");
     int h = cfg->get<int>("cfg.img.height");
 
@@ -207,12 +207,14 @@ int main(int argc, char** argv)
 
     monitor_queue<camera_frame_t> mq(5);
     camera& c = *cam;
-    // subscribe on updates
-    resync.subscribe(jb.get());
+
 
     frame_producer producer(c, mq, stop_flag, &stat_collect);
     frame_processor processor(isize, mq, stop_flag, dataurl
             , jb, &stat_collect);
+
+    // subscribe on updates
+    resync.subscribe(jb.get());
     resync.subscribe(&processor);
 
     boost::thread tproducer(producer);

@@ -8,7 +8,7 @@
 
 #include <perf/perf_clock.hpp>
 
-#include <boost/atomic.hpp>
+#include <boost/smart_ptr.hpp>
 
 
 namespace vidstream
@@ -35,10 +35,7 @@ public:
 //        boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
-        boost::shared_ptr<itpp::Channel_Code> empty_codec;
-        boost::shared_ptr<itpp::BCH> bch_codec(new itpp::BCH(7, 3));
-
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, bch_codec));
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_));
 
         int max_err_try = 0;
 
@@ -59,7 +56,6 @@ public:
 
                 if (*is_bw_)
                 {
-                    std::cerr << "convert to BW" << std::endl;
                     boost::shared_ptr<cv::Mat> gs(new cv::Mat());
                     cvtColor(*frame, *gs, cv::COLOR_RGB2GRAY);
                     frame.swap(gs);
@@ -92,7 +88,7 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-                                outsink.reset(new out_channel(url_, empty_codec));
+                                outsink.reset(new out_channel(url_, codec_));
                                 //trans.reset(new transport(TRANSPORT_PUSH, url_));
                                 max_err_try = 0;
                             }
@@ -112,7 +108,7 @@ public:
                                   << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
                         // trans.reset(new transport(TRANSPORT_PUSH, url_));
-                        outsink.reset(new out_channel(url_, empty_codec));
+                        outsink.reset(new out_channel(url_, codec_));
                         max_err_try = 0;
                     }
                 }
@@ -152,6 +148,9 @@ public:
         int h = cfg.get<int>("cfg.img.height");
         bool bw = cfg.get<bool>("cfg.img.bw");
 
+        int bch_n = cfg.get<int>("cfg.bch.n");
+        int bch_t = cfg.get<int>("cfg.bch.t");
+
         cv::Size tmp(w, h);
         if (*req_size_ != tmp)
         {
@@ -163,16 +162,28 @@ public:
             *is_bw_ = bw;
         }
 
+        
+        if (bch_n == 0 && bch_t == 0)
+        {
+            codec_ = boost::shared_ptr<itpp::Channel_Code>();
+        }
+        else
+        {
+            codec_ = boost::shared_ptr<itpp::Channel_Code>(new itpp::BCH(bch_n, bch_t));
+        }
     }
 
 private:
     /* data */
     boost::shared_ptr<cv::Size> req_size_;
     boost::shared_ptr<bool> is_bw_;
+
     monitor_queue<camera_frame_t>& q_;
     int& stop_;
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
+    boost::shared_ptr<itpp::Channel_Code> codec_;
+
     mutable unsigned long long cnt_processed_;
     mutable unsigned long long cnt_sent_;
     mutable timer<high_resolution_clock> timer_;

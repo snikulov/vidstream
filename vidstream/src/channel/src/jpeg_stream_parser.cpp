@@ -8,24 +8,27 @@ jpeg_stream_parser::jpeg_stream_parser(const std::vector<uint8_t>& mark)
 
 jpeg_stream_parser::parse_status_t jpeg_stream_parser::parse()
 {
-    std::deque<uint8_t>::iterator l = std::search(workq_.begin(), workq_.end(), mark_.begin(), mark_.end());
+    cbuff_type::iterator l = std::search(cbuff.begin(), cbuff.end(), mark_.begin(), mark_.end());
 
-    if (l == workq_.end())
+    if (l == cbuff.end())
     {
         // no marker
         return need_more_data;
     }
 
-    if (l == workq_.begin())
+    if (l == cbuff.begin())
     {
-        // at the beginning
-        workq_.erase(workq_.begin(), workq_.begin() + mark_.size());
+        for (size_t i = 0; i < mark_.size(); ++i)
+        {
+            cbuff.pop_front();
+        }
+
         return parse();
     }
 
     // else we got jpeg between marks
-    vidstream::jpeg_data_t jpeg(new std::vector<uint8_t>(workq_.begin(), l));
-    workq_.erase(workq_.begin(), l + mark_.size());
+    vidstream::jpeg_data_t jpeg(new std::vector<uint8_t>(cbuff.begin(), l));
+    cbuff.erase(cbuff.begin(), l + mark_.size());
 
     jpegs_.push_back(jpeg);
 
@@ -37,7 +40,7 @@ jpeg_stream_parser::parse_status_t jpeg_stream_parser::parse()
 
 jpeg_stream_parser::parse_status_t jpeg_stream_parser::parse(const std::vector<uint8_t>& data)
 {
-    workq_.insert(workq_.end(), data.begin(), data.end());
+    cbuff.insert(cbuff.end(), data.begin(), data.end());
     return parse();
 }
 

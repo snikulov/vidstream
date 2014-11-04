@@ -34,7 +34,7 @@ int MyErrorHandler(int status, const char* func_name, const char* err_msg, const
     return 0;
 } 
 
-class jpeg_receiver
+class jpeg_receiver : public cfg_notify
 {
 public:
     jpeg_receiver(bool& stop, const std::string& url
@@ -55,7 +55,8 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        boost::scoped_ptr<in_channel> input(new in_channel(url_, boost::shared_ptr<itpp::BCH>(new itpp::BCH(7, 3))));
+        input_.reset(new in_channel(url_, codec_));
+
 //        boost::scoped_ptr<transport> rcv(
 //                new transport(TRANSPORT_PULL, url_)
 //                );
@@ -66,8 +67,7 @@ public:
 
         jpeg_stream_parser jstp(s_mark);
 
-//        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
-        jpeg_data_t rcv_buf(new std::vector<unsigned char>);
+        jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
         unsigned long img_count = 0;
         size_t rst_num = 0;
@@ -76,102 +76,68 @@ public:
 
         while(!stop_)
         {
-            waiting_ = true;
 
             if (stop_) break;
 
-            indata = input->get();
+
+            indata = input_->get(false);
 
             if (!indata)
             {
-                // no data available - try again
-                continue;
+                jstp.parse();
+            }
+            else
+            {
+                jstp.parse(*indata);
             }
 
-            jpeg_stream_parser::parse_status_t ps = jstp.parse(*indata);
-
-            while (ps == jpeg_stream_parser::jpeg_ready)
+            while (jstp.num_jpegs())
             {
-                jpeg_data_t rsts = jstp.get_jpeg();
-                if (rsts)
+                jpeg_data_t jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
+                if (jpeg)
                 {
-                    jpeg_data_t jpg = jb_->build_jpeg_from_rst(rsts);
-                    cv::Mat m = cv::imdecode(cv::Mat(*jpg), cv::IMREAD_UNCHANGED);
+                    cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
                     if (!m.empty())
                     {
                         cv::imshow("received", m);
                         cv::waitKey(5);
                     }
                 }
-                ps = jstp.parse();
             }
 
             waiting_ = false;
-#if 0
-            if (*indata != s_mark)
-            {
-                // IMREAD_UNCHANGED
-                jpeg_data_t jpg = jb_->build_jpeg_from_rst(indata);
-                cv::Mat m = cv::imdecode(cv::Mat(*jpg), cv::IMREAD_UNCHANGED);
-                if (!m.empty())
-                {
-                    cv::imshow("received", m);
-                    cv::waitKey(5);
-                }
-            }
-#endif
-
-#if 0
-            stm.process(*indata);
-            
-            if (stm.has_data())
-            {
-                jpeg_data_t jpg = stm.get_jpeg();
-                jpeg_rst_idxs_t rsts = jb_->rst_idxs(jpg);
-                std::cerr << "stm jpeg: rst count=" << std::dec << rsts->size() << std::endl;
-                std::vector<unsigned char>& rjpg = *jpg;
-                for(size_t i = 0; i < rsts->size(); ++i)
-                {
-                    size_t idx = (*rsts)[i];
-                    unsigned char val1 = rjpg[idx];
-                    unsigned char val2 = rjpg[idx+1];
-                    if (val1 != 0xff || ((val2 & 0x0f) != (i % 8)))
-                    {
-                        std::cerr << "i=" << i
-                            << " rst=0x" << std::hex
-                            << int(val1) << int(val2) << std::endl;
-                    }
-                }
-		// write rebuilt frame
-		static int nn = 0;
-                jb_->write(jpg,nn);
-                
-		// TODO: NEED TO INVESTIGATE!!!
-                //cvSetErrMode(CV_ErrModeParent);
-		//cvRedirectError(MyErrorHandler);
-		//cv::Mat imgbuf = cv::Mat(1, jpg->size(), CV_8U, &((*jpg)[0]));
-		//cv::Mat m = cv::imdecode(imgbuf, CV_LOAD_IMAGE_COLOR);
-		
-                //cv::Mat m = cv::imdecode(cv::Mat(*jpg), CV_LOAD_IMAGE_COLOR);
-		cv::Mat m = cv::imread("img00000000.jpg", cv::IMREAD_COLOR);
-		
-                if (!m.empty())
-                {
-                    std::cerr << "new frame" << std::endl;
-
-		  // probably good frame, store history
-                    history->put(jpg);
-                    cv::imshow("received", m);
-                    cv::waitKey(10);
-                }
-            }
-#endif
         }
     }
 
     void stop()
     {
+        input_.reset();
         stop_ = true;
+    }
+
+    void cfg_changed(const boost::property_tree::ptree& cfg)
+    {
+        int n = cfg.get<int>("cfg.bch.n");
+        int t = cfg.get<int>("cfg.bch.t");
+
+        boost::shared_ptr<itpp::Channel_Code> newcodec;
+        if (0 == n && 0 == t)
+        {
+            // no decoder
+        }
+        else
+        {
+            newcodec.reset(new itpp::BCH(n, t));
+        }
+        codec_.swap(newcodec);
+
+        if (input_)
+        {
+            input_->set_codec(codec_);
+        }
+
+        jb_->cfg_changed(cfg);
+        err_->cfg_changed(cfg);
     }
 
 private:
@@ -181,7 +147,9 @@ private:
     bool waiting_;
     boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<jpeg_builder> jb_;
-    boost::shared_ptr<bch_codec> ecc_;
+
+    boost::shared_ptr<itpp::Channel_Code> codec_;
+    boost::shared_ptr<in_channel>         input_;
 };
 
 #endif

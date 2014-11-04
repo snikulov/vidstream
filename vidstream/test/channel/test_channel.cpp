@@ -5,15 +5,26 @@
 #include <sstream>
 #include <string>
 
-#include "channel/channel.hpp"
+#include <opencv2/opencv.hpp>
+#include <types.hpp>
 
+#include "channel/channel.hpp"
 #include "channel/out_channel.hpp"
 #include "channel/in_channel.hpp"
+
+
+#include <jpeg/jpeg_rcv_stm.hpp>
+#include <jpeg/jpeg_transport.hpp>
+#include <jpeg/jpeg_history.hpp>
+#include <jpeg/jpeg_builder.hpp>
+
+#include <jpeg/jpeg_stream_parser.hpp>
 
 using namespace boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_suite_channel)
 
+#if 0
 BOOST_AUTO_TEST_CASE( test_channel_case_1 )
 {
     channel ch("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9000");
@@ -113,7 +124,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
 
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
 
-    // setle the server connect
+    // settle the server connect
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
 
@@ -132,6 +143,70 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
 
     BOOST_CHECK_MESSAGE(test1 == target,
             "test1.size()=" << test1.size() << " received.size()=" << target.size());
+}
+#endif
+
+
+using namespace vidstream;
+
+BOOST_AUTO_TEST_CASE(test_channel_case_6)
+{
+    int i = 0;
+    // use jpeg for test
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    boost::shared_ptr<itpp::Channel_Code> bch_codec(new itpp::BCH(7, 3));
+    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
+
+    // settle the server connect
+    // TODO: need fix it later
+    boost::this_thread::sleep_for(boost::chrono::seconds(1));
+
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+    
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
+
+    BOOST_REQUIRE(data);
+    BOOST_REQUIRE(!data->empty());
+
+    // jpeg header check
+    std::vector<size_t> outidx;
+    BOOST_REQUIRE(get_all_rst_blocks(*data, outidx));
+    BOOST_REQUIRE(!outidx.empty());
+    BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
+
+
+    boost::shared_ptr<jpeg_builder> jb_(new jpeg_builder());
+
+    jpeg_rst_idxs_t rst(jb_->rst_idxs(data));
+
+    boost::shared_ptr<jpeg_history> history;
+    jpeg_transport jt;
+    const std::vector<unsigned char>& s_mark = jt.start_mark();
+
+    jpeg_stream_parser stream_parser(jt.start_mark());
+
+    for (size_t idx = 0; idx < 10000; ++idx)
+    {
+        int ret = jt.send_jpeg(data, rst, out_plain);
+
+        while (stream_parser.num_jpegs() != 1)
+        {
+            boost::shared_ptr<std::vector< uint8_t > > buf = in_plain.get(false);
+            if (buf)
+            {
+                stream_parser.parse(*buf);
+            }
+            else
+            {
+                stream_parser.parse();
+                boost::this_thread::sleep_for(boost::chrono::nanoseconds(200));
+            }
+        }
+
+        jb_->write(jb_->build_jpeg_from_rst(stream_parser.get_jpeg()), idx);
+    }
+
 
 }
 

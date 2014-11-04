@@ -31,14 +31,12 @@ void service_worker::start()
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
     boost::shared_ptr<corrupt_intro> err(new corrupt_intro());
 
-    cfgsrv_->subscribe(jb.get());
-    cfgsrv_->subscribe(err.get());
 
-
-    int m = cfg_->get<int>("cfg.bch.m");
+    int m = cfg_->get<int>("cfg.bch.n");
     int t = cfg_->get<int>("cfg.bch.t");
 
     rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb));
+    cfgsrv_->subscribe(rcv_.get());
 
     // run threads
     cfgthread_.reset(new boost::thread(*cfgsrv_));

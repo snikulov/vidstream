@@ -58,7 +58,7 @@ public:
 
     jpeg_data_t from_cvmat(const camera_frame_t frame)
     {
-        jpeg_data_t ret_buf(new std::vector<unsigned char>);
+        jpeg_data_t ret_buf(new std::vector<unsigned char>());
         if (frame && !frame->empty())
         {
             boost::mutex::scoped_lock lk(mx_);
@@ -131,6 +131,9 @@ public:
         dst->erase(dst->begin()+dst_idxs[0], dst->end());
         dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
 
+        // add missing terminator
+        dst->push_back(0xFF);
+        dst->push_back(0xD9);
         return dst;
     }
 
