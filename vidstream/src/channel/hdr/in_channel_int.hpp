@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <deque>
+#include <fstream>
 
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
@@ -14,12 +15,13 @@
 #include <itpp/itcomm.h>
 
 #include <channel/bchwrapper.hpp>
+#include <corrupt/corrupt_intro.hpp>
 
 class in_channel
     : private boost::noncopyable
 {
 public:
-    in_channel(const std::string& url, bchwrapper& codec);
+    in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err);
     ~in_channel();
 
     // blocks on wait if no data
@@ -47,6 +49,8 @@ private:
     boost::mutex codec_lk_;
     bchwrapper& codec_;
 
+    corrupt_intro& corruptor_;
+
     // internal cbuff
     boost::mutex inmx_;
     boost::condition_variable incond_;
@@ -57,6 +61,9 @@ private:
     bool is_connected_;
 
     boost::thread wt_;
+#if defined(CHANNEL_DEBUG)
+    std::ofstream dbgfile_;
+#endif
 };
 
 

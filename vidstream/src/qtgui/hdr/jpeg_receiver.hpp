@@ -32,7 +32,7 @@ int MyErrorHandler(int status, const char* func_name, const char* err_msg, const
 {
     std::cerr << "Woohoo, my own custom error handler" << std::endl;
     return 0;
-} 
+}
 
 class jpeg_receiver : public cfg_notify
 {
@@ -56,7 +56,7 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        input_.reset(new in_channel(url_, *codec_));
+        input_.reset(new in_channel(url_, *codec_, *err_));
 
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();

@@ -21,6 +21,8 @@ public:
 #endif
         start_mark_.push_back(0xff);
         start_mark_.push_back(0xff);
+        start_mark_.push_back(0xff);
+        start_mark_.push_back(0xff);
     }
 
     ~jpeg_transport()

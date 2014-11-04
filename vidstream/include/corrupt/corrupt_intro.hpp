@@ -3,14 +3,16 @@
 
 #include <types.hpp>
 #include <vector>
-#include <corrupt/corrupt.h>
 
 #include <itpp/itcomm.h>
+
+#include <cfg/cfg_notify.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 class corrupt_intro : public cfg_notify
 {
 public:
-    corrupt_intro(double e = 0.0)
+    corrupt_intro(double e = 0.00)
         : binary_channel_(new itpp::BSC(e))
     {
     }
@@ -30,8 +32,8 @@ public:
 
 private:
 
-    corrupt_intro(const corrupt_intro&) {}
-    corrupt_intro& operator= (const corrupt_intro&) { return *this; }
+    corrupt_intro(const corrupt_intro&);
+    corrupt_intro& operator= (const corrupt_intro&);
 
     // BSC channel model from ITPP
     boost::mutex lk_;

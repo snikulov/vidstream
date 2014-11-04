@@ -1,6 +1,7 @@
 #include "out_channel_int.hpp"
 
 #include <iostream>
+#include <stdexcept>
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
@@ -82,10 +83,19 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
     for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bits = itpp::dec2bin(data[i]);
-        itpp::bvec encoded = codec->encode(bits);
-        std::string str = itpp::to_str(encoded);
-        size_t strl = str.size();
-        int sent = sock_->send(str.c_str(), strl, 0);
+        std::string to_send;
+        if (codec)
+        {
+            std::cerr << "[I] " << __FUNCTION__ << " encode data" << std::endl;
+            to_send = itpp::to_str(codec->encode(bits));
+        }
+        else
+        {
+            to_send = itpp::to_str(bits);
+        }
+        size_t strl = to_send.size();
+        int sent = sock_->send(to_send.c_str(), strl, 0);
+
         if (sent > 0 && sent == strl)
         {
             res += sent;
@@ -100,7 +110,19 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
             {
                 // wait for unblocking...
             }
+            sent = sock_->send(to_send.c_str(), strl, 0);
+            if (sent > 0)
+            {
+                res += sent;
+            }
+            else
+            {
+                throw std::runtime_error("can't send");
+            }
         }
+#if defined(CHANNEL_DEBUG)
+        dbgfile_.write(to_send.c_str(), to_send.size());
+#endif
     }
     return static_cast<int>(res);
 }
@@ -133,18 +155,26 @@ void out_channel::send_data()
         std::vector<uint8_t>& data = *data_ptr;
         size_t len = data.size();
         int sent = 0;
+
+#if defined(CHANNEL_DEBUG)
+//        dbgfile_.write(reinterpret_cast<const char*>(&data[0]), data.size()*sizeof(data[0]));
+#endif
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+
+#if 0
         if (codec)
         {
 //            std::cerr << "[I] send encoded with BCH" << std::endl;
+#endif
             sent = send_encoded(data, codec);
+#if 0
         }
         else
         {
 //            std::cerr << "[I] send without encoding" << std::endl;
             sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), 0);
         }
-
+#endif
         if (sent > 0)
         {
             // remove from queue
@@ -157,12 +187,13 @@ void out_channel::send_data()
             // sleep or poll???
         }
     }
-
-
 }
 
 void out_channel::processor()
 {
+#if defined(CHANNEL_DEBUG)
+    dbgfile_.open("out_channel_dbg.dat", std::ios::binary|std::ios::trunc );
+#endif
 
     while (is_running_)
     {
@@ -177,6 +208,9 @@ void out_channel::processor()
             boost::this_thread::sleep_for(boost::chrono::milliseconds(5));
         }
     }
+#if defined(CHANNEL_DEBUG)
+    dbgfile_.close();
+#endif
 }
 
 void out_channel::put(boost::shared_ptr< std::vector<uint8_t> > data)
