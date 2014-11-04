@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     // use jpeg for test
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
-    bchwrapper bch_codec(0, 0);
+    bchwrapper bch_codec(7, 1);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
 
     // settle the server connect
@@ -164,7 +164,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
 
     boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
-    
+
     jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 
     BOOST_REQUIRE(data);
@@ -187,7 +187,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
 
     jpeg_stream_parser stream_parser(jt.start_mark());
 
-    for (size_t idx = 0; idx < 10000; ++idx)
+    for (size_t idx = 0; idx < 5; ++idx)
     {
         int ret = jt.send_jpeg(data, rst, out_plain);
 
