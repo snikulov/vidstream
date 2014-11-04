@@ -34,8 +34,8 @@ void service_worker::start()
 
     int m = cfg_->get<int>("cfg.bch.n");
     int t = cfg_->get<int>("cfg.bch.t");
-
-    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb));
+    boost::shared_ptr<bchwrapper> bch(new bchwrapper(m, t));
+    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb, bch));
     cfgsrv_->subscribe(rcv_.get());
 
     // run threads

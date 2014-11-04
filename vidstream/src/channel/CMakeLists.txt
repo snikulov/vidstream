@@ -9,6 +9,7 @@ set(HDR_FILES
     hdr/out_channel_int.hpp
     hdr/in_channel_int.hpp
     hdr/transport_int.hpp
+    hdr/bchwrapper_int.hpp
     hdr/codec_int.hpp)
 
 set(SRC_FILES

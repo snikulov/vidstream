@@ -115,7 +115,7 @@ void channel::send_encoded(int s, const std::vector<uint8_t>& src)
     for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bv = itpp::dec2bin(src[i]);
-        std::string to_send = itpp::to_str(codec_->encode(bv));
+        std::string to_send = itpp::to_str(codec_.get()->encode(bv));
         nn_send(s, to_send.c_str(), to_send.size(), NN_DONTWAIT);
 
         // TODO: add error checking

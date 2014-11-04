@@ -20,10 +20,10 @@ class frame_processor
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
-                    , stat_data_t * stat
+                    , stat_data_t * stat, bchwrapper& codec
                    )
         : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
-        , cnt_processed_(0), cnt_sent_(0), stat_(stat)
+        , cnt_processed_(0), cnt_sent_(0), stat_(stat), codec_(codec)
     {
     }
 
@@ -32,7 +32,6 @@ public:
 #if defined(CAPTURE_UI)
         cv::namedWindow("Capture",1);
 #endif
-//        boost::shared_ptr<transport> trans;
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
         boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_));
@@ -70,7 +69,6 @@ public:
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
                 pt.stop();
-//                std::cerr << "process time: " << pt.seconds() << std::endl;
                 stat_->f_process_time_ = pt.seconds();
 
                 if (outsink)
@@ -78,7 +76,6 @@ public:
                     try
                     {
                         pt.start();
-//                        int ret = jpgtrans->send_jpeg(jpg, rst, trans, ecc_);
                         int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
 
                         if (ret == -1)
@@ -162,15 +159,7 @@ public:
             *is_bw_ = bw;
         }
 
-        
-        if (bch_n == 0 && bch_t == 0)
-        {
-            codec_ = boost::shared_ptr<itpp::Channel_Code>();
-        }
-        else
-        {
-            codec_ = boost::shared_ptr<itpp::Channel_Code>(new itpp::BCH(bch_n, bch_t));
-        }
+        codec_.change_params(bch_n, bch_t);
     }
 
 private:
@@ -182,7 +171,7 @@ private:
     int& stop_;
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
-    boost::shared_ptr<itpp::Channel_Code> codec_;
+    bchwrapper& codec_;
 
     mutable unsigned long long cnt_processed_;
     mutable unsigned long long cnt_sent_;

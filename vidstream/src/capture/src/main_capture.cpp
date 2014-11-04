@@ -19,6 +19,8 @@
 #include <cfg/cfg_subscribers.hpp>
 #include <stat/stat_data.hpp>
 
+#include <channel/bchwrapper.hpp>
+
 using namespace vidstream;
 
 namespace po = boost::program_options;
@@ -155,7 +157,7 @@ int main(int argc, char** argv)
     po::options_description desc("All options");
     desc.add_options()
         ("url,u", po::value<std::string>()->default_value("tcp://127.0.0.1:9900"),
-            "url for publising data {tcp://<control IP>:<control PORT>}")
+        "url for publising data {tcp://<control IP>:<control PORT>}")
         ("file,f", po::value<std::string>()->default_value(""), "path to input video file")
         ("help,?", "show help");
     po::variables_map vm;
@@ -181,18 +183,20 @@ int main(int argc, char** argv)
     cfg_sync_thread resync(stop_flag, cmd_url, cfg, &stat_collect);
     boost::thread cfg_thread(boost::ref(resync));
 
-    while(!resync.ready())
+    while (!resync.ready())
     {
         std::cerr << "Configuration is not in sync with server. Retrying..." << std::endl;
         boost::this_thread::sleep_for(boost::chrono::seconds(1));
     }
 
-//    display(3, *cfg);
+    //    display(3, *cfg);
 
     int bch_n = cfg->get<int>("cfg.bch.n");
     int bch_t = cfg->get<int>("cfg.bch.t");
     int w = cfg->get<int>("cfg.img.width");
     int h = cfg->get<int>("cfg.img.height");
+
+    bchwrapper bch(bch_n, bch_t);
 
     cv::Size isize(w,h);
 
@@ -210,8 +214,7 @@ int main(int argc, char** argv)
 
 
     frame_producer producer(c, mq, stop_flag, &stat_collect);
-    frame_processor processor(isize, mq, stop_flag, dataurl
-            , jb, &stat_collect);
+    frame_processor processor(isize, mq, stop_flag, dataurl, jb, &stat_collect, bch);
 
     // subscribe on updates
     resync.subscribe(jb.get());

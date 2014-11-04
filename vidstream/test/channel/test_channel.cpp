@@ -11,6 +11,7 @@
 #include "channel/channel.hpp"
 #include "channel/out_channel.hpp"
 #include "channel/in_channel.hpp"
+#include "channel/bchwrapper.hpp"
 
 
 #include <jpeg/jpeg_rcv_stm.hpp>
@@ -155,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     // use jpeg for test
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
-    boost::shared_ptr<itpp::Channel_Code> bch_codec(new itpp::BCH(7, 3));
+    bchwrapper bch_codec(7, 3);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
 
     // settle the server connect

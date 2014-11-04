@@ -4,7 +4,7 @@
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
-out_channel::out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)
+out_channel::out_channel(const std::string& url, bchwrapper& codec)
     : url_(url), codec_(codec), is_running_(false), is_connected_(false)
 {
     is_running_ = true;
@@ -74,7 +74,7 @@ void out_channel::connect()
     }
 }
 
-int out_channel::send_encoded(const std::vector<uint8_t>& data)
+int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<itpp::Channel_Code> codec)
 {
     size_t len = data.size();
 
@@ -82,7 +82,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data)
     for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bits = itpp::dec2bin(data[i]);
-        itpp::bvec encoded = codec_->encode(bits);
+        itpp::bvec encoded = codec->encode(bits);
         std::string str = itpp::to_str(encoded);
         size_t strl = str.size();
         int sent = sock_->send(str.c_str(), strl, 0);
@@ -133,18 +133,16 @@ void out_channel::send_data()
         std::vector<uint8_t>& data = *data_ptr;
         size_t len = data.size();
         int sent = 0;
-        if (codec_)
+        boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+        if (codec)
         {
-            sent = send_encoded(data);
+//            std::cerr << "[I] send encoded with BCH" << std::endl;
+            sent = send_encoded(data, codec);
         }
         else
         {
+//            std::cerr << "[I] send without encoding" << std::endl;
             sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), 0);
-
-            if (sent < 0)
-            {
-                std::cerr << "[E] sent=" << sent << " " << nn_strerror(nn_errno()) << std::endl;
-            }
         }
 
         if (sent > 0)

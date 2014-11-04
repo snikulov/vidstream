@@ -40,8 +40,9 @@ public:
     jpeg_receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
+            , boost::shared_ptr<bchwrapper> codec
             )
-        : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb)
+            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
     {
       cv::namedWindow("received");
     }
@@ -55,11 +56,7 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        input_.reset(new in_channel(url_, codec_));
-
-//        boost::scoped_ptr<transport> rcv(
-//                new transport(TRANSPORT_PULL, url_)
-//                );
+        input_.reset(new in_channel(url_, *codec_));
 
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();
@@ -120,21 +117,7 @@ public:
         int n = cfg.get<int>("cfg.bch.n");
         int t = cfg.get<int>("cfg.bch.t");
 
-        boost::shared_ptr<itpp::Channel_Code> newcodec;
-        if (0 == n && 0 == t)
-        {
-            // no decoder
-        }
-        else
-        {
-            newcodec.reset(new itpp::BCH(n, t));
-        }
-        codec_.swap(newcodec);
-
-        if (input_)
-        {
-            input_->set_codec(codec_);
-        }
+        codec_->change_params(n, t);
 
         jb_->cfg_changed(cfg);
         err_->cfg_changed(cfg);
@@ -148,7 +131,7 @@ private:
     boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<jpeg_builder> jb_;
 
-    boost::shared_ptr<itpp::Channel_Code> codec_;
+    boost::shared_ptr<bchwrapper> codec_;
     boost::shared_ptr<in_channel>         input_;
 };
 

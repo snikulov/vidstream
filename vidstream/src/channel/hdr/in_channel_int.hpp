@@ -13,21 +13,17 @@
 #include <nanopp/nn.hpp>
 #include <itpp/itcomm.h>
 
+#include <channel/bchwrapper.hpp>
+
 class in_channel
     : private boost::noncopyable
 {
 public:
-    in_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
+    in_channel(const std::string& url, bchwrapper& codec);
     ~in_channel();
 
     // blocks on wait if no data
     boost::shared_ptr< std::vector< uint8_t > > get(bool wait=true);
-
-    void set_codec(boost::shared_ptr<itpp::Channel_Code> codec)
-    {
-        boost::mutex::scoped_lock lk(codec_lk_);
-        codec_ = codec;
-    }
 
 private:
     in_channel();
@@ -49,7 +45,7 @@ private:
     std::string url_;
 
     boost::mutex codec_lk_;
-    boost::shared_ptr<itpp::Channel_Code> codec_;
+    bchwrapper& codec_;
 
     // internal cbuff
     boost::mutex inmx_;

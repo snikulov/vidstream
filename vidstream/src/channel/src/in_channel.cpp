@@ -4,7 +4,7 @@
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
-in_channel::in_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec)
+in_channel::in_channel(const std::string& url, bchwrapper& codec)
     : url_(url), codec_(codec), is_running_(false), is_connected_(false)
 {
     is_running_ = true;
@@ -105,14 +105,15 @@ void in_channel::read_data()
 
     if (bytes > 0)
     {
-        boost::mutex::scoped_lock lk(codec_lk_);
-        if (codec_)
+        boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+
+        if (codec && buf[0] == '[')
         {
             std::string rcv_string(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
             itpp::bvec rcv_signal(rcv_string);
 
             itpp::bvec decoded;
-            codec_->decode(rcv_signal, decoded);
+            codec->decode(rcv_signal, decoded);
             uint8_t data = static_cast<uint8_t>(itpp::bin2dec(decoded));
 
             boost::mutex::scoped_lock lk(inmx_);

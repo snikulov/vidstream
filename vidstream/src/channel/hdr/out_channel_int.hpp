@@ -11,12 +11,13 @@
 
 #include <nanopp/nn.hpp>
 #include <itpp/itcomm.h>
+#include <channel/bchwrapper.hpp>
 
 class out_channel
     : private boost::noncopyable
 {
 public:
-    out_channel(const std::string& url, boost::shared_ptr<itpp::Channel_Code> codec);
+    out_channel(const std::string& url, bchwrapper& codec);
     ~out_channel();
 
     void put(boost::shared_ptr< std::vector<uint8_t> > data);
@@ -32,14 +33,14 @@ private:
 
     void send_data();
 
-    int send_encoded(const std::vector<uint8_t>& data);
+    int send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<itpp::Channel_Code> codec);
 
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 
     bool can_send_data();
 
     std::string url_;
-    boost::shared_ptr<itpp::Channel_Code> codec_;
+    bchwrapper& codec_;
 
     // internal cbuff
     boost::mutex outmx_;
