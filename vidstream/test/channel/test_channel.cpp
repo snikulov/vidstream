@@ -21,6 +21,8 @@
 
 #include <jpeg/jpeg_stream_parser.hpp>
 
+#include <corrupt/corrupt_intro.hpp>
+
 using namespace boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_suite_channel)
@@ -156,8 +158,10 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     // use jpeg for test
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
+    corrupt_intro corrupt;
     bchwrapper bch_codec(7, 3);
-    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
+
+    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect
     // TODO: need fix it later
@@ -215,8 +219,9 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     // use jpeg for test
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
-    bchwrapper bch_codec(7, 2);
-    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec);
+    corrupt_intro corrupt(0.1);
+    bchwrapper bch_codec(7, 3);
+    in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect
     // TODO: need fix it later
@@ -244,8 +249,10 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
         itpp::bvec rcv_signal(received);
         BOOST_CHECK(encoded == rcv_signal);
 
+        itpp::bvec corrupted = corrupt.corrupt(rcv_signal);
+
         itpp::bvec decoded;
-        bch_codec.get()->decode(rcv_signal, decoded);
+        bch_codec.get()->decode(corrupted, decoded);
 
         BOOST_CHECK_MESSAGE(invec == decoded, "Failure: data=" << std::hex << (unsigned int)in << " " << invec << " " << decoded);
 

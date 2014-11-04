@@ -4,8 +4,8 @@
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
-in_channel::in_channel(const std::string& url, bchwrapper& codec)
-    : url_(url), codec_(codec), is_running_(false), is_connected_(false)
+in_channel::in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err)
+    : url_(url), codec_(codec), corruptor_(err), is_running_(false), is_connected_(false)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&in_channel::processor, this));
@@ -113,10 +113,14 @@ void in_channel::read_data()
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
 
 #if defined(CHANNEL_DEBUG)
-       dbgfile_.write(buf, bytes);
+        dbgfile_.write(buf, bytes);
 #endif
         std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
-        itpp::bvec rcv_signal(rcv_data);
+        itpp::bvec rcvsignal(rcv_data);
+
+        // corrupt signal in channel
+        itpp::bvec chsignal = corruptor_.corrupt(rcvsignal);
+
         uint8_t data = 0;
         if (codec)
         {
@@ -124,14 +128,14 @@ void in_channel::read_data()
             std::cerr << "[I] " << __FUNCTION__ << " decode data" << std::endl;
 
             itpp::bvec decoded;
-            codec->decode(rcv_signal, decoded);
+            codec->decode(chsignal, decoded);
             int conv = itpp::bin2dec(decoded);
             conv &= 0xFF;
             data = static_cast<uint8_t>(conv);
         }
         else
         {
-            int conv = itpp::bin2dec(rcv_signal);
+            int conv = itpp::bin2dec(chsignal);
             conv &= 0xFF;
             data = static_cast<uint8_t>(conv);
         }

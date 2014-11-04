@@ -15,12 +15,13 @@
 #include <itpp/itcomm.h>
 
 #include <channel/bchwrapper.hpp>
+#include <corrupt/corrupt_intro.hpp>
 
 class in_channel
     : private boost::noncopyable
 {
 public:
-    in_channel(const std::string& url, bchwrapper& codec);
+    in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err);
     ~in_channel();
 
     // blocks on wait if no data
@@ -47,6 +48,8 @@ private:
 
     boost::mutex codec_lk_;
     bchwrapper& codec_;
+
+    corrupt_intro& corruptor_;
 
     // internal cbuff
     boost::mutex inmx_;
