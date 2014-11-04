@@ -18,10 +18,10 @@ const size_t RES_MODE_MAX = sizeof(res_modes)/sizeof(res_modes[0]);
 
 static const param_pair_t bch_modes[] =
 {
-    {13,105}
-    ,{5,3}
-    ,{6,6}
-    ,{5,4}
+    {0,0}
+    ,{7,1}
+    ,{7,2}
+    ,{7,3}
 };
 const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 
@@ -35,7 +35,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
         u.spinBox_lum_quality->setValue(cfg.get<int>("cfg.img.lum"));
         u.spinBox_rst_num->setValue(cfg.get<int>("cfg.img.rst"));
         u.checkBox_is_gray->setChecked(cfg.get<bool>("cfg.img.bw"));
-        u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.m"));
+        u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.n"));
         u.spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
 
         u.doubleSpinBox_error_persent->setValue(cfg.get<double>("cfg.error.val"));
@@ -69,7 +69,7 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
 
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 {
-    cfg.put("cfg.bch.m",     u.spinBox_bch_m->value());
+    cfg.put("cfg.bch.n",     u.spinBox_bch_m->value());
     cfg.put("cfg.bch.t",     u.spinBox_bch_t->value());
     cfg.put("cfg.img.chrom", u.spinBox_chrome_quality->value());
     cfg.put("cfg.img.lum",   u.spinBox_lum_quality->value());
@@ -129,7 +129,7 @@ int ui_set_bch_preset_list_index(Ui::MainWindow &u
 {
     int def_idx = BCH_PRESET_MAX; // custom
 
-    int m = cfg.get<int>("cfg.bch.m");
+    int m = cfg.get<int>("cfg.bch.n");
     int t = cfg.get<int>("cfg.bch.t");
 
     for(int i = 0; i < BCH_PRESET_MAX; i++)
@@ -162,7 +162,7 @@ int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
             if (u.spinBox_bch_m->value() != m) u.spinBox_bch_m->setValue(m);
             if (u.spinBox_bch_t->value() != t) u.spinBox_bch_t->setValue(t);
         }
-        cfg.put("cfg.bch.m", m);
+        cfg.put("cfg.bch.n", m);
         cfg.put("cfg.bch.t", t);
     }
     else

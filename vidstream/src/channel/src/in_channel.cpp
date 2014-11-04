@@ -105,10 +105,12 @@ void in_channel::read_data()
 
     if (bytes > 0)
     {
+        boost::mutex::scoped_lock lk(codec_lk_);
         if (codec_)
         {
             std::string rcv_string(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
             itpp::bvec rcv_signal(rcv_string);
+
             itpp::bvec decoded;
             codec_->decode(rcv_signal, decoded);
             uint8_t data = static_cast<uint8_t>(itpp::bin2dec(decoded));

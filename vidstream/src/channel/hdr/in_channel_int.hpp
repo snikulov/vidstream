@@ -8,6 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/atomic.hpp>
 
 #include <nanopp/nn.hpp>
 #include <itpp/itcomm.h>
@@ -22,12 +23,20 @@ public:
     // blocks on wait if no data
     boost::shared_ptr< std::vector< uint8_t > > get(bool wait=true);
 
+    void in_channel::set_codec(boost::shared_ptr<itpp::Channel_Code> codec)
+    {
+        boost::mutex::scoped_lock lk(codec_lk_);
+        codec_ = codec;
+    }
+
 private:
     in_channel();
 
     void processor();
 
     void connect();
+
+
 
     bool is_data_on_socket();
 
@@ -38,6 +47,8 @@ private:
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 
     std::string url_;
+
+    boost::mutex codec_lk_;
     boost::shared_ptr<itpp::Channel_Code> codec_;
 
     // internal cbuff
