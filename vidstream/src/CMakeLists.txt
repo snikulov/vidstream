@@ -1,6 +1,7 @@
-if(NOT MSVC)
-    add_subdirectory(bch)
-endif()
+# no more bch from old team
+#add_subdirectory(bch)
+
+add_subdirectory(channel)
 add_subdirectory(capture)
 add_subdirectory(split)
 add_subdirectory(corrupt)

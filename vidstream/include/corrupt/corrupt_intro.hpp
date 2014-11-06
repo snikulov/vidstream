@@ -3,33 +3,42 @@
 
 #include <types.hpp>
 #include <vector>
-#include <corrupt/corrupt.h>
+
+#include <itpp/itcomm.h>
+
+#include <cfg/cfg_notify.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 class corrupt_intro : public cfg_notify
 {
 public:
-    corrupt_intro(double e = 0.0)
-        : err_val_(e)
+    corrupt_intro(double e = 0.00)
+        : binary_channel_(new itpp::BSC(e))
     {
     }
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
     {
-        err_val_ = cfg.get<double>("cfg.error.val");
+        double noise = cfg.get<double>("cfg.error.val");
+        boost::mutex::scoped_lock lk(lk_);
+        binary_channel_.reset(new itpp::BSC(noise));
     }
 
-    void corrupt(std::vector<uint8_t>& data)
+    itpp::bvec corrupt(itpp::bvec& signal)
     {
-        corr_.add_error(data, err_val_);
+        boost::mutex::scoped_lock lk(lk_);
+        return binary_channel_->operator()(signal);
     }
 
 private:
 
-    corrupt_intro(const corrupt_intro&) {}
-    corrupt_intro& operator= (const corrupt_intro&) { return *this; }
+    corrupt_intro(const corrupt_intro&);
+    corrupt_intro& operator= (const corrupt_intro&);
 
-    corruptor corr_;
-    double err_val_;
+    // BSC channel model from ITPP
+    boost::mutex lk_;
+    boost::scoped_ptr<itpp::BSC> binary_channel_;
+
 };
 
 #endif

@@ -3,7 +3,8 @@
 
 #include <types.hpp>
 #include <transport/transport.hpp>
-#include <ecc/bch_codec.hpp>
+
+#include <channel/out_channel.hpp>
 
 namespace vidstream {
 
@@ -28,44 +29,36 @@ public:
     {
     }
 
+
     int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
-            ,boost::shared_ptr<transport> trans
-            ,boost::shared_ptr<bch_codec> codec
-            )
+        , boost::shared_ptr<out_channel> outsink)
     {
-	trans->start_frame();
         int res = 0;
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;
 
-        res = trans->send(codec->encode(start_mark_));
-// send start file marker
-        if (res == -1)
-        {
-            return res;
-        }
+        outsink->put(start_mark_);
 
-// send rst blocks
-        size_t ridx_len = ridx.size()-1;
-        for(size_t i = 0; i < ridx_len; i++ )
+        // send whole jpeg RST
+        std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
+        outsink->put(rst_blocks);
+
+        outsink->put(start_mark_);
+#if 0
+        // send rst blocks
+        size_t ridx_len = ridx.size() - 1;
+        for (size_t i = 0; i < ridx_len; i++)
         {
             // send only data, without RST mark
-            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i)+2], &rdata[ridx.at(i+1)]);
-            // put terminal RSTn code for end of block indication
-//            rst_blk.push_back(rst_blk.at(0));
-//            rst_blk.push_back(rst_blk.at(1));
+            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i) + 2], &rdata[ridx.at(i + 1)]);
 
-            res = trans->send(codec->encode(rst_blk));
-
-            if (res == -1)
-            {
-                return res;
-            }
+            outsink->put(rst_blk);
         }
-// send end file marker
-//        res = trans->send(codec->encode(end_mark_));
+#endif
         return res;
     }
+
+
 
     const std::vector<unsigned char>& start_mark() const
     {
