@@ -65,7 +65,7 @@ public:
             read_time_ = boost::chrono::high_resolution_clock::now();
             count_++;
             timer_.stop();
-            sec_ = timer_.seconds(); // only good attempts
+            sec_ = timer_.sec(); // only good attempts
         }
         else
         {
