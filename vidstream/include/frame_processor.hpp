@@ -69,7 +69,7 @@ public:
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
                 pt.stop();
-                stat_->f_process_time_ = pt.seconds();
+                stat_->f_process_time_ = pt.sec();
 
                 if (outsink)
                 {
@@ -96,7 +96,7 @@ public:
                             cnt_sent_++;
                             pt.stop();
 //                            std::cerr << "send time: " << pt.seconds() << std::endl;
-                            stat_->f_send_time_ = pt.seconds();
+                            stat_->f_send_time_ = pt.sec();
                         }
                     }
                     catch(nn::exception& ex)
@@ -126,12 +126,22 @@ public:
 
     unsigned int get_process_fps() const
     {
-        return  static_cast<unsigned int>(cnt_processed_/timer_.seconds());
+        unsigned long t = timer_.sec();
+        if (t > 0)
+        {
+            return  static_cast<unsigned int>(cnt_processed_/timer_.sec());
+        }
+        return cnt_processed_;
     }
 
     unsigned int get_sent_fps() const
     {
-        return  static_cast<unsigned int>(cnt_sent_/timer_.seconds());
+        unsigned long t = timer_.sec();
+        if (t > 0)
+        {
+            return  static_cast<unsigned int>(cnt_sent_/timer_.sec());
+        }
+        return cnt_sent_;
     }
 
 
