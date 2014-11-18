@@ -2,6 +2,13 @@
 #include <stdexcept>
 #include <vector>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/fileappender.h>
+#include <log4cplus/loglevel.h>
+#include <log4cplus/configurator.h>
+
+
 #include <boost/scoped_ptr.hpp>
 #include <boost/program_options.hpp>
 #include <boost/shared_ptr.hpp>
@@ -154,6 +161,18 @@ private:
 
 int main(int argc, char** argv)
 {
+    using namespace log4cplus;
+    using namespace log4cplus::helpers;
+
+    try
+    {
+        PropertyConfigurator::doConfigure("log4cplus.properties");
+    }
+    catch(const std::exception& ex)
+    {
+        LOG4CPLUS_ERROR(Logger::getInstance("main"), ex.what());
+    }
+
     po::options_description desc("All options");
     desc.add_options()
         ("url,u", po::value<std::string>()->default_value("tcp://127.0.0.1:9900"),
@@ -185,7 +204,7 @@ int main(int argc, char** argv)
 
     while (!resync.ready())
     {
-        std::cerr << "Configuration is not in sync with server. Retrying..." << std::endl;
+        LOG4CPLUS_WARN(Logger::getInstance("main"), "Config server is not ready. Retrying...");
         boost::this_thread::sleep_for(boost::chrono::seconds(1));
     }
 
