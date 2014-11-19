@@ -230,7 +230,7 @@ int main(int argc, char** argv)
 
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
 
-    monitor_queue<camera_frame_t> mq(5);
+    monitor_queue<camera_frame_t> mq(20);
     camera& c = *cam;
 
 
@@ -244,9 +244,11 @@ int main(int argc, char** argv)
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);
 
-    cfg_thread.join();
-    tproducer.join();
     tprocess.join();
+    tproducer.join();
+    cfg_thread.join();
+
+    LOG4CPLUS_INFO(Logger::getInstance("main"), "Capture server stopped...");
 
     return 0;
 }
