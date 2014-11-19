@@ -168,7 +168,7 @@ int main(int argc, char** argv)
 
     try
     {
-        PropertyConfigurator::doConfigure("capture_log.properties");
+        PropertyConfigurator::doConfigure("log4cplus.properties");
     }
     catch(const std::exception& ex)
     {

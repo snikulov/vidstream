@@ -13,6 +13,10 @@
 #include <boost/chrono.hpp>
 #include <opencv2/opencv.hpp>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
+
 #include <perf/perf_clock.hpp>
 
 using cv::VideoCapture;
@@ -25,16 +29,18 @@ namespace vidstream
         public:
             camera(int w = 640, int h = 480)
                 : src_(new VideoCapture()), fname_(), is_hw_cam_(true)
-                  , req_size_(cv::Size(w,h)), count_(0), sec_(0),
-                  read_time_(boost::chrono::high_resolution_clock::now())
+                  , req_size_(cv::Size(w,h)), count_(0), sec_(0)
+                  , read_time_(boost::chrono::high_resolution_clock::now())
+                  , log_(log4cplus::Logger::getInstance("camera"))
             {
                 open();
             }
 
             camera(const std::string& fname, int w = 640, int h = 480)
-                : src_(new VideoCapture()), fname_(fname), is_hw_cam_(false),
-                req_size_(cv::Size(w,h)), count_(0), sec_(0),
-                read_time_(boost::chrono::high_resolution_clock::now())
+                : src_(new VideoCapture()), fname_(fname), is_hw_cam_(false)
+                  , req_size_(cv::Size(w,h)), count_(0), sec_(0)
+                  , read_time_(boost::chrono::high_resolution_clock::now())
+                  , log_(log4cplus::Logger::getInstance("camera"))
             {
                 open();
             }
@@ -90,20 +96,20 @@ namespace vidstream
 
             void rl_fps() const
             {
-                    // Delay to get desired FPS for fast systems
-                    static const double desired_fps = 25.0;
+                // Delay to get desired FPS for fast systems
+                static const double desired_fps = 25.0;
 
-                    // limit read frame rate to 25 fps
-                    double limit =
-                        duration_cast< duration<double> >(
-                                high_resolution_clock::now() - read_time_).count();
-                    while ( limit < 1.0/desired_fps )
-                    {
-                        // TODO: replace with sleep_until
-                        boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
-                        limit = duration_cast< duration<double> >(
-                                high_resolution_clock::now() - read_time_).count();
-                    }
+                // limit read frame rate to 25 fps
+                double limit =
+                    duration_cast< duration<double> >(
+                            high_resolution_clock::now() - read_time_).count();
+                while ( limit < 1.0/desired_fps )
+                {
+                    // TODO: replace with sleep_until
+                    boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+                    limit = duration_cast< duration<double> >(
+                            high_resolution_clock::now() - read_time_).count();
+                }
             }
 
             // init camera
@@ -111,21 +117,15 @@ namespace vidstream
             {
                 count_ = 0;
                 sec_ = 0.;
-                if(is_hw_cam_)
-                {
-                    src_->open(0);
-                }
-                else
-                {
-                    src_->open(fname_);
-                    // limit capture FPS from file
-                    // src_->set(CV_CAP_PROP_FPS, 25);
-                }
 
-                if (!src_->isOpened())
+                bool res = is_hw_cam_ ? src_->open(0) : src_->open(fname_);
+
+                if (!res)
                 {
                     std::string source = is_hw_cam_ ? "HW Camera" : fname_;
-                    throw std::runtime_error(source +": Unable to open");
+                    source += ": Unable to open";
+                    LOG4CPLUS_FATAL(log_, source);
+                    throw std::runtime_error(source);
                 }
 
                 // TODO: should reconsider to set hw capture prop instead of resize
@@ -141,6 +141,8 @@ namespace vidstream
             mutable long double sec_;
             mutable timer<high_resolution_clock> timer_;
             mutable boost::chrono::high_resolution_clock::time_point read_time_;
+
+            log4cplus::Logger log_;
     };
 
 } /* namespace vidstream */
