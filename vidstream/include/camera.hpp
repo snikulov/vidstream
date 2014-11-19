@@ -9,6 +9,7 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/thread.hpp>
+#include <boost/make_shared.hpp>
 
 #include <boost/chrono.hpp>
 #include <opencv2/opencv.hpp>
@@ -52,24 +53,14 @@ namespace vidstream
             camera_frame_t get_frame() const
             {
                 static int err_count = 0;
-                if (!count_)
-                {
-                    timer_.start();
-                }
-                camera_frame_t ret_val(new cv::Mat());
 
-                if (src_->read(*ret_val))
-                {
-                    rl_fps();
+                camera_frame_t ret_val = boost::make_shared<cv::Mat>();
 
-                    read_time_ = boost::chrono::high_resolution_clock::now();
-                    count_++;
-                    timer_.stop();
-                    sec_ = timer_.sec(); // only good attempts
+                bool res = src_->read(*ret_val);
 
-                }
-                else
+                if (!res)
                 {
+                    LOG4CPLUS_WARN(log_, "Error reading frame!!!!");
                     err_count++;
                     ret_val.reset();
                     if (err_count > 5)
@@ -129,8 +120,11 @@ namespace vidstream
                 }
 
                 // TODO: should reconsider to set hw capture prop instead of resize
-                //        width_  = src_->get(CV_CAP_PROP_FRAME_WIDTH);
-                //        height_ = src_->get(CV_CAP_PROP_FRAME_HEIGHT);
+                int w = src_->get(cv::CAP_PROP_FRAME_WIDTH);
+                int h = src_->get(cv::CAP_PROP_FRAME_HEIGHT);
+
+
+                LOG4CPLUS_INFO(log_, "Camera is opened...: " << w << ":" << h);
             }
             /* data */
             boost::scoped_ptr<VideoCapture> src_;
