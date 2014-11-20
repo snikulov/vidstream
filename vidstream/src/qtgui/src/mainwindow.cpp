@@ -139,7 +139,7 @@ void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 void MainWindow::on_spinBox_bch_m_valueChanged(int arg1)
 {
     // bch m value
-    cfg_->put("cfg.bch.m", arg1);
+    cfg_->put("cfg.bch.n", arg1);
     ui_set_bch_preset_list_index(*ui, *cfg_);
 }
 

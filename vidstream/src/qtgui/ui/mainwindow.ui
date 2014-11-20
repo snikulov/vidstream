@@ -200,7 +200,11 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent">
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
