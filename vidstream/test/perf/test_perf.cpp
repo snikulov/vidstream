@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE( test_perf_case_1 )
     timer<high_resolution_clock> t;
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
     t.stop();
-    BOOST_MESSAGE("sleeped for: nsec=" << t.nsec() << " int. sec=" << t.sec() <<" real sec=" << t.seconds());
+    BOOST_MESSAGE("sleeped for: nsec=" << t.nsec() << " int. sec=" << t.sec() <<" real sec=" << t.sec());
 
     t.start();
     for(int i=0; i < 5; ++i)

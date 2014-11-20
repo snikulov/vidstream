@@ -2,6 +2,13 @@
 #include <stdexcept>
 #include <vector>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/fileappender.h>
+#include <log4cplus/loglevel.h>
+#include <log4cplus/configurator.h>
+
+
 #include <boost/scoped_ptr.hpp>
 #include <boost/program_options.hpp>
 #include <boost/shared_ptr.hpp>
@@ -31,7 +38,8 @@ void display(const int depth, const boost::property_tree::ptree& tree)
     using namespace boost::property_tree;
     using namespace std;
 
-    BOOST_FOREACH( ptree::value_type const&v, tree.get_child("") ) {
+    BOOST_FOREACH( ptree::value_type const&v, tree.get_child("") )
+    {
         ptree subtree = v.second;
         string nodestr = tree.get<string>(v.first);
 
@@ -50,114 +58,132 @@ void display(const int depth, const boost::property_tree::ptree& tree)
 
 class cfg_sync_thread : public boost::noncopyable
 {
-public:
-    cfg_sync_thread(int& stop, const std::string& url, boost::shared_ptr<boost::property_tree::ptree> cfg, stat_data_t* stat)
-        : stop_(stop), url_(url), cfg_(cfg), is_ready_(false), stat_(stat)
-    {}
+    public:
+        cfg_sync_thread(int& stop, const std::string& url,
+                boost::shared_ptr<boost::property_tree::ptree> cfg, stat_data_t* stat)
+            : stop_(stop), url_(url), cfg_(cfg), is_ready_(false), stat_(stat)
+        {}
 
-    int send_request()
-    {
-        boost::property_tree::ptree pt;
-        pt.put("cam.fps", stat_->cam_fps_);
-        pt.put("proc.fps", stat_->process_fps_);
-        pt.put("proc.time", stat_->f_process_time_);
-        pt.put("send.time", stat_->f_send_time_);
-        std::stringstream ss;
-        boost::property_tree::write_json(ss, pt);
-        return trans_->send(ss.str());
-    }
-
-    void operator()()
-    {
-        int err_count = 0;
-        trans_.reset(new transport(TRANSPORT_REQ, url_));
-        while(!stop_)
+        int send_request()
         {
-            if (err_count >= 10)
+            boost::property_tree::ptree pt;
+
+            pt.put("cam.fps", stat_->cam_fps_);
+            pt.put("proc.fps", stat_->process_fps_);
+            pt.put("proc.time", stat_->f_process_time_);
+            pt.put("send.time", stat_->f_send_time_);
+            pt.put("sent.bytes", stat_->bytes_sent_);
+            pt.put("sent.frames", stat_->frames_sent_);
+
+            std::stringstream ss;
+            boost::property_tree::write_json(ss, pt);
+            return trans_->send(ss.str());
+        }
+
+        void operator()()
+        {
+            int err_count = 0;
+            trans_.reset(new transport(TRANSPORT_REQ, url_));
+            while(!stop_)
             {
-                // close
-                trans_.reset();
-                // re-connect to host after the one second
-                boost::this_thread::sleep_for(boost::chrono::seconds(1));
-                if(stop_) break;
-                err_count = 0;
-                trans_.reset(new transport(TRANSPORT_REQ, url_));
-            }
-
-            int ret = -1;
-            try
-            {
-                do
+                if (err_count >= 10)
                 {
+                    // close
+                    trans_.reset();
+                    // re-connect to host after the one second
+                    boost::this_thread::sleep_for(boost::chrono::seconds(1));
                     if(stop_) break;
-                    ret = send_request();
-                    boost::this_thread::sleep_for(boost::chrono::milliseconds(250));
-                    if (-1 == ret) err_count++;
-                    else err_count = 0;
-                }while(-1 == ret && err_count < 10 && !stop_);
-
-                if (err_count >= 10 || stop_) continue;
-
-                std::vector<unsigned char> cfgdata;
-                do
-                {
-                    if(stop_) break;
-                    ret = trans_->receive(cfgdata);
-                    boost::this_thread::sleep_for(boost::chrono::milliseconds(250));
-                    if (-1 == ret) err_count++;
-                    else err_count = 0;
-                }while(-1 == ret && err_count < 10 && !stop_);
-
-                if (err_count >= 10 || stop_) continue;
-
-                // done - got data
-                std::string config(cfgdata.begin(), cfgdata.end());
-                std::stringstream ss(config);
-                boost::property_tree::ptree rhs;
-                boost::property_tree::read_json(ss, rhs);
-                if (*cfg_ != rhs)
-                {
-                    cfg_->swap(rhs);
-                    subs_.notify_change(*cfg_);
+                    err_count = 0;
+                    trans_.reset(new transport(TRANSPORT_REQ, url_));
                 }
-                is_ready_ = true;
-                // will repeat each 2 sec
-                boost::this_thread::sleep_for(boost::chrono::seconds(2));
-                err_count = 0;
-            }
-            catch(nn::exception& ex)
-            {
-                std::cerr << "Transport error: " << ex.what() << std::endl;
-                err_count = 10; // go to re-connect immediately
-                continue;
+
+                int ret = -1;
+                try
+                {
+                    do
+                    {
+                        if(stop_) break;
+                        ret = send_request();
+                        boost::this_thread::sleep_for(boost::chrono::milliseconds(250));
+                        if (-1 == ret) err_count++;
+                        else err_count = 0;
+                    }while(-1 == ret && err_count < 10 && !stop_);
+
+                    if (err_count >= 10 || stop_) continue;
+
+                    std::vector<unsigned char> cfgdata;
+                    do
+                    {
+                        if(stop_) break;
+                        ret = trans_->receive(cfgdata);
+                        boost::this_thread::sleep_for(boost::chrono::milliseconds(250));
+                        if (-1 == ret) err_count++;
+                        else err_count = 0;
+                    }while(-1 == ret && err_count < 10 && !stop_);
+
+                    if (err_count >= 10 || stop_) continue;
+
+                    // done - got data
+                    std::string config(cfgdata.begin(), cfgdata.end());
+                    std::stringstream ss(config);
+                    boost::property_tree::ptree rhs;
+                    boost::property_tree::read_json(ss, rhs);
+                    if (*cfg_ != rhs)
+                    {
+                        cfg_->swap(rhs);
+                        subs_.notify_change(*cfg_);
+                    }
+                    is_ready_ = true;
+                    // will repeat each 2 sec
+                    boost::this_thread::sleep_for(boost::chrono::seconds(2));
+                    err_count = 0;
+                }
+                catch(nn::exception& ex)
+                {
+                    std::cerr << "Transport error: " << ex.what() << std::endl;
+                    err_count = 10; // go to re-connect immediately
+                    continue;
+                }
             }
         }
-    }
 
-    bool ready() {return is_ready_;}
+        bool ready() {return is_ready_;}
 
-    bool subscribe(cfg_notify* sub)
-    {
-        return subs_.subscribe(sub);
-    }
+        bool subscribe(cfg_notify* sub)
+        {
+            return subs_.subscribe(sub);
+        }
 
-private:
-    int & stop_;
-    std::string url_;
-    boost::shared_ptr<boost::property_tree::ptree> cfg_;
-    boost::shared_ptr<transport> trans_;
-    bool is_ready_;
-    stat_data_t * stat_;
+    private:
+        int & stop_;
+        std::string url_;
+        boost::shared_ptr<boost::property_tree::ptree> cfg_;
+        boost::shared_ptr<transport> trans_;
+        bool is_ready_;
+        stat_data_t * stat_;
 
-    cfg_subscribers subs_;
+        cfg_subscribers subs_;
 };
 
 int main(int argc, char** argv)
 {
+    using namespace log4cplus;
+    using namespace log4cplus::helpers;
+
+    try
+    {
+        PropertyConfigurator::doConfigure("log4cplus.properties");
+    }
+    catch(const std::exception& ex)
+    {
+        std::cerr << ex.what() << std::endl;
+        exit(0);
+    }
+
     po::options_description desc("All options");
     desc.add_options()
         ("url,u", po::value<std::string>()->default_value("tcp://127.0.0.1:9900"),
-        "url for publising data {tcp://<control IP>:<control PORT>}")
+         "url for publising data {tcp://<control IP>:<control PORT>}")
         ("file,f", po::value<std::string>()->default_value(""), "path to input video file")
         ("help,?", "show help");
     po::variables_map vm;
@@ -185,7 +211,7 @@ int main(int argc, char** argv)
 
     while (!resync.ready())
     {
-        std::cerr << "Configuration is not in sync with server. Retrying..." << std::endl;
+        LOG4CPLUS_INFO(Logger::getInstance("main"), "Config server is not ready. Retrying...");
         boost::this_thread::sleep_for(boost::chrono::seconds(1));
     }
 
@@ -209,7 +235,7 @@ int main(int argc, char** argv)
 
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
 
-    monitor_queue<camera_frame_t> mq(5);
+    monitor_queue<camera_frame_t> mq(20);
     camera& c = *cam;
 
 
@@ -223,9 +249,11 @@ int main(int argc, char** argv)
     boost::thread tproducer(producer);
     boost::thread tprocess(processor);
 
-    cfg_thread.join();
-    tproducer.join();
     tprocess.join();
+    tproducer.join();
+    cfg_thread.join();
+
+    LOG4CPLUS_INFO(Logger::getInstance("main"), "Capture server stopped...");
 
     return 0;
 }

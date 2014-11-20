@@ -5,8 +5,9 @@
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
 
-out_channel::out_channel(const std::string& url, bchwrapper& codec)
-    : url_(url), codec_(codec), is_running_(false), is_connected_(false)
+out_channel::out_channel(const std::string& url, bchwrapper& codec, stat_data_t* stat)
+    : url_(url), codec_(codec), stat_(stat), is_running_(false), is_connected_(false)
+      , block_count_(0), bytes_count_(0)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&out_channel::processor, this));
@@ -109,6 +110,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
         if (sent > 0 && sent == strl)
         {
             res += sent;
+            bytes_count_ +=sent;
         }
         else
         {
@@ -124,6 +126,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
             if (sent > 0)
             {
                 res += sent;
+                bytes_count_ += sent;
             }
             else
             {
@@ -134,6 +137,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
         dbgfile_.write(to_send.c_str(), to_send.size());
 #endif
     }
+    stat_->bytes_sent_ = bytes_count_;
     return static_cast<int>(res);
 }
 
@@ -190,6 +194,8 @@ void out_channel::send_data()
             // remove from queue
             boost::mutex::scoped_lock lk(outmx_);
             outdata_.pop_front();
+
+            block_count_++;
         }
         else
         {
@@ -199,6 +205,7 @@ void out_channel::send_data()
 #endif
         }
     }
+    stat_->frames_sent_ = block_count_;
 }
 
 void out_channel::processor()

@@ -6,6 +6,7 @@
 
 in_channel::in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err)
     : url_(url), codec_(codec), corruptor_(err), is_running_(false), is_connected_(false)
+      , bytes_count_(0)
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&in_channel::processor, this));
@@ -117,6 +118,7 @@ void in_channel::read_data()
 
     if (bytes > 0)
     {
+        bytes_count_ += bytes;
 
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
 

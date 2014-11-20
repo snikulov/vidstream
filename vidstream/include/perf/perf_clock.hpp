@@ -13,7 +13,7 @@ class timer
 public:
     timer() : start_( Clock::now() ) {}
 
-    void start(bool reset = true) 
+    void start(bool reset = true)
     {
         if (reset)
         {
@@ -31,10 +31,12 @@ public:
         return diff_;
     }
 
+#if 0
     double seconds() const
     {
         return diff_.count() * ((double)Clock::period::num/Clock::period::den);
     }
+#endif
 
     unsigned long long sec() const
     {
@@ -50,7 +52,6 @@ public:
     {
         return  boost::chrono::duration_cast<boost::chrono::microseconds>( elapsed() ).count();
     }
-    
 };
 
 

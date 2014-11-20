@@ -16,6 +16,7 @@
 
 #include <channel/bchwrapper.hpp>
 #include <corrupt/corrupt_intro.hpp>
+#include <perf/perf_clock.hpp>
 
 class in_channel
     : private boost::noncopyable
@@ -59,6 +60,9 @@ private:
     bool is_running_;
     boost::shared_ptr<nn::socket> sock_;
     bool is_connected_;
+
+    unsigned long long bytes_count_;
+    timer<boost::chrono::steady_clock> timer_;
 
     boost::thread wt_;
 #if defined(CHANNEL_DEBUG)
