@@ -16,6 +16,8 @@ option(WITH_CAPTURE_UI "Build with capture window" ON)
 option(WITH_CH_DBG "Build transport debug facility" OFF)
 
 
+link_directories(${CMAKE_BINARY_DIR})
+
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
 endif()
@@ -61,7 +63,7 @@ include_directories(ext/nanomsg/src)
 # log4cplus build from ext/log4cplus
 #-------------------------------------------
 if(WITH_LOG4CPLUS)
-    set(BUILD_SHARED_LIBS FALSE)
+    set(BUILD_SHARED_LIBS OFF)
     set(UNICODE_DEFAULT OFF)
     set(UNICODE OFF)
     add_subdirectory(ext/log4cplus)
