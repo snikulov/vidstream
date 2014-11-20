@@ -136,7 +136,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>m</string>
+              <string>n</string>
              </property>
             </widget>
            </item>
@@ -144,22 +144,22 @@
             <widget class="QComboBox" name="comboBox_bch_mode">
              <item>
               <property name="text">
-               <string>1 : 5</string>
+               <string>0 : 0</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>1 : 1</string>
+               <string>7 : 1</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>2 : 1</string>
+               <string>7 : 2</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>3 : 1</string>
+               <string>7 : 3</string>
               </property>
              </item>
              <item>
@@ -175,7 +175,7 @@
               <number>1000</number>
              </property>
              <property name="value">
-              <number>13</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -192,7 +192,7 @@
               <number>1000</number>
              </property>
              <property name="value">
-              <number>105</number>
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -200,7 +200,11 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent">
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -333,8 +337,8 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>360</y>
+      <x>20</x>
+      <y>390</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -346,8 +350,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>390</y>
+      <x>20</x>
+      <y>420</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -359,8 +363,8 @@
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>420</y>
+      <x>20</x>
+      <y>450</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -372,8 +376,8 @@
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>450</y>
+      <x>20</x>
+      <y>480</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -388,8 +392,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>360</y>
+      <x>130</x>
+      <y>390</y>
       <width>114</width>
       <height>22</height>
      </rect>
@@ -413,8 +417,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>390</y>
+      <x>130</x>
+      <y>420</y>
       <width>114</width>
       <height>22</height>
      </rect>
@@ -438,8 +442,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>420</y>
+      <x>130</x>
+      <y>450</y>
       <width>114</width>
       <height>22</height>
      </rect>
@@ -460,8 +464,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>450</y>
+      <x>130</x>
+      <y>480</y>
       <width>114</width>
       <height>22</height>
      </rect>

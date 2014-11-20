@@ -29,7 +29,7 @@ class jpeg_builder : public cfg_notify
 {
 public:
     jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
-        : quality_(quality), csize_(cv::Size(640, 480)), num_of_rst_(0)
+        : quality_(quality), csize_(cv::Size(640, 480)), bw_(false), num_of_rst_(0)
     {
         boost::mutex::scoped_lock lk(mx_);
         params_.push_back(cv::IMWRITE_JPEG_QUALITY);
@@ -58,7 +58,7 @@ public:
 
     jpeg_data_t from_cvmat(const camera_frame_t frame)
     {
-        jpeg_data_t ret_buf(new std::vector<unsigned char>);
+        jpeg_data_t ret_buf(new std::vector<unsigned char>());
         if (frame && !frame->empty())
         {
             boost::mutex::scoped_lock lk(mx_);
@@ -105,7 +105,8 @@ public:
         camera_frame_t frame;
         {
             boost::mutex::scoped_lock lk(mx_);
-            frame.reset(new cv::Mat(csize_, CV_8UC3, cv::Scalar::all(0)));
+            
+            frame.reset(new cv::Mat(csize_, bw_ ? CV_8UC1 : CV_8UC3, cv::Scalar::all(0)));
         }
         return from_cvmat(frame);
     }
@@ -130,6 +131,9 @@ public:
         dst->erase(dst->begin()+dst_idxs[0], dst->end());
         dst->insert(dst->end(),jpeg_rst->begin(), jpeg_rst->end());
 
+        // add missing terminator
+        dst->push_back(0xFF);
+        dst->push_back(0xD9);
         return dst;
     }
 
@@ -137,6 +141,8 @@ public:
     {
         int w = cfg.get<int>("cfg.img.width");
         int h = cfg.get<int>("cfg.img.height");
+        bool bw = cfg.get<bool>("cfg.img.bw");
+
         cv::Size tmps(w, h);
 
         if (csize_ != tmps)
@@ -144,6 +150,11 @@ public:
             boost::mutex::scoped_lock lk(mx_);
             csize_ = tmps;
             num_of_rst_ = 0;
+        }
+
+        if (bw_ != bw)
+        {
+            bw_ = bw;
         }
 
         std::vector<int> tpar;
@@ -169,6 +180,7 @@ private:
     int quality_;
     std::vector<int> params_;
     cv::Size csize_;
+    bool bw_;
     boost::mutex mx_;
     size_t num_of_rst_;
 };

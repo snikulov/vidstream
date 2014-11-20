@@ -2,7 +2,7 @@ Before you begin:
 1. Install git: sudo apt-get install git
 2. Do one-time git setup: http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup
 3. Get sources from repository
-git clone --recursive <git>
+git clone --recurse-submodules <git>
              or
 git clone <git>
 git submodule update --init --recursive
@@ -115,7 +115,7 @@ or for 32bit system:
 
 5. Build system 
 1 cd build
-# cmake .. -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
+# cmake .. -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DWITH_UT=OFF
 # cmake ..
 # make
 

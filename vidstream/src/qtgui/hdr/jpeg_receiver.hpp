@@ -22,9 +22,9 @@
 
 #include <ocv/ocv_output.hpp>
 #include <corrupt/corrupt_intro.hpp>
-#include <ecc/bch_codec.hpp>
+#include <channel/in_channel.hpp>
 
-
+#include <jpeg/jpeg_stream_parser.hpp>
 
 using namespace vidstream;
 
@@ -32,18 +32,17 @@ int MyErrorHandler(int status, const char* func_name, const char* err_msg, const
 {
     std::cerr << "Woohoo, my own custom error handler" << std::endl;
     return 0;
-} 
+}
 
-class jpeg_receiver
+class jpeg_receiver : public cfg_notify
 {
 public:
     jpeg_receiver(bool& stop, const std::string& url
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
-            , boost::shared_ptr<bch_codec> bch
+            , boost::shared_ptr<bchwrapper> codec
             )
-        : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb)
-          , ecc_(bch)
+            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
     {
       cv::namedWindow("received");
     }
@@ -57,105 +56,71 @@ public:
 
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
-        boost::scoped_ptr<transport> rcv(
-                new transport(TRANSPORT_PULL, url_)
-                );
+        input_.reset(new in_channel(url_, *codec_, *err_));
 
         jpeg_transport jt;
         const std::vector<unsigned char>& s_mark = jt.start_mark();
         const std::vector<unsigned char>& e_mark = jt.end_mark();
+
+        jpeg_stream_parser jstp(s_mark);
+
         jpeg_rcv_stm stm(jb_, history, s_mark, e_mark);
 
-        jpeg_data_t rcv_buf(new std::vector<unsigned char>);
         unsigned long img_count = 0;
         size_t rst_num = 0;
+
+        boost::shared_ptr< std::vector< uint8_t > > indata;
+
         while(!stop_)
         {
-            waiting_ = true;
-            std::vector<unsigned char> buf;
+
             if (stop_) break;
-            int bytes = rcv->receive(buf);
 
-            if (bytes < 0)
-            {
-                // no data available - try again
-                continue;
-            }
-            // introduce error
-            if (err_)
-            {
-                err_->corrupt(buf);
-            }
-            if (ecc_)
-            {
-                std::vector<char> good;
-                bool is_ok = false;
-                std::vector<unsigned char> dec = ecc_->decode(buf, good, is_ok);
-		// hack TODO: try to decode everytime
-		is_ok = true;
-                if (is_ok)
-                {
-                    buf.swap(dec);
-                }
-                else
-                {
-                    std::cout << "failed to decode buffer" << std::endl;
 
-                    // TODO: try recovery mode here...
-                    continue;
-                }
-            }
-            waiting_ = false;
+            indata = input_->get(false);
 
-            stm.process(buf);
-            
-            if (stm.has_data())
+            if (!indata)
             {
-                jpeg_data_t jpg = stm.get_jpeg();
-                jpeg_rst_idxs_t rsts = jb_->rst_idxs(jpg);
-                std::cerr << "stm jpeg: rst count=" << std::dec << rsts->size() << std::endl;
-                std::vector<unsigned char>& rjpg = *jpg;
-                for(size_t i = 0; i < rsts->size(); ++i)
+                jstp.parse();
+            }
+            else
+            {
+                jstp.parse(*indata);
+            }
+
+            while (jstp.num_jpegs())
+            {
+                jpeg_data_t jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
+                if (jpeg)
                 {
-                    size_t idx = (*rsts)[i];
-                    unsigned char val1 = rjpg[idx];
-                    unsigned char val2 = rjpg[idx+1];
-                    if (val1 != 0xff || ((val2 & 0x0f) != (i % 8)))
+                    cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
+                    if (!m.empty())
                     {
-                        std::cerr << "i=" << i
-                            << " rst=0x" << std::hex
-                            << int(val1) << int(val2) << std::endl;
+                        cv::imshow("received", m);
+                        cv::waitKey(5);
                     }
                 }
-		// write rebuilt frame
-		static int nn = 0;
-                jb_->write(jpg,nn);
-                
-		// TODO: NEED TO INVESTIGATE!!!
-                //cvSetErrMode(CV_ErrModeParent);
-		//cvRedirectError(MyErrorHandler);
-		//cv::Mat imgbuf = cv::Mat(1, jpg->size(), CV_8U, &((*jpg)[0]));
-		//cv::Mat m = cv::imdecode(imgbuf, CV_LOAD_IMAGE_COLOR);
-		
-                //cv::Mat m = cv::imdecode(cv::Mat(*jpg), CV_LOAD_IMAGE_COLOR);
-		cv::Mat m = cv::imread("img00000000.jpg", cv::IMREAD_COLOR);
-		
-                if (!m.empty())
-                {
-                    std::cerr << "new frame" << std::endl;
-
-		  // probably good frame, store history
-                    history->put(jpg);
-                    cv::imshow("received", m);
-                    cv::waitKey(10);
-                }
             }
+
+            waiting_ = false;
         }
     }
 
     void stop()
     {
+        input_.reset();
         stop_ = true;
+    }
+
+    void cfg_changed(const boost::property_tree::ptree& cfg)
+    {
+        int n = cfg.get<int>("cfg.bch.n");
+        int t = cfg.get<int>("cfg.bch.t");
+
+        codec_->change_params(n, t);
+
+        jb_->cfg_changed(cfg);
+        err_->cfg_changed(cfg);
     }
 
 private:
@@ -165,7 +130,9 @@ private:
     bool waiting_;
     boost::shared_ptr<corrupt_intro> err_;
     boost::shared_ptr<jpeg_builder> jb_;
-    boost::shared_ptr<bch_codec> ecc_;
+
+    boost::shared_ptr<bchwrapper> codec_;
+    boost::shared_ptr<in_channel>         input_;
 };
 
 #endif

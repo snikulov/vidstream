@@ -184,6 +184,12 @@ namespace nn
             return rc;
         }
 
+        // need this for polling
+        inline int get_sock_val()
+        {
+            return s;
+        }
+
     private:
 
         int s;

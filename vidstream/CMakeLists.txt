@@ -11,7 +11,12 @@ set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" OFF)
-option(WITH_ITPP "Build and use ITPP" OFF)
+option(WITH_ITPP "Build and use ITPP" ON)
+option(WITH_CAPTURE_UI "Build with capture window" ON)
+option(WITH_CH_DBG "Build transport debug facility" OFF)
+
+
+link_directories(${CMAKE_BINARY_DIR})
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
@@ -29,9 +34,13 @@ if(Boost_FOUND)
     link_directories(${Boost_LIBRARY_DIRS})
 endif()
 
+
+# now enabled to cleanup old code
+add_definitions( -DBUILD_FOR_LINUX )
+
 if(UNIX)
     message(STATUS "Build for Linux")
-    add_definitions( -DBUILD_FOR_LINUX -Wall)
+    add_definitions(-Wall)
 elseif(WIN32)
     message(STATUS "Build for Windows")
 endif()
@@ -46,7 +55,7 @@ source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 #-------------------------------------------
 # nanomsg build from ext/nanomsg
 #-------------------------------------------
-set(WITH_NANOMSG_UT OFF)
+set(WITH_UT OFF)
 add_subdirectory(ext/nanomsg)
 include_directories(ext/nanomsg/src)
 
@@ -54,7 +63,7 @@ include_directories(ext/nanomsg/src)
 # log4cplus build from ext/log4cplus
 #-------------------------------------------
 if(WITH_LOG4CPLUS)
-    set(BUILD_SHARED_LIBS FALSE)
+    set(BUILD_SHARED_LIBS OFF)
     set(UNICODE_DEFAULT OFF)
     set(UNICODE OFF)
     add_subdirectory(ext/log4cplus)
@@ -65,7 +74,13 @@ endif()
 # itpp build from ext/itpp
 #-------------------------------------------
 if(WITH_ITPP)
+    set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
+    include_directories(ext/itpp ${CMAKE_BINARY_DIR})
+endif()
+
+if(WITH_CH_DBG)
+    add_definitions(-DCHANNEL_DEBUG)
 endif()
 
 include_directories(include)

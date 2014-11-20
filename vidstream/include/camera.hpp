@@ -36,7 +36,7 @@ public:
         req_size_(cv::Size(w,h)), count_(0), sec_(0),
         read_time_(boost::chrono::high_resolution_clock::now())
     {
-	open();
+        open();
     }
 
     ~camera()
@@ -52,18 +52,18 @@ public:
         }
         camera_frame_t ret_val(new cv::Mat());
 
-	// Delay to get desired FPS for fast systems
-	double desired_fps = 25.0;
+        // Delay to get desired FPS for fast systems
+        double desired_fps = 25.0;
 
 
         if (src_->read(*ret_val))
         {
-	  // limit read frame rate to 25 fps
-	  while ( duration_cast<duration<double> >(high_resolution_clock::now() - read_time_).count() <= 1.0/desired_fps )
-	      boost::this_thread::sleep(boost::posix_time::milliseconds(1));
+            // limit read frame rate to 25 fps
+            while ( duration_cast<duration<double> >(high_resolution_clock::now() - read_time_).count() <= 1.0/desired_fps )
+                boost::this_thread::sleep(boost::posix_time::milliseconds(1));
 
-	    read_time_ = boost::chrono::high_resolution_clock::now();
-	    count_++;
+            read_time_ = boost::chrono::high_resolution_clock::now();
+            count_++;
             timer_.stop();
             sec_ = timer_.seconds(); // only good attempts
         }
@@ -105,8 +105,8 @@ private:
         else
         {
             src_->open(fname_);
-	    // limit capture FPS from file
-	    // src_->set(CV_CAP_PROP_FPS, 25);
+            // limit capture FPS from file
+            // src_->set(CV_CAP_PROP_FPS, 25);
         }
 
         if (!src_->isOpened())
