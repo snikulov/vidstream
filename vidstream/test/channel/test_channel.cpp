@@ -22,6 +22,7 @@
 #include <jpeg/jpeg_stream_parser.hpp>
 
 #include <corrupt/corrupt_intro.hpp>
+#include <stat/stat_data.hpp>
 
 using namespace boost::unit_test;
 
@@ -131,7 +132,8 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
 
-    out_channel out_plain("tcp://127.0.0.1:9000", bch_codec);
+    stat_data_t stat;
+    out_channel out_plain("tcp://127.0.0.1:9000", bch_codec, &stat);
 
     std::vector<uint8_t> test1(20, 0xff);
     out_plain.put(test1);
@@ -166,8 +168,9 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     // settle the server connect
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
-
-    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+    stat_data_t stat;
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000"
+                , bch_codec, &stat));
 
     jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 
@@ -226,8 +229,9 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     // settle the server connect
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
-
-    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+    stat_data_t stat;
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000"
+                , bch_codec, &stat));
 
     jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 

@@ -34,7 +34,7 @@ public:
 #endif
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_));
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_, stat_));
 
         int max_err_try = 0;
 
@@ -85,7 +85,7 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-                                outsink.reset(new out_channel(url_, codec_));
+                                outsink.reset(new out_channel(url_, codec_, stat_));
                                 //trans.reset(new transport(TRANSPORT_PUSH, url_));
                                 max_err_try = 0;
                             }
@@ -105,7 +105,7 @@ public:
                                   << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
                         // trans.reset(new transport(TRANSPORT_PUSH, url_));
-                        outsink.reset(new out_channel(url_, codec_));
+                        outsink.reset(new out_channel(url_, codec_, stat_));
                         max_err_try = 0;
                     }
                 }

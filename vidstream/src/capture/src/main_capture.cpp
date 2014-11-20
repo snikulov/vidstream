@@ -67,10 +67,14 @@ class cfg_sync_thread : public boost::noncopyable
         int send_request()
         {
             boost::property_tree::ptree pt;
+
             pt.put("cam.fps", stat_->cam_fps_);
             pt.put("proc.fps", stat_->process_fps_);
             pt.put("proc.time", stat_->f_process_time_);
             pt.put("send.time", stat_->f_send_time_);
+            pt.put("sent.bytes", stat_->bytes_sent_);
+            pt.put("sent.frames", stat_->frames_sent_);
+
             std::stringstream ss;
             boost::property_tree::write_json(ss, pt);
             return trans_->send(ss.str());
@@ -172,7 +176,8 @@ int main(int argc, char** argv)
     }
     catch(const std::exception& ex)
     {
-        LOG4CPLUS_ERROR(Logger::getInstance("main"), ex.what());
+        std::cerr << ex.what() << std::endl;
+        exit(0);
     }
 
     po::options_description desc("All options");

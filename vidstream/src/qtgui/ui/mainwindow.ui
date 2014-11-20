@@ -110,9 +110,6 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_channel_speed"/>
-        </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
@@ -201,6 +198,9 @@
         </item>
         <item row="3" column="1">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_channel_speed"/>
         </item>
        </layout>
       </widget>
@@ -321,7 +321,7 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>20</y>
+      <y>30</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -476,6 +476,85 @@
      <double>99999.990000000005239</double>
     </property>
    </widget>
+   <widget class="QSpinBox" name="spinBox_sent_frames">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>510</y>
+      <width>114</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>9000</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sent frames</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>540</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sent bytes</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_sent_bytes">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>540</y>
+      <width>211</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>groupBox</zorder>
+   <zorder>pushButton_operate</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_8</zorder>
+   <zorder>label_14</zorder>
+   <zorder>label_15</zorder>
+   <zorder>spinBox_cap_fps</zorder>
+   <zorder>spinBox_proc_fps</zorder>
+   <zorder>doubleSpinBox_f_proc_time</zorder>
+   <zorder>doubleSpinBox_f_send_time</zorder>
+   <zorder>spinBox_sent_frames</zorder>
+   <zorder>label_16</zorder>
+   <zorder>label_17</zorder>
+   <zorder>lineEdit_channel_speed</zorder>
+   <zorder>lineEdit_sent_bytes</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>

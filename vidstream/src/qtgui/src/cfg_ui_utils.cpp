@@ -64,6 +64,10 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     u.doubleSpinBox_f_send_time->setValue(pt.get<double>("send.time"));
     u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
     u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
+    u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
+
+    std::string sentb = pt.get<std::string>("sent.bytes");
+    u.lineEdit_sent_bytes->setText( QString::fromUtf8(sentb.c_str()) );
 
 }
 

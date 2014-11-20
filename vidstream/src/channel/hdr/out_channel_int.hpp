@@ -13,12 +13,14 @@
 #include <nanopp/nn.hpp>
 #include <itpp/itcomm.h>
 #include <channel/bchwrapper.hpp>
+#include <perf/perf_clock.hpp>
+#include <stat/stat_data.hpp>
 
 class out_channel
     : private boost::noncopyable
 {
 public:
-    out_channel(const std::string& url, bchwrapper& codec);
+    out_channel(const std::string& url, bchwrapper& codec, stat_data_t* stat);
     ~out_channel();
 
     void put(boost::shared_ptr< std::vector<uint8_t> > data);
@@ -43,6 +45,9 @@ private:
     std::string url_;
     bchwrapper& codec_;
 
+    // statistics
+    stat_data_t * stat_;
+
     // internal cbuff
     boost::mutex outmx_;
     boost::condition_variable outcond_;
@@ -51,6 +56,13 @@ private:
     bool is_running_;
     boost::shared_ptr<nn::socket> sock_;
     bool is_connected_;
+
+    // counter for output blocks/data frames
+    unsigned long long block_count_;
+    // counter for output bytes
+    unsigned long long bytes_count_;
+
+    timer<boost::chrono::steady_clock> timer_;
 
     boost::thread wt_;
 
