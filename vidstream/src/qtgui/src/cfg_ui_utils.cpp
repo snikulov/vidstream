@@ -132,11 +132,11 @@ int ui_set_bch_preset_list_index(Ui::MainWindow &u
     int m = cfg.get<int>("cfg.bch.n");
     int t = cfg.get<int>("cfg.bch.t");
 
-    for(int i = 0; i < BCH_PRESET_MAX; i++)
+    for(size_t i = 0; i < BCH_PRESET_MAX; i++)
     {
         if (bch_modes[i].one == m && bch_modes[i].two == t)
         {
-            def_idx = i;
+            def_idx = static_cast<int>(i);
             break;
         }
     }
@@ -152,18 +152,25 @@ int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
 {
     if (idx >= 0 && idx <= BCH_PRESET_MAX)
     {
-        int m = u.spinBox_bch_m->value();
+        int n = u.spinBox_bch_m->value();
         int t = u.spinBox_bch_t->value();
-
+        bool enabled = true;
         if (idx < BCH_PRESET_MAX)
         {
-            m = bch_modes[idx].one;
+            n = bch_modes[idx].one;
             t = bch_modes[idx].two;
-            if (u.spinBox_bch_m->value() != m) u.spinBox_bch_m->setValue(m);
-            if (u.spinBox_bch_t->value() != t) u.spinBox_bch_t->setValue(t);
+            enabled = false;
         }
-        cfg.put("cfg.bch.n", m);
+
+        cfg.put("cfg.bch.n", n);
         cfg.put("cfg.bch.t", t);
+
+        // update values
+        u.spinBox_bch_m->setValue(n);
+        u.spinBox_bch_t->setValue(t);
+        u.spinBox_bch_m->setEnabled(enabled);
+        u.spinBox_bch_t->setEnabled(enabled);
+
     }
     else
     {
