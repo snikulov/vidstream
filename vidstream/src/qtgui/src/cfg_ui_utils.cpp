@@ -148,6 +148,7 @@ int ui_set_bch_preset_list_index(Ui::MainWindow &u
     {
         u.comboBox_bch_mode->setCurrentIndex(def_idx);
     }
+
     return 0;
 }
 

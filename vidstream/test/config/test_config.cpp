@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_1 )
     boost::property_tree::read_json(input, pt);
 
     BOOST_CHECK(9955 == pt.get<int>("cfg.dataport"));
-    BOOST_CHECK(5 == pt.get<int>("cfg.bch.m"));
+    BOOST_CHECK(5 == pt.get<int>("cfg.bch.n"));
     BOOST_CHECK(103 == pt.get<int>("cfg.bch.t"));
 
     BOOST_CHECK(640 == pt.get<int>("cfg.img.width"));
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_2 )
     boost::property_tree::ptree pt;
 
     pt.put("cfg.dataport", 9955);
-    pt.put("cfg.bch.m", 5);
+    pt.put("cfg.bch.n", 5);
     pt.put("cfg.bch.t", 103);
     pt.put("cfg.img.width", 640);
     pt.put("cfg.img.height", 480);
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_2 )
     pt.put("cfg.img.bw", false);
 
     BOOST_CHECK(9955 == pt.get<int>("cfg.dataport"));
-    BOOST_CHECK(5 == pt.get<int>("cfg.bch.m"));
+    BOOST_CHECK(5 == pt.get<int>("cfg.bch.n"));
     BOOST_CHECK(103 == pt.get<int>("cfg.bch.t"));
 
     BOOST_CHECK(640 == pt.get<int>("cfg.img.width"));
