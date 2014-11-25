@@ -92,22 +92,22 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
     for (size_t i = 0; i < len; ++i)
     {
         itpp::bvec bits = itpp::dec2bin(data[i]);
-        std::string to_send;
+        int send_data = 0;
         if (codec)
         {
 #if defined(CHANNEL_DEBUG)
             std::cerr << "[I] " << __FUNCTION__ << " encode data" << std::endl;
 #endif
-            to_send = itpp::to_str(codec->encode(bits));
+            send_data = itpp::bin2dec(codec->encode(bits));
         }
         else
         {
-            to_send = itpp::to_str(bits);
+            send_data = itpp::bin2dec(bits);
         }
-        size_t strl = to_send.size();
-        int sent = sock_->send(to_send.c_str(), strl, 0);
+        size_t l = sizeof(send_data);
+        int sent = sock_->send(&send_data, l, 0);
 
-        if (sent > 0 && sent == strl)
+        if (sent > 0 && sent == l)
         {
             res += sent;
             bytes_count_ +=sent;
@@ -122,7 +122,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
             {
                 // wait for unblocking...
             }
-            sent = sock_->send(to_send.c_str(), strl, 0);
+            sent = sock_->send(&send_data, l, 0);
             if (sent > 0)
             {
                 res += sent;
@@ -137,7 +137,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
         dbgfile_.write(to_send.c_str(), to_send.size());
 #endif
     }
-    stat_->bytes_sent_ = bytes_count_;
+    stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
     return static_cast<int>(res);
 }
 
@@ -213,7 +213,7 @@ void out_channel::processor()
 #if defined(CHANNEL_DEBUG)
     dbgfile_.open("out_channel_dbg.dat", std::ios::binary|std::ios::trunc );
 #endif
-
+    timer_.start();
     while (is_running_)
     {
         connect();

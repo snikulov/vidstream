@@ -23,6 +23,10 @@ namespace vidstream
 
                 LOG4CPLUS_INFO(log_, "Frame producer thread started...");
 
+                // 1/25 seconds - time to get frame
+                boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
+                boost::chrono::nanoseconds ns_per_frame = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
+
                 timer<boost::chrono::steady_clock> t1;
                 timer<boost::chrono::steady_clock> t2;
 
@@ -34,31 +38,37 @@ namespace vidstream
 
                 while(!stop_)
                 {
-
                     t2.start();
                     frame = cam_.get_frame();
                     t2.stop();
+                    if(t2.elapsed() < ns_per_frame)
+                    {
+                        boost::this_thread::sleep_for(ns_per_frame - t2.elapsed());
+                    }
+
                     LOG4CPLUS_TRACE(log_, "capture ns: " << t2.nsec());
 
                     if (frame)
                     {
                         fcount++;
-                        t1.stop();
-
                         t2.start();
                         q_.enqueue(frame);
                         t2.stop();
                         LOG4CPLUS_TRACE(log_, "push to processing ns: " << t2.nsec());
 
-                        sec = t1.sec();
-                        sec = sec ? sec : 1; // 0 div check
                     }
                     else
                     {
                         LOG4CPLUS_WARN(log_, "Camera return empty frame: " << fcount << ", " << sec);
                     }
+
+                    t1.stop();
+                    sec = t1.sec();
+                    sec = sec ? sec : 1; // 0 div check
+
                     unsigned long long fps = fcount/sec;
                     stat_->cam_fps_ = fps;
+                    stat_->tsec_ = sec;
                 }
 
                 LOG4CPLUS_INFO(log_, "Frame producer exited...");

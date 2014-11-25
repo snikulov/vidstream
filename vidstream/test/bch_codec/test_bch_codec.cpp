@@ -22,6 +22,8 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
     etal.push_back(0xff);
     etal.push_back(0xd1);
 
+    BOOST_MESSAGE("etal size=" << etal.size());
+
     for(unsigned char i = 0; i < 10; ++i)
     {
         etal.push_back(i);
@@ -31,9 +33,12 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
     // mode 1:1 (5, 3) - orig 12, encoded 24, decoded 12
     // mode 2:1 (6, 6) - orig 12, encoded 32, decoded 12
     // mode 3:1 (5, 4) - orig 12, encoded 32, decoded 12
-    bch_codec ecc(5, 4);
+    bch_codec ecc(5, 3);
     std::vector<unsigned char> ec = ecc.encode(etal);
     BOOST_REQUIRE(ec != etal);
+
+    for(size_t i=0; i < ec.size(); ++i)
+        BOOST_MESSAGE("ec[" << std::dec << i <<"]=" << std::hex << (int)ec.at(i));
 
     std::vector<char> good;
     bool is_ok = false;
@@ -42,9 +47,7 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
     BOOST_CHECK(is_ok);
     BOOST_CHECK_MESSAGE(etal == dc, "etal size=" << etal.size() << " dc size=" << dc.size() << " good size=" << good.size());
     for(size_t i=0; i < etal.size(); ++i)
-        BOOST_CHECK_MESSAGE(etal.at(i) == dc.at(i),"diff at i="<< i);
-    for(size_t i=etal.size(); i < dc.size(); ++i)
-        BOOST_CHECK_MESSAGE(dc.at(i) == 0, "dc("<< i << ")="<<dc.at(i));
+        BOOST_CHECK_MESSAGE(etal.at(i) == dc.at(i)," etal[" << std::dec << i <<"]=" << std::hex << (int)etal.at(i));
 
     BOOST_TEST_MESSAGE("etal size=" << etal.size() << " ec size=" << ec.size() << " dc size=" << dc.size());
 }

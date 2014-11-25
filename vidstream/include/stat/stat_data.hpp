@@ -20,6 +20,8 @@ struct stat_data_t
     unsigned long bytes_sent_;
     unsigned frames_sent_;
 
+    unsigned long tsec_;
+
 };
 
 #endif /* end of include guard: STAT_DATA_H__ */

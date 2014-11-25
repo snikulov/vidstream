@@ -154,6 +154,11 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
 
 using namespace vidstream;
 
+BOOST_AUTO_TEST_CASE(test_channel_case_5)
+{
+    itpp::bvec t = itpp::dec2bin(32, int(0xf0fffc07));
+}
+
 BOOST_AUTO_TEST_CASE(test_channel_case_6)
 {
     int i = 0;

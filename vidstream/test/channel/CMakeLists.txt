@@ -21,5 +21,5 @@ target_link_libraries(${TEST_NAME}
     itpp
     )
 
-add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME} --log_level=message ${CMAKE_SOURCE_DIR}/test/data/config.json)
+add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME} --log_level=message ${CMAKE_SOURCE_DIR}/test/data/img_test_split.jpg)
 

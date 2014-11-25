@@ -116,7 +116,7 @@ void in_channel::read_data()
 
     bytes = sock_->recv(&buf, NN_MSG, 0);
 
-    if (bytes > 0)
+    if (bytes > 0 && bytes == sizeof(int))
     {
         bytes_count_ += bytes;
 
@@ -125,8 +125,16 @@ void in_channel::read_data()
 #if defined(CHANNEL_DEBUG)
         dbgfile_.write(buf, bytes);
 #endif
-        std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
-        itpp::bvec rcvsignal(rcv_data);
+
+//        std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
+        //int ri = reinterpret_cast<int>(*buf);
+        unsigned int ri = 0;
+        uint8_t one = buf[3];
+        uint8_t two = buf[2];
+        uint8_t three = buf[1];
+        uint8_t four = buf[0];
+        ri = ((one << 24) | (two << 16) | (three << 8) | four);
+        itpp::bvec rcvsignal(itpp::dec2bin(32, int(ri)));
 
         // corrupt signal in channel
         itpp::bvec chsignal = corruptor_.corrupt(rcvsignal);
@@ -183,9 +191,7 @@ void in_channel::read_data()
     else
     {
         // ???
-#if defined(CHANNEL_DEBUG)
         std::cerr << "[E] recv : " << bytes << " " << nn_strerror(nn_errno())<< std::endl;
-#endif
         boost::this_thread::sleep_for(boost::chrono::microseconds(100));
     }
 

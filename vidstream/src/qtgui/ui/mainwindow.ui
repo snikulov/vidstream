@@ -528,7 +528,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Sent bytes</string>
+     <string>Bytes/sec</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_sent_bytes">
@@ -537,28 +537,13 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>130</x>
       <y>540</y>
-      <width>211</width>
+      <width>171</width>
       <height>23</height>
      </rect>
     </property>
    </widget>
-   <zorder>groupBox</zorder>
-   <zorder>pushButton_operate</zorder>
-   <zorder>label_7</zorder>
-   <zorder>label_8</zorder>
-   <zorder>label_14</zorder>
-   <zorder>label_15</zorder>
-   <zorder>spinBox_cap_fps</zorder>
-   <zorder>spinBox_proc_fps</zorder>
-   <zorder>doubleSpinBox_f_proc_time</zorder>
-   <zorder>doubleSpinBox_f_send_time</zorder>
-   <zorder>spinBox_sent_frames</zorder>
-   <zorder>label_16</zorder>
-   <zorder>label_17</zorder>
-   <zorder>lineEdit_channel_speed</zorder>
-   <zorder>lineEdit_sent_bytes</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
