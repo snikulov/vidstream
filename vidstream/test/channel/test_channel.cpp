@@ -24,9 +24,27 @@
 #include <corrupt/corrupt_intro.hpp>
 #include <stat/stat_data.hpp>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/fileappender.h>
+#include <log4cplus/loglevel.h>
+#include <log4cplus/configurator.h>
+
 using namespace boost::unit_test;
 
-BOOST_AUTO_TEST_SUITE(test_suite_channel)
+struct fixture
+{
+    fixture()
+    {
+        log4cplus::BasicConfigurator::doConfigure();
+        log_ = log4cplus::Logger::getInstance("test");
+    }
+    ~fixture() {}
+
+    log4cplus::Logger log_;
+};
+
+BOOST_FIXTURE_TEST_SUITE(test_suite_channel, fixture)
 
 #if 0
 BOOST_AUTO_TEST_CASE( test_channel_case_1 )

@@ -6,7 +6,7 @@
 
 in_channel::in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err)
     : url_(url), codec_(codec), corruptor_(err), is_running_(false), is_connected_(false)
-      , bytes_count_(0)
+      , bytes_count_(0), log_(log4cplus::Logger::getInstance("input_channel"))
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&in_channel::processor, this));
@@ -22,6 +22,8 @@ in_channel::~in_channel()
 
 void in_channel::processor()
 {
+    // create local logger for thread
+    log4cplus::Logger logger = log4cplus::Logger::getInstance("input_channel");
 
 #if defined(CHANNEL_DEBUG)
     dbgfile_.open("in_channel_dbg.dat", std::ios::binary|std::ios::trunc );
@@ -38,6 +40,7 @@ void in_channel::processor()
         }
         else
         {
+            LOG4CPLUS_DEBUG(logger, "is_connected_=" << is_connected_);
             boost::this_thread::sleep_for(boost::chrono::milliseconds(5));
         }
     }
@@ -62,17 +65,13 @@ void in_channel::connect()
             }
             else
             {
-#if defined(CHANNEL_DEBUG)
-                std::cerr << "[E] bind: " << ret << std::endl;
-#endif
+                LOG4CPLUS_ERROR(log_, "bind: returned " << ret);
             }
         }
         catch (std::exception& e)
         {
             is_connected_ = false;
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[E] bind: " << e.what() << std::endl;
-#endif
+            LOG4CPLUS_ERROR(log_, "bind: " << e.what());
         }
     }
 }
@@ -93,16 +92,11 @@ bool in_channel::is_data_on_socket()
     }
     else
     {
-#if defined(CHANNEL_DEBUG)
-        std::cerr << "rc = " << rc << std::endl;
-#endif
         if (rc < 0)
         {
             // socket error occurred
             is_connected_ = false;
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[E] poll : " << nn_strerror(nn_errno()) << std::endl;
-#endif
+            LOG4CPLUS_ERROR(log_, "poll : " << nn_strerror(nn_errno()));
         }
         // else timeout gets trigged... repeat
     }
@@ -116,8 +110,9 @@ void in_channel::read_data()
 
     bytes = sock_->recv(&buf, NN_MSG, 0);
 
-    if (bytes > 0 && bytes == sizeof(int))
+    if (bytes > 0)
     {
+        LOG4CPLUS_TRACE(log_, "read data: " << bytes << " bytes");
         bytes_count_ += bytes;
 
         boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
@@ -164,34 +159,10 @@ void in_channel::read_data()
         boost::mutex::scoped_lock lk(inmx_);
         indata_.push_back(data);
         incond_.notify_one();
-#if 0
-        if (codec && buf[0] == '[')
-        {
-            std::string rcv_string(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
-            itpp::bvec rcv_signal(rcv_string);
-
-            itpp::bvec decoded;
-            codec->decode(rcv_signal, decoded);
-            uint8_t data = static_cast<uint8_t>(itpp::bin2dec(decoded));
-
-            boost::mutex::scoped_lock lk(inmx_);
-            indata_.push_back(data);
-            incond_.notify_one();
-
-        }
-        else
-        {
-            boost::mutex::scoped_lock lk(inmx_);
-            indata_.insert(indata_.end(), buf, buf + bytes);
-            incond_.notify_one();
-        }
-#endif
-
     }
     else
     {
-        // ???
-        std::cerr << "[E] recv : " << bytes << " " << nn_strerror(nn_errno())<< std::endl;
+        LOG4CPLUS_ERROR(log_, "rcv error: " << nn_strerror(nn_errno()));
         boost::this_thread::sleep_for(boost::chrono::microseconds(100));
     }
 

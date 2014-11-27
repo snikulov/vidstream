@@ -15,6 +15,7 @@ add_executable(${TEST_NAME} ${SRC_FILES})
 target_link_libraries(${TEST_NAME}
     ${Boost_LIBRARIES}
     ${OpenCV_LIBS}
+    ${LOG4CPLUS_LIBRARIES}
     split
     channel
     nanomsg

@@ -18,6 +18,10 @@
 #include <corrupt/corrupt_intro.hpp>
 #include <perf/perf_clock.hpp>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
+
 class in_channel
     : private boost::noncopyable
 {
@@ -68,6 +72,7 @@ private:
 #if defined(CHANNEL_DEBUG)
     std::ofstream dbgfile_;
 #endif
+    log4cplus::Logger log_;
 };
 
 

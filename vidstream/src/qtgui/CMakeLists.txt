@@ -65,6 +65,7 @@ endif()
 target_link_libraries(${TARGET_NAME}
    ${Boost_LIBRARIES}
    ${OpenCV_LIBS}
+   ${LOG4CPLUS_LIBRARIES}
    nanomsg
    split
    corrupt
