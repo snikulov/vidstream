@@ -134,7 +134,7 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
             }
         }
 #if defined(CHANNEL_DEBUG)
-        dbgfile_.write(to_send.c_str(), to_send.size());
+        dbgfile_.write(reinterpret_cast<char*>(&send_data), l);
 #endif
     }
     stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
