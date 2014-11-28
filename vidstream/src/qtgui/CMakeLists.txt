@@ -71,4 +71,5 @@ target_link_libraries(${TARGET_NAME}
    corrupt
    itpp
    channel
+   utils
    )

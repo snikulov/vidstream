@@ -3,6 +3,7 @@
 #include <iostream>
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
+#include <utils/converters.hpp>
 
 in_channel::in_channel(const std::string& url, bchwrapper& codec, corrupt_intro& err)
     : url_(url), codec_(codec), corruptor_(err), is_running_(false), is_connected_(false)
@@ -22,9 +23,6 @@ in_channel::~in_channel()
 
 void in_channel::processor()
 {
-    // create local logger for thread
-    log4cplus::Logger logger = log4cplus::Logger::getInstance("input_channel");
-
 #if defined(CHANNEL_DEBUG)
     dbgfile_.open("in_channel_dbg.dat", std::ios::binary|std::ios::trunc );
 #endif
@@ -40,7 +38,6 @@ void in_channel::processor()
         }
         else
         {
-            LOG4CPLUS_DEBUG(logger, "is_connected_=" << is_connected_);
             boost::this_thread::sleep_for(boost::chrono::milliseconds(5));
         }
     }
@@ -107,6 +104,7 @@ void in_channel::read_data()
 {
     int bytes = 0;
     char * buf = NULL;
+    std::vector<uint8_t> data;
 
     bytes = sock_->recv(&buf, NN_MSG, 0);
 
@@ -123,18 +121,13 @@ void in_channel::read_data()
 
 //        std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
         //int ri = reinterpret_cast<int>(*buf);
-        unsigned int ri = 0;
-        uint8_t one = buf[3];
-        uint8_t two = buf[2];
-        uint8_t three = buf[1];
-        uint8_t four = buf[0];
-        ri = ((one << 24) | (two << 16) | (three << 8) | four);
-        itpp::bvec rcvsignal(itpp::dec2bin(32, int(ri)));
+        boost::dynamic_bitset<uint8_t> dbs(buf, buf+bytes);
+        itpp::bvec rcvsignal;
+        vidstream::to_itppbvec(dbs, rcvsignal);
 
         // corrupt signal in channel
         itpp::bvec chsignal = corruptor_.corrupt(rcvsignal);
 
-        uint8_t data = 0;
         if (codec)
         {
 #if defined(CHANNEL_DEBUG)
@@ -142,22 +135,19 @@ void in_channel::read_data()
 #endif
             itpp::bvec decoded;
             codec->decode(chsignal, decoded);
-            int conv = itpp::bin2dec(decoded);
-            conv &= 0xFF;
-            data = static_cast<uint8_t>(conv);
+            vidstream::to_vector(decoded, data);
         }
         else
         {
-            int conv = itpp::bin2dec(chsignal);
-            conv &= 0xFF;
-            data = static_cast<uint8_t>(conv);
+            vidstream::to_vector(chsignal, data);
         }
 
 #if defined(CHANNEL_DEBUG)
 //        dbgfile_.write(reinterpret_cast<const char*>(&data), sizeof(data));
 #endif
         boost::mutex::scoped_lock lk(inmx_);
-        indata_.push_back(data);
+//        indata_.push_back(data);
+        indata_.insert(indata_.end(), data.begin(), data.end());
         incond_.notify_one();
     }
     else

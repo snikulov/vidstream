@@ -16,6 +16,10 @@
 #include <perf/perf_clock.hpp>
 #include <stat/stat_data.hpp>
 
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
+
 class out_channel
     : private boost::noncopyable
 {
@@ -69,6 +73,7 @@ private:
 #if defined(CHANNEL_DEBUG)
     std::ofstream dbgfile_;
 #endif
+    log4cplus::Logger log_;
 };
 
 
