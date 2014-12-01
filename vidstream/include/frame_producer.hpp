@@ -68,7 +68,7 @@ namespace vidstream
                 // 1/25 seconds - time to get frame
                 boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
                 boost::chrono::nanoseconds ns_per_frame = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
-                if (frame_get_time < time_per_frame)
+                if (frame_get_time < ns_per_frame)
                 {
                      boost::this_thread::sleep_for(ns_per_frame - frame_get_time);
                 }
