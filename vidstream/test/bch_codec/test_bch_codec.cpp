@@ -9,6 +9,8 @@
 #include <boost/property_tree/json_parser.hpp>
 
 #include <ecc/bch_codec.hpp>
+#include <itpp/itcomm.h>
+
 
 using namespace boost::unit_test;
 
@@ -16,40 +18,44 @@ BOOST_AUTO_TEST_SUITE(test_suite_bch)
 
 BOOST_AUTO_TEST_CASE( test_bch_case_1 )
 {
-//    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
-    std::vector<unsigned char> etal;
+    uint16_t byte = 0x1FF1;
 
-    etal.push_back(0xff);
-    etal.push_back(0xd1);
+    // kernel codec
+    ecc kc(15, 7);
 
-    BOOST_MESSAGE("etal size=" << etal.size());
+    // itpp codec
+    itpp::BCH ic(15, 7);
 
-    for(unsigned char i = 0; i < 10; ++i)
+    size_t outdatalen = 0;
+    char* kdata = kc.encode((char*)&byte, sizeof(byte), outdatalen);
+
+    itpp::bvec bc = itpp::dec2bin(16, byte);
+    BOOST_MESSAGE("bc.size() = " << bc.size());
+
+    itpp::bvec ebc = ic.encode(bc);
+
+    BOOST_MESSAGE("outdatalen = " << outdatalen);
+    BOOST_MESSAGE("ebc.size() = " << ebc.size());
+
+    BOOST_MESSAGE("ebc = " << ebc);
+
+    std::ostringstream os;
+    for(size_t i = 0; i < outdatalen; ++i)
     {
-        etal.push_back(i);
+        os << std::hex << (int)kdata[i];
     }
+    BOOST_MESSAGE("kdata = " << os.str());
 
-    // mode 1:5 (13, 105) - orig 12, encoded buf len 1024, decoded 853
-    // mode 1:1 (5, 3) - orig 12, encoded 24, decoded 12
-    // mode 2:1 (6, 6) - orig 12, encoded 32, decoded 12
-    // mode 3:1 (5, 4) - orig 12, encoded 32, decoded 12
-    bch_codec ecc(5, 3);
-    std::vector<unsigned char> ec = ecc.encode(etal);
-    BOOST_REQUIRE(ec != etal);
+    std::vector<char> vc;
+    bool dec_st = false;
 
-    for(size_t i=0; i < ec.size(); ++i)
-        BOOST_MESSAGE("ec[" << std::dec << i <<"]=" << std::hex << (int)ec.at(i));
+    size_t dodl = 0;
+    char * dk = kc.decode((unsigned char*)kdata, outdatalen, dodl, vc, dec_st);
 
-    std::vector<char> good;
-    bool is_ok = false;
-    std::vector<unsigned char> dc = ecc.decode(ec, good, is_ok);
+    BOOST_MESSAGE("dk = " << (int)(*dk));
 
-    BOOST_CHECK(is_ok);
-    BOOST_CHECK_MESSAGE(etal == dc, "etal size=" << etal.size() << " dc size=" << dc.size() << " good size=" << good.size());
-    for(size_t i=0; i < etal.size(); ++i)
-        BOOST_CHECK_MESSAGE(etal.at(i) == dc.at(i)," etal[" << std::dec << i <<"]=" << std::hex << (int)etal.at(i));
-
-    BOOST_TEST_MESSAGE("etal size=" << etal.size() << " ec size=" << ec.size() << " dc size=" << dc.size());
+    free(kdata);
+    free(dk);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

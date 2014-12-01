@@ -38,7 +38,6 @@ public:
 
         int max_err_try = 0;
 
-        timer_.start();
         while(!stop_)
         {
             timer<high_resolution_clock> pt;
@@ -68,14 +67,13 @@ public:
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
-                pt.stop();
                 stat_->f_process_time_ = pt.sec();
 
                 if (outsink)
                 {
                     try
                     {
-                        pt.start();
+                        pt.restart();
                         int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
 
                         if (ret == -1)
@@ -94,8 +92,6 @@ public:
                         {
                             max_err_try = 0;
                             cnt_sent_++;
-                            pt.stop();
-//                            std::cerr << "send time: " << pt.seconds() << std::endl;
                             stat_->f_send_time_ = pt.sec();
                         }
                     }
@@ -114,7 +110,6 @@ public:
             {
                 stop_ = true;
             }
-            timer_.stop();
 #if 0
             std::cout << "process FPS: " << get_process_fps()
                       << " sent FPS: " << get_sent_fps()
@@ -126,7 +121,7 @@ public:
 
     unsigned int get_process_fps() const
     {
-        unsigned long t = timer_.sec();
+        unsigned long long t = timer_.sec();
         if (t > 0)
         {
             return  static_cast<unsigned int>(cnt_processed_/timer_.sec());
@@ -136,7 +131,7 @@ public:
 
     unsigned int get_sent_fps() const
     {
-        unsigned long t = timer_.sec();
+        unsigned long long t = timer_.sec();
         if (t > 0)
         {
             return  static_cast<unsigned int>(cnt_sent_/timer_.sec());

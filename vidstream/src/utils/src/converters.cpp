@@ -6,26 +6,30 @@ namespace vidstream
     void to_itppbvec(const boost::dynamic_bitset<uint8_t>& bdb, itpp::bvec& ib)
     {
         size_t len = bdb.size();
-        itpp::bvec res(len);
+        if(len != ib.length())
+        {
+            ib.set_size(len);
+        }
 
         for(size_t i=0,j = len-1; i < len; ++i, --j)
         {
-            res[i] = bdb[j];
+            ib[i] = bdb[j];
         }
-
-        ib = res;
     }
 
     void to_dynbitset(const itpp::bvec& ib, boost::dynamic_bitset<uint8_t>& bdb)
     {
         size_t len = ib.size();
-        boost::dynamic_bitset<uint8_t> res(len);
+
+        if(len != bdb.size())
+        {
+            bdb.resize(len);
+        }
 
         for(size_t i = 0, j = len-1; i < len; ++i, --j)
         {
-            res[i] = ib[j];
+            bdb[i] = ib[j];
         }
-        bdb.swap(res);
     }
 
     void to_vector(const boost::dynamic_bitset<uint8_t>& bdb, std::vector<uint8_t>& data)

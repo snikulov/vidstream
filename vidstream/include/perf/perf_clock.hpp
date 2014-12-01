@@ -8,50 +8,50 @@ template< class Clock >
 class timer
 {
     typename Clock::time_point start_;
-    mutable typename Clock::duration diff_;
 
 public:
     timer() : start_( Clock::now() ) {}
 
-    void start(bool reset = true)
+    void restart()
     {
-        if (reset)
-        {
-            start_ = Clock::now();
-        }
-    }
-
-    void stop()
-    {
-        diff_ = Clock::now() - start_;
+        start_ = Clock::now();
     }
 
     typename Clock::duration elapsed() const
     {
-        return diff_;
+        return Clock::now() - start_;
     }
-
-#if 0
-    double seconds() const
-    {
-        return diff_.count() * ((double)Clock::period::num/Clock::period::den);
-    }
-#endif
 
     unsigned long long sec() const
     {
-        return  (boost::chrono::duration_cast<boost::chrono::seconds>( diff_ )).count();
+        return  boost::chrono::duration_cast<boost::chrono::seconds>( elapsed() ).count();
     }
 
     unsigned long long nsec() const
     {
-        return diff_.count();
+        return elapsed().count();
     }
 
     unsigned long long mcsec() const
     {
         return  boost::chrono::duration_cast<boost::chrono::microseconds>( elapsed() ).count();
     }
+
+    unsigned long long sec(typename Clock::duration& d) const
+    {
+        return  boost::chrono::duration_cast<boost::chrono::seconds>( d ).count();
+    }
+
+    unsigned long long nsec(typename Clock::duration& d) const
+    {
+        return d.count();
+    }
+
+    unsigned long long mcsec(typename Clock::duration& d) const
+    {
+        return boost::chrono::duration_cast<boost::chrono::microseconds>( d ).count();
+    }
+
 };
 
 

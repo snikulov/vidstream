@@ -23,46 +23,29 @@ namespace vidstream
 
                 LOG4CPLUS_INFO(log_, "Frame producer thread started...");
 
-                // 1/25 seconds - time to get frame
-                boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
-                boost::chrono::nanoseconds ns_per_frame = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
-
-                timer<boost::chrono::steady_clock> t1;
-                timer<boost::chrono::steady_clock> t2;
-
                 camera_frame_t frame;
                 unsigned long long sec = 1;
                 unsigned long long fcount = 0;
 
-                t1.start();
+                timer<boost::chrono::steady_clock> t1;
+                timer<boost::chrono::steady_clock> t2;
 
                 while(!stop_)
                 {
-                    t2.start();
+                    t2.restart();
                     frame = cam_.get_frame();
-                    t2.stop();
-                    if(t2.elapsed() < ns_per_frame)
-                    {
-                        boost::this_thread::sleep_for(ns_per_frame - t2.elapsed());
-                    }
-
-                    LOG4CPLUS_TRACE(log_, "capture ns: " << t2.nsec());
+                    fps_rate_limit(t2.elapsed());
 
                     if (frame)
                     {
                         fcount++;
-                        t2.start();
                         q_.enqueue(frame);
-                        t2.stop();
-                        LOG4CPLUS_TRACE(log_, "push to processing ns: " << t2.nsec());
-
                     }
                     else
                     {
-                        LOG4CPLUS_WARN(log_, "Camera return empty frame: " << fcount << ", " << sec);
+                        LOG4CPLUS_WARN(log_, "Camera return empty frame: " << fcount);
                     }
 
-                    t1.stop();
                     sec = t1.sec();
                     sec = sec ? sec : 1; // 0 div check
 
@@ -79,6 +62,18 @@ namespace vidstream
             }
 
         private:
+
+            void fps_rate_limit(const boost::chrono::steady_clock::duration& frame_get_time) const
+            {
+                // 1/25 seconds - time to get frame
+                boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
+                boost::chrono::nanoseconds ns_per_frame = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
+                if (frame_get_time < time_per_frame)
+                {
+                     boost::this_thread::sleep_for(ns_per_frame - frame_get_time);
+                }
+            }
+
             /* data */
             const camera& cam_;
             monitor_queue<camera_frame_t>& q_;

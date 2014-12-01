@@ -194,7 +194,6 @@ void out_channel::processor()
     dbgfile_.open("out_channel_dbg.dat", std::ios::binary|std::ios::trunc );
 #endif
 
-    timer_.start();
     while (is_running_)
     {
         connect();
