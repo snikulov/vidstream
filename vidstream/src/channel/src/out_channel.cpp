@@ -85,57 +85,46 @@ void out_channel::connect()
     }
 }
 
-int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<itpp::Channel_Code> codec)
+int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<abstract_ecc_codec> codec)
 {
     std::vector<uint8_t> dsend;
 
     size_t len = data.size();
     size_t res = 0;
 
-    for (size_t i = 0; i < len; ++i)
+    codec->encode(data, dsend);
+
+    LOG4CPLUS_DEBUG(log_, "data.size() = " << data.size() << " encoded.size() = " << dsend.size());
+
+    int sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
+
+    if (sent > 0)
     {
-        boost::dynamic_bitset<uint8_t> bs(&data[i], &data[i+1]);
-        itpp::bvec bits;
-        vidstream::to_itppbvec(bs, bits);
-
-        if (codec)
+        res += sent;
+        bytes_count_ +=sent;
+    }
+    else
+    {
+        LOG4CPLUS_WARN(log_, "sent = " << sent << " " << nn_strerror(nn_errno()));
+        while (is_running_ && !can_send_data())
         {
-            itpp::bvec enc = codec->encode(bits);
-            vidstream::to_vector(enc, dsend);
+            // wait for unblocking...
         }
-        else
-        {
-            vidstream::to_vector(bits, dsend);
-        }
-
-        int sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
-
+        sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
         if (sent > 0)
         {
             res += sent;
-            bytes_count_ +=sent;
+            bytes_count_ += sent;
         }
         else
         {
-            LOG4CPLUS_WARN(log_, "sent = " << sent << " " << nn_strerror(nn_errno()));
-            while (is_running_ && !can_send_data())
-            {
-                // wait for unblocking...
-            }
-            sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
-            if (sent > 0)
-            {
-                res += sent;
-                bytes_count_ += sent;
-            }
-            else
-            {
-                LOG4CPLUS_FATAL(log_, "can't send - sent = " << sent << " " << nn_strerror(nn_errno()));
-                throw std::runtime_error("can't send");
-            }
+            LOG4CPLUS_FATAL(log_, "can't send - sent = " << sent << " " << nn_strerror(nn_errno()));
+            throw std::runtime_error("can't send");
         }
     }
+
     stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
+
     return static_cast<int>(res);
 }
 
@@ -168,9 +157,7 @@ void out_channel::send_data()
         size_t len = data.size();
         int sent = 0;
 
-        boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
-
-        sent = send_encoded(data, codec);
+        sent = send_encoded(data, codec_.get());
 
         if (sent > 0)
         {

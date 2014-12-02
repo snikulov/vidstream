@@ -13,16 +13,35 @@ class bch_codec_kernel : public abstract_ecc_codec
 
         bool encode(const std::vector<uint8_t>& src, std::vector<uint8_t>& dst) const
         {
+            size_t encoded_len = 0;
+            char * encoded = codec_->encode( reinterpret_cast<const char*>(&src[0]), src.size(), encoded_len );
+
+            std::vector<uint8_t> res(encoded, encoded + encoded_len);
+            dst.swap(res);
+
+            free(encoded);
+
             return true;
         }
 
         bool encode(uint8_t src, std::vector<uint8_t>& dst) const
         {
-            return true;
+            std::vector<uint8_t> vsrc;
+            vsrc.push_back(src);
+            return encode(vsrc, dst);
         }
 
         bool decode(const std::vector<uint8_t>& src, std::vector<uint8_t>& dst) const
         {
+            bool dok = false;
+            size_t decoded_len = 0;
+            std::vector<char> good_data;
+            char * decoded = codec_->decode( &src[0], src.size(), decoded_len, good_data, dok);
+
+            std::vector<uint8_t> res(decoded, decoded + decoded_len);
+            dst.swap(res);
+
+            free(decoded);
             return true;
         }
 
