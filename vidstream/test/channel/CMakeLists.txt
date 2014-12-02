@@ -16,10 +16,10 @@ target_link_libraries(${TEST_NAME}
     ${Boost_LIBRARIES}
     ${OpenCV_LIBS}
     ${LOG4CPLUS_LIBRARIES}
+    ${ITPP_LIBRARIES}
     split
     channel
     nanomsg
-    itpp
     utils
     bch
     )

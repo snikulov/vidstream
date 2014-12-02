@@ -46,7 +46,6 @@ public:
 #if defined(CHANNEL_DEBUG)
         std::cerr << "[I] get bch with n_=" << n_ << " t_=" << t_ << std::endl;
 #endif
-        boost::mutex::scoped_lock lk(mx_);
         if (!codec_)
         {
             init_bch_codec();

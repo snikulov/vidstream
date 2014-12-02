@@ -11,11 +11,14 @@
 #include <ecc/bch_codec.hpp>
 #include <itpp/itcomm.h>
 
+#include <channel/bchwrapper.hpp>
+
 
 using namespace boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(test_suite_bch)
 
+#if 0
 BOOST_AUTO_TEST_CASE( test_bch_case_1 )
 {
     uint16_t byte = 0x1FF1;
@@ -57,6 +60,27 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
     free(kdata);
     free(dk);
 }
+#endif
+
+BOOST_AUTO_TEST_CASE( test_bch_case_2 )
+{
+    bchwrapper bch(7, 3);
+    std::vector<uint8_t> src;
+
+    src.push_back(0);
+    src.push_back(1);
+    src.push_back(2);
+    src.push_back(3);
+
+    std::vector<uint8_t> enc_src;
+    bch.get()->encode(src, enc_src);
+
+    std::vector<uint8_t> dst;
+    bch.get()->decode(enc_src, dst);
+
+    BOOST_CHECK(dst == src);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

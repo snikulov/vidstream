@@ -14,7 +14,7 @@ target_link_libraries(test_split
     corrupt
     ${Boost_LIBRARIES}
     ${OpenCV_LIBS}
-    itpp
+    ${ITPP_LIBRARIES}
     channel
     )
 
