@@ -184,7 +184,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt;
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
 
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
@@ -246,7 +246,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt(0.1);
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect

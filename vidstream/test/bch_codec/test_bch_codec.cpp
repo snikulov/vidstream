@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
 
 BOOST_AUTO_TEST_CASE( test_bch_case_2 )
 {
-    bchwrapper bch(7, 3);
+    bchwrapper bch(5, 3);
     std::vector<uint8_t> src;
 
     src.push_back(0);
