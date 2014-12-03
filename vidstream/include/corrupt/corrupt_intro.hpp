@@ -21,9 +21,10 @@ public:
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
     {
-        double noise = cfg.get<double>("cfg.error.val");
+        float noise = cfg.get<float>("cfg.error.val");
         boost::mutex::scoped_lock lk(lk_);
-        binary_channel_.reset(new itpp::BSC(noise));
+        p_ = noise;
+        binary_channel_.reset(new itpp::BSC(p_));
     }
 
     itpp::bvec corrupt(itpp::bvec& signal)
