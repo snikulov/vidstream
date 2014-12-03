@@ -77,6 +77,11 @@ if(WITH_ITPP)
     set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
     include_directories(ext/itpp ${CMAKE_BINARY_DIR})
+    set(ITPP_LIBRARIES "itpp")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        set(ITPP_LIBRARIES "${ITPP_LIBRARIES}_debug")
+    endif()
+
 endif()
 
 if(WITH_CH_DBG)

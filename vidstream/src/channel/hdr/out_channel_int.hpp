@@ -40,7 +40,8 @@ private:
 
     void send_data();
 
-    int send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<itpp::Channel_Code> codec);
+    int send_encoded(const std::vector<uint8_t>& data,
+            boost::shared_ptr<abstract_ecc_codec> codec);
 
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 

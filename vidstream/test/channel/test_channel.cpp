@@ -184,7 +184,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt;
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
 
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
@@ -246,7 +246,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt(0.1);
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect
@@ -262,29 +262,17 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     BOOST_REQUIRE(!data->empty());
 
     std::vector<uint8_t>& data_ref = *data;
+    std::vector<uint8_t> encoded_data;
 
-    for(size_t idx = 0; idx < data_ref.size(); ++idx)
-    {
-        uint8_t in = data_ref[idx];
-        itpp::bvec invec   = itpp::dec2bin(in);
-        itpp::bvec encoded = bch_codec.get()->encode(invec);
+    bch_codec.get()->encode(data_ref, encoded_data);
 
-        std::string to_send = itpp::to_str(encoded);
+    std::vector<uint8_t> signal = corrupt.corrupt(encoded_data);
 
-        std::string received(to_send.c_str()+1, to_send.c_str()+to_send.size()-1);
+    std::vector<uint8_t> decoded_data;
 
-        itpp::bvec rcv_signal(received);
-        BOOST_CHECK(encoded == rcv_signal);
+    bch_codec.get()->decode(signal, decoded_data);
 
-        itpp::bvec corrupted = corrupt.corrupt(rcv_signal);
-
-        itpp::bvec decoded;
-        bch_codec.get()->decode(corrupted, decoded);
-
-        BOOST_CHECK_MESSAGE(invec == decoded, "Failure: data=" << std::hex << (unsigned int)in << " " << invec << " " << decoded);
-
-    }
-
+    BOOST_CHECK(data_ref == decoded_data);
 }
 
 

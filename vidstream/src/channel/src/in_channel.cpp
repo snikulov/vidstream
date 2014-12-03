@@ -113,7 +113,7 @@ void in_channel::read_data()
         LOG4CPLUS_TRACE(log_, "read data: " << bytes << " bytes");
         bytes_count_ += bytes;
 
-        boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+        boost::shared_ptr<abstract_ecc_codec> codec = codec_.get();
 
 #if defined(CHANNEL_DEBUG)
         dbgfile_.write(buf, bytes);
@@ -121,26 +121,12 @@ void in_channel::read_data()
 
 //        std::string rcv_data(buf + sizeof(buf[0]), buf + bytes - sizeof(buf[0]));
         //int ri = reinterpret_cast<int>(*buf);
-        boost::dynamic_bitset<uint8_t> dbs(buf, buf+bytes);
-        itpp::bvec rcvsignal;
-        vidstream::to_itppbvec(dbs, rcvsignal);
+        std::vector<uint8_t> dvec(buf, buf+bytes);
 
         // corrupt signal in channel
-        itpp::bvec chsignal = corruptor_.corrupt(rcvsignal);
+        std::vector<uint8_t> signal = corruptor_.corrupt(dvec);
 
-        if (codec)
-        {
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[I] " << __FUNCTION__ << " decode data" << std::endl;
-#endif
-            itpp::bvec decoded;
-            codec->decode(chsignal, decoded);
-            vidstream::to_vector(decoded, data);
-        }
-        else
-        {
-            vidstream::to_vector(chsignal, data);
-        }
+        bool dres = codec->decode(signal, data);
 
 #if defined(CHANNEL_DEBUG)
 //        dbgfile_.write(reinterpret_cast<const char*>(&data), sizeof(data));

@@ -165,6 +165,20 @@ class cfg_sync_thread : public boost::noncopyable
         cfg_subscribers subs_;
 };
 
+static int stop_flag = 0;
+
+#ifdef __unix__
+#include <signal.h>
+extern "C" void quit_signal_handler(int signum)
+{
+    if (stop_flag != 0) exit(0); // just exit already
+    stop_flag = 1;
+
+    printf("Will quit at next camera frame (repeat to kill now)\n");
+
+}
+#endif
+
 int main(int argc, char** argv)
 {
     using namespace log4cplus;
@@ -179,6 +193,10 @@ int main(int argc, char** argv)
         std::cerr << ex.what() << std::endl;
         exit(0);
     }
+
+#ifdef __unix__
+    signal(SIGINT, quit_signal_handler);
+#endif
 
     po::options_description desc("All options");
     desc.add_options()
@@ -199,8 +217,6 @@ int main(int argc, char** argv)
 
     std::string infile = vm["file"].as<std::string>();
     std::string cmd_url = vm["url"].as<std::string>();
-
-    int stop_flag = 0;
 
     boost::shared_ptr<boost::property_tree::ptree> cfg(new boost::property_tree::ptree());
 

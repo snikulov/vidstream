@@ -45,8 +45,6 @@ private:
 
     void read_data();
 
-    int send_encoded(const std::vector<uint8_t>& data);
-
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 
     std::string url_;
