@@ -74,6 +74,8 @@ class cfg_sync_thread : public boost::noncopyable
             pt.put("send.time", stat_->f_send_time_);
             pt.put("sent.bytes", stat_->bytes_sent_);
             pt.put("sent.frames", stat_->frames_sent_);
+            pt.put("fr.size", stat_->frame_size_);
+            pt.put("rst.num", stat_->num_rst_);
 
             std::stringstream ss;
             boost::property_tree::write_json(ss, pt);

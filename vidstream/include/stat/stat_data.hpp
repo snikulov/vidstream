@@ -22,6 +22,8 @@ struct stat_data_t
 
     unsigned long tsec_;
 
+    unsigned long frame_size_;
+    unsigned long num_rst_;
 };
 
 #endif /* end of include guard: STAT_DATA_H__ */

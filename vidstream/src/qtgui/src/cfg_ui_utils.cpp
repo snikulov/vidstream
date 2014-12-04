@@ -66,8 +66,16 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
     u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
 
-    std::string sentb = pt.get<std::string>("sent.bytes");
-    u.lineEdit_sent_bytes->setText( QString::fromUtf8(sentb.c_str()) );
+    u.lineEdit_sent_bytes->setText(
+                QString::fromUtf8(pt.get<std::string>("sent.bytes").c_str())
+                );
+
+    u.lineEdit_frame_size->setText(
+                QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
+                );
+    u.lineEdit_num_rst->setText(
+                QString::fromUtf8(pt.get<std::string>("rst.num").c_str())
+                );
 
 }
 

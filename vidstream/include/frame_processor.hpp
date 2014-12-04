@@ -68,6 +68,8 @@ public:
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
                 stat_->f_process_time_ = pt.sec();
+                stat_->frame_size_ = jpg->size();
+                stat_->num_rst_ = rst->size();
 
                 if (outsink)
                 {

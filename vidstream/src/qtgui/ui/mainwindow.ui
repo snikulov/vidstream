@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>600</height>
+    <height>734</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +25,7 @@
   <property name="maximumSize">
    <size>
     <width>620</width>
-    <height>600</height>
+    <height>800</height>
    </size>
   </property>
   <property name="font">
@@ -44,7 +44,7 @@
       <x>9</x>
       <y>9</y>
       <width>511</width>
-      <height>341</height>
+      <height>701</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -56,270 +56,280 @@
     <property name="title">
      <string>VidStream Config</string>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="title">
-        <string>Канал</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Порт управления</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBox_port_cmd">
-          <property name="minimum">
-           <number>9900</number>
-          </property>
-          <property name="maximum">
-           <number>9949</number>
-          </property>
-          <property name="value">
-           <number>9900</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Порт приема</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QSpinBox" name="spinBox_port_data">
-          <property name="minimum">
-           <number>9950</number>
-          </property>
-          <property name="maximum">
-           <number>9999</number>
-          </property>
-          <property name="value">
-           <number>9950</number>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Скорость (b/sec)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Ошибка (%)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="title">
-           <string>Параметры BCH</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Режимы</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>n</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_bch_mode">
-             <item>
-              <property name="text">
-               <string>0 : 0</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>7 : 1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>7 : 2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>7 : 3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Вручную</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_bch_m">
-             <property name="maximum">
-              <number>1000</number>
-             </property>
-             <property name="value">
-              <number>0</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>t</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_bch_t">
-             <property name="maximum">
-              <number>1000</number>
-             </property>
-             <property name="value">
-              <number>0</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent">
-          <property name="singleStep">
-           <double>0.010000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_channel_speed"/>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QGroupBox" name="groupBox_3">
-       <property name="title">
-        <string>Изображение</string>
-       </property>
-       <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>RST блок</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBox_rst_num">
-          <property name="minimum">
-           <number>0</number>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Lum</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QSpinBox" name="spinBox_lum_quality">
-          <property name="minimum">
-           <number>0</number>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>20</number>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Chrom</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QSpinBox" name="spinBox_chrome_quality">
-          <property name="minimum">
-           <number>0</number>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>20</number>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Разрешение камеры</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QComboBox" name="comboBox_camera_resolution">
-          <property name="currentIndex">
-           <number>2</number>
-          </property>
-          <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>30</y>
+       <width>243</width>
+       <height>289</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Канал</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Порт управления</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinBox_port_cmd">
+        <property name="minimum">
+         <number>9900</number>
+        </property>
+        <property name="maximum">
+         <number>9949</number>
+        </property>
+        <property name="value">
+         <number>9900</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Порт приема</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spinBox_port_data">
+        <property name="minimum">
+         <number>9950</number>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+        <property name="value">
+         <number>9950</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Скорость (b/sec)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Ошибка (%)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string>Параметры BCH</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>1280x800</string>
+            <string>Режимы</string>
            </property>
-          </item>
-          <item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_12">
            <property name="text">
-            <string>1024x780</string>
+            <string>n</string>
            </property>
-          </item>
-          <item>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_bch_mode">
+           <item>
+            <property name="text">
+             <string>0 : 0</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>7 : 1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>7 : 2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>7 : 3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Вручную</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="spinBox_bch_m">
+           <property name="maximum">
+            <number>1000</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_13">
            <property name="text">
-            <string>640x480</string>
+            <string>t</string>
            </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>320x240</string>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="spinBox_bch_t">
+           <property name="maximum">
+            <number>1000</number>
            </property>
-          </item>
-         </widget>
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_error_persent">
+        <property name="singleStep">
+         <double>0.010000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEdit_channel_speed"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>261</x>
+       <y>30</y>
+       <width>238</width>
+       <height>182</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Изображение</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>RST блок</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinBox_rst_num">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Lum</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spinBox_lum_quality">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Chrom</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spinBox_chrome_quality">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Разрешение камеры</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="comboBox_camera_resolution">
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>1280x800</string>
+         </property>
         </item>
-        <item row="4" column="0">
-         <widget class="QCheckBox" name="checkBox_is_gray">
-          <property name="text">
-           <string> Оттенки серого</string>
-          </property>
-         </widget>
+        <item>
+         <property name="text">
+          <string>1024x780</string>
+         </property>
         </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
+        <item>
+         <property name="text">
+          <string>640x480</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>320x240</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="checkBox_is_gray">
+        <property name="text">
+         <string> Оттенки серого</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_operate">
     <property name="geometry">
@@ -544,6 +554,76 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>570</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Frame Size</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_frame_size">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>570</y>
+      <width>171</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>600</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Num of RST's</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_num_rst">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>600</y>
+      <width>171</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>pushButton_operate</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_8</zorder>
+   <zorder>label_14</zorder>
+   <zorder>label_15</zorder>
+   <zorder>spinBox_cap_fps</zorder>
+   <zorder>spinBox_proc_fps</zorder>
+   <zorder>doubleSpinBox_f_proc_time</zorder>
+   <zorder>doubleSpinBox_f_send_time</zorder>
+   <zorder>spinBox_sent_frames</zorder>
+   <zorder>label_16</zorder>
+   <zorder>label_17</zorder>
+   <zorder>lineEdit_sent_bytes</zorder>
+   <zorder>label_18</zorder>
+   <zorder>lineEdit_frame_size</zorder>
+   <zorder>label_19</zorder>
+   <zorder>lineEdit_num_rst</zorder>
+   <zorder>groupBox</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
