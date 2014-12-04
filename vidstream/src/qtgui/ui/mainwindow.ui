@@ -330,6 +330,32 @@
       </item>
      </layout>
     </widget>
+    <widget class="QLineEdit" name="lineEdit_send_time">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>470</y>
+       <width>171</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_proc_time">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>440</y>
+       <width>171</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_operate">
     <property name="geometry">
@@ -380,7 +406,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Frame proc. time:</string>
+     <string>Proc. time, ns</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_15">
@@ -393,7 +419,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Frame send time:</string>
+     <string>Send time, ns</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_cap_fps">
@@ -444,50 +470,6 @@
     </property>
     <property name="value">
      <number>0</number>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_f_proc_time">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>450</y>
-      <width>114</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="decimals">
-     <number>6</number>
-    </property>
-    <property name="maximum">
-     <double>99999.990000000005239</double>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_f_send_time">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>480</y>
-      <width>114</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="decimals">
-     <number>6</number>
-    </property>
-    <property name="maximum">
-     <double>99999.990000000005239</double>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_sent_frames">
@@ -564,7 +546,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Frame Size</string>
+     <string>Frame size</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_frame_size">
@@ -613,8 +595,6 @@
    <zorder>label_15</zorder>
    <zorder>spinBox_cap_fps</zorder>
    <zorder>spinBox_proc_fps</zorder>
-   <zorder>doubleSpinBox_f_proc_time</zorder>
-   <zorder>doubleSpinBox_f_send_time</zorder>
    <zorder>spinBox_sent_frames</zorder>
    <zorder>label_16</zorder>
    <zorder>label_17</zorder>

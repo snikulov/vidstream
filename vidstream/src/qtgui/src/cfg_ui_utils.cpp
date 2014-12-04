@@ -60,8 +60,13 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     boost::property_tree::ptree pt;
     boost::property_tree::read_json(ss, pt);
 
-    u.doubleSpinBox_f_proc_time->setValue(pt.get<double>("proc.time"));
-    u.doubleSpinBox_f_send_time->setValue(pt.get<double>("send.time"));
+    u.lineEdit_proc_time->setText(
+                QString::fromUtf8(pt.get<std::string>("t.proc").c_str())
+                );
+    u.lineEdit_send_time->setText(
+                QString::fromUtf8(pt.get<std::string>("t.send").c_str())
+                );
+
     u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
     u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
     u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));

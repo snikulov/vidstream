@@ -70,8 +70,8 @@ class cfg_sync_thread : public boost::noncopyable
 
             pt.put("cam.fps", stat_->cam_fps_);
             pt.put("proc.fps", stat_->process_fps_);
-            pt.put("proc.time", stat_->f_process_time_);
-            pt.put("send.time", stat_->f_send_time_);
+            pt.put("t.proc", stat_->f_process_time_);
+            pt.put("t.send", stat_->f_send_time_);
             pt.put("sent.bytes", stat_->bytes_sent_);
             pt.put("sent.frames", stat_->frames_sent_);
             pt.put("fr.size", stat_->frame_size_);

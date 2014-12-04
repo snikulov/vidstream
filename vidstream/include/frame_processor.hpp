@@ -37,10 +37,11 @@ public:
         boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_, stat_));
 
         int max_err_try = 0;
+        timer<high_resolution_clock> pt;
 
         while(!stop_)
         {
-            timer<high_resolution_clock> pt;
+            pt.restart();
 
             camera_frame_t frame = q_.dequeue();
             if (frame && !frame->empty())
@@ -67,7 +68,7 @@ public:
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
-                stat_->f_process_time_ = pt.sec();
+                stat_->f_process_time_ = pt.nsec();
                 stat_->frame_size_ = jpg->size();
                 stat_->num_rst_ = rst->size();
 
@@ -75,7 +76,6 @@ public:
                 {
                     try
                     {
-                        pt.restart();
                         int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
 
                         if (ret == -1)
@@ -94,7 +94,6 @@ public:
                         {
                             max_err_try = 0;
                             cnt_sent_++;
-                            stat_->f_send_time_ = pt.sec();
                         }
                     }
                     catch(nn::exception& ex)
@@ -108,10 +107,15 @@ public:
                     }
                 }
             }
+
+#if defined(CAPTURE_UI)
+            // only when UI screen
             if(cv::waitKey(10) >= 0)
             {
                 stop_ = true;
             }
+#endif
+
 #if 0
             std::cout << "process FPS: " << get_process_fps()
                       << " sent FPS: " << get_sent_fps()

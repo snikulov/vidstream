@@ -14,8 +14,8 @@ struct stat_data_t
 
     unsigned cam_fps_;
     unsigned process_fps_;
-    double f_process_time_;
-    double f_send_time_;
+    unsigned long f_process_time_;
+    unsigned long f_send_time_;
 
     unsigned long bytes_sent_;
     unsigned frames_sent_;

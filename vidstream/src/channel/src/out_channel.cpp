@@ -181,13 +181,16 @@ void out_channel::processor()
     dbgfile_.open("out_channel_dbg.dat", std::ios::binary|std::ios::trunc );
 #endif
 
+    timer<high_resolution_clock> st;
     while (is_running_)
     {
         connect();
 
         if (is_connected_)
         {
+            st.restart();
             send_data();
+            stat_->f_send_time_ = st.nsec();
         }
         else
         {

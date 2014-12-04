@@ -10,7 +10,11 @@ set(HDR_FILES
     hdr/in_channel_int.hpp
     hdr/transport_int.hpp
     hdr/bchwrapper_int.hpp
-    hdr/codec_int.hpp)
+    hdr/codec_int.hpp
+    hdr/bch_codec_itpp.hpp
+    hdr/bch_codec_kernel.hpp
+    hdr/bch_codec_none.hpp
+)
 
 set(SRC_FILES
     src/channel.cpp
