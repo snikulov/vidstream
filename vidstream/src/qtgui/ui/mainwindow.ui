@@ -43,7 +43,7 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>511</width>
+      <width>601</width>
       <height>701</height>
      </rect>
     </property>
@@ -553,6 +553,9 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
    </widget>
    <widget class="QLabel" name="label_18">
     <property name="geometry">
@@ -606,22 +609,6 @@
      </rect>
     </property>
    </widget>
-   <zorder>pushButton_operate</zorder>
-   <zorder>label_7</zorder>
-   <zorder>label_8</zorder>
-   <zorder>label_14</zorder>
-   <zorder>label_15</zorder>
-   <zorder>spinBox_cap_fps</zorder>
-   <zorder>spinBox_proc_fps</zorder>
-   <zorder>spinBox_sent_frames</zorder>
-   <zorder>label_16</zorder>
-   <zorder>label_17</zorder>
-   <zorder>lineEdit_sent_bytes</zorder>
-   <zorder>label_18</zorder>
-   <zorder>lineEdit_frame_size</zorder>
-   <zorder>label_19</zorder>
-   <zorder>lineEdit_num_rst</zorder>
-   <zorder>groupBox</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>

@@ -176,3 +176,13 @@ void MainWindow::on_spinBox_bch_m_editingFinished()
 {
 
 }
+
+void MainWindow::on_lineEdit_sent_bytes_textChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_spinBox_bw_valueChanged(int arg1)
+{
+    cfg_->put("cfg.bw", arg1);
+}

@@ -43,6 +43,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
 
         u.spinBox_port_data->setValue(cfg.get<int>("cfg.dataport"));
         u.spinBox_port_cmd->setValue(cfg.get<int>("cfg.cmdport"));
+        u.spinBox_bw->setValue(cfg.get<int>("cfg.bw"));
 
         ui_set_resolution_index(u, cfg);
         ui_set_bch_preset_list_index(u, cfg);
@@ -71,11 +72,11 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
     u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
     u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
-
+/*
     u.lineEdit_sent_bytes->setText(
                 QString::fromUtf8(pt.get<std::string>("sent.bytes").c_str())
                 );
-
+*/
     u.lineEdit_frame_size->setText(
                 QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
                 );
@@ -83,6 +84,20 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
                 QString::fromUtf8(pt.get<std::string>("rst.num").c_str())
                 );
 
+
+    double speed = pt.get<double>("sent.bytes");
+    double mbps = speed*8.0/1000000.0;
+
+    u.lineEdit_sent_bytes->setText(QString::number(mbps));
+
+    if (mbps > u.spinBox_bw->value())
+    {
+        u.lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: red;}");
+    }
+    else
+    {
+        u.lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: white;}");
+    }
 }
 
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
@@ -98,6 +113,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 
     cfg.put("cfg.cmdport", u.spinBox_port_cmd->value());
     cfg.put("cfg.dataport", u.spinBox_port_data->value());
+    cfg.put("cfg.bw", u.spinBox_bw->value());
 
     cfg_set_resolution_by_list_index(cfg
                                      , u.comboBox_camera_resolution->currentIndex());
