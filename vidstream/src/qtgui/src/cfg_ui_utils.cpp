@@ -19,9 +19,10 @@ const size_t RES_MODE_MAX = sizeof(res_modes)/sizeof(res_modes[0]);
 static const param_pair_t bch_modes[] =
 {
     {0,0}
+    ,{5,3}
+    ,{5,1}
     ,{7,1}
-    ,{7,2}
-    ,{7,3}
+    ,{15, 1}
 };
 const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 
