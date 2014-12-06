@@ -179,7 +179,15 @@ void MainWindow::on_spinBox_bch_m_editingFinished()
 
 void MainWindow::on_lineEdit_sent_bytes_textChanged(const QString &arg1)
 {
-
+    double mbps = ui->lineEdit_sent_bytes->text().toDouble();
+    if (mbps > ui->spinBox_bw->value())
+    {
+        ui->lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: red;}");
+    }
+    else
+    {
+        ui->lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: white;}");
+    }
 }
 
 void MainWindow::on_spinBox_bw_valueChanged(int arg1)

@@ -89,15 +89,6 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     double mbps = speed*8.0/1000000.0;
 
     u.lineEdit_sent_bytes->setText(QString::number(mbps));
-
-    if (mbps > u.spinBox_bw->value())
-    {
-        u.lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: red;}");
-    }
-    else
-    {
-        u.lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: white;}");
-    }
 }
 
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)

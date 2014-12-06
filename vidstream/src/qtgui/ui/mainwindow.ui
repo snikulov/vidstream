@@ -112,7 +112,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Скорость, Mbps</string>
+         <string>Ширина, Mbps</string>
         </property>
        </widget>
       </item>
@@ -538,7 +538,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Bytes/sec</string>
+     <string>Скорость Mbps</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_sent_bytes">
