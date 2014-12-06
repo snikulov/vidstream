@@ -62,23 +62,48 @@ BOOST_AUTO_TEST_CASE( test_bch_case_1 )
 }
 #endif
 
-BOOST_AUTO_TEST_CASE( test_bch_case_2 )
+BOOST_AUTO_TEST_CASE( test_bch_case_1 )
 {
-    bchwrapper bch(5, 3);
-    std::vector<uint8_t> src;
+    typedef struct
+    {
+        int m;
+        int t;
+    }bch_param_t;
 
-    src.push_back(0);
-    src.push_back(1);
-    src.push_back(2);
-    src.push_back(3);
+    bch_param_t params[] = {
+        {15, 1},
+        {7, 1},
+        {5, 1},
+        {5, 3}
+    };
 
-    std::vector<uint8_t> enc_src;
-    bch.get()->encode(src, enc_src);
+    size_t num_profiles = sizeof(params)/sizeof(params[0]);
 
-    std::vector<uint8_t> dst;
-    bch.get()->decode(enc_src, dst);
+    for (size_t idx = 0; idx < num_profiles; ++idx)
+    {
+        int m = params[idx].m;
+        int t = params[idx].t;
 
-    BOOST_CHECK(dst == src);
+        BOOST_MESSAGE("run test for bch params {" << m << ", " << t << "}");
+        bchwrapper bch(params[idx].m, params[idx].t);
+        std::vector<uint8_t> src;
+        src.push_back(0);
+        src.push_back(1);
+        src.push_back(2);
+        src.push_back(3);
+
+        std::vector<uint8_t> enc_src;
+        bch.get()->encode(src, enc_src);
+        BOOST_MESSAGE("data size = " << src.size() << " encoded size = " <<enc_src.size());
+
+        std::vector<uint8_t> dst;
+        BOOST_CHECK(bch.get()->decode(enc_src, dst));
+
+        BOOST_CHECK_MESSAGE(dst == src, "decoded size = " << dst.size());
+
+        BOOST_MESSAGE("end test for bch params {" << m << ", " << t << "}");
+    }
+
 }
 
 

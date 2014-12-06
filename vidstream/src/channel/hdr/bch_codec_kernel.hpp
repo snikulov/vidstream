@@ -42,7 +42,7 @@ class bch_codec_kernel : public abstract_ecc_codec
             dst.swap(res);
 
             free(decoded);
-            return true;
+            return dok;
         }
 
 
