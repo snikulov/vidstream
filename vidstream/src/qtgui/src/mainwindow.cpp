@@ -139,8 +139,12 @@ void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 void MainWindow::on_spinBox_bch_m_valueChanged(int arg1)
 {
     // bch m value
-    cfg_->put("cfg.bch.n", arg1);
+
     ui_set_bch_preset_list_index(*ui, *cfg_);
+    if (0 == arg1 || (arg1 >= 5 && arg1 <= 15))
+    {
+        cfg_->put("cfg.bch.n", arg1);
+    }
 }
 
 void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
@@ -166,4 +170,27 @@ void MainWindow::on_doubleSpinBox_error_persent_valueChanged(double arg1)
 {
     // changed error value
     cfg_->put("cfg.error.val", arg1);
+}
+
+void MainWindow::on_spinBox_bch_m_editingFinished()
+{
+
+}
+
+void MainWindow::on_lineEdit_sent_bytes_textChanged(const QString &arg1)
+{
+    double mbps = ui->lineEdit_sent_bytes->text().toDouble();
+    if (mbps > ui->spinBox_bw->value())
+    {
+        ui->lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: red;}");
+    }
+    else
+    {
+        ui->lineEdit_sent_bytes->setStyleSheet("QLineEdit{background: white;}");
+    }
+}
+
+void MainWindow::on_spinBox_bw_valueChanged(int arg1)
+{
+    cfg_->put("cfg.bw", arg1);
 }

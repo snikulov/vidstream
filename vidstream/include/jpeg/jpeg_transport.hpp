@@ -37,13 +37,22 @@ public:
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;
 
-        outsink->put(start_mark_);
+
+        std::vector<uint8_t> outdata;
+        outdata.insert(outdata.end(), start_mark_.begin(), start_mark_.end());
+        outdata.insert(outdata.end(), rdata.begin()+ridx[0], rdata.begin()+ridx[ridx.size()-1]);
+        outdata.insert(outdata.end(), start_mark_.begin(), start_mark_.end());
+
+        outsink->put(outdata);
+
+
+//        outsink->put(start_mark_);
 
         // send whole jpeg RST
-        std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
-        outsink->put(rst_blocks);
+//        std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
+//        outsink->put(rst_blocks);
 
-        outsink->put(start_mark_);
+//        outsink->put(start_mark_);
 #if 0
         // send rst blocks
         size_t ridx_len = ridx.size() - 1;

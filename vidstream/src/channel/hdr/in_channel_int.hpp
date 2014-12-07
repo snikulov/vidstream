@@ -16,6 +16,11 @@
 
 #include <channel/bchwrapper.hpp>
 #include <corrupt/corrupt_intro.hpp>
+#include <perf/perf_clock.hpp>
+
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
 
 class in_channel
     : private boost::noncopyable
@@ -40,8 +45,6 @@ private:
 
     void read_data();
 
-    int send_encoded(const std::vector<uint8_t>& data);
-
     boost::shared_ptr< std::vector<uint8_t> > getdata();
 
     std::string url_;
@@ -60,10 +63,14 @@ private:
     boost::shared_ptr<nn::socket> sock_;
     bool is_connected_;
 
+    unsigned long long bytes_count_;
+    timer<boost::chrono::steady_clock> timer_;
+
     boost::thread wt_;
 #if defined(CHANNEL_DEBUG)
     std::ofstream dbgfile_;
 #endif
+    log4cplus::Logger log_;
 };
 
 

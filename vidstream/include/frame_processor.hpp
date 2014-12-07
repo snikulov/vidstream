@@ -34,14 +34,14 @@ public:
 #endif
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
-        boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_));
+        boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_, stat_));
 
         int max_err_try = 0;
+        timer<high_resolution_clock> pt;
 
-        timer_.start();
         while(!stop_)
         {
-            timer<high_resolution_clock> pt;
+            pt.restart();
 
             camera_frame_t frame = q_.dequeue();
             if (frame && !frame->empty())
@@ -68,14 +68,14 @@ public:
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
-                pt.stop();
-                stat_->f_process_time_ = pt.seconds();
+                stat_->f_process_time_ = pt.nsec();
+                stat_->frame_size_ = jpg->size();
+                stat_->num_rst_ = rst->size();
 
                 if (outsink)
                 {
                     try
                     {
-                        pt.start();
                         int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
 
                         if (ret == -1)
@@ -85,7 +85,7 @@ public:
                             if (max_err_try > 10)
                             {
                                 std::cerr << "Error send jpeg..." << std::endl;
-                                outsink.reset(new out_channel(url_, codec_));
+                                outsink.reset(new out_channel(url_, codec_, stat_));
                                 //trans.reset(new transport(TRANSPORT_PUSH, url_));
                                 max_err_try = 0;
                             }
@@ -94,9 +94,6 @@ public:
                         {
                             max_err_try = 0;
                             cnt_sent_++;
-                            pt.stop();
-//                            std::cerr << "send time: " << pt.seconds() << std::endl;
-                            stat_->f_send_time_ = pt.seconds();
                         }
                     }
                     catch(nn::exception& ex)
@@ -105,16 +102,20 @@ public:
                                   << " closing transport" << std::endl;
                         // close transport - TODO: think how to reconnect
                         // trans.reset(new transport(TRANSPORT_PUSH, url_));
-                        outsink.reset(new out_channel(url_, codec_));
+                        outsink.reset(new out_channel(url_, codec_, stat_));
                         max_err_try = 0;
                     }
                 }
             }
+
+#if defined(CAPTURE_UI)
+            // only when UI screen
             if(cv::waitKey(10) >= 0)
             {
                 stop_ = true;
             }
-            timer_.stop();
+#endif
+
 #if 0
             std::cout << "process FPS: " << get_process_fps()
                       << " sent FPS: " << get_sent_fps()
@@ -126,12 +127,22 @@ public:
 
     unsigned int get_process_fps() const
     {
-        return  static_cast<unsigned int>(cnt_processed_/timer_.seconds());
+        unsigned long long t = timer_.sec();
+        if (t > 0)
+        {
+            return  static_cast<unsigned int>(cnt_processed_/timer_.sec());
+        }
+        return cnt_processed_;
     }
 
     unsigned int get_sent_fps() const
     {
-        return  static_cast<unsigned int>(cnt_sent_/timer_.seconds());
+        unsigned long long t = timer_.sec();
+        if (t > 0)
+        {
+            return  static_cast<unsigned int>(cnt_sent_/timer_.sec());
+        }
+        return cnt_sent_;
     }
 
 

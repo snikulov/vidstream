@@ -16,18 +16,26 @@ BOOST_AUTO_TEST_CASE( test_perf_case_1 )
 {
     timer<high_resolution_clock> t;
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
-    t.stop();
-    BOOST_MESSAGE("sleeped for: nsec=" << t.nsec() << " int. sec=" << t.sec() <<" real sec=" << t.seconds());
+    BOOST_MESSAGE("sleeped for: nsec=" << t.nsec() << " int. sec=" << t.sec() <<" real sec=" << t.sec());
 
-    t.start();
+    t.restart();
     for(int i=0; i < 5; ++i)
     {
         boost::this_thread::sleep_for(boost::chrono::seconds(1));
     }
-    t.stop();
     BOOST_CHECK_MESSAGE(5 == t.sec(), "timer sec=" << t.sec());
 
 }
+
+BOOST_AUTO_TEST_CASE( test_perf_case_2 )
+{
+    boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
+    boost::chrono::nanoseconds ns = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
+    boost::chrono::milliseconds ms = boost::chrono::duration_cast<boost::chrono::milliseconds>(time_per_frame);
+    BOOST_MESSAGE("ns = " << ns.count() << " ms = " << ms.count());
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

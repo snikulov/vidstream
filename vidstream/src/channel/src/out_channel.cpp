@@ -4,9 +4,11 @@
 #include <stdexcept>
 #include <nanopp/nn.hpp>
 #include <boost/make_shared.hpp>
+#include <utils/converters.hpp>
 
-out_channel::out_channel(const std::string& url, bchwrapper& codec)
-    : url_(url), codec_(codec), is_running_(false), is_connected_(false)
+out_channel::out_channel(const std::string& url, bchwrapper& codec, stat_data_t* stat)
+    : url_(url), codec_(codec), stat_(stat), is_running_(false), is_connected_(false)
+      , block_count_(0), bytes_count_(0), log_(log4cplus::Logger::getInstance("output_channel"))
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&out_channel::processor, this));
@@ -83,57 +85,46 @@ void out_channel::connect()
     }
 }
 
-int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<itpp::Channel_Code> codec)
+int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_ptr<abstract_ecc_codec> codec)
 {
+    std::vector<uint8_t> dsend;
+
     size_t len = data.size();
-
     size_t res = 0;
-    for (size_t i = 0; i < len; ++i)
-    {
-        itpp::bvec bits = itpp::dec2bin(data[i]);
-        std::string to_send;
-        if (codec)
-        {
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[I] " << __FUNCTION__ << " encode data" << std::endl;
-#endif
-            to_send = itpp::to_str(codec->encode(bits));
-        }
-        else
-        {
-            to_send = itpp::to_str(bits);
-        }
-        size_t strl = to_send.size();
-        int sent = sock_->send(to_send.c_str(), strl, 0);
 
-        if (sent > 0 && sent == strl)
+    codec->encode(data, dsend);
+
+    LOG4CPLUS_DEBUG(log_, "data.size() = " << data.size() << " encoded.size() = " << dsend.size());
+
+    int sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
+
+    if (sent > 0)
+    {
+        res += sent;
+        bytes_count_ +=sent;
+    }
+    else
+    {
+        LOG4CPLUS_WARN(log_, "sent = " << sent << " " << nn_strerror(nn_errno()));
+        while (is_running_ && !can_send_data())
+        {
+            // wait for unblocking...
+        }
+        sent = sock_->send(reinterpret_cast<const char*>(&dsend[0]), dsend.size(), 0);
+        if (sent > 0)
         {
             res += sent;
+            bytes_count_ += sent;
         }
         else
         {
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[E] send_encoded: sent=" << sent << " "
-                << nn_strerror(nn_errno()) << std::endl;
-#endif
-            while (is_running_ && !can_send_data())
-            {
-                // wait for unblocking...
-            }
-            sent = sock_->send(to_send.c_str(), strl, 0);
-            if (sent > 0)
-            {
-                res += sent;
-            }
-            else
-            {
-                throw std::runtime_error("can't send");
-            }
+            LOG4CPLUS_FATAL(log_, "can't send - sent = " << sent << " " << nn_strerror(nn_errno()));
+            throw std::runtime_error("can't send");
         }
-#if defined(CHANNEL_DEBUG)
-        dbgfile_.write(to_send.c_str(), to_send.size());
-#endif
     }
+
+    stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
+
     return static_cast<int>(res);
 }
 
@@ -166,39 +157,22 @@ void out_channel::send_data()
         size_t len = data.size();
         int sent = 0;
 
-#if defined(CHANNEL_DEBUG)
-//        dbgfile_.write(reinterpret_cast<const char*>(&data[0]), data.size()*sizeof(data[0]));
-#endif
-        boost::shared_ptr<itpp::Channel_Code> codec = codec_.get();
+        sent = send_encoded(data, codec_.get());
 
-#if 0
-        if (codec)
-        {
-//            std::cerr << "[I] send encoded with BCH" << std::endl;
-#endif
-            sent = send_encoded(data, codec);
-#if 0
-        }
-        else
-        {
-//            std::cerr << "[I] send without encoding" << std::endl;
-            sent = sock_->send(reinterpret_cast<const char*>(&data[0]), data.size(), 0);
-        }
-#endif
         if (sent > 0)
         {
             // remove from queue
             boost::mutex::scoped_lock lk(outmx_);
             outdata_.pop_front();
+            block_count_++;
         }
         else
         {
-#if defined(CHANNEL_DEBUG)
-            std::cerr << "[I] sent = " << sent << " len = " << len << std::endl;
             // sleep or poll???
-#endif
+            LOG4CPLUS_DEBUG(log_, "send_encoded returned " << sent);
         }
     }
+    stat_->frames_sent_ = block_count_;
 }
 
 void out_channel::processor()
@@ -207,13 +181,16 @@ void out_channel::processor()
     dbgfile_.open("out_channel_dbg.dat", std::ios::binary|std::ios::trunc );
 #endif
 
+    timer<high_resolution_clock> st;
     while (is_running_)
     {
         connect();
 
         if (is_connected_)
         {
+            st.restart();
             send_data();
+            stat_->f_send_time_ = st.nsec();
         }
         else
         {
@@ -230,12 +207,12 @@ void out_channel::put(boost::shared_ptr< std::vector<uint8_t> > data)
     boost::mutex::scoped_lock lock(outmx_);
     if (outdata_.size() > 20)
     {
-#if defined(CHANNEL_DEBUG)
-        std::cerr << "[W] more then limit in output queue - dropping frame" << std::endl;
-#endif
-        return;
+        LOG4CPLUS_WARN(log_, "Output queue is full, frame is dropped!");
     }
-    outdata_.push_back(data);
+    else
+    {
+        outdata_.push_back(data);
+    }
     outcond_.notify_one();
 }
 

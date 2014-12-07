@@ -16,10 +16,14 @@ if(WITH_CAPTURE_UI)
 endif()
 
 target_link_libraries(${TARGET_NAME}
-    ${OpenCV_LIBS} ${Boost_LIBRARIES}
+    ${OpenCV_LIBS}
+    ${Boost_LIBRARIES}
+    ${LOG4CPLUS_LIBRARIES}
+    ${ITPP_LIBRARIES}
     split
     corrupt
     nanomsg
-    itpp
     channel
+    utils
+    bch
     )

@@ -22,10 +22,29 @@
 #include <jpeg/jpeg_stream_parser.hpp>
 
 #include <corrupt/corrupt_intro.hpp>
+#include <stat/stat_data.hpp>
+
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/fileappender.h>
+#include <log4cplus/loglevel.h>
+#include <log4cplus/configurator.h>
 
 using namespace boost::unit_test;
 
-BOOST_AUTO_TEST_SUITE(test_suite_channel)
+struct fixture
+{
+    fixture()
+    {
+        log4cplus::BasicConfigurator::doConfigure();
+        log_ = log4cplus::Logger::getInstance("test");
+    }
+    ~fixture() {}
+
+    log4cplus::Logger log_;
+};
+
+BOOST_FIXTURE_TEST_SUITE(test_suite_channel, fixture)
 
 #if 0
 BOOST_AUTO_TEST_CASE( test_channel_case_1 )
@@ -131,7 +150,8 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
 
-    out_channel out_plain("tcp://127.0.0.1:9000", bch_codec);
+    stat_data_t stat;
+    out_channel out_plain("tcp://127.0.0.1:9000", bch_codec, &stat);
 
     std::vector<uint8_t> test1(20, 0xff);
     out_plain.put(test1);
@@ -152,6 +172,11 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
 
 using namespace vidstream;
 
+BOOST_AUTO_TEST_CASE(test_channel_case_5)
+{
+    itpp::bvec t = itpp::dec2bin(32, int(0xf0fffc07));
+}
+
 BOOST_AUTO_TEST_CASE(test_channel_case_6)
 {
     int i = 0;
@@ -159,15 +184,16 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt;
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
 
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
-
-    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+    stat_data_t stat;
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000"
+                , bch_codec, &stat));
 
     jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 
@@ -220,14 +246,15 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
 
     corrupt_intro corrupt(0.1);
-    bchwrapper bch_codec(7, 3);
+    bchwrapper bch_codec(5, 3);
     in_channel in_plain("tcp://127.0.0.1:9000", bch_codec, corrupt);
 
     // settle the server connect
     // TODO: need fix it later
     boost::this_thread::sleep_for(boost::chrono::seconds(1));
-
-    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000", bch_codec));
+    stat_data_t stat;
+    boost::shared_ptr<out_channel> out_plain(new out_channel("tcp://127.0.0.1:9000"
+                , bch_codec, &stat));
 
     jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
 
@@ -235,29 +262,17 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
     BOOST_REQUIRE(!data->empty());
 
     std::vector<uint8_t>& data_ref = *data;
+    std::vector<uint8_t> encoded_data;
 
-    for(size_t idx = 0; idx < data_ref.size(); ++idx)
-    {
-        uint8_t in = data_ref[idx];
-        itpp::bvec invec   = itpp::dec2bin(in);
-        itpp::bvec encoded = bch_codec.get()->encode(invec);
+    bch_codec.get()->encode(data_ref, encoded_data);
 
-        std::string to_send = itpp::to_str(encoded);
+    std::vector<uint8_t> signal = corrupt.corrupt(encoded_data);
 
-        std::string received(to_send.c_str()+1, to_send.c_str()+to_send.size()-1);
+    std::vector<uint8_t> decoded_data;
 
-        itpp::bvec rcv_signal(received);
-        BOOST_CHECK(encoded == rcv_signal);
+    bch_codec.get()->decode(signal, decoded_data);
 
-        itpp::bvec corrupted = corrupt.corrupt(rcv_signal);
-
-        itpp::bvec decoded;
-        bch_codec.get()->decode(corrupted, decoded);
-
-        BOOST_CHECK_MESSAGE(invec == decoded, "Failure: data=" << std::hex << (unsigned int)in << " " << invec << " " << decoded);
-
-    }
-
+    BOOST_CHECK(data_ref == decoded_data);
 }
 
 

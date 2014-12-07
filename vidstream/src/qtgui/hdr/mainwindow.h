@@ -49,6 +49,12 @@ private slots:
 
     void on_doubleSpinBox_error_persent_valueChanged(double arg1);
 
+    void on_spinBox_bch_m_editingFinished();
+
+    void on_lineEdit_sent_bytes_textChanged(const QString &arg1);
+
+    void on_spinBox_bw_valueChanged(int arg1);
+
 private:
     typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
     Ui::MainWindow *ui;

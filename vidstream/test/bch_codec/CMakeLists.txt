@@ -9,9 +9,10 @@ set(SRC_FILES
 
 add_executable(${TEST_NAME} ${SRC_FILES})
 target_link_libraries(${TEST_NAME}
-   ${Boost_LIBRARIES}
-   bch
-   )
+    ${Boost_LIBRARIES}
+    ${ITPP_LIBRARIES}
+    bch
+    )
 
 add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME} --log_level=message ${CMAKE_SOURCE_DIR}/test/data/img_test_split.jpg)
 

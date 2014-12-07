@@ -1,12 +1,12 @@
 [submodule "vidstream/ext/ffmpeg"]
 	path = vidstream/ext/ffmpeg
-	url = git://source.ffmpeg.org/ffmpeg.git
+	url = https://github.com/FFmpeg/FFmpeg.git
 [submodule "vidstream/ext/libjpeg-turbo"]
 	path = vidstream/ext/libjpeg-turbo
 	url = https://github.com/snikulov/libjpeg-turbo.git
 [submodule "vidstream/ext/opencv"]
 	path = vidstream/ext/opencv
-	url = https://github.com/snikulov/opencv.git
+	url = https://github.com/Itseez/opencv.git
 [submodule "vidstream/ext/nanomsg"]
 	path = vidstream/ext/nanomsg
 	url = https://github.com/snikulov/nanomsg.git
@@ -15,5 +15,4 @@
 	url = https://github.com/log4cplus/log4cplus.git
 [submodule "vidstream/ext/itpp"]
 	path = vidstream/ext/itpp
-	url = git://git.code.sf.net/u/snikulov/itpp
-	branch = cmake_updates
+	url = https://github.com/snikulov/mirror.itpp.git

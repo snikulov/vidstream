@@ -63,11 +63,14 @@ else()
 endif()
 
 target_link_libraries(${TARGET_NAME}
-   ${Boost_LIBRARIES}
-   ${OpenCV_LIBS}
-   nanomsg
-   split
-   corrupt
-   itpp
-   channel
-   )
+    ${Boost_LIBRARIES}
+    ${OpenCV_LIBS}
+    ${LOG4CPLUS_LIBRARIES}
+    ${ITPP_LIBRARIES}
+    nanomsg
+    split
+    corrupt
+    channel
+    utils
+    bch
+    )
