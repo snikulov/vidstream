@@ -8,7 +8,8 @@
 
 out_channel::out_channel(const std::string& url, bchwrapper& codec, stat_data_t* stat)
     : url_(url), codec_(codec), stat_(stat), is_running_(false), is_connected_(false)
-      , block_count_(0), bytes_count_(0), log_(log4cplus::Logger::getInstance("output_channel"))
+      , block_count_(0), bytes_count_(0), bytes_speed_(0)
+      , log_(log4cplus::Logger::getInstance("output_channel"))
 {
     is_running_ = true;
     wt_ = boost::thread(boost::bind(&out_channel::processor, this));
@@ -122,8 +123,24 @@ int out_channel::send_encoded(const std::vector<uint8_t>& data, boost::shared_pt
             throw std::runtime_error("can't send");
         }
     }
+    unsigned long sec = timer_.sec();
+    if (!sec)
+    {
+        sec = 1;
+    }
+//    stat_->bytes_sent_ = bytes_count_/sec;
+//    stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
 
-    stat_->bytes_sent_ = bytes_count_/stat_->tsec_;
+    if(timer_.elapsed() >= boost::chrono::seconds(1))
+    {
+        stat_->bytes_sent_ = bytes_speed_;
+        bytes_speed_ = 0;
+        timer_.restart();
+    }
+    else
+    {
+        bytes_speed_ += res;
+    }
 
     return static_cast<int>(res);
 }

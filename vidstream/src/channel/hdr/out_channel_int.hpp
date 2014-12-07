@@ -66,6 +66,7 @@ private:
     unsigned long long block_count_;
     // counter for output bytes
     unsigned long long bytes_count_;
+    unsigned long long bytes_speed_;
 
     timer<boost::chrono::steady_clock> timer_;
 
