@@ -37,6 +37,38 @@ BOOST_AUTO_TEST_CASE( test_split_case_1 )
     BOOST_TEST_MESSAGE("rst_count: " << rst_count); // 1200 for 640x480
 }
 
+BOOST_AUTO_TEST_CASE( test_get_rst_block_file )
+{
+    BOOST_REQUIRE(framework::master_test_suite().argc > 1);
+
+    jpeg_data_t data = jpeg_builder::read(framework::master_test_suite().argv[1]);
+
+    BOOST_REQUIRE( data );
+    BOOST_REQUIRE( !data->empty() );
+    // jpeg header check
+    std::vector<uint8_t>& rdata = *data;
+
+    BOOST_CHECK_MESSAGE(rdata[0] == 0xff, "rdata[0] =" << std::hex << (int)rdata[0]);
+    BOOST_CHECK_MESSAGE(rdata[1] == 0xd8, "rdata[1] =" << std::hex << (int)rdata[1]);
+
+    std::vector<size_t> outidx;
+    BOOST_REQUIRE(get_all_rst_blocks(*data, outidx));
+    BOOST_REQUIRE(!outidx.empty());
+
+    BOOST_TEST_MESSAGE("rst_count: " << outidx.size());
+
+
+    std::vector<uint8_t> rstblocks(rdata.begin()+outidx[0], rdata.begin()+outidx[outidx.size()-1]);
+
+    std::ofstream of("rstblocks", std::ios_base::binary);
+    const char * p_buf = reinterpret_cast<const char*>(&rstblocks[0]);
+    of.write(p_buf, rstblocks.size()*sizeof(unsigned char));
+    of.close();
+
+}
+
+
+
 BOOST_AUTO_TEST_CASE( test_get_rst_block_1 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);
@@ -94,7 +126,7 @@ BOOST_AUTO_TEST_CASE( test_rebuild_image_1 )
 
 }
 
-#if 0 
+#if 0
 BOOST_AUTO_TEST_CASE( test_get_rst_block_2 )
 {
     BOOST_REQUIRE(framework::master_test_suite().argc > 1);

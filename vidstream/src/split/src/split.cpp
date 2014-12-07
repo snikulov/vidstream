@@ -269,7 +269,7 @@ bool is_rst_int(unsigned char c)
 
 bool is_eoi_int(unsigned char c)
 {
-    return (0xd9 == c);
+    return (0xd9 == c || 0xda);
 }
 
 bool is_valid_marker(unsigned char c)
