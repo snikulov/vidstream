@@ -245,6 +245,9 @@
       <string>Изображение</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
@@ -268,12 +271,12 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Lum</string>
+         <string>JPEG Quality</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_lum_quality">
+       <widget class="QSpinBox" name="spinBox_jpeg_quality">
         <property name="minimum">
          <number>0</number>
         </property>
@@ -281,38 +284,18 @@
          <number>100</number>
         </property>
         <property name="value">
-         <number>20</number>
+         <number>100</number>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Chrom</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox_chrome_quality">
-        <property name="minimum">
-         <number>0</number>
-        </property>
-        <property name="maximum">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
          <string>Разрешение камеры</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="2" column="1">
        <widget class="QComboBox" name="comboBox_camera_resolution">
         <property name="currentIndex">
          <number>2</number>
@@ -339,7 +322,7 @@
         </item>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="3" column="0">
        <widget class="QCheckBox" name="checkBox_is_gray">
         <property name="text">
          <string> Оттенки серого</string>

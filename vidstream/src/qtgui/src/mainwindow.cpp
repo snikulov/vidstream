@@ -154,18 +154,6 @@ void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
     ui_set_bch_preset_list_index(*ui, *cfg_);
 }
 
-void MainWindow::on_spinBox_lum_quality_valueChanged(int arg1)
-{
-    // lum value changed
-    cfg_->put("cfg.img.lum", arg1);
-}
-
-void MainWindow::on_spinBox_chrome_quality_valueChanged(int arg1)
-{
-    // chrome
-    cfg_->put("cfg.img.chrom", arg1);
-}
-
 void MainWindow::on_doubleSpinBox_error_persent_valueChanged(double arg1)
 {
     // changed error value
@@ -193,4 +181,9 @@ void MainWindow::on_lineEdit_sent_bytes_textChanged(const QString &arg1)
 void MainWindow::on_spinBox_bw_valueChanged(int arg1)
 {
     cfg_->put("cfg.bw", arg1);
+}
+
+void MainWindow::on_spinBox_jpeg_quality_valueChanged(int arg1)
+{
+    cfg_->put("cfg.img.q", arg1);
 }

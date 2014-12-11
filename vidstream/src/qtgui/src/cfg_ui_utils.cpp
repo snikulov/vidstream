@@ -32,8 +32,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
     bool is_good_cfg = false;
     try
     {
-        u.spinBox_chrome_quality->setValue(cfg.get<int>("cfg.img.chrom"));
-        u.spinBox_lum_quality->setValue(cfg.get<int>("cfg.img.lum"));
+        u.spinBox_jpeg_quality->setValue(cfg.get<int>("cfg.img.q"));
         u.spinBox_rst_num->setValue(cfg.get<int>("cfg.img.rst"));
         u.checkBox_is_gray->setChecked(cfg.get<bool>("cfg.img.bw"));
         u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.n"));
@@ -72,11 +71,7 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
     u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
     u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
-/*
-    u.lineEdit_sent_bytes->setText(
-                QString::fromUtf8(pt.get<std::string>("sent.bytes").c_str())
-                );
-*/
+
     u.lineEdit_frame_size->setText(
                 QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
                 );
@@ -95,8 +90,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 {
     cfg.put("cfg.bch.n",     u.spinBox_bch_m->value());
     cfg.put("cfg.bch.t",     u.spinBox_bch_t->value());
-    cfg.put("cfg.img.chrom", u.spinBox_chrome_quality->value());
-    cfg.put("cfg.img.lum",   u.spinBox_lum_quality->value());
+    cfg.put("cfg.img.q",     u.spinBox_jpeg_quality->value());
     cfg.put("cfg.dataport",  u.spinBox_port_data->value());
     cfg.put("cfg.img.rst",   u.spinBox_rst_num->value());
     cfg.put("cfg.img.bw",    u.checkBox_is_gray->isChecked());

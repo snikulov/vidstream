@@ -28,18 +28,14 @@ namespace vidstream
 class jpeg_builder : public cfg_notify
 {
 public:
-    jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
-        : quality_(quality), csize_(cv::Size(640, 480)), bw_(false), num_of_rst_(0)
+    jpeg_builder(int quality=100, int rst_interval=1)
+        : quality_(quality), rst_(rst_interval)
+        , csize_(cv::Size(640, 480)), bw_(false), num_of_rst_(0)
     {
-        boost::mutex::scoped_lock lk(mx_);
         params_.push_back(cv::IMWRITE_JPEG_QUALITY);
-        params_.push_back(quality);
+        params_.push_back(quality_);
         params_.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
-        params_.push_back(rst_interval);
-        params_.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
-        params_.push_back(lum);
-        params_.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
-        params_.push_back(chrom);
+        params_.push_back(rst_);
     }
 
     ~jpeg_builder()
@@ -139,9 +135,11 @@ public:
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
     {
-        int w = cfg.get<int>("cfg.img.width");
-        int h = cfg.get<int>("cfg.img.height");
-        bool bw = cfg.get<bool>("cfg.img.bw");
+        int w       = cfg.get<int>("cfg.img.width");
+        int h       = cfg.get<int>("cfg.img.height");
+        bool bw     = cfg.get<bool>("cfg.img.bw");
+        int quality = cfg.get<int>("cfg.img.q");
+        int rst     = cfg.get<int>("cfg.img.rst");
 
         cv::Size tmps(w, h);
 
@@ -154,23 +152,23 @@ public:
 
         if (bw_ != bw)
         {
+            boost::mutex::scoped_lock lk(mx_);
             bw_ = bw;
         }
 
         std::vector<int> tpar;
         tpar.push_back(cv::IMWRITE_JPEG_QUALITY);
-        tpar.push_back(quality_);
+        tpar.push_back(quality);
         tpar.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
-        tpar.push_back(cfg.get<int>("cfg.img.rst"));
-        tpar.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
-        tpar.push_back(cfg.get<int>("cfg.img.lum"));
-        tpar.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
-        tpar.push_back(cfg.get<int>("cfg.img.chrom"));
+        tpar.push_back(rst);
 
         if(params_ != tpar)
         {
             boost::mutex::scoped_lock lk(mx_);
             params_.swap(tpar);
+
+            quality_    = quality;
+            rst_        = rst;
             num_of_rst_ = 0;
         }
     }
@@ -178,6 +176,7 @@ public:
 private:
     /* data */
     int quality_;
+    int rst_;
     std::vector<int> params_;
     cv::Size csize_;
     bool bw_;
