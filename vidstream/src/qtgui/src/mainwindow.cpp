@@ -187,3 +187,8 @@ void MainWindow::on_spinBox_jpeg_quality_valueChanged(int arg1)
 {
     cfg_->put("cfg.img.q", arg1);
 }
+
+void MainWindow::on_spinBox_fps_limit_valueChanged(int arg1)
+{
+    cfg_->put("cfg.fps.lim", arg1);
+}

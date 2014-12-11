@@ -5,15 +5,19 @@
 #include <monitor_queue.hpp>
 #include <stat/stat_data.hpp>
 
+#include <boost/ratio.hpp>
+
 namespace vidstream
 {
 
-    class frame_producer
+    class frame_producer :
+        public cfg_notify, private boost::noncopyable
     {
         public:
             frame_producer(const camera& cam, monitor_queue<camera_frame_t>& q,
                    int& stop_flag, stat_data_t * stat)
-                : cam_(cam), q_(q), stop_(stop_flag), stat_(stat)
+                : cam_(cam), frame_rate_(25), sec_per_frame_(0.0)
+                , q_(q), stop_(stop_flag), stat_(stat)
             {
             }
 
@@ -61,13 +65,25 @@ namespace vidstream
             {
             }
 
+            void cfg_changed(const boost::property_tree::ptree& cfg)
+            {
+                int fps_lim = cfg.get<int>("cfg.fps.lim");
+                if (frame_rate_ != fps_lim)
+                {
+                    boost::mutex::scoped_lock lk(mx_);
+                    frame_rate_ = fps_lim;
+                    sec_per_frame_ = 1./frame_rate_;
+                }
+            }
+
+
         private:
 
             void fps_rate_limit(const boost::chrono::steady_clock::duration& frame_get_time) const
             {
-                // 1/25 seconds - time to get frame
-                boost::chrono::duration<unsigned int, boost::ratio<1, 25> > time_per_frame(1);
-                boost::chrono::nanoseconds ns_per_frame = boost::chrono::duration_cast<boost::chrono::nanoseconds>(time_per_frame);
+                boost::chrono::duration<double> spf(sec_per_frame_);
+                boost::chrono::nanoseconds ns_per_frame =
+                        boost::chrono::duration_cast<boost::chrono::nanoseconds>(spf);
                 if (frame_get_time < ns_per_frame)
                 {
                      boost::this_thread::sleep_for(ns_per_frame - frame_get_time);
@@ -76,6 +92,9 @@ namespace vidstream
 
             /* data */
             const camera& cam_;
+            int  frame_rate_;
+            double sec_per_frame_;
+            boost::mutex mx_;
             monitor_queue<camera_frame_t>& q_;
             int& stop_;
             stat_data_t * stat_;

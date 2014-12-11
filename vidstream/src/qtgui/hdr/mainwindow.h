@@ -53,6 +53,8 @@ private slots:
 
     void on_spinBox_jpeg_quality_valueChanged(int arg1);
 
+    void on_spinBox_fps_limit_valueChanged(int arg1);
+
 private:
     typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
     Ui::MainWindow *ui;

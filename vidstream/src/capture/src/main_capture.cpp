@@ -262,9 +262,10 @@ int main(int argc, char** argv)
 
     // subscribe on updates
     resync.subscribe(jb.get());
+    resync.subscribe(&producer);
     resync.subscribe(&processor);
 
-    boost::thread tproducer(producer);
+    boost::thread tproducer(boost::ref(producer));
     boost::thread tprocess(processor);
 
     tprocess.join();
