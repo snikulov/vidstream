@@ -37,6 +37,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
         u.checkBox_is_gray->setChecked(cfg.get<bool>("cfg.img.bw"));
         u.spinBox_bch_m->setValue(cfg.get<int>("cfg.bch.n"));
         u.spinBox_bch_t->setValue(cfg.get<int>("cfg.bch.t"));
+        u.spinBox_fps_limit->setValue(cfg.get<int>("cfg.fps.lim"));
 
         u.doubleSpinBox_error_persent->setValue(cfg.get<double>("cfg.error.val"));
 
@@ -95,6 +96,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
     cfg.put("cfg.img.rst",   u.spinBox_rst_num->value());
     cfg.put("cfg.img.bw",    u.checkBox_is_gray->isChecked());
     cfg.put("cfg.error.val", u.doubleSpinBox_error_persent->value());
+    cfg.put("cfg.fps.lim",   u.spinBox_fps_limit->value());
 
     cfg.put("cfg.cmdport", u.spinBox_port_cmd->value());
     cfg.put("cfg.dataport", u.spinBox_port_data->value());
