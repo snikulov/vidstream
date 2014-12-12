@@ -386,6 +386,58 @@
       </item>
      </layout>
     </widget>
+    <widget class="QLineEdit" name="lineEdit_num_rst">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>620</y>
+       <width>171</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>620</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Num of RST's</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ecc_payload_coef">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>590</y>
+       <width>171</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>590</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ECC coef.</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_operate">
     <property name="geometry">
@@ -590,32 +642,6 @@
      <rect>
       <x>130</x>
       <y>570</y>
-      <width>171</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_19">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>600</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Num of RST's</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_num_rst">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>600</y>
       <width>171</width>
       <height>23</height>
      </rect>

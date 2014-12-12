@@ -101,7 +101,6 @@ public:
         camera_frame_t frame;
         {
             boost::mutex::scoped_lock lk(mx_);
-            
             frame.reset(new cv::Mat(csize_, bw_ ? CV_8UC1 : CV_8UC3, cv::Scalar::all(0)));
         }
         return from_cvmat(frame);

@@ -7,6 +7,8 @@ struct stat_data_t
         : cam_fps_(0), process_fps_(0)
           , f_process_time_(0.0), f_send_time_(0.0)
           , bytes_sent_(0), frames_sent_(0)
+          , tsec_(0), frame_size_(0), num_rst_(0)
+          , ecc_payload_coef_(1.0)
     {}
 
     ~stat_data_t()
@@ -24,6 +26,9 @@ struct stat_data_t
 
     unsigned long frame_size_;
     unsigned long num_rst_;
+
+    double ecc_payload_coef_;
+
 };
 
 #endif /* end of include guard: STAT_DATA_H__ */

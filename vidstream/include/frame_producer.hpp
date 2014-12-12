@@ -10,8 +10,9 @@
 namespace vidstream
 {
 
-    class frame_producer :
-        public cfg_notify, private boost::noncopyable
+    class frame_producer
+        : public cfg_notify
+          , private boost::noncopyable
     {
         public:
             frame_producer(const camera& cam, monitor_queue<camera_frame_t>& q,

@@ -85,6 +85,10 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     double mbps = speed*8.0/1000000.0;
 
     u.lineEdit_sent_bytes->setText(QString::number(mbps));
+
+    u.lineEdit_ecc_payload_coef->setText(
+                QString::fromUtf8(pt.get<std::string>("ecc.coef").c_str())
+                );
 }
 
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)

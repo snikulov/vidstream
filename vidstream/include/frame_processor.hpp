@@ -16,6 +16,7 @@ namespace vidstream
 
 class frame_processor
     : public cfg_notify
+      , private boost::noncopyable
 {
 public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
@@ -68,45 +69,24 @@ public:
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
 
-                stat_->f_process_time_ = pt.nsec();
-                stat_->frame_size_ = jpg->size();
-                stat_->num_rst_ = rst->size();
-
                 if (outsink)
                 {
                     try
                     {
-                        int ret = jpgtrans->send_jpeg(jpg, rst, outsink);
-
-                        if (ret == -1)
-                        {
-                            //    std::cerr << "Error send jpeg... Skip" << std::endl;
-                            max_err_try++;
-                            if (max_err_try > 10)
-                            {
-                                std::cerr << "Error send jpeg..." << std::endl;
-                                outsink.reset(new out_channel(url_, codec_, stat_));
-                                //trans.reset(new transport(TRANSPORT_PUSH, url_));
-                                max_err_try = 0;
-                            }
-                        }
-                        else
-                        {
-                            max_err_try = 0;
-                            cnt_sent_++;
-                        }
+                        size_t ret = jpgtrans->send_jpeg(jpg, rst, outsink);
                     }
                     catch(nn::exception& ex)
                     {
-                        std::cerr << "Error sending jpeg: " << ex.what()
-                                  << " closing transport" << std::endl;
-                        // close transport - TODO: think how to reconnect
-                        // trans.reset(new transport(TRANSPORT_PUSH, url_));
                         outsink.reset(new out_channel(url_, codec_, stat_));
                         max_err_try = 0;
                     }
                 }
-            }
+
+                stat_->f_process_time_ = pt.nsec();
+                stat_->frame_size_ = jpg->size();
+                stat_->num_rst_ = rst->size();
+                stat_->ecc_payload_coef_ = codec_.get_encode_coef();
+           }
 
 #if defined(CAPTURE_UI)
             // only when UI screen
@@ -116,11 +96,6 @@ public:
             }
 #endif
 
-#if 0
-            std::cout << "process FPS: " << get_process_fps()
-                      << " sent FPS: " << get_sent_fps()
-                      << " sec=" << timer_.sec() << " frame count=" << cnt_processed_ << std::endl;
-#endif
             stat_->process_fps_= get_process_fps();
         }
     }
