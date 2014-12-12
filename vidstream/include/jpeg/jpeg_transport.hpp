@@ -43,6 +43,7 @@ public:
 
         outsink->put(outdata);
 
+        // here the actual data which will be sent over the wire
         return outdata.size();
     }
 

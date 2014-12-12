@@ -9,6 +9,7 @@ struct stat_data_t
           , bytes_sent_(0), frames_sent_(0)
           , tsec_(0), frame_size_(0), num_rst_(0)
           , ecc_payload_coef_(1.0)
+          , jpeg_auto_quality_(100)
     {}
 
     ~stat_data_t()
@@ -28,6 +29,8 @@ struct stat_data_t
     unsigned long num_rst_;
 
     double ecc_payload_coef_;
+
+    int jpeg_auto_quality_;
 
 };
 

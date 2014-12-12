@@ -89,6 +89,14 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     u.lineEdit_ecc_payload_coef->setText(
                 QString::fromUtf8(pt.get<std::string>("ecc.coef").c_str())
                 );
+
+    // update jpeg quality if needed
+    int jpeg_auto_q = pt.get<int>("jpg.a.q");
+    if (u.spinBox_jpeg_quality->value() != jpeg_auto_q)
+    {
+        u.spinBox_jpeg_quality->setValue(jpeg_auto_q);
+    }
+
 }
 
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)

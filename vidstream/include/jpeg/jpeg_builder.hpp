@@ -64,7 +64,7 @@ public:
         return ret_buf;
     }
 
-    std::vector<int> get_params()
+    std::vector<int> get_params() const
     {
         boost::mutex::scoped_lock lk(mx_);
         return params_;
@@ -155,31 +155,45 @@ public:
             bw_ = bw;
         }
 
-        std::vector<int> tpar;
-        tpar.push_back(cv::IMWRITE_JPEG_QUALITY);
-        tpar.push_back(quality);
-        tpar.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
-        tpar.push_back(rst);
+        update_jpeg_encoder_params(quality, rst);
 
-        if(params_ != tpar)
-        {
-            boost::mutex::scoped_lock lk(mx_);
-            params_.swap(tpar);
+    }
 
-            quality_    = quality;
-            rst_        = rst;
-            num_of_rst_ = 0;
-        }
+    int get_quality() const
+    {
+        // lock or atomic???
+        return quality_;
+    }
+
+    void set_quality(int quality)
+    {
+        update_jpeg_encoder_params(quality, rst_);
     }
 
 private:
+
+    void update_jpeg_encoder_params(int q, int r)
+    {
+        boost::mutex::scoped_lock lk(mx_);
+
+        // in-place changes...
+        if (quality_ != q)
+        {
+            params_[1] = quality_ = q;
+        }
+        if (rst_ != r)
+        {
+            params_[3] = rst_     = r;
+        }
+    }
+
     /* data */
     int quality_;
     int rst_;
     std::vector<int> params_;
     cv::Size csize_;
     bool bw_;
-    boost::mutex mx_;
+    mutable boost::mutex mx_;
     size_t num_of_rst_;
 };
 } /* namespace vidstream */

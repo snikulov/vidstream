@@ -23,8 +23,10 @@ public:
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
                     , stat_data_t * stat, bchwrapper& codec
                    )
-        : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q), stop_(stop_flag), url_(url), jb_(jb)
-        , cnt_processed_(0), cnt_sent_(0), stat_(stat), codec_(codec)
+        : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q)
+          , stop_(stop_flag), url_(url), jb_(jb)
+          , cnt_processed_(0), cnt_sent_(0), stat_(stat), codec_(codec)
+          , bw_limit_(10), fps_limit_(25)
     {
     }
 
@@ -73,7 +75,11 @@ public:
                 {
                     try
                     {
-                        size_t ret = jpgtrans->send_jpeg(jpg, rst, outsink);
+                        size_t data_size = jpgtrans->send_jpeg(jpg, rst, outsink);
+
+                        // here we know size of frame
+                        recalculate_jpeg_quality(data_size);
+
                     }
                     catch(nn::exception& ex)
                     {
@@ -134,6 +140,10 @@ public:
         int bch_n = cfg.get<int>("cfg.bch.n");
         int bch_t = cfg.get<int>("cfg.bch.t");
 
+        bw_limit_ = cfg.get<int>("cfg.bw");
+        fps_limit_ = cfg.get<int>("cfg.fps.lim");
+        jpg_quality_ = cfg.get<int>("cfg.img.q");
+
         cv::Size tmp(w, h);
         if (*req_size_ != tmp)
         {
@@ -149,6 +159,37 @@ public:
     }
 
 private:
+
+    void recalculate_jpeg_quality(size_t frame_size) const
+    {
+        unsigned long bch_size_in_byte =
+            static_cast<unsigned long>(
+                    std::ceil(static_cast<double>(frame_size) * codec_.get_encode_coef())
+                    );
+        unsigned long bw_in_bytes = (bw_limit_ * 1000000UL) / 8;
+
+        unsigned long expected_frame_size = bw_in_bytes / fps_limit_;
+
+        if (bch_size_in_byte > expected_frame_size)
+        {
+            // lowering quality
+            if (jpg_quality_ > 22)
+            {
+                jpg_quality_ -= 2;
+            }
+        }
+        else
+        {
+            // increase quality
+            if (jpg_quality_ < 100)
+            {
+                jpg_quality_ +=1;
+            }
+        }
+        jb_->set_quality(jpg_quality_);
+        stat_->jpeg_auto_quality_ = jpg_quality_;
+    }
+
     /* data */
     boost::shared_ptr<cv::Size> req_size_;
     boost::shared_ptr<bool> is_bw_;
@@ -158,6 +199,10 @@ private:
     std::string url_;
     boost::shared_ptr<jpeg_builder> jb_;
     bchwrapper& codec_;
+
+    int bw_limit_;
+    int fps_limit_;
+    mutable int jpg_quality_;
 
     mutable unsigned long long cnt_processed_;
     mutable unsigned long long cnt_sent_;
