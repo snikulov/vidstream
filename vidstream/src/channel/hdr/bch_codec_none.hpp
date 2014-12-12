@@ -29,6 +29,11 @@ class bch_codec_none : public abstract_ecc_codec
             dst = src;
             return true;
         }
+
+        double get_encode_coef()
+        {
+            return 1.0;
+        }
 };
 
 

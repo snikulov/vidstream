@@ -11,6 +11,7 @@ add_executable(${TEST_NAME} ${SRC_FILES})
 target_link_libraries(${TEST_NAME}
     ${Boost_LIBRARIES}
     ${ITPP_LIBRARIES}
+    ${LOG4CPLUS_LIBRARIES}
     bch
     )
 

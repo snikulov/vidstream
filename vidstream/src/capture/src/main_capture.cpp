@@ -76,6 +76,8 @@ class cfg_sync_thread : public boost::noncopyable
             pt.put("sent.frames", stat_->frames_sent_);
             pt.put("fr.size", stat_->frame_size_);
             pt.put("rst.num", stat_->num_rst_);
+            pt.put("ecc.coef", stat_->ecc_payload_coef_);
+            pt.put("jpg.a.q", stat_->jpeg_auto_quality_);
 
             std::stringstream ss;
             boost::property_tree::write_json(ss, pt);
@@ -266,7 +268,7 @@ int main(int argc, char** argv)
     resync.subscribe(&processor);
 
     boost::thread tproducer(boost::ref(producer));
-    boost::thread tprocess(processor);
+    boost::thread tprocess(boost::ref(processor));
 
     tprocess.join();
     tproducer.join();

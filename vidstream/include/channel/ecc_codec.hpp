@@ -11,8 +11,9 @@ class abstract_ecc_codec
 
         virtual bool encode(uint8_t src, std::vector<uint8_t>& dst) const = 0;
         virtual bool encode(const std::vector<uint8_t>& src, std::vector<uint8_t>& dst) const = 0;
-
         virtual bool decode(const std::vector<uint8_t>& src, std::vector<uint8_t>& dst) const = 0;
+
+        virtual double get_encode_coef() = 0;
 };
 
 

@@ -10,13 +10,14 @@
 namespace vidstream
 {
 
-    class frame_producer :
-        public cfg_notify, private boost::noncopyable
+    class frame_producer
+        : public cfg_notify
+          , private boost::noncopyable
     {
         public:
             frame_producer(const camera& cam, monitor_queue<camera_frame_t>& q,
                    int& stop_flag, stat_data_t * stat)
-                : cam_(cam), frame_rate_(25), sec_per_frame_(0.0)
+                : cam_(cam), frame_rate_(25), sec_per_frame_(1.0/frame_rate_)
                 , q_(q), stop_(stop_flag), stat_(stat)
             {
             }
@@ -72,7 +73,7 @@ namespace vidstream
                 {
                     boost::mutex::scoped_lock lk(mx_);
                     frame_rate_ = fps_lim;
-                    sec_per_frame_ = 1./frame_rate_;
+                    sec_per_frame_ = 1.0/frame_rate_;
                 }
             }
 

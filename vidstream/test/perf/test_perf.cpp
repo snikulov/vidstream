@@ -36,6 +36,14 @@ BOOST_AUTO_TEST_CASE( test_perf_case_2 )
 }
 
 
+BOOST_AUTO_TEST_CASE( test_perf_case_3 )
+{
+
+    unsigned long b = 10000000;
+    BOOST_CHECK((b/8) == 1250000);
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

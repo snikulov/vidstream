@@ -30,13 +30,11 @@ public:
     }
 
 
-    int send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
+    size_t send_jpeg(jpeg_data_t data, jpeg_rst_idxs_t idxs
         , boost::shared_ptr<out_channel> outsink)
     {
-        int res = 0;
         std::vector<std::size_t>& ridx = *idxs;
         std::vector<unsigned char>& rdata = *data;
-
 
         std::vector<uint8_t> outdata;
         outdata.insert(outdata.end(), start_mark_.begin(), start_mark_.end());
@@ -45,26 +43,8 @@ public:
 
         outsink->put(outdata);
 
-
-//        outsink->put(start_mark_);
-
-        // send whole jpeg RST
-//        std::vector<uint8_t> rst_blocks(&rdata[ridx[0]], &rdata[ridx[ridx.size()-1]]);
-//        outsink->put(rst_blocks);
-
-//        outsink->put(start_mark_);
-#if 0
-        // send rst blocks
-        size_t ridx_len = ridx.size() - 1;
-        for (size_t i = 0; i < ridx_len; i++)
-        {
-            // send only data, without RST mark
-            std::vector<unsigned char> rst_blk(&rdata[ridx.at(i) + 2], &rdata[ridx.at(i + 1)]);
-
-            outsink->put(rst_blk);
-        }
-#endif
-        return res;
+        // here the actual data which will be sent over the wire
+        return outdata.size();
     }
 
 

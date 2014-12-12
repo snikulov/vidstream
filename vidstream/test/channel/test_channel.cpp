@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_6)
 
     for (size_t idx = 0; idx < 5; ++idx)
     {
-        int ret = jt.send_jpeg(data, rst, out_plain);
+        size_t ret = jt.send_jpeg(data, rst, out_plain);
 
         while (stream_parser.num_jpegs() != 1)
         {
