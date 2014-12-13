@@ -35,8 +35,6 @@ private slots:
 
     void on_spinBox_port_data_valueChanged(int arg1);
 
-    void on_lineEdit_channel_speed_textChanged(const QString &arg1);
-
     void on_comboBox_bch_mode_currentIndexChanged(int index);
 
     void on_spinBox_bch_m_valueChanged(int arg1);

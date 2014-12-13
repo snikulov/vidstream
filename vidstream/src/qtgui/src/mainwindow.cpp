@@ -140,12 +140,6 @@ void MainWindow::on_spinBox_port_data_valueChanged(int arg1)
     cfg_->put("cfg.dataport", arg1);
 }
 
-void MainWindow::on_lineEdit_channel_speed_textChanged(const QString &arg1)
-{
-    // channel speed changed
-    std::cerr << "line speed changed" << std::endl;
-}
-
 void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 {
     // bch preset changed

@@ -20,9 +20,8 @@ static const param_pair_t bch_modes[] =
 {
     {0,0}
     ,{5,3}
-    ,{5,1}
-    ,{7,1}
-    ,{15, 1}
+    ,{5,4}
+    ,{7,5}
 };
 const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 

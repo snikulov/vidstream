@@ -26,7 +26,7 @@ public:
         : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q)
           , stop_(stop_flag), url_(url), jb_(jb)
           , cnt_processed_(0), cnt_sent_(0), stat_(stat), codec_(codec)
-          , bw_limit_(10), fps_limit_(25)
+          , bw_limit_(10), fps_limit_(25), jpg_quality_(100)
     {
     }
 
