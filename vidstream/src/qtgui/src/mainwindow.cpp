@@ -6,6 +6,9 @@
 #include <iostream>
 #include <service_worker.hpp>
 
+#include <QNetworkInterface>
+#include <QHostAddress>
+
 
 void display(const int depth, const boost::property_tree::ptree& tree)
 {
@@ -46,6 +49,21 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     ui->setupUi(this);
+
+    if(!ui->comboBox_ip_selector->count())
+    {
+        // get list of interfaces
+        foreach (const QHostAddress &address, QNetworkInterface::allAddresses())
+        {
+            if (address.protocol() == QAbstractSocket::IPv4Protocol)
+            {
+                QString ip = address.toString();
+                ui->comboBox_ip_selector->addItem(ip);
+            }
+        }
+        cfg_->put("cfg.ip",
+                  ui->comboBox_ip_selector->itemText(0).toUtf8().constData());
+    }
 
     if (file_exist)
     {
@@ -191,4 +209,10 @@ void MainWindow::on_spinBox_jpeg_quality_valueChanged(int arg1)
 void MainWindow::on_spinBox_fps_limit_valueChanged(int arg1)
 {
     cfg_->put("cfg.fps.lim", arg1);
+}
+
+void MainWindow::on_comboBox_ip_selector_currentIndexChanged(int index)
+{
+    cfg_->put("cfg.ip",
+              ui->comboBox_ip_selector->itemText(index).toUtf8().constData());
 }

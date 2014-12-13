@@ -246,7 +246,9 @@ int main(int argc, char** argv)
 
     cv::Size isize(w,h);
 
-    std::string dataurl("tcp://127.0.0.1:");
+    std::string dataurl("tcp://");
+    dataurl += cfg->get<std::string>("cfg.ip");
+    dataurl += ":";
     dataurl += cfg->get<std::string>("cfg.dataport");
 
     boost::scoped_ptr<camera> cam(infile.size() == 0
