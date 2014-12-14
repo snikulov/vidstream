@@ -22,11 +22,12 @@ public:
     frame_processor(const cv::Size& sz, monitor_queue<camera_frame_t>& q, int& stop_flag,
                     const std::string& url, boost::shared_ptr<jpeg_builder> jb
                     , stat_data_t * stat, bchwrapper& codec
+                    , int bw_limit = 10, int fps_limit = 25, int quality = 100
                    )
         : req_size_(new cv::Size(sz)), is_bw_(new bool(false)), q_(q)
           , stop_(stop_flag), url_(url), jb_(jb)
           , cnt_processed_(0), cnt_sent_(0), stat_(stat), codec_(codec)
-          , bw_limit_(10), fps_limit_(25), jpg_quality_(100)
+          , bw_limit_(bw_limit), fps_limit_(fps_limit), jpg_quality_(quality)
     {
     }
 

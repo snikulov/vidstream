@@ -16,8 +16,8 @@ namespace vidstream
     {
         public:
             frame_producer(const camera& cam, monitor_queue<camera_frame_t>& q,
-                   int& stop_flag, stat_data_t * stat)
-                : cam_(cam), frame_rate_(25), sec_per_frame_(1.0/frame_rate_)
+                   int& stop_flag, stat_data_t * stat, int frame_rate = 25)
+                : cam_(cam), frame_rate_(frame_rate), sec_per_frame_(1.0/frame_rate_)
                 , q_(q), stop_(stop_flag), stat_(stat)
             {
             }
