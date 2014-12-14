@@ -44,7 +44,7 @@ public:
             )
             : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
     {
-//      cv::namedWindow("received");
+        cv::namedWindow("received");
     }
 
     ~jpeg_receiver()
@@ -53,9 +53,6 @@ public:
 
     void operator()()
     {
-
-        cv::namedWindow("received");
-
         boost::shared_ptr<jpeg_history> history(new jpeg_history(jb_));
 
         input_.reset(new in_channel(url_, *codec_, *err_));

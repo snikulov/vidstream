@@ -210,3 +210,36 @@ void MainWindow::on_comboBox_ip_selector_currentIndexChanged(int index)
     cfg_->put("cfg.ip",
               ui->comboBox_ip_selector->itemText(index).toUtf8().constData());
 }
+
+void MainWindow::on_comboBox_config_preset_currentIndexChanged(int index)
+{
+    struct profile
+    {
+        int bw;
+        int fps;
+        int jpeg_quality;
+        int bch_idx;
+        int res_idx;
+    };
+
+    const struct profile presets[] = {
+        {10, 25, 60, 3, 2},
+        {10, 25, 40, 1, 2},
+        {10, 20, 30, 2, 2},
+        {5,  15, 40, 2, 2},
+        {5,  25, 40, 1, 3}
+    };
+
+    const size_t PROFILE_SIZE = sizeof(presets)/sizeof(presets[0]);
+
+    if (index > 0 && index <= PROFILE_SIZE)
+    {
+        int i = index-1;
+        ui->spinBox_bw->setValue(presets[i].bw);
+        ui->spinBox_fps_limit->setValue(presets[i].fps);
+        ui->spinBox_jpeg_quality->setValue(presets[i].jpeg_quality);
+        ui->comboBox_bch_mode->setCurrentIndex(presets[i].bch_idx);
+        ui->comboBox_camera_resolution->setCurrentIndex(presets[i].res_idx);
+    }
+
+}
