@@ -444,6 +444,11 @@
      </property>
      <item>
       <property name="text">
+       <string>None</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Preset #1</string>
       </property>
      </item>

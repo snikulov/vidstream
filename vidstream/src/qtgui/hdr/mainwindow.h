@@ -55,6 +55,8 @@ private slots:
 
     void on_comboBox_ip_selector_currentIndexChanged(int index);
 
+    void on_comboBox_config_preset_currentIndexChanged(int index);
+
 private:
     typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
     Ui::MainWindow *ui;
