@@ -241,6 +241,9 @@ int main(int argc, char** argv)
     int bch_t = cfg->get<int>("cfg.bch.t");
     int w = cfg->get<int>("cfg.img.width");
     int h = cfg->get<int>("cfg.img.height");
+    int frame_rate = cfg->get<int>("cfg.fps.lim");
+    int bw = cfg->get<int>("cfg.bw");
+    int quality = cfg->get<int>("cfg.img.q");
 
     bchwrapper bch(bch_n, bch_t);
 
@@ -261,8 +264,9 @@ int main(int argc, char** argv)
     camera& c = *cam;
 
 
-    frame_producer producer(c, mq, stop_flag, &stat_collect);
-    frame_processor processor(isize, mq, stop_flag, dataurl, jb, &stat_collect, bch);
+    frame_producer producer(c, mq, stop_flag, &stat_collect, frame_rate);
+    frame_processor processor(isize, mq, stop_flag, dataurl, jb
+            , &stat_collect, bch, bw, frame_rate, quality);
 
     // subscribe on updates
     resync.subscribe(jb.get());
