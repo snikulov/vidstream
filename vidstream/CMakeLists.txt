@@ -13,7 +13,19 @@ option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" ON)
 option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
-option(WITH_CH_DBG "Build transport debug facility" OFF)
+option(WITH_ASAN "Build with address sanitizer" OFF)
+
+if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -W")
+
+    if (WITH_ASAN)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
+    endif()
+
+endif()
 
 
 link_directories(${CMAKE_BINARY_DIR})

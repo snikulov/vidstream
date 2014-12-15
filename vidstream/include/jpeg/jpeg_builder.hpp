@@ -28,18 +28,14 @@ namespace vidstream
 class jpeg_builder : public cfg_notify
 {
 public:
-    jpeg_builder(int quality=100, int rst_interval=1, int lum=20, int chrom= 20)
-        : quality_(quality), csize_(cv::Size(640, 480)), bw_(false), num_of_rst_(0)
+    jpeg_builder(int quality=100, int rst_interval=1)
+        : quality_(quality), rst_(rst_interval)
+        , csize_(cv::Size(640, 480)), bw_(false), num_of_rst_(0)
     {
-        boost::mutex::scoped_lock lk(mx_);
         params_.push_back(cv::IMWRITE_JPEG_QUALITY);
-        params_.push_back(quality);
+        params_.push_back(quality_);
         params_.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
-        params_.push_back(rst_interval);
-        params_.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
-        params_.push_back(lum);
-        params_.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
-        params_.push_back(chrom);
+        params_.push_back(rst_);
     }
 
     ~jpeg_builder()
@@ -68,7 +64,7 @@ public:
         return ret_buf;
     }
 
-    std::vector<int> get_params()
+    std::vector<int> get_params() const
     {
         boost::mutex::scoped_lock lk(mx_);
         return params_;
@@ -105,7 +101,6 @@ public:
         camera_frame_t frame;
         {
             boost::mutex::scoped_lock lk(mx_);
-            
             frame.reset(new cv::Mat(csize_, bw_ ? CV_8UC1 : CV_8UC3, cv::Scalar::all(0)));
         }
         return from_cvmat(frame);
@@ -139,15 +134,18 @@ public:
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
     {
-        int w = cfg.get<int>("cfg.img.width");
-        int h = cfg.get<int>("cfg.img.height");
-        bool bw = cfg.get<bool>("cfg.img.bw");
+        boost::mutex::scoped_lock lk(mx_);
+
+        int w       = cfg.get<int>("cfg.img.width");
+        int h       = cfg.get<int>("cfg.img.height");
+        bool bw     = cfg.get<bool>("cfg.img.bw");
+        int quality = cfg.get<int>("cfg.img.q");
+        int rst     = cfg.get<int>("cfg.img.rst");
 
         cv::Size tmps(w, h);
 
         if (csize_ != tmps)
         {
-            boost::mutex::scoped_lock lk(mx_);
             csize_ = tmps;
             num_of_rst_ = 0;
         }
@@ -157,31 +155,45 @@ public:
             bw_ = bw;
         }
 
-        std::vector<int> tpar;
-        tpar.push_back(cv::IMWRITE_JPEG_QUALITY);
-        tpar.push_back(quality_);
-        tpar.push_back(cv::IMWRITE_JPEG_RST_INTERVAL);
-        tpar.push_back(cfg.get<int>("cfg.img.rst"));
-        tpar.push_back(cv::IMWRITE_JPEG_LUMA_QUALITY);
-        tpar.push_back(cfg.get<int>("cfg.img.lum"));
-        tpar.push_back(cv::IMWRITE_JPEG_CHROMA_QUALITY);
-        tpar.push_back(cfg.get<int>("cfg.img.chrom"));
+        update_jpeg_encoder_params(quality, rst);
 
-        if(params_ != tpar)
-        {
-            boost::mutex::scoped_lock lk(mx_);
-            params_.swap(tpar);
-            num_of_rst_ = 0;
-        }
+    }
+
+    int get_quality() const
+    {
+        boost::mutex::scoped_lock lk(mx_);
+        return quality_;
+    }
+
+    void set_quality(int quality)
+    {
+        boost::mutex::scoped_lock lk(mx_);
+        update_jpeg_encoder_params(quality, rst_);
     }
 
 private:
+
+    void update_jpeg_encoder_params(int q, int r)
+    {
+
+        // in-place changes...
+        if (quality_ != q)
+        {
+            params_[1] = quality_ = q;
+        }
+        if (rst_ != r)
+        {
+            params_[3] = rst_     = r;
+        }
+    }
+
     /* data */
     int quality_;
+    int rst_;
     std::vector<int> params_;
     cv::Size csize_;
     bool bw_;
-    boost::mutex mx_;
+    mutable boost::mutex mx_;
     size_t num_of_rst_;
 };
 } /* namespace vidstream */

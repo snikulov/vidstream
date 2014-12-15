@@ -23,9 +23,12 @@ void service_worker::start()
 
     //cv::namedWindow("received");
 
-    std::string host("tcp://127.0.0.1:");
-    std::string dataurl = host + cfg_->get<std::string>("cfg.dataport");
-    std::string cmdurl = host + cfg_->get<std::string>("cfg.cmdport");
+    std::string proto("tcp://");
+    std::string host = cfg_->get<std::string>("cfg.ip");
+    std::string dataurl = proto + host + ":"
+            + cfg_->get<std::string>("cfg.dataport");
+    std::string cmdurl = proto + host + ":"
+            + cfg_->get<std::string>("cfg.cmdport");
 
     cfgsrv_.reset(new ctrlsrv(ui_, cfg_, cmdurl, stop_));
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
@@ -39,7 +42,7 @@ void service_worker::start()
     cfgsrv_->subscribe(rcv_.get());
 
     // run threads
-    cfgthread_.reset(new boost::thread(*cfgsrv_));
+    cfgthread_.reset(new boost::thread(boost::ref(*cfgsrv_)));
     process_.reset(new boost::thread(*rcv_));
 
 }

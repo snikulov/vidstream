@@ -107,7 +107,7 @@ namespace vidstream
             void open() const
             {
                 count_ = 0;
-                sec_ = 0.;
+                sec_ = 0.0;
 
                 bool res = is_hw_cam_ ? src_->open(0) : src_->open(fname_);
 

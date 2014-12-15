@@ -30,6 +30,11 @@ class bch_codec_itpp : public abstract_ecc_codec
             return true;
         }
 
+        double get_encode_coef()
+        {
+            return 1.0;
+        }
+
 
 
     private:

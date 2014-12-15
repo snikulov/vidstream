@@ -76,6 +76,8 @@ class cfg_sync_thread : public boost::noncopyable
             pt.put("sent.frames", stat_->frames_sent_);
             pt.put("fr.size", stat_->frame_size_);
             pt.put("rst.num", stat_->num_rst_);
+            pt.put("ecc.coef", stat_->ecc_payload_coef_);
+            pt.put("jpg.a.q", stat_->jpeg_auto_quality_);
 
             std::stringstream ss;
             boost::property_tree::write_json(ss, pt);
@@ -239,12 +241,17 @@ int main(int argc, char** argv)
     int bch_t = cfg->get<int>("cfg.bch.t");
     int w = cfg->get<int>("cfg.img.width");
     int h = cfg->get<int>("cfg.img.height");
+    int frame_rate = cfg->get<int>("cfg.fps.lim");
+    int bw = cfg->get<int>("cfg.bw");
+    int quality = cfg->get<int>("cfg.img.q");
 
     bchwrapper bch(bch_n, bch_t);
 
     cv::Size isize(w,h);
 
-    std::string dataurl("tcp://127.0.0.1:");
+    std::string dataurl("tcp://");
+    dataurl += cfg->get<std::string>("cfg.ip");
+    dataurl += ":";
     dataurl += cfg->get<std::string>("cfg.dataport");
 
     boost::scoped_ptr<camera> cam(infile.size() == 0
@@ -257,15 +264,17 @@ int main(int argc, char** argv)
     camera& c = *cam;
 
 
-    frame_producer producer(c, mq, stop_flag, &stat_collect);
-    frame_processor processor(isize, mq, stop_flag, dataurl, jb, &stat_collect, bch);
+    frame_producer producer(c, mq, stop_flag, &stat_collect, frame_rate);
+    frame_processor processor(isize, mq, stop_flag, dataurl, jb
+            , &stat_collect, bch, bw, frame_rate, quality);
 
     // subscribe on updates
     resync.subscribe(jb.get());
+    resync.subscribe(&producer);
     resync.subscribe(&processor);
 
-    boost::thread tproducer(producer);
-    boost::thread tprocess(processor);
+    boost::thread tproducer(boost::ref(producer));
+    boost::thread tprocess(boost::ref(processor));
 
     tprocess.join();
     tproducer.join();

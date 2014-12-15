@@ -76,16 +76,24 @@ private:
     void init_socket()
     {
         int opt = 250; // ms
-        socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
-        socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
+        try
+        {
+            socket_.setsockopt(NN_SOL_SOCKET, NN_SNDTIMEO, &opt, sizeof (opt));
+            socket_.setsockopt(NN_SOL_SOCKET, NN_RCVTIMEO, &opt, sizeof (opt));
 
-        if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
-        {
-            socket_.bind(url_.c_str());
+            if (type_ == TRANSPORT_PULL || type_ == TRANSPORT_REP)
+            {
+                socket_.bind(url_.c_str());
+            }
+            else if (type_ == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
+            {
+                socket_.connect(url_.c_str());
+            }
         }
-        else if (type_ == TRANSPORT_PUSH || type_ == TRANSPORT_REQ)
+        catch( const std::exception& ex)
         {
-            socket_.connect(url_.c_str());
+            std::cerr << "[E]" << "url=" << url_ << " " << ex.what() << std::endl;
+            throw ex;
         }
     }
 

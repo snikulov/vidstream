@@ -29,8 +29,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_1 )
     BOOST_CHECK(640 == pt.get<int>("cfg.img.width"));
     BOOST_CHECK(480 == pt.get<int>("cfg.img.height"));
     BOOST_CHECK(1 == pt.get<int>("cfg.img.rst"));
-    BOOST_CHECK(20 == pt.get<int>("cfg.img.lum"));
-    BOOST_CHECK(20 == pt.get<int>("cfg.img.chrom"));
+
     BOOST_CHECK(false == pt.get<bool>("cfg.img.bw"));
 }
 
@@ -44,8 +43,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_2 )
     pt.put("cfg.img.width", 640);
     pt.put("cfg.img.height", 480);
     pt.put("cfg.img.rst", 1);
-    pt.put("cfg.img.lum", 20);
-    pt.put("cfg.img.chrom", 20);
+
     pt.put("cfg.img.bw", false);
 
     BOOST_CHECK(9955 == pt.get<int>("cfg.dataport"));
@@ -55,8 +53,7 @@ BOOST_AUTO_TEST_CASE( test_config_case_2 )
     BOOST_CHECK(640 == pt.get<int>("cfg.img.width"));
     BOOST_CHECK(480 == pt.get<int>("cfg.img.height"));
     BOOST_CHECK(1 == pt.get<int>("cfg.img.rst"));
-    BOOST_CHECK(20 == pt.get<int>("cfg.img.lum"));
-    BOOST_CHECK(20 == pt.get<int>("cfg.img.chrom"));
+
     BOOST_CHECK(false == pt.get<bool>("cfg.img.bw"));
 
     std::ostringstream out;

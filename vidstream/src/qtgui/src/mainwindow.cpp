@@ -6,6 +6,9 @@
 #include <iostream>
 #include <service_worker.hpp>
 
+#include <QNetworkInterface>
+#include <QHostAddress>
+
 
 void display(const int depth, const boost::property_tree::ptree& tree)
 {
@@ -46,6 +49,21 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     ui->setupUi(this);
+
+    if(!ui->comboBox_ip_selector->count())
+    {
+        // get list of interfaces
+        foreach (const QHostAddress &address, QNetworkInterface::allAddresses())
+        {
+            if (address.protocol() == QAbstractSocket::IPv4Protocol)
+            {
+                QString ip = address.toString();
+                ui->comboBox_ip_selector->addItem(ip);
+            }
+        }
+        cfg_->put("cfg.ip",
+                  ui->comboBox_ip_selector->itemText(0).toUtf8().constData());
+    }
 
     if (file_exist)
     {
@@ -122,12 +140,6 @@ void MainWindow::on_spinBox_port_data_valueChanged(int arg1)
     cfg_->put("cfg.dataport", arg1);
 }
 
-void MainWindow::on_lineEdit_channel_speed_textChanged(const QString &arg1)
-{
-    // channel speed changed
-    std::cerr << "line speed changed" << std::endl;
-}
-
 void MainWindow::on_comboBox_bch_mode_currentIndexChanged(int index)
 {
     // bch preset changed
@@ -152,18 +164,6 @@ void MainWindow::on_spinBox_bch_t_valueChanged(int arg1)
     // bch t value
     cfg_->put("cfg.bch.t", arg1);
     ui_set_bch_preset_list_index(*ui, *cfg_);
-}
-
-void MainWindow::on_spinBox_lum_quality_valueChanged(int arg1)
-{
-    // lum value changed
-    cfg_->put("cfg.img.lum", arg1);
-}
-
-void MainWindow::on_spinBox_chrome_quality_valueChanged(int arg1)
-{
-    // chrome
-    cfg_->put("cfg.img.chrom", arg1);
 }
 
 void MainWindow::on_doubleSpinBox_error_persent_valueChanged(double arg1)
@@ -193,4 +193,53 @@ void MainWindow::on_lineEdit_sent_bytes_textChanged(const QString &arg1)
 void MainWindow::on_spinBox_bw_valueChanged(int arg1)
 {
     cfg_->put("cfg.bw", arg1);
+}
+
+void MainWindow::on_spinBox_jpeg_quality_valueChanged(int arg1)
+{
+    cfg_->put("cfg.img.q", arg1);
+}
+
+void MainWindow::on_spinBox_fps_limit_valueChanged(int arg1)
+{
+    cfg_->put("cfg.fps.lim", arg1);
+}
+
+void MainWindow::on_comboBox_ip_selector_currentIndexChanged(int index)
+{
+    cfg_->put("cfg.ip",
+              ui->comboBox_ip_selector->itemText(index).toUtf8().constData());
+}
+
+void MainWindow::on_comboBox_config_preset_currentIndexChanged(int index)
+{
+    struct profile
+    {
+        int bw;
+        int fps;
+        int jpeg_quality;
+        int bch_idx;
+        int res_idx;
+    };
+
+    const struct profile presets[] = {
+        {10, 25, 60, 3, 2},
+        {10, 25, 40, 1, 2},
+        {10, 20, 30, 2, 2},
+        {5,  15, 40, 2, 2},
+        {5,  25, 40, 1, 3}
+    };
+
+    const size_t PROFILE_SIZE = sizeof(presets)/sizeof(presets[0]);
+
+    if (index > 0 && index <= PROFILE_SIZE)
+    {
+        int i = index-1;
+        ui->spinBox_bw->setValue(presets[i].bw);
+        ui->spinBox_fps_limit->setValue(presets[i].fps);
+        ui->spinBox_jpeg_quality->setValue(presets[i].jpeg_quality);
+        ui->comboBox_bch_mode->setCurrentIndex(presets[i].bch_idx);
+        ui->comboBox_camera_resolution->setCurrentIndex(presets[i].res_idx);
+    }
+
 }

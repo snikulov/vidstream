@@ -18,7 +18,8 @@ if(USE_QT5)
     add_definitions(${Qt5Widgets_DEFINITIONS})
     set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 else()
-    find_package(Qt4 REQUIRED)
+#    find_package(Qt4 REQUIRED)
+    find_package(Qt4 COMPONENTS QtCore QtGui QtNetwork REQUIRED)
     include(${QT_USE_FILE})
 endif()
 
@@ -63,7 +64,6 @@ else()
 endif()
 
 target_link_libraries(${TARGET_NAME}
-    ${Boost_LIBRARIES}
     ${OpenCV_LIBS}
     ${LOG4CPLUS_LIBRARIES}
     ${ITPP_LIBRARIES}
@@ -73,4 +73,5 @@ target_link_libraries(${TARGET_NAME}
     channel
     utils
     bch
+    ${Boost_LIBRARIES}
     )

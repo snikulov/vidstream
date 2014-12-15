@@ -35,17 +35,11 @@ private slots:
 
     void on_spinBox_port_data_valueChanged(int arg1);
 
-    void on_lineEdit_channel_speed_textChanged(const QString &arg1);
-
     void on_comboBox_bch_mode_currentIndexChanged(int index);
 
     void on_spinBox_bch_m_valueChanged(int arg1);
 
     void on_spinBox_bch_t_valueChanged(int arg1);
-
-    void on_spinBox_lum_quality_valueChanged(int arg1);
-
-    void on_spinBox_chrome_quality_valueChanged(int arg1);
 
     void on_doubleSpinBox_error_persent_valueChanged(double arg1);
 
@@ -54,6 +48,14 @@ private slots:
     void on_lineEdit_sent_bytes_textChanged(const QString &arg1);
 
     void on_spinBox_bw_valueChanged(int arg1);
+
+    void on_spinBox_jpeg_quality_valueChanged(int arg1);
+
+    void on_spinBox_fps_limit_valueChanged(int arg1);
+
+    void on_comboBox_ip_selector_currentIndexChanged(int index);
+
+    void on_comboBox_config_preset_currentIndexChanged(int index);
 
 private:
     typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
