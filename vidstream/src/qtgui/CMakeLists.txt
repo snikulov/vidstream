@@ -64,7 +64,6 @@ else()
 endif()
 
 target_link_libraries(${TARGET_NAME}
-    ${Boost_LIBRARIES}
     ${OpenCV_LIBS}
     ${LOG4CPLUS_LIBRARIES}
     ${ITPP_LIBRARIES}
@@ -74,4 +73,5 @@ target_link_libraries(${TARGET_NAME}
     channel
     utils
     bch
+    ${Boost_LIBRARIES}
     )

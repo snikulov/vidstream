@@ -69,6 +69,7 @@ public:
         size_t rst_num = 0;
 
         boost::shared_ptr< std::vector< uint8_t > > indata;
+        jpeg_data_t jpeg;
 
         while(!stop_)
         {
@@ -89,7 +90,7 @@ public:
 
             while (jstp.num_jpegs())
             {
-                jpeg_data_t jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
+                jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
                 if (jpeg)
                 {
                     cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
@@ -131,7 +132,7 @@ private:
     boost::shared_ptr<jpeg_builder> jb_;
 
     boost::shared_ptr<bchwrapper> codec_;
-    boost::shared_ptr<in_channel>         input_;
+    boost::shared_ptr<in_channel> input_;
 };
 
 #endif

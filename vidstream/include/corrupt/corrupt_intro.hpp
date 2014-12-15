@@ -35,6 +35,9 @@ public:
 
     std::vector<uint8_t> corrupt(const std::vector<uint8_t>& src)
     {
+
+        boost::mutex::scoped_lock lk(lk_);
+
         std::vector<uint8_t> res;
         res.reserve(src.size());
         boost::dynamic_bitset<uint8_t> bs(src.begin(), src.end());

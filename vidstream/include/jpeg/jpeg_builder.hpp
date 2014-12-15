@@ -134,6 +134,8 @@ public:
 
     void cfg_changed(const boost::property_tree::ptree& cfg)
     {
+        boost::mutex::scoped_lock lk(mx_);
+
         int w       = cfg.get<int>("cfg.img.width");
         int h       = cfg.get<int>("cfg.img.height");
         bool bw     = cfg.get<bool>("cfg.img.bw");
@@ -144,14 +146,12 @@ public:
 
         if (csize_ != tmps)
         {
-            boost::mutex::scoped_lock lk(mx_);
             csize_ = tmps;
             num_of_rst_ = 0;
         }
 
         if (bw_ != bw)
         {
-            boost::mutex::scoped_lock lk(mx_);
             bw_ = bw;
         }
 
@@ -161,12 +161,13 @@ public:
 
     int get_quality() const
     {
-        // lock or atomic???
+        boost::mutex::scoped_lock lk(mx_);
         return quality_;
     }
 
     void set_quality(int quality)
     {
+        boost::mutex::scoped_lock lk(mx_);
         update_jpeg_encoder_params(quality, rst_);
     }
 
@@ -174,7 +175,6 @@ private:
 
     void update_jpeg_encoder_params(int q, int r)
     {
-        boost::mutex::scoped_lock lk(mx_);
 
         // in-place changes...
         if (quality_ != q)

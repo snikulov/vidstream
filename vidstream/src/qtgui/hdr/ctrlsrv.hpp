@@ -14,7 +14,7 @@
 
 typedef boost::shared_ptr<boost::property_tree::ptree> cfg_ptr_t;
 
-class ctrlsrv
+class ctrlsrv : private boost::noncopyable
 {
 public:
     ctrlsrv(Ui::MainWindow &u, cfg_ptr_t cfg, const std::string& url, bool& stop)

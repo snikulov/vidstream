@@ -42,7 +42,7 @@ void service_worker::start()
     cfgsrv_->subscribe(rcv_.get());
 
     // run threads
-    cfgthread_.reset(new boost::thread(*cfgsrv_));
+    cfgthread_.reset(new boost::thread(boost::ref(*cfgsrv_)));
     process_.reset(new boost::thread(*rcv_));
 
 }
