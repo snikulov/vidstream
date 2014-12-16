@@ -79,13 +79,20 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // pass configuration to logic
-    logic_.reset(new service_worker(*ui, cfg_));
+    logic_.reset(new service_worker(*this, cfg_));
 
 }
 
 MainWindow::~MainWindow()
 {
+    if (is_srv_running_)
+    {
+        refresh_timer_->stop();
+        logic_->stop();
+    }
+
     boost::property_tree::write_json("settings.json", *cfg_);
+    delete refresh_timer_;
     delete ui;
 }
 
@@ -111,9 +118,18 @@ void MainWindow::on_pushButton_operate_clicked()
     {
         ui->pushButton_operate->setText("Stop");
         logic_->start();
+
+        refresh_timer_ = new QTimer(this);
+        QObject::connect(refresh_timer_,SIGNAL(timeout()), this, SLOT(on_timer_overflow()));
+
+        // one second refresh
+        refresh_timer_->start(1000);
     }
     else
     {
+        refresh_timer_->stop();
+        delete refresh_timer_;
+        refresh_timer_ = 0;
         ui->pushButton_operate->setText("Start");
         logic_->stop();
     }
@@ -209,6 +225,63 @@ void MainWindow::on_comboBox_ip_selector_currentIndexChanged(int index)
 {
     cfg_->put("cfg.ip",
               ui->comboBox_ip_selector->itemText(index).toUtf8().constData());
+}
+
+void MainWindow::on_timer_overflow()
+{
+    ui->lineEdit_proc_time->setText(
+                QString::number(stat_.f_process_time_)
+                );
+    ui->lineEdit_send_time->setText(
+                QString::number(stat_.f_send_time_)
+                );
+
+    ui->spinBox_cap_fps->setValue(stat_.cam_fps_);
+    ui->spinBox_proc_fps->setValue(stat_.process_fps_);
+    ui->spinBox_sent_frames->setValue(stat_.frames_sent_);
+
+    ui->lineEdit_frame_size->setText(
+                QString::number(stat_.frame_size_)
+                );
+    ui->lineEdit_num_rst->setText(
+                QString::number(stat_.num_rst_)
+                );
+
+
+    double mbps = static_cast<double>(stat_.bytes_sent_)*8.0/1000000.0;
+
+    ui->lineEdit_sent_bytes->setText(QString::number(mbps));
+
+    ui->lineEdit_ecc_payload_coef->setText(
+                QString::number(stat_.ecc_payload_coef_)
+                );
+
+    // update jpeg quality if needed
+    if (ui->spinBox_jpeg_quality->value() != stat_.jpeg_auto_quality_)
+    {
+        ui->spinBox_jpeg_quality->setValue(stat_.jpeg_auto_quality_);
+    }
+
+    // start new timer
+    refresh_timer_->start(1000);
+}
+
+void MainWindow::update_stat(const std::string& data)
+{
+    std::stringstream ss(data);
+    boost::property_tree::ptree pt;
+    boost::property_tree::read_json(ss, pt);
+
+    stat_.f_process_time_    = pt.get<unsigned long>("t.proc");
+    stat_.f_send_time_       = pt.get<unsigned long>("t.send");
+    stat_.cam_fps_           = pt.get<unsigned int>("cam.fps");
+    stat_.process_fps_       = pt.get<unsigned int>("proc.fps");
+    stat_.frames_sent_       = pt.get<unsigned int>("sent.frames");
+    stat_.frame_size_        = pt.get<unsigned int>("fr.size");
+    stat_.num_rst_           = pt.get<unsigned int>("rst.num");
+    stat_.jpeg_auto_quality_ = pt.get<int>("jpg.a.q");
+    stat_.ecc_payload_coef_  = pt.get<double>("ecc.coef");
+    stat_.bytes_sent_        = pt.get<unsigned long>("sent.bytes");
 }
 
 void MainWindow::on_comboBox_config_preset_currentIndexChanged(int index)
