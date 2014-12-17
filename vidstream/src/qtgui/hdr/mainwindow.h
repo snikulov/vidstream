@@ -2,11 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
+#include <stat/stat_data.hpp>
 #include <worker.hpp>
 
 namespace Ui {
@@ -19,6 +21,9 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+
+    void update_stat(const std::string&);
+
     ~MainWindow();
 
 private slots:
@@ -57,6 +62,8 @@ private slots:
 
     void on_comboBox_config_preset_currentIndexChanged(int index);
 
+    void on_timer_overflow();
+
 private:
     typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
     Ui::MainWindow *ui;
@@ -64,6 +71,9 @@ private:
     config_ptr_t cfg_;
     boost::shared_ptr<worker> logic_;
 
+    stat_data_t stat_;
+
+    QTimer * refresh_timer_;
 };
 
 // free form functions
@@ -72,8 +82,6 @@ bool ui_update(Ui::MainWindow &
 
 void cfg_update(boost::property_tree::ptree &
                 , const Ui::MainWindow &);
-
-void update_stat(Ui::MainWindow &, const std::string&);
 
 int ui_set_resolution_index(
     Ui::MainWindow&

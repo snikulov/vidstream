@@ -7,7 +7,7 @@
 #include <jpeg_receiver.hpp>
 #include <ctrlsrv.hpp>
 
-service_worker::service_worker(Ui::MainWindow &u, boost::shared_ptr<boost::property_tree::ptree> pcfg)
+service_worker::service_worker(MainWindow &u, boost::shared_ptr<boost::property_tree::ptree> pcfg)
     : ui_(u), cfg_(pcfg), stop_(false)
 {
 }

@@ -17,7 +17,7 @@ typedef boost::shared_ptr<boost::property_tree::ptree> cfg_ptr_t;
 class ctrlsrv : private boost::noncopyable
 {
 public:
-    ctrlsrv(Ui::MainWindow &u, cfg_ptr_t cfg, const std::string& url, bool& stop)
+    ctrlsrv(MainWindow &u, cfg_ptr_t cfg, const std::string& url, bool& stop)
         : ui_(u), cfg_(cfg), url_(url), stop_(stop)
     {
     }
@@ -38,7 +38,7 @@ public:
                 // got command - don't care for now
                 // later will use it for statistic
                 std::string stat(cmd.begin(), cmd.end());
-                update_stat(ui_, stat);
+                ui_.update_stat(stat);
 
                 std::ostringstream out;
                 write_json(out, *cfg_, false);
@@ -72,7 +72,7 @@ public:
 
 private:
     /* data */
-    Ui::MainWindow &ui_;
+    MainWindow &ui_;
     cfg_ptr_t cfg_;
     std::string url_;
     bool& stop_;
