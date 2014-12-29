@@ -8,7 +8,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(WITH_TEST "Build UnitTests" ON)
+option(WITH_TEST "Build UnitTests" OFF)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
@@ -73,11 +73,13 @@ add_subdirectory(ext/nanomsg)
 
 # log4cplus build from ext/log4cplus
 add_subdirectory(ext/log4cplus)
+set(LOG4CPLUS_LIBRARIES log4cplusS)
 
 # itpp build from ext/itpp
 if(WITH_ITPP)
     add_subdirectory(ext/itpp)
     add_definitions(-DBUILD_WITH_ITPP)
+    set(ITPP_LIBRARIES itpp)
 endif()
 
 include_directories(include)
