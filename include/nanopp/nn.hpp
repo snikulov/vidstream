@@ -23,10 +23,10 @@
 #ifndef NN_HPP_INCLUDED
 #define NN_HPP_INCLUDED
 
-#include <nn.h>
-#include <tcp.h>
-#include <pipeline.h>
-#include <reqrep.h>
+#include <nanomsg/nn.h>
+#include <nanomsg/tcp.h>
+#include <nanomsg/pipeline.h>
+#include <nanomsg/reqrep.h>
 
 #include <cassert>
 #include <cstring>

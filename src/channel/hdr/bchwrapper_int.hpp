@@ -2,15 +2,17 @@
 #define BCHWRAPPER_INT_HPP__
 
 #include "bch_codec_none.hpp"
-#include "bch_codec_itpp.hpp"
 #include "bch_codec_kernel.hpp"
+
+#ifdef BUILD_WITH_ITPP
+#include "bch_codec_itpp.hpp"
+#endif
 
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
 
 #include <boost/shared_ptr.hpp>
-#include <itpp/itcomm.h>
 #include <channel/ecc_codec.hpp>
 
 

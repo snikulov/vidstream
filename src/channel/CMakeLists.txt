@@ -17,7 +17,7 @@ set(HDR_FILES
 )
 
 set(SRC_FILES
-    src/channel.cpp
+#    src/channel.cpp
     src/jpeg_stream_parser.cpp
     src/in_channel.cpp
     src/out_channel.cpp)

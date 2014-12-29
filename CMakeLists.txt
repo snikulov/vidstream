@@ -10,8 +10,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
-option(WITH_LOG4CPLUS "Build and use log4cplus" ON)
-option(WITH_ITPP "Build and use ITPP" OFF)
+option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
 option(WITH_ASAN "Build with address sanitizer" OFF)
 
@@ -27,12 +26,6 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILE
 endif()
 
 link_directories(${CMAKE_BINARY_DIR})
-
-#
-# Externals projects
-#
-set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
-add_subdirectory(ext/ffmpeg)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
@@ -56,7 +49,6 @@ add_definitions( -DBUILD_FOR_LINUX )
 
 if(UNIX)
     message(STATUS "Build for Linux")
-    add_definitions(-Wall)
 elseif(WIN32)
     message(STATUS "Build for Windows")
 endif()
@@ -67,41 +59,25 @@ source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 #-------------------------------------------
 # external projects
 #-------------------------------------------
+set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
 
-#-------------------------------------------
+include_directories(${DEPS_LOCATION}/include)
+link_directories(${DEPS_LOCATION}/lib)
+link_directories(${DEPS_LOCATION}/lib64)
+
+# ffmpeg from ext/ffmpeg
+add_subdirectory(ext/ffmpeg)
+
 # nanomsg build from ext/nanomsg
-#-------------------------------------------
-set(WITH_UT OFF)
 add_subdirectory(ext/nanomsg)
-include_directories(ext/nanomsg/src)
 
-#-------------------------------------------
 # log4cplus build from ext/log4cplus
-#-------------------------------------------
-if(WITH_LOG4CPLUS)
-    set(BUILD_SHARED_LIBS OFF)
-    set(UNICODE_DEFAULT OFF)
-    set(UNICODE OFF)
-    add_subdirectory(ext/log4cplus)
-    include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
-    set(LOG4CPLUS_LIBRARIES log4cplusS)
-endif()
-#-------------------------------------------
+add_subdirectory(ext/log4cplus)
+
 # itpp build from ext/itpp
-#-------------------------------------------
 if(WITH_ITPP)
-    set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
-    include_directories(ext/itpp ${CMAKE_BINARY_DIR})
-    set(ITPP_LIBRARIES "itpp")
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        set(ITPP_LIBRARIES "${ITPP_LIBRARIES}_debug")
-    endif()
-
-endif()
-
-if(WITH_CH_DBG)
-    add_definitions(-DCHANNEL_DEBUG)
+    add_definitions(-DBUILD_WITH_ITPP)
 endif()
 
 include_directories(include)

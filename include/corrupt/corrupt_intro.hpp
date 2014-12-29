@@ -4,7 +4,9 @@
 #include <types.hpp>
 #include <vector>
 
+#ifdef BUILD_WITH_ITPP
 #include <itpp/itcomm.h>
+#endif
 
 #include <cfg/cfg_notify.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -15,7 +17,10 @@ class corrupt_intro : public cfg_notify
 {
 public:
     corrupt_intro(float e = 0.0f)
-        : p_(e), u_(0.0f, 1.0f), binary_channel_(new itpp::BSC(e))
+        : p_(e), u_(0.0f, 1.0f)
+#ifdef BUILD_WITH_ITPP
+          , binary_channel_(new itpp::BSC(e))
+#endif
     {
     }
 
@@ -24,14 +29,18 @@ public:
         float noise = cfg.get<float>("cfg.error.val");
         boost::mutex::scoped_lock lk(lk_);
         p_ = noise;
+#ifdef BUILD_WITH_ITPP
         binary_channel_.reset(new itpp::BSC(p_));
+#endif
     }
 
+#ifdef BUILD_WITH_ITPP
     itpp::bvec corrupt(itpp::bvec& signal)
     {
         boost::mutex::scoped_lock lk(lk_);
         return binary_channel_->operator()(signal);
     }
+#endif
 
     std::vector<uint8_t> corrupt(const std::vector<uint8_t>& src)
     {
@@ -74,7 +83,10 @@ private:
 
     // BSC channel model from ITPP
     boost::mutex lk_;
+
+#ifdef BUILD_WITH_ITPP
     boost::scoped_ptr<itpp::BSC> binary_channel_;
+#endif
 
 };
 
