@@ -6,12 +6,12 @@ project(vidstream C CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set_property( GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(WITH_TEST "Build UnitTests" ON)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_LOG4CPLUS "Build and use log4cplus" ON)
-option(WITH_ITPP "Build and use ITPP" ON)
+option(WITH_ITPP "Build and use ITPP" OFF)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
 option(WITH_ASAN "Build with address sanitizer" OFF)
 
@@ -24,11 +24,15 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILE
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
     endif()
-
 endif()
 
-
 link_directories(${CMAKE_BINARY_DIR})
+
+#
+# Externals projects
+#
+set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
+add_subdirectory(ext/ffmpeg)
 
 if(WIN32)
     set( Boost_USE_STATIC_LIBS ON )
