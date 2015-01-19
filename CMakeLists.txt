@@ -14,6 +14,8 @@ option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" ON)
 option(WITH_ASAN "Build with address sanitizer" OFF)
 
+find_package(Threads REQUIRED)
+
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -W")
@@ -35,7 +37,8 @@ if(MSVC)
 endif()
 add_definitions(-DBOOST_SYSTEM_NO_DEPRECATED )
 find_package(Boost COMPONENTS random thread chrono system program_options unit_test_framework REQUIRED)
-find_package(OpenCV REQUIRED)
+
+#find_package(OpenCV)
 
 if(Boost_FOUND)
     #    add_definitions( -DBOOST_ALL_NO_LIB )
@@ -74,6 +77,8 @@ add_subdirectory(ext/nanomsg)
 # log4cplus build from ext/log4cplus
 add_subdirectory(ext/log4cplus)
 set(LOG4CPLUS_LIBRARIES log4cplusS)
+
+add_subdirectory(ext/opencv)
 
 # itpp build from ext/itpp
 if(WITH_ITPP)

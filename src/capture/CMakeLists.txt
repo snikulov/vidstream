@@ -27,3 +27,6 @@ target_link_libraries(${TARGET_NAME}
     utils
     bch
     )
+
+target_link_libraries(${TARGET_NAME} opencv_core opencv_highgui opencv_imgcodecs opencv_imgproc opencv_video opencv_videoio)
+target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
