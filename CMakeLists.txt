@@ -68,6 +68,8 @@ include_directories(${DEPS_LOCATION}/include)
 link_directories(${DEPS_LOCATION}/lib)
 link_directories(${DEPS_LOCATION}/lib64)
 
+add_subdirectory(ext/libjpeg-turbo)
+
 # ffmpeg from ext/ffmpeg
 add_subdirectory(ext/ffmpeg)
 
