@@ -6,14 +6,15 @@ project(vidstream C CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set_property( GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(WITH_TEST "Build UnitTests" ON)
+option(WITH_TEST "Build UnitTests" OFF)
 option(USE_QT5 "Use qt5 for build" OFF)
-option(WITH_LOG4CPLUS "Build and use log4cplus" ON)
 option(WITH_ITPP "Build and use ITPP" ON)
-option(WITH_CAPTURE_UI "Build with capture window" ON)
+option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN "Build with address sanitizer" OFF)
+
+find_package(Threads REQUIRED)
 
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
@@ -24,9 +25,7 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILE
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
     endif()
-
 endif()
-
 
 link_directories(${CMAKE_BINARY_DIR})
 
@@ -38,7 +37,8 @@ if(MSVC)
 endif()
 add_definitions(-DBOOST_SYSTEM_NO_DEPRECATED )
 find_package(Boost COMPONENTS random thread chrono system program_options unit_test_framework REQUIRED)
-find_package(OpenCV REQUIRED)
+
+#find_package(OpenCV)
 
 if(Boost_FOUND)
     #    add_definitions( -DBOOST_ALL_NO_LIB )
@@ -52,7 +52,6 @@ add_definitions( -DBUILD_FOR_LINUX )
 
 if(UNIX)
     message(STATUS "Build for Linux")
-    add_definitions(-Wall)
 elseif(WIN32)
     message(STATUS "Build for Windows")
 endif()
@@ -63,42 +62,40 @@ source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 #-------------------------------------------
 # external projects
 #-------------------------------------------
+set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
+set(ENV{PKG_CONFIG_PATH} "${DEPS_LOCATION}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}")
+message("env PKG_CONFIG_PATH = $ENV{PKG_CONFIG_PATH}")
 
-#-------------------------------------------
+add_custom_target(envpkg 
+    COMMAND "PKG_CONFIG_PATH=${DEPS_LOCATION}/lib/pkgconfig"
+    )
+
+include_directories(${DEPS_LOCATION}/include)
+link_directories(${DEPS_LOCATION}/lib64)
+link_directories(${DEPS_LOCATION}/lib)
+
+add_subdirectory(ext/libjpeg-turbo)
+
+# ffmpeg from ext/ffmpeg
+# add_subdirectory(ext/ffmpeg)
+
 # nanomsg build from ext/nanomsg
-#-------------------------------------------
-set(WITH_UT OFF)
 add_subdirectory(ext/nanomsg)
-include_directories(ext/nanomsg/src)
 
-#-------------------------------------------
 # log4cplus build from ext/log4cplus
-#-------------------------------------------
-if(WITH_LOG4CPLUS)
-    set(BUILD_SHARED_LIBS OFF)
-    set(UNICODE_DEFAULT OFF)
-    set(UNICODE OFF)
-    add_subdirectory(ext/log4cplus)
-    include_directories(ext/log4cplus/include ${CMAKE_BINARY_DIR}/ext/log4cplus/include)
-    set(LOG4CPLUS_LIBRARIES log4cplusS)
-endif()
-#-------------------------------------------
+add_subdirectory(ext/log4cplus)
+set(LOG4CPLUS_LIBRARIES log4cplusS)
+
+add_subdirectory(ext/opencv)
+
 # itpp build from ext/itpp
-#-------------------------------------------
 if(WITH_ITPP)
-    set(HTML_DOCS OFF)
     add_subdirectory(ext/itpp)
-    include_directories(ext/itpp ${CMAKE_BINARY_DIR})
-    set(ITPP_LIBRARIES "itpp")
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        set(ITPP_LIBRARIES "${ITPP_LIBRARIES}_debug")
-    endif()
-
+    add_definitions(-DBUILD_WITH_ITPP)
+    set(ITPP_LIBRARIES itpp)
 endif()
 
-if(WITH_CH_DBG)
-    add_definitions(-DCHANNEL_DEBUG)
-endif()
+add_dependencies(ext.opencv ext.libjpeg-turbo)
 
 include_directories(include)
 add_subdirectory(src)

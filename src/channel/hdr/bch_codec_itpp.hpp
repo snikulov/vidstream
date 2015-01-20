@@ -1,8 +1,9 @@
 #ifndef BCH_CODEC_ITPP_HPP__
 #define BCH_CODEC_ITPP_HPP__
 
-#include <boost/scoped_ptr.hpp>
 #include <channel/ecc_codec.hpp>
+#include <itpp/itcomm.h>
+#include <boost/scoped_ptr.hpp>
 
 class bch_codec_itpp : public abstract_ecc_codec
 {

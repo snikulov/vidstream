@@ -12,7 +12,6 @@
 #include <boost/atomic.hpp>
 
 #include <nanopp/nn.hpp>
-#include <itpp/itcomm.h>
 
 #include <channel/bchwrapper.hpp>
 #include <corrupt/corrupt_intro.hpp>
