@@ -11,7 +11,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 option(WITH_TEST "Build UnitTests" OFF)
 option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
-option(WITH_CAPTURE_UI "Build with capture window" ON)
+option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN "Build with address sanitizer" OFF)
 
 find_package(Threads REQUIRED)
@@ -63,15 +63,21 @@ source_group("Global_HEADERS" FILES ${GLB_HDR_FILES})
 # external projects
 #-------------------------------------------
 set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
+set(ENV{PKG_CONFIG_PATH} "${DEPS_LOCATION}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}")
+message("env PKG_CONFIG_PATH = $ENV{PKG_CONFIG_PATH}")
+
+add_custom_target(envpkg 
+    COMMAND "PKG_CONFIG_PATH=${DEPS_LOCATION}/lib/pkgconfig"
+    )
 
 include_directories(${DEPS_LOCATION}/include)
-link_directories(${DEPS_LOCATION}/lib)
 link_directories(${DEPS_LOCATION}/lib64)
+link_directories(${DEPS_LOCATION}/lib)
 
 add_subdirectory(ext/libjpeg-turbo)
 
 # ffmpeg from ext/ffmpeg
-add_subdirectory(ext/ffmpeg)
+# add_subdirectory(ext/ffmpeg)
 
 # nanomsg build from ext/nanomsg
 add_subdirectory(ext/nanomsg)
@@ -88,6 +94,8 @@ if(WITH_ITPP)
     add_definitions(-DBUILD_WITH_ITPP)
     set(ITPP_LIBRARIES itpp)
 endif()
+
+add_dependencies(ext.opencv ext.libjpeg-turbo)
 
 include_directories(include)
 add_subdirectory(src)
