@@ -15,6 +15,7 @@ SET(CMAKE_CXX_COMPILER ${TARGET_PATH}/sysroots/i686-eldk-linux/usr/bin/arm-linux
 SET(CMAKE_FIND_ROOT_PATH 
     ${TARGET_PATH}/sysroots/armv7ahf-vfp-neon-linux-gnueabi
     ${TARGET_PATH}/rootfs-lsb-sdk
+    ${TARGET_PATH}/rootfs-lsb-sdk/usr
     /home/snikulov/eldk-${TARGET_TOOL_NAME}-inst
     /home/snikulov/${TARGET_TOOL_NAME})
 
