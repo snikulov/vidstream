@@ -1,6 +1,7 @@
 #ifndef BCH_CODEC_KERNEL_HPP__
 #define BCH_CODEC_KERNEL_HPP__
 
+#include <boost/scoped_ptr.hpp>
 #include <ecc/ecc.h>
 
 class bch_codec_kernel : public abstract_ecc_codec
