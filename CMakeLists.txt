@@ -2,6 +2,16 @@ cmake_minimum_required(VERSION 2.8)
 
 project(vidstream C CXX)
 
+if (CMAKE_TOOLCHAIN_FILE)
+    message("Cross compiling project vidstream...")
+    set(TARGET_CROSS 1)
+    get_filename_component(_tool_file ${CMAKE_TOOLCHAIN_FILE} NAME)
+    set(_cross_toolchain_file "${PROJECT_SOURCE_DIR}/cmake/${_tool_file}")
+    message("${_tool_file}")
+    message("${PROJECT_SOURCE_DIR}")
+    message("${_cross_toolchain_file}")
+endif()
+
 # set output dir for binary
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
