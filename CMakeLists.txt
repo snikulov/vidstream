@@ -13,6 +13,8 @@ option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN "Build with address sanitizer" OFF)
+option(WITH_QTGUI "Build QtGUI Application" OFF)
+option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" OFF)
 
 find_package(Threads REQUIRED)
 
@@ -74,7 +76,9 @@ include_directories(${DEPS_LOCATION}/include)
 link_directories(${DEPS_LOCATION}/lib64)
 link_directories(${DEPS_LOCATION}/lib)
 
-add_subdirectory(ext/libjpeg-turbo)
+if(WITH_EXT_JPEG)
+    add_subdirectory(ext/libjpeg-turbo)
+endif()
 
 # ffmpeg from ext/ffmpeg
 # add_subdirectory(ext/ffmpeg)
@@ -95,7 +99,9 @@ if(WITH_ITPP)
     set(ITPP_LIBRARIES itpp)
 endif()
 
-add_dependencies(ext.opencv ext.libjpeg-turbo)
+if(WITH_EXT_JPEG)
+    add_dependencies(ext.opencv ext.libjpeg-turbo)
+endif()
 
 include_directories(include)
 add_subdirectory(src)
