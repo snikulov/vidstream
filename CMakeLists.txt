@@ -41,14 +41,17 @@ endif()
 
 link_directories(${CMAKE_BINARY_DIR})
 
-if(WIN32)
-    set( Boost_USE_STATIC_LIBS ON )
-endif()
 if(MSVC)
     add_definitions(/EHsc)
 endif()
-add_definitions(-DBOOST_SYSTEM_NO_DEPRECATED )
-find_package(Boost COMPONENTS random thread chrono system program_options unit_test_framework REQUIRED)
+
+set( Boost_USE_STATIC_LIBS ON )
+add_definitions( -DBOOST_SYSTEM_NO_DEPRECATED )
+find_package(Boost
+    COMPONENTS random thread chrono system
+               program_options unit_test_framework
+    REQUIRED
+    )
 
 #find_package(OpenCV)
 
