@@ -2,6 +2,16 @@ cmake_minimum_required(VERSION 2.8)
 
 project(vidstream C CXX)
 
+if (CMAKE_TOOLCHAIN_FILE)
+    message("Cross compiling project vidstream...")
+    set(TARGET_CROSS ON)
+    get_filename_component(_tool_file ${CMAKE_TOOLCHAIN_FILE} NAME)
+    set(_cross_toolchain_file "${PROJECT_SOURCE_DIR}/cmake/${_tool_file}")
+    message("${_tool_file}")
+    message("${PROJECT_SOURCE_DIR}")
+    message("${_cross_toolchain_file}")
+endif()
+
 # set output dir for binary
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -13,6 +23,12 @@ option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_ITPP "Build and use ITPP" ON)
 option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN "Build with address sanitizer" OFF)
+if (TARGET_CROSS)
+    option(WITH_QTGUI "Build QtGUI Application" OFF)
+else()
+    option(WITH_QTGUI "Build QtGUI Application" ON)
+endif()
+option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" OFF)
 
 find_package(Threads REQUIRED)
 
@@ -29,14 +45,17 @@ endif()
 
 link_directories(${CMAKE_BINARY_DIR})
 
-if(WIN32)
-    set( Boost_USE_STATIC_LIBS ON )
-endif()
 if(MSVC)
     add_definitions(/EHsc)
 endif()
-add_definitions(-DBOOST_SYSTEM_NO_DEPRECATED )
-find_package(Boost COMPONENTS random thread chrono system program_options unit_test_framework REQUIRED)
+
+set( Boost_USE_STATIC_LIBS ON )
+add_definitions( -DBOOST_SYSTEM_NO_DEPRECATED )
+find_package(Boost
+    COMPONENTS random thread chrono system
+               program_options unit_test_framework
+    REQUIRED
+    )
 
 #find_package(OpenCV)
 
@@ -74,7 +93,9 @@ include_directories(${DEPS_LOCATION}/include)
 link_directories(${DEPS_LOCATION}/lib64)
 link_directories(${DEPS_LOCATION}/lib)
 
-add_subdirectory(ext/libjpeg-turbo)
+if(WITH_EXT_JPEG)
+    add_subdirectory(ext/libjpeg-turbo)
+endif()
 
 # ffmpeg from ext/ffmpeg
 # add_subdirectory(ext/ffmpeg)
@@ -95,7 +116,9 @@ if(WITH_ITPP)
     set(ITPP_LIBRARIES itpp)
 endif()
 
-add_dependencies(ext.opencv ext.libjpeg-turbo)
+if(WITH_EXT_JPEG)
+    add_dependencies(ext.opencv ext.libjpeg-turbo)
+endif()
 
 include_directories(include)
 add_subdirectory(src)
