@@ -32,7 +32,7 @@ void display(const int depth, const boost::property_tree::ptree& tree)
 }
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+    QWidget(parent),
     ui(new Ui::MainWindow),
     is_srv_running_(false)
     , cfg_(new boost::property_tree::ptree())

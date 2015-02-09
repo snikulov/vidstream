@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "mainvideoiowindow.h"
 #include <QApplication>
 
 #include <log4cplus/logger.h>
@@ -6,6 +6,8 @@
 #include <log4cplus/fileappender.h>
 #include <log4cplus/loglevel.h>
 #include <log4cplus/configurator.h>
+
+#include <iostream>
 
 
 int main(int argc, char *argv[])
@@ -22,7 +24,8 @@ int main(int argc, char *argv[])
 
 
     QApplication a(argc, argv);
-    MainWindow w;
+
+    MainVideoIoWindow w;
     w.show();
 
     return a.exec();
