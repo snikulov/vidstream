@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "config_iface.hpp"
+
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +24,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    cfg_ptr_t cfg_;
 };
 
 #endif // MAINWINDOW_H

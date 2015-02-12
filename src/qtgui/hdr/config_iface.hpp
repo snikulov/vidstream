@@ -7,4 +7,12 @@
 
 typedef boost::shared_ptr<boost::property_tree::ptree> cfg_ptr_t;
 
+// read config file
+// true - ok
+// false - otherwise
+bool read_config_file(const std::string & fname, cfg_ptr_t cfg);
+
+void init_config_defaults(cfg_ptr_t cfg);
+
+
 #endif /* end of include guard: CONFIG_IFACE_H */

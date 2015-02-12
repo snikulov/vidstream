@@ -6,8 +6,13 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+    , cfg_(new boost::property_tree::ptree)
 {
     ui->setupUi(this);
+    if(!read_config_file("settings.json", cfg_))
+    {
+        init_config_defaults(cfg_);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -24,7 +29,7 @@ void MainWindow::on_actionStart_triggered()
 void MainWindow::on_actionConfigure_triggered()
 {
     // Settings trigged
-    SettingsDialog dlg;
+    SettingsDialog dlg(cfg_);
     dlg.exec();
 
 }
