@@ -51,7 +51,7 @@ private slots:
 
     void on_spinBox_fps_limit_valueChanged(int arg1);
 
-//    void on_comboBox_ip_selector_currentIndexChanged(int index);
+    void on_comboBox_ip_selector_currentIndexChanged(int index);
 
     void on_comboBox_config_preset_currentIndexChanged(int index);
 

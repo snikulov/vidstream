@@ -1,6 +1,10 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
+#include <QNetworkInterface>
+#include <QHostAddress>
+
+
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
@@ -14,6 +18,23 @@ SettingsDialog::SettingsDialog(cfg_ptr_t cfg, QWidget *parent) :
     cfg_(cfg)
 {
     ui->setupUi(this);
+
+    if(!ui->comboBox_ip_selector->count())
+    {
+        // get list of interfaces
+        foreach (const QHostAddress &address, QNetworkInterface::allAddresses())
+        {
+            if (address.protocol() == QAbstractSocket::IPv4Protocol)
+            {
+                QString ip = address.toString();
+                ui->comboBox_ip_selector->addItem(ip);
+            }
+        }
+        cfg_->put("cfg.ip",
+                  ui->comboBox_ip_selector->itemText(0).toUtf8().constData());
+    }
+
+
 
     // check-point for old values
     write_config_file(cfg_);
@@ -154,3 +175,11 @@ void SettingsDialog::on_comboBox_config_preset_currentIndexChanged(int index)
     }
 
 }
+
+void SettingsDialog::on_comboBox_ip_selector_currentIndexChanged(int index)
+{
+    cfg_->put("cfg.ip",
+              ui->comboBox_ip_selector->itemText(index).toUtf8().constData());
+}
+
+

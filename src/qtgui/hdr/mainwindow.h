@@ -22,6 +22,8 @@ private slots:
 
     void on_actionConfigure_triggered();
 
+//    void update_video_ui(QImage img);
+
 private:
     Ui::MainWindow *ui;
     cfg_ptr_t cfg_;
