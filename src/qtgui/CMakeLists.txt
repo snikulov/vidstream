@@ -45,6 +45,7 @@ set(HDR_FILES
     hdr/service_worker.hpp
     hdr/ctrlsrv.hpp
     hdr/jpeg_receiver.hpp
+    hdr/config_iface.hpp
 )
 
 set(SRC_FILES

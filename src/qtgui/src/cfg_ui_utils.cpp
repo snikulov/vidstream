@@ -1,5 +1,10 @@
+#include "config_iface.hpp"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include "settingsdialog.h"
+#include "ui_settingsdialog.h"
 
 typedef struct
 {
@@ -25,7 +30,7 @@ static const param_pair_t bch_modes[] =
 };
 const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 
-bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
+bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg)
 {
     // stupid mechanical work
     bool is_good_cfg = false;
@@ -55,6 +60,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
     return is_good_cfg;
 }
 
+#if 0
 void update_stat(Ui::MainWindow & u, const std::string& data)
 {
     std::stringstream ss(data);
@@ -97,8 +103,9 @@ void update_stat(Ui::MainWindow & u, const std::string& data)
     }
 
 }
+#endif
 
-void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
+void cfg_update(boost::property_tree::ptree &cfg, const Ui::SettingsDialog &u)
 {
     cfg.put("cfg.bch.n",     u.spinBox_bch_m->value());
     cfg.put("cfg.bch.t",     u.spinBox_bch_t->value());
@@ -118,7 +125,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 
 }
 
-int ui_set_resolution_index(Ui::MainWindow& u, const boost::property_tree::ptree& cfg)
+int ui_set_resolution_index(Ui::SettingsDialog& u, const boost::property_tree::ptree& cfg)
 {
     int def_idx = 2; // 640x480 by default
 
@@ -156,7 +163,7 @@ int cfg_set_resolution_by_list_index(boost::property_tree::ptree &cfg, int idx)
     return 0;
 }
 
-int ui_set_bch_preset_list_index(Ui::MainWindow &u
+int ui_set_bch_preset_list_index(Ui::SettingsDialog &u
                                  , const boost::property_tree::ptree &cfg)
 {
     int def_idx = BCH_PRESET_MAX; // custom
@@ -181,7 +188,7 @@ int ui_set_bch_preset_list_index(Ui::MainWindow &u
 }
 
 int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
-                                     , Ui::MainWindow& u, int idx)
+                                     , Ui::SettingsDialog & u, int idx)
 {
     if (idx >= 0 && idx <= BCH_PRESET_MAX)
     {

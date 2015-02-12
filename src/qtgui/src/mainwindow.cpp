@@ -24,7 +24,7 @@ void MainWindow::on_actionStart_triggered()
 void MainWindow::on_actionConfigure_triggered()
 {
     // Settings trigged
-    SettingsDialog dlg(this);
+    SettingsDialog dlg;
     dlg.exec();
 
 }
