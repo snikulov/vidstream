@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     , cfg_(new boost::property_tree::ptree)
 {
     ui->setupUi(this);
-    if(!read_config_file("settings.json", cfg_))
+    if(!read_config_file(cfg_))
     {
         init_config_defaults(cfg_);
     }

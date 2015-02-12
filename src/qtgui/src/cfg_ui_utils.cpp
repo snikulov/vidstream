@@ -220,7 +220,7 @@ int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
     return 0;
 }
 
-bool read_config_file(const std::string& fname, cfg_ptr_t cfg)
+bool read_config_file(cfg_ptr_t cfg, const std::string & fname)
 {
     bool ret_val = false;
     try
@@ -234,6 +234,21 @@ bool read_config_file(const std::string& fname, cfg_ptr_t cfg)
     return ret_val;
 }
 
+bool write_config_file(cfg_ptr_t cfg, const std::string & fname)
+{
+    bool ret_val = false;
+    try
+    {
+        boost::property_tree::write_json(fname, *cfg);
+        ret_val = true;
+    }
+    catch(...)
+    {
+    }
+    return ret_val;
+}
+
+
 void init_config_defaults(cfg_ptr_t cfg)
 {
     cfg->put("cfg.bch.n",  0);
@@ -242,7 +257,7 @@ void init_config_defaults(cfg_ptr_t cfg)
     cfg->put("cfg.dataport", 9950);
     cfg->put("cfg.img.rst",   1);
     cfg->put("cfg.img.bw",    0);
-    cfg->put("cfg.error.val", 0);
+    cfg->put("cfg.error.val", 0.0f);
     cfg->put("cfg.fps.lim",   25);
 
     cfg->put("cfg.cmdport", 9900);
