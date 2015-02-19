@@ -44,7 +44,7 @@ public:
             )
             : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
     {
-        cv::namedWindow("received");
+//        cv::namedWindow("received");
     }
 
     ~jpeg_receiver()
@@ -96,8 +96,8 @@ public:
                     cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
                     if (!m.empty())
                     {
-                        cv::imshow("received", m);
-                        cv::waitKey(5);
+ //                       cv::imshow("received", m);
+ //                       cv::waitKey(5);
                     }
                 }
             }
