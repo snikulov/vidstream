@@ -41,8 +41,9 @@ public:
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
             , boost::shared_ptr<bchwrapper> codec
+            , boost::function<void(cv::Mat*)> pf
             )
-            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
+            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec), pf_(pf)
     {
 //        cv::namedWindow("received");
     }
@@ -98,6 +99,8 @@ public:
                     {
  //                       cv::imshow("received", m);
  //                       cv::waitKey(5);
+ //
+                        pf_(&m);
                     }
                 }
             }
@@ -133,6 +136,7 @@ private:
 
     boost::shared_ptr<bchwrapper> codec_;
     boost::shared_ptr<in_channel> input_;
+    boost::function<void(cv::Mat*)> pf_;
 };
 
 #endif

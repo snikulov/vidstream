@@ -64,6 +64,7 @@ void MainWindow::on_actionConfigure_triggered()
 
 void MainWindow::slot_show_image(QImage img)
 {
+    std::cerr << "slot show_image triggered" << std::endl;
 }
 
 void MainWindow::post_image(cv::Mat * img)

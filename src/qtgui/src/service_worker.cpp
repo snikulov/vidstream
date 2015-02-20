@@ -24,6 +24,8 @@ void service_worker::start()
     // init run
 
     //cv::namedWindow("received");
+    boost::function<void(cv::Mat*)> pfunc =
+        std::bind1st(std::mem_fun(&MainWindow::post_image), &ui_);
 
     std::string proto("tcp://");
     std::string host = cfg_->get<std::string>("cfg.ip");
@@ -40,7 +42,7 @@ void service_worker::start()
     int m = cfg_->get<int>("cfg.bch.n");
     int t = cfg_->get<int>("cfg.bch.t");
     boost::shared_ptr<bchwrapper> bch(new bchwrapper(m, t));
-    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb, bch));
+    rcv_.reset(new jpeg_receiver(stop_, dataurl, err, jb, bch, pfunc));
     cfgsrv_->subscribe(rcv_.get());
 
     // run threads
