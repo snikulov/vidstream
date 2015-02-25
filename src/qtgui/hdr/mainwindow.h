@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QImage>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
 #include "config_iface.hpp"
 
@@ -15,6 +17,8 @@ namespace Ui {
 class MainWindow;
 }
 
+typedef boost::shared_ptr<cv::Mat> mat_ptr_t;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -23,22 +27,25 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void post_image(cv::Mat * img);
+    void post_image(mat_ptr_t img);
 
 private slots:
     void on_actionStart_triggered();
 
     void on_actionConfigure_triggered();
 
-    void slot_show_image(QImage img);
+    void slot_show_image(QImage * img);
 
 signals:
-    void signal_show_image(QImage img);
-
-//    void update_video_ui(QImage img);
+    void signal_show_image(QImage * img);
 
 private:
-    Ui::MainWindow *ui;
+
+    void adjust_size();
+
+    Ui::MainWindow * ui;
+    QGraphicsScene * scene_;
+    QGraphicsPixmapItem * item_;
     cfg_ptr_t cfg_;
     bool do_capture_;
     boost::shared_ptr<service_worker> worker_;

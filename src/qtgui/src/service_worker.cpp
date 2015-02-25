@@ -24,7 +24,7 @@ void service_worker::start()
     // init run
 
     //cv::namedWindow("received");
-    boost::function<void(cv::Mat*)> pfunc =
+    boost::function<void(mat_ptr_t)> pfunc =
         std::bind1st(std::mem_fun(&MainWindow::post_image), &ui_);
 
     std::string proto("tcp://");
@@ -60,5 +60,4 @@ void service_worker::stop()
 
     process_->join();
     cfgthread_->join();
-    cv::destroyWindow("received");
 }

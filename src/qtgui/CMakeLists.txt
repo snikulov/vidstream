@@ -11,8 +11,8 @@ if(WIN32)
 endif()
 
 if(USE_QT5)
-    #    set(CMAKE_AUTOMOC ON)
-    #    set(CMAKE_AUTOUIC ON)
+    set(CMAKE_AUTOMOC ON)
+#    set(CMAKE_AUTOUIC ON)
 
     cmake_policy(SET CMP0020 OLD)
 
@@ -62,14 +62,15 @@ set(UI_FILES
 )
 
 if(USE_QT5)
-    qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
-    qt5_wrap_cpp(MOC_SRC ${HDR_FILES})
+     qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
+#    qt5_wrap_cpp(MOC_SRC ${HDR_FILES})
+    add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${HDR_FILES} ${GLB_HDR_FILES})
 else()
     QT4_WRAP_UI(UI_SRC_FILES ${UI_FILES})
     QT4_WRAP_CPP(MOC_SRC ${HDR_FILES})
+    add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 endif()
 
-add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 
 if(USE_QT5)
     target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES} ${Qt5Network_LIBRARIES})

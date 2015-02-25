@@ -4,6 +4,8 @@
 #include "settingsdialog.h"
 #include "service_worker.hpp"
 
+
+
 static QImage mat_to_qimg(cv::Mat const& src)
 {
      cv::Mat temp; // make the same cv::Mat
@@ -14,9 +16,12 @@ static QImage mat_to_qimg(cv::Mat const& src)
      return dest;
 }
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+    , scene_(new QGraphicsScene)
+    , item_(new QGraphicsPixmapItem)
     , cfg_(new boost::property_tree::ptree)
     , do_capture_(false)
 {
@@ -26,8 +31,12 @@ MainWindow::MainWindow(QWidget *parent) :
         init_config_defaults(cfg_);
     }
 
-    connect(this, SIGNAL(signal_show_image(QImage)),
-            SLOT(slot_show_image(QImage)),
+    adjust_size();
+
+    ui->graphicsView->setScene(scene_);
+
+    connect(this, SIGNAL(signal_show_image(QImage *)),
+            SLOT(slot_show_image(QImage *)),
             Qt::QueuedConnection);
 
     worker_.reset(new service_worker(*this, cfg_));
@@ -35,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete item_;
+    delete scene_;
     delete ui;
 }
 
@@ -60,15 +71,38 @@ void MainWindow::on_actionConfigure_triggered()
     SettingsDialog dlg(cfg_);
     dlg.exec();
 
+    adjust_size();
+
 }
 
-void MainWindow::slot_show_image(QImage img)
+void MainWindow::slot_show_image(QImage * img)
 {
     std::cerr << "slot show_image triggered" << std::endl;
+
+    item_->setPixmap(QPixmap::fromImage(*img));
+
+    scene_->addItem(item_);
+
+    ui->graphicsView->show();
+
+    delete img;
+
 }
 
-void MainWindow::post_image(cv::Mat * img)
+void MainWindow::post_image(mat_ptr_t img)
 {
-    QImage qi = mat_to_qimg(*img);
+    QImage * qi = new QImage( mat_to_qimg(*img) );
     emit signal_show_image(qi);
+}
+
+void MainWindow::adjust_size()
+{
+    const int diff = 20;
+    int w = cfg_->get<int>("cfg.img.width");
+    int h = cfg_->get<int>("cfg.img.height");
+
+    resize(w+diff, h+(diff*4));
+    ui->graphicsView->resize(w, h);
+
+//    ui->centralWidget->setBaseSize(w, h);
 }
