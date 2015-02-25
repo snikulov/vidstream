@@ -71,7 +71,7 @@ void MainWindow::on_actionConfigure_triggered()
     SettingsDialog dlg(cfg_);
     dlg.exec();
 
-    adjust_size();
+//    adjust_size();
 
 }
 
