@@ -60,51 +60,6 @@ bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg)
     return is_good_cfg;
 }
 
-#if 0
-void update_stat(Ui::MainWindow & u, const std::string& data)
-{
-    std::stringstream ss(data);
-    boost::property_tree::ptree pt;
-    boost::property_tree::read_json(ss, pt);
-
-    u.lineEdit_proc_time->setText(
-                QString::fromUtf8(pt.get<std::string>("t.proc").c_str())
-                );
-    u.lineEdit_send_time->setText(
-                QString::fromUtf8(pt.get<std::string>("t.send").c_str())
-                );
-
-    u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
-    u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
-    u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
-
-    u.lineEdit_frame_size->setText(
-                QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
-                );
-    u.lineEdit_num_rst->setText(
-                QString::fromUtf8(pt.get<std::string>("rst.num").c_str())
-                );
-
-
-    double speed = pt.get<double>("sent.bytes");
-    double mbps = speed*8.0/1000000.0;
-
-    u.lineEdit_sent_bytes->setText(QString::number(mbps));
-
-    u.lineEdit_ecc_payload_coef->setText(
-                QString::fromUtf8(pt.get<std::string>("ecc.coef").c_str())
-                );
-
-    // update jpeg quality if needed
-    int jpeg_auto_q = pt.get<int>("jpg.a.q");
-    if (u.spinBox_jpeg_quality->value() != jpeg_auto_q)
-    {
-        u.spinBox_jpeg_quality->setValue(jpeg_auto_q);
-    }
-
-}
-#endif
-
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::SettingsDialog &u)
 {
     cfg.put("cfg.bch.n",     u.spinBox_bch_m->value());

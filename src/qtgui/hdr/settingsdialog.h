@@ -65,11 +65,6 @@ private:
 bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg);
 
 
-#if 0
-void update_stat(Ui::MainWindow & u, const std::string& data);
-
-#endif
-
 void cfg_update(boost::property_tree::ptree &cfg, const Ui::SettingsDialog &u);
 
 

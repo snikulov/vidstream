@@ -101,8 +101,67 @@ void MainWindow::adjust_size()
     int w = cfg_->get<int>("cfg.img.width");
     int h = cfg_->get<int>("cfg.img.height");
 
-    resize(w+diff, h+(diff*4));
+    resize(w+diff, h+(diff*10));
     ui->graphicsView->resize(w, h);
 
 //    ui->centralWidget->setBaseSize(w, h);
 }
+
+void MainWindow::update_stat(const std::string& data)
+{
+    Ui::MainWindow& u = *ui;
+
+    std::stringstream ss(data);
+    boost::property_tree::ptree pt;
+    boost::property_tree::read_json(ss, pt);
+
+    // capture fps...
+    u.label_0->setText(QString("cFPS: ")
+            + QString::fromUtf8(pt.get<std::string>("cam.fps").c_str())
+            );
+    // processing fps...
+    u.label_1->setText(QString("pFPS: ")
+            + QString::fromUtf8(pt.get<std::string>("proc.fps").c_str())
+            );
+    // frames sent...
+    u.label_2->setText(QString("Fsent: ")
+            + QString::fromUtf8(pt.get<std::string>("sent.frames").c_str())
+            );
+
+    // frame size...
+    u.label_3->setText(QString("Fsize: ")
+                + QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
+                );
+    // num rst in frame..
+    u.label_4->setText(QString("Nrst: ")
+                + QString::fromUtf8(pt.get<std::string>("rst.num").c_str())
+                );
+    // required bw...
+    double speed = pt.get<double>("sent.bytes");
+    double mbps = speed*8.0/1000000.0;
+    u.label_5->setText(QString("BW: ")
+            + QString::number(mbps)
+            );
+    u.label_6->setText(QString("ECCoh: ")
+                + QString::fromUtf8(pt.get<std::string>("ecc.coef").c_str())
+                );
+
+#if 0
+    u.lineEdit_send_time->setText(
+                QString::fromUtf8(pt.get<std::string>("t.send").c_str())
+                );
+
+
+#endif
+    // update jpeg quality if needed
+    int jpeg_auto_q = pt.get<int>("jpg.a.q");
+    int jpeg_cfg_q = cfg_->get<int>("cfg.img.q");
+
+    if (jpeg_cfg_q != jpeg_auto_q)
+    {
+        cfg_->put("cfg.img.q", jpeg_auto_q);
+    }
+
+}
+
+
