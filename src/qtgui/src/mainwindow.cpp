@@ -101,7 +101,8 @@ void MainWindow::adjust_size()
     int w = cfg_->get<int>("cfg.img.width");
     int h = cfg_->get<int>("cfg.img.height");
 
-    resize(w+diff, h+(diff*10));
+    showMaximized();
+   // resize(w+diff, h+(diff*10));
     ui->graphicsView->resize(w, h);
 
 //    ui->centralWidget->setBaseSize(w, h);
