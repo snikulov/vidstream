@@ -11,12 +11,21 @@ if(WIN32)
 endif()
 
 if(USE_QT5)
+    set(CMAKE_AUTOMOC ON)
+#    set(CMAKE_AUTOUIC ON)
+
     cmake_policy(SET CMP0020 OLD)
 
     find_package(Qt5Widgets REQUIRED)
     include_directories(${Qt5Widgets_INCLUDES})
     add_definitions(${Qt5Widgets_DEFINITIONS})
-    set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+
+    find_package(Qt5Network REQUIRED)
+    include_directories(${Qt5Network_INCLUDE_DIRS})
+    add_definitions(${Qt5Network_DEFINITIONS})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Network_EXECUTABLE_COMPILE_FLAGS}")
+ 
 else()
 #    find_package(Qt4 REQUIRED)
     find_package(Qt4 COMPONENTS QtCore QtGui QtNetwork REQUIRED)
@@ -31,34 +40,40 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(HDR_FILES
     hdr/mainwindow.h
+    hdr/settingsdialog.h
     hdr/worker.hpp
     hdr/service_worker.hpp
     hdr/ctrlsrv.hpp
     hdr/jpeg_receiver.hpp
+    hdr/config_iface.hpp
 )
 
 set(SRC_FILES
     src/main.cpp
     src/mainwindow.cpp
+    src/settingsdialog.cpp
     src/service_worker.cpp
     src/cfg_ui_utils.cpp
 )
 
 set(UI_FILES
     ui/mainwindow.ui
+    ui/settingsdialog.ui
 )
 
 if(USE_QT5)
-    qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
+     qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
+#    qt5_wrap_cpp(MOC_SRC ${HDR_FILES})
+    add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${HDR_FILES} ${GLB_HDR_FILES})
 else()
     QT4_WRAP_UI(UI_SRC_FILES ${UI_FILES})
     QT4_WRAP_CPP(MOC_SRC ${HDR_FILES})
+    add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 endif()
 
-add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 
 if(USE_QT5)
-    target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES})
+    target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES} ${Qt5Network_LIBRARIES})
 else()
     target_link_libraries(${TARGET_NAME} ${QT_LIBRARIES})
 endif()

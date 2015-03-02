@@ -2,99 +2,60 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTimer>
+#include <QImage>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include "config_iface.hpp"
 
-#include <stat/stat_data.hpp>
-#include <worker.hpp>
+class service_worker;
+namespace cv {
+class Mat;
+}
 
 namespace Ui {
 class MainWindow;
 }
+
+typedef boost::shared_ptr<cv::Mat> mat_ptr_t;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-
-    void update_stat(const std::string&);
-
+    explicit MainWindow(bool cfg, QWidget *parent = 0);
     ~MainWindow();
 
+    void post_image(mat_ptr_t img);
+
+    void update_stat(const std::string& stat);
+
 private slots:
+    void on_actionStart_triggered();
 
-    void on_checkBox_is_gray_stateChanged(int arg1);
+    void on_actionConfigure_triggered();
 
-    void on_comboBox_camera_resolution_currentIndexChanged(int index);
+    void slot_show_image(QImage * img);
 
-    void on_pushButton_operate_clicked();
-
-    void on_spinBox_rst_num_valueChanged(int arg1);
-
-    void on_spinBox_port_cmd_valueChanged(int arg1);
-
-    void on_spinBox_port_data_valueChanged(int arg1);
-
-    void on_comboBox_bch_mode_currentIndexChanged(int index);
-
-    void on_spinBox_bch_m_valueChanged(int arg1);
-
-    void on_spinBox_bch_t_valueChanged(int arg1);
-
-    void on_doubleSpinBox_error_persent_valueChanged(double arg1);
-
-    void on_spinBox_bch_m_editingFinished();
-
-    void on_lineEdit_sent_bytes_textChanged(const QString &arg1);
-
-    void on_spinBox_bw_valueChanged(int arg1);
-
-    void on_spinBox_jpeg_quality_valueChanged(int arg1);
-
-    void on_spinBox_fps_limit_valueChanged(int arg1);
-
-    void on_comboBox_ip_selector_currentIndexChanged(int index);
-
-    void on_comboBox_config_preset_currentIndexChanged(int index);
-
-    void on_timer_overflow();
+signals:
+    void signal_show_image(QImage * img);
 
 private:
-    typedef boost::shared_ptr<boost::property_tree::ptree> config_ptr_t;
-    Ui::MainWindow *ui;
-    bool is_srv_running_;
-    config_ptr_t cfg_;
-    boost::shared_ptr<worker> logic_;
 
-    stat_data_t stat_;
+    void adjust_size();
 
-    QTimer * refresh_timer_;
+    bool is_cfg_enabled_;
+
+    Ui::MainWindow * ui;
+    QGraphicsScene * scene_;
+    QGraphicsPixmapItem * item_;
+    cfg_ptr_t cfg_;
+    bool do_capture_;
+    boost::shared_ptr<service_worker> worker_;
 };
 
-// free form functions
-bool ui_update(Ui::MainWindow &
-               , const boost::property_tree::ptree &);
 
-void cfg_update(boost::property_tree::ptree &
-                , const Ui::MainWindow &);
-
-int ui_set_resolution_index(
-    Ui::MainWindow&
-    , const boost::property_tree::ptree &);
-
-int cfg_set_resolution_by_list_index(boost::property_tree::ptree &, int );
-
-int ui_set_bch_preset_list_index(
-    Ui::MainWindow&
-    , const boost::property_tree::ptree &);
-
-int cfg_set_bch_values_by_list_index(
-    boost::property_tree::ptree&
-    , Ui::MainWindow&, int);
+//void update_stat(Ui::MainWindow & u, const std::string& data);
 
 #endif // MAINWINDOW_H

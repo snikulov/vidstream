@@ -1,5 +1,10 @@
+#include "config_iface.hpp"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include "settingsdialog.h"
+#include "ui_settingsdialog.h"
 
 typedef struct
 {
@@ -25,7 +30,7 @@ static const param_pair_t bch_modes[] =
 };
 const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 
-bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
+bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg)
 {
     // stupid mechanical work
     bool is_good_cfg = false;
@@ -55,50 +60,7 @@ bool ui_update(Ui::MainWindow &u, const boost::property_tree::ptree &cfg)
     return is_good_cfg;
 }
 
-void update_stat(Ui::MainWindow & u, const std::string& data)
-{
-    std::stringstream ss(data);
-    boost::property_tree::ptree pt;
-    boost::property_tree::read_json(ss, pt);
-
-    u.lineEdit_proc_time->setText(
-                QString::fromUtf8(pt.get<std::string>("t.proc").c_str())
-                );
-    u.lineEdit_send_time->setText(
-                QString::fromUtf8(pt.get<std::string>("t.send").c_str())
-                );
-
-    u.spinBox_cap_fps->setValue(pt.get<unsigned int>("cam.fps"));
-    u.spinBox_proc_fps->setValue(pt.get<unsigned int>("proc.fps"));
-    u.spinBox_sent_frames->setValue(pt.get<unsigned int>("sent.frames"));
-
-    u.lineEdit_frame_size->setText(
-                QString::fromUtf8(pt.get<std::string>("fr.size").c_str())
-                );
-    u.lineEdit_num_rst->setText(
-                QString::fromUtf8(pt.get<std::string>("rst.num").c_str())
-                );
-
-
-    double speed = pt.get<double>("sent.bytes");
-    double mbps = speed*8.0/1000000.0;
-
-    u.lineEdit_sent_bytes->setText(QString::number(mbps));
-
-    u.lineEdit_ecc_payload_coef->setText(
-                QString::fromUtf8(pt.get<std::string>("ecc.coef").c_str())
-                );
-
-    // update jpeg quality if needed
-    int jpeg_auto_q = pt.get<int>("jpg.a.q");
-    if (u.spinBox_jpeg_quality->value() != jpeg_auto_q)
-    {
-        u.spinBox_jpeg_quality->setValue(jpeg_auto_q);
-    }
-
-}
-
-void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
+void cfg_update(boost::property_tree::ptree &cfg, const Ui::SettingsDialog &u)
 {
     cfg.put("cfg.bch.n",     u.spinBox_bch_m->value());
     cfg.put("cfg.bch.t",     u.spinBox_bch_t->value());
@@ -118,7 +80,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::MainWindow &u)
 
 }
 
-int ui_set_resolution_index(Ui::MainWindow& u, const boost::property_tree::ptree& cfg)
+int ui_set_resolution_index(Ui::SettingsDialog& u, const boost::property_tree::ptree& cfg)
 {
     int def_idx = 2; // 640x480 by default
 
@@ -156,7 +118,7 @@ int cfg_set_resolution_by_list_index(boost::property_tree::ptree &cfg, int idx)
     return 0;
 }
 
-int ui_set_bch_preset_list_index(Ui::MainWindow &u
+int ui_set_bch_preset_list_index(Ui::SettingsDialog &u
                                  , const boost::property_tree::ptree &cfg)
 {
     int def_idx = BCH_PRESET_MAX; // custom
@@ -181,7 +143,7 @@ int ui_set_bch_preset_list_index(Ui::MainWindow &u
 }
 
 int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
-                                     , Ui::MainWindow& u, int idx)
+                                     , Ui::SettingsDialog & u, int idx)
 {
     if (idx >= 0 && idx <= BCH_PRESET_MAX)
     {
@@ -212,3 +174,52 @@ int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
     }
     return 0;
 }
+
+bool read_config_file(cfg_ptr_t cfg, const std::string & fname)
+{
+    bool ret_val = false;
+    try
+    {
+        boost::property_tree::read_json(fname, *cfg);
+        ret_val = true;
+    }
+    catch(...)
+    {
+    }
+    return ret_val;
+}
+
+bool write_config_file(cfg_ptr_t cfg, const std::string & fname)
+{
+    bool ret_val = false;
+    try
+    {
+        boost::property_tree::write_json(fname, *cfg);
+        ret_val = true;
+    }
+    catch(...)
+    {
+    }
+    return ret_val;
+}
+
+
+void init_config_defaults(cfg_ptr_t cfg)
+{
+    cfg->put("cfg.bch.n",  0);
+    cfg->put("cfg.bch.t",  0);
+    cfg->put("cfg.img.q",  100);
+    cfg->put("cfg.dataport", 9950);
+    cfg->put("cfg.img.rst",   1);
+    cfg->put("cfg.img.bw",    0);
+    cfg->put("cfg.error.val", 0.0f);
+    cfg->put("cfg.fps.lim",   25);
+
+    cfg->put("cfg.cmdport", 9900);
+    cfg->put("cfg.dataport", 9950);
+    cfg->put("cfg.bw", 10);
+
+    cfg_set_resolution_by_list_index(*cfg, 2);
+}
+
+

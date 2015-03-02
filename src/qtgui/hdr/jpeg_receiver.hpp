@@ -34,6 +34,8 @@ int MyErrorHandler(int status, const char* func_name, const char* err_msg, const
     return 0;
 }
 
+typedef boost::shared_ptr<cv::Mat> mat_ptr_t;
+
 class jpeg_receiver : public cfg_notify
 {
 public:
@@ -41,10 +43,10 @@ public:
             , boost::shared_ptr<corrupt_intro> error
             , boost::shared_ptr<jpeg_builder> jb
             , boost::shared_ptr<bchwrapper> codec
+            , boost::function<void(mat_ptr_t)> pf
             )
-            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec)
+            : stop_(stop), url_(url), waiting_(false), err_(error), jb_(jb), codec_(codec), pf_(pf)
     {
-        cv::namedWindow("received");
     }
 
     ~jpeg_receiver()
@@ -93,11 +95,14 @@ public:
                 jpeg = jb_->build_jpeg_from_rst(jstp.get_jpeg());
                 if (jpeg)
                 {
-                    cv::Mat m = cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED);
-                    if (!m.empty())
+                    mat_ptr_t m(new cv::Mat(cv::imdecode(cv::Mat(*jpeg), cv::IMREAD_UNCHANGED)));
+                    if (m && !m->empty())
                     {
-                        cv::imshow("received", m);
-                        cv::waitKey(5);
+                        pf_(m);
+                    }
+                    else
+                    {
+                        // empty jpeg
                     }
                 }
             }
@@ -133,6 +138,7 @@ private:
 
     boost::shared_ptr<bchwrapper> codec_;
     boost::shared_ptr<in_channel> input_;
+    boost::function<void(mat_ptr_t)> pf_;
 };
 
 #endif

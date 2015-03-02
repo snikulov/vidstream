@@ -38,6 +38,7 @@ public:
                 // got command - don't care for now
                 // later will use it for statistic
                 std::string stat(cmd.begin(), cmd.end());
+
                 ui_.update_stat(stat);
 
                 std::ostringstream out;
