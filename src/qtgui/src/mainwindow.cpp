@@ -17,9 +17,10 @@ static QImage mat_to_qimg(cv::Mat const& src)
 }
 
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(bool cfg, QWidget *parent) :
+    QMainWindow(parent)
+    , is_cfg_enabled_(cfg)
+    , ui(new Ui::MainWindow)
     , scene_(new QGraphicsScene)
     , item_(new QGraphicsPixmapItem)
     , cfg_(new boost::property_tree::ptree)
@@ -34,6 +35,13 @@ MainWindow::MainWindow(QWidget *parent) :
     adjust_size();
 
     ui->graphicsView->setScene(scene_);
+
+    if (!is_cfg_enabled_)
+    {
+        ui->menuSettings->setEnabled(is_cfg_enabled_);
+        ui->menuSettings->setTitle("");
+        ui->menuBar->removeAction(ui->actionConfigure);
+    }
 
     connect(this, SIGNAL(signal_show_image(QImage *)),
             SLOT(slot_show_image(QImage *)),

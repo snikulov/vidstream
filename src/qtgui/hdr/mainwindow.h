@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(bool cfg, QWidget *parent = 0);
     ~MainWindow();
 
     void post_image(mat_ptr_t img);
@@ -44,6 +44,8 @@ signals:
 private:
 
     void adjust_size();
+
+    bool is_cfg_enabled_;
 
     Ui::MainWindow * ui;
     QGraphicsScene * scene_;
