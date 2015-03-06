@@ -16,8 +16,9 @@ class SettingsDialog : public QDialog
 public:
     ~SettingsDialog();
 
-    explicit SettingsDialog(cfg_ptr_t cfg,
-            QWidget * parent = 0);
+    explicit SettingsDialog(cfg_ptr_t cfg
+            , boost::shared_ptr<profile_list_t> plist
+            , QWidget * parent = 0);
 
 private slots:
 
@@ -60,6 +61,7 @@ private:
 
     Ui::SettingsDialog *ui;
     cfg_ptr_t cfg_;
+    boost::shared_ptr<profile_list_t> plist_;
 };
 
 bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg);

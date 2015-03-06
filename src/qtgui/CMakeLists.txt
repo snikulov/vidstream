@@ -54,6 +54,7 @@ set(SRC_FILES
     src/settingsdialog.cpp
     src/service_worker.cpp
     src/cfg_ui_utils.cpp
+    src/config_iface.cpp
 )
 
 set(UI_FILES

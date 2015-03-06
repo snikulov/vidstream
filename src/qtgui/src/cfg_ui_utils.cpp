@@ -6,29 +6,8 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
-typedef struct
-{
-    int one;
-    int two;
-} param_pair_t;
 
-static const param_pair_t res_modes[] =
-{
-    {1280,800}
-    ,{1024,780}
-    ,{640,480}
-    ,{320,240}
-};
-const size_t RES_MODE_MAX = sizeof(res_modes)/sizeof(res_modes[0]);
 
-static const param_pair_t bch_modes[] =
-{
-    {0,0}
-    ,{5,3}
-    ,{5,4}
-    ,{7,5}
-};
-const size_t BCH_PRESET_MAX = sizeof(bch_modes)/sizeof(bch_modes[0]);
 
 bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg)
 {
@@ -76,8 +55,7 @@ void cfg_update(boost::property_tree::ptree &cfg, const Ui::SettingsDialog &u)
     cfg.put("cfg.bw", u.spinBox_bw->value());
 
     cfg_set_resolution_by_list_index(cfg
-                                     , u.comboBox_camera_resolution->currentIndex());
-
+            , u.comboBox_camera_resolution->currentIndex());
 }
 
 int ui_set_resolution_index(Ui::SettingsDialog& u, const boost::property_tree::ptree& cfg)
@@ -119,7 +97,7 @@ int cfg_set_resolution_by_list_index(boost::property_tree::ptree &cfg, int idx)
 }
 
 int ui_set_bch_preset_list_index(Ui::SettingsDialog &u
-                                 , const boost::property_tree::ptree &cfg)
+        , const boost::property_tree::ptree &cfg)
 {
     int def_idx = BCH_PRESET_MAX; // custom
 
@@ -143,7 +121,7 @@ int ui_set_bch_preset_list_index(Ui::SettingsDialog &u
 }
 
 int cfg_set_bch_values_by_list_index(boost::property_tree::ptree& cfg
-                                     , Ui::SettingsDialog & u, int idx)
+        , Ui::SettingsDialog & u, int idx)
 {
     if (idx >= 0 && idx <= BCH_PRESET_MAX)
     {
@@ -189,7 +167,7 @@ bool read_config_file(cfg_ptr_t cfg, const std::string & fname)
     return ret_val;
 }
 
-bool write_config_file(cfg_ptr_t cfg, const std::string & fname)
+bool write_config_file(const cfg_ptr_t cfg, const std::string & fname)
 {
     bool ret_val = false;
     try
@@ -221,5 +199,6 @@ void init_config_defaults(cfg_ptr_t cfg)
 
     cfg_set_resolution_by_list_index(*cfg, 2);
 }
+
 
 

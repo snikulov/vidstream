@@ -12,10 +12,11 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
-SettingsDialog::SettingsDialog(cfg_ptr_t cfg, QWidget *parent) :
+SettingsDialog::SettingsDialog(cfg_ptr_t cfg, boost::shared_ptr<profile_list_t> plist, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog),
     cfg_(cfg)
+  , plist_(plist)
 {
     ui->setupUi(this);
 
@@ -34,10 +35,17 @@ SettingsDialog::SettingsDialog(cfg_ptr_t cfg, QWidget *parent) :
                   ui->comboBox_ip_selector->itemText(0).toUtf8().constData());
     }
 
-
+    if (plist_)
+    {
+        for(size_t i = 0; i < plist_->size(); ++i)
+        {
+            QString pname = QString::fromUtf8((*plist_)[i].name_.c_str());
+            ui->comboBox_config_preset->addItem(pname);
+        }
+    }
 
     // check-point for old values
-    write_config_file(cfg_);
+    write_config_file(cfg_, CONFIG_FILE_NAME);
 
     (void)ui_update(*ui, *cfg_);
 }
@@ -52,13 +60,13 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::on_buttonBox_accepted()
 {
     // store configuration
-    write_config_file(cfg_);
+    write_config_file(cfg_, CONFIG_FILE_NAME);
 }
 
 void SettingsDialog::on_buttonBox_rejected()
 {
     // drop all chanegs
-    read_config_file(cfg_);
+    read_config_file(cfg_, CONFIG_FILE_NAME);
 }
 
 void SettingsDialog::on_checkBox_is_gray_stateChanged(int arg1)
@@ -145,35 +153,24 @@ void SettingsDialog::on_spinBox_fps_limit_valueChanged(int arg1)
 
 void SettingsDialog::on_comboBox_config_preset_currentIndexChanged(int index)
 {
-    struct profile
+    if (plist_)
     {
-        int bw;
-        int fps;
-        int jpeg_quality;
-        int bch_idx;
-        int res_idx;
-    };
+        const profile_list_t& presets = *plist_;
 
-    const struct profile presets[] = {
-        {10, 25, 60, 3, 2},
-        {10, 25, 40, 1, 2},
-        {10, 20, 30, 2, 2},
-        {5,  15, 40, 2, 2},
-        {5,  25, 40, 1, 3}
-    };
+        size_t i = static_cast<size_t>(index);
 
-    const size_t PROFILE_SIZE = sizeof(presets)/sizeof(presets[0]);
+        if (i > 0 && i <= presets.size())
+        {
+            // correcting i to point profile in vector
+            i--;
 
-    if (index > 0 && index <= PROFILE_SIZE)
-    {
-        int i = index-1;
-        ui->spinBox_bw->setValue(presets[i].bw);
-        ui->spinBox_fps_limit->setValue(presets[i].fps);
-        ui->spinBox_jpeg_quality->setValue(presets[i].jpeg_quality);
-        ui->comboBox_bch_mode->setCurrentIndex(presets[i].bch_idx);
-        ui->comboBox_camera_resolution->setCurrentIndex(presets[i].res_idx);
+            ui->spinBox_bw->setValue(presets[i].bw_);
+            ui->spinBox_fps_limit->setValue(presets[i].fps_);
+            ui->spinBox_jpeg_quality->setValue(presets[i].jpeg_quality_);
+            ui->comboBox_bch_mode->setCurrentIndex(presets[i].bch_idx_);
+            ui->comboBox_camera_resolution->setCurrentIndex(presets[i].res_idx_);
+        }
     }
-
 }
 
 void SettingsDialog::on_comboBox_ip_selector_currentIndexChanged(int index)
