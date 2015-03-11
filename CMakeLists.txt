@@ -29,13 +29,13 @@ else()
     option(WITH_QTGUI "Build QtGUI Application" ON)
 endif()
 option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" OFF)
+option(USE_BOOST_STATIC "Build with static Boost C++ libs" ON)
 
 find_package(Threads REQUIRED)
 
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -W")
-
     if (WITH_ASAN)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
@@ -49,7 +49,7 @@ if(MSVC)
     add_definitions(/EHsc)
 endif()
 
-set( Boost_USE_STATIC_LIBS ON )
+set( Boost_USE_STATIC_LIBS ${USE_BOOST_STATIC} )
 add_definitions( -DBOOST_SYSTEM_NO_DEPRECATED )
 find_package(Boost
     COMPONENTS random thread chrono system

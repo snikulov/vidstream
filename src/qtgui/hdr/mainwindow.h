@@ -38,12 +38,16 @@ private slots:
 
     void slot_show_image(QImage * img);
 
+    void on_comboBox_profiles_currentIndexChanged(int index);
+
 signals:
     void signal_show_image(QImage * img);
 
 private:
 
     void adjust_size();
+
+    void adjust_preset();
 
     bool is_cfg_enabled_;
 
@@ -53,6 +57,11 @@ private:
     cfg_ptr_t cfg_;
     bool do_capture_;
     boost::shared_ptr<service_worker> worker_;
+
+    // profiles with presets for transmitter
+    boost::shared_ptr<profile_list_t> presets_;
+    boost::shared_ptr<int_pair_t> resolutions_;
+    boost::shared_ptr<int_pair_t> bchmodes_;
 };
 
 
