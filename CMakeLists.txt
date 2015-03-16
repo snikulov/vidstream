@@ -11,6 +11,7 @@ if (CMAKE_TOOLCHAIN_FILE)
     message("${PROJECT_SOURCE_DIR}")
     message("${_cross_toolchain_file}")
 endif()
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 # set output dir for binary
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -32,6 +33,7 @@ option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" OFF)
 option(USE_BOOST_STATIC "Build with static Boost C++ libs" ON)
 
 find_package(Threads REQUIRED)
+find_package(Lint)
 
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
