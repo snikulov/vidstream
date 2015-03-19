@@ -14,6 +14,8 @@ if(LINT_EXECUTABLE)
     set(LINT_FOUND TRUE)
     set(LINT_DATA_DIR ${CMAKE_SOURCE_DIR}/lint)
 
+    # a phony target which causes all available *_LINT targets to be executed
+    add_custom_target(ALL_LINT)
 
     macro(lint_check_sources _target_name _sources)
 
@@ -63,7 +65,10 @@ if(LINT_EXECUTABLE)
 
         endforeach(_current_file)
 
-        ADD_CUSTOM_TARGET(${_target_name}_lint DEPENDS ${LINT_C_INCLUDE} ${LINT_CXX_INCLUDE} ${LINT_C_INCLUDE_PATH_FILE} ${LINT_CXX_INCLUDE_PATH_FILE} ${LINT_RULES_FILE} ${_all_files_reports})
+        ADD_CUSTOM_TARGET(${_target_name}_LINT DEPENDS ${LINT_C_INCLUDE} ${LINT_CXX_INCLUDE} ${LINT_C_INCLUDE_PATH_FILE} ${LINT_CXX_INCLUDE_PATH_FILE} ${LINT_RULES_FILE} ${_all_files_reports})
+
+        # make the ALL_LINT target depend on each and every *_LINT target
+        add_dependencies(ALL_LINT ${_target_name}_LINT)
 
     endmacro(lint_check_sources)
 

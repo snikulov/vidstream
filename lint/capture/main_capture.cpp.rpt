@@ -861,7 +861,6 @@
 "/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"27 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/stat/stat_data.hpp'
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"29 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/channel/bchwrapper.hpp'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"37 1 Note 957: Function 'display(int, const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &)' defined without a prototype in scope
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 2 in macro 'BOOST_FOREACH'
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 774: Boolean within 'if' always evaluates to False [Reference: file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp: line 41]
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 1 Info 831: Reference cited in prior message
@@ -1220,13 +1219,10 @@
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 34 Info 1793: While calling 'std::basic_string<char>::assign(unsigned long, char)': Initializing the implicit object parameter 'std::basic_string<char> &' (a non-const reference) with a non-lvalue (a temporary object of type 'std::basic_string<char>')
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Warning 647: Suspicious truncation
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"60 1 Note 1932: Base class 'boost::noncopyable_::noncopyable' is not abstract -- More Effective C++ #33
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"60 1 Info 1790: Base class 'boost::noncopyable_::noncopyable' has no non-destructor virtual functions
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Info 1725: class member 'cfg_sync_thread::stop_' is a reference
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"167 28 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"170 1 Warning 1509: The destructor of derived class 'cfg_sync_thread' is non-trivial, but the non-trivial destructor of base class 'boost::noncopyable_::noncopyable' is not virtual -- Effective C++ #14 & Eff. C++ 3rd Ed. item 7
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"64 13 Warning 578: Declaration of symbol 'stat' hides symbol 'stat(const char *, struct stat *)' (line 453, file /usr/include/sys/stat.h)
 "/usr/include/sys/stat.h"453 1 Info 830: Location cited in prior message
@@ -1268,7 +1264,6 @@
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"159 9 Note 952: Parameter 'sub' (line 156) could be declared const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"170 1 Info 1712: default constructor not defined for class 'cfg_sync_thread'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"177 1 Note 957: Function 'quit_signal_handler(int)' defined without a prototype in scope
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"183 1 Info 715: Symbol 'signum' (line 176) not referenced
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"176 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"183 1 Note 952: Parameter 'signum' (line 176) could be declared const --- Eff. C++ 3rd Ed. item 3
@@ -1282,7 +1277,6 @@
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 94 Info 730: Boolean argument to function
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 94 Info 717: do ... while(0);
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"263 40 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"263 40 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"264 21 Info 1702: operator 'operator*' is both an ordinary function 'boost::chrono::operator*(const boost::chrono::duration<<1>,<2>> &, const <3>&)' and a member function 'boost::scoped_ptr<vidstream::camera>::operator*(void) const'
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"272 31 Warning 534: Ignoring return value of function 'cfg_sync_thread::subscribe(cfg_notify *)' (compare with line 156)
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
@@ -1318,8 +1312,6 @@
 /// Start of Pass 2 ///
 
 --- Module:   /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp (C++)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"167 28 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
 
 --- Global Wrap-up
 
@@ -1391,11 +1383,8 @@ Count   Type    Number  Text
 1       Info    1764    Reference parameter '___' (___) could be declared const ref
 1       Info    1790    Base class '___' has no non-destructor virtual functions
 4       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
-2       Note    917     Prototype coercion (___) ___ to ___
 5       Note    952     Parameter '___' (___) could be declared const
 7       Note    953     Variable '___' (___) could be declared as const
-2       Note    957     Function '___' defined without a prototype in scope
-4       Note    958     Padding of ___ byte(s) is required to align ___ on ___ byte boundary
 2       Note    1926    Symbol '___'s default constructor implicitly called
 1       Note    1928    Symbol '___' did not appear in the constructor initializer list
 1       Note    1932    Base class '___' is not abstract

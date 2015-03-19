@@ -980,14 +980,12 @@
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"55 37 Info 737: Loss of sign in promotion from int to unsigned long
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"64 1 Note 953: Variable 'ret_val' (line 51) could be declared as const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"51 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"72 37 Warning 574: Signed-unsigned mix with relational
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"72 37 Info 737: Loss of sign in promotion from int to unsigned long
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"81 1 Note 953: Variable 'ret_val' (line 68) could be declared as const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"68 1 Info 830: Location cited in prior message
 
@@ -1024,6 +1022,5 @@ Count   Type    Number  Text
 1       Info    864     Expression involving variable '___' possibly depends on order of evaluation
 71      Info    1703    Function '___' arbitrarily selected.  Refer to Error ___
 2       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
-2       Note    917     Prototype coercion (___) ___ to ___
 2       Note    952     Parameter '___' (___) could be declared const
 2       Note    953     Variable '___' (___) could be declared as const
