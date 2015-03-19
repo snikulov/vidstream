@@ -119,8 +119,6 @@ void MainWindow::on_actionConfigure_triggered()
 
 void MainWindow::slot_show_image(QImage * img)
 {
-    std::cerr << "slot show_image triggered" << std::endl;
-
     item_->setPixmap(QPixmap::fromImage(*img));
 
     scene_->addItem(item_);
@@ -128,7 +126,6 @@ void MainWindow::slot_show_image(QImage * img)
     ui->graphicsView->show();
 
     delete img;
-
 }
 
 void MainWindow::post_image(mat_ptr_t img)
