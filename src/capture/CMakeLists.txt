@@ -11,6 +11,8 @@ set(SRC_FILES
 
 add_executable(${TARGET_NAME} ${SRC_FILES} ${GLB_HDR_FILES})
 
+lint_check_sources(${TARGET_NAME} ${SRC_FILES})
+
 if(WITH_CAPTURE_UI)
     set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "CAPTURE_UI")
 endif()

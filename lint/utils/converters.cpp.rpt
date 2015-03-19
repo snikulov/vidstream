@@ -1,0 +1,72 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/utils/src/converters.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
+"/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/cmath"82 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"88 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"92 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"9 30 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"11 28 Info 712: Loss of precision (arg. no. 1) (unsigned long to int)
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"11 28 Info 747: Significant prototype coercion (arg. no. 1) unsigned long to int
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"16 17 Info 712: Loss of precision (arg. no. 1) (unsigned long to int)
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"16 17 Info 747: Significant prototype coercion (arg. no. 1) unsigned long to int
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"18 5 Note 953: Variable 'len' (line 8) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"8 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"22 31 Info 732: Loss of sign (initialization) (int to unsigned long)
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"31 26 Info 712: Loss of precision (arg. no. 1) (unsigned long to int)
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"31 26 Info 747: Significant prototype coercion (arg. no. 1) unsigned long to int
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"31 27 Info 1793: While calling 'boost::dynamic_bitset<unsigned char>::reference::operator=(bool)': Initializing the implicit object parameter 'boost::dynamic_bitset<unsigned char>::reference &' (a non-const reference) with a non-lvalue (a temporary object of type 'boost::dynamic_bitset<unsigned char>::reference')
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"33 5 Note 953: Variable 'len' (line 22) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"22 1 Info 830: Location cited in prior message
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/utils/src/converters.cpp (C++)
+
+--- Global Wrap-up
+
+ Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
+ Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"6 1 Info 714: Symbol 'vidstream::to_itppbvec(const boost::dynamic_bitset<unsigned char> &, itpp::Vec<itpp::bin> &)' (line 6, file /home/snikulov/work/vidstream/src/utils/src/converters.cpp) not referenced
+"/home/snikulov/work/vidstream/src/utils/src/converters.cpp"42 1 Info 714: Symbol 'vidstream::to_vector(const itpp::Vec<itpp::bin> &, std::vector<unsigned char> &)' (line 42, file /home/snikulov/work/vidstream/src/utils/src/converters.cpp) not referenced
+
+Count   Type    Number  Text
+
+6       Error   10      Expecting ___
+2       Error   19      Useless Declaration
+2       Error   39      Redefinition of symbol '___' ___
+1       Error   40      Undeclared identifier '___'
+4       Error   129     declaration expected, identifier '___' ignored
+1       Error   151     Token '___' inconsistent with abstract type
+1       Error   1013    Symbol '___' not a member of class '___'
+1       Error   1015    Symbol '___' not found in class
+4       Error   1051    Symbol '___' is both a function and a variable
+1       Error   1054    template variable declaration expects a type, int assumed
+3       Info    712     Loss of precision (___) (___ to ___)
+2       Info    714     Symbol '___' (___) not referenced
+1       Info    732     Loss of sign (___) (___ to ___)
+1       Info    737     Loss of sign in promotion from ___ to ___
+3       Info    747     Significant prototype coercion (___) ___ to ___
+2       Info    1754    Expected symbol '___' to be declared for class '___'
+1       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
+2       Note    953     Variable '___' (___) could be declared as const

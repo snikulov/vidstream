@@ -72,6 +72,7 @@ else()
     add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 endif()
 
+lint_check_sources(${TARGET_NAME} ${SRC_FILES})
 
 if(USE_QT5)
     target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES} ${Qt5Network_LIBRARIES})

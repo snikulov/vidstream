@@ -1,0 +1,226 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/bch/src/ecc.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
+"/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 34
+"/usr/include/boost/type_traits/is_integral.hpp"34 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"12 1 Note 1927: Symbol 'ecc::pbch' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"12 1 Note 1927: Symbol 'ecc::pkg_len' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"12 1 Note 1927: Symbol 'ecc::ecc_len' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"12 1 Note 1927: Symbol 'ecc::data_len' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"12 1 Note 1927: Symbol 'ecc::ecc_buff' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Note 952: Parameter 't' (line 10) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"10 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Note 952: Parameter 'm' (line 10) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"10 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Warning 1566: member 'ecc::pbch' (line 35, file /home/snikulov/work/vidstream/include/ecc/ecc.h) might have been initialized by a separate function but no '-sem(ecc::ecc_init,initializer)' was seen
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"35 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Warning 1566: member 'ecc::pkg_len' (line 36, file /home/snikulov/work/vidstream/include/ecc/ecc.h) might have been initialized by a separate function but no '-sem(ecc::ecc_init,initializer)' was seen
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"36 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Warning 1566: member 'ecc::ecc_len' (line 37, file /home/snikulov/work/vidstream/include/ecc/ecc.h) might have been initialized by a separate function but no '-sem(ecc::ecc_init,initializer)' was seen
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"37 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Warning 1566: member 'ecc::data_len' (line 38, file /home/snikulov/work/vidstream/include/ecc/ecc.h) might have been initialized by a separate function but no '-sem(ecc::ecc_init,initializer)' was seen
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"38 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"14 1 Warning 1566: member 'ecc::ecc_buff' (line 40, file /home/snikulov/work/vidstream/include/ecc/ecc.h) might have been initialized by a separate function but no '-sem(ecc::ecc_init,initializer)' was seen
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"40 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"17 22 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 26 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 41 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 44 Info 747: Significant prototype coercion (arg. no. 2) int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"43 36 Warning 613: Possible use of null pointer 'ecc::data_buff' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 28 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 43 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"46 1 Note 952: Parameter 't' (line 16) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"16 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"46 1 Note 952: Parameter 'm' (line 16) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"16 1 Info 830: Location cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/ecc.cpp line 13: ecc::ecc_init(?, ?) #1
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"43 1 Warning 613: Possible use of null pointer 'ecc::data_buff' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"59 1 Info 1740: pointer member 'ecc::pbch' (line 35, file /home/snikulov/work/vidstream/include/ecc/ecc.h) not directly freed or zeroed by destructor -- Effective C++ #6
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"35 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"59 1 Info 1740: pointer member 'ecc::ecc_buff' (line 40, file /home/snikulov/work/vidstream/include/ecc/ecc.h) not directly freed or zeroed by destructor -- Effective C++ #6
+"/home/snikulov/work/vidstream/include/ecc/ecc.h"40 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"64 50 Info 712: Loss of precision (initialization) (unsigned long to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 29 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 71 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 71 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 74 Info 747: Significant prototype coercion (arg. no. 2) int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"71 54 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"71 54 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"71 64 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"71 65 Warning 668: Possibly passing a null pointer to function 'memcpy(void *, const void *, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"72 34 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"73 56 Warning 668: Possibly passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"75 45 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"75 45 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"75 66 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"75 67 Warning 613: Possible use of null pointer 'data_pkg' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 69]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"78 35 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"78 36 Info 802: Conceivably passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42] -- Effective C++ #7
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"80 56 Info 802: Conceivably passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44] -- Effective C++ #7
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"83 82 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"83 83 Warning 613: Possible use of null pointer 'data_pkg' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 69]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"86 53 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"92 1 Note 953: Variable 'data_blocks' (line 64) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"64 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"92 1 Note 953: Variable 'data_pkg' (line 69) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"92 1 Note 952: Parameter 'in_data' (line 62) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"62 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"92 1 Note 952: Parameter 'in_data_len' (line 62) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"62 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"97 49 Info 712: Loss of precision (initialization) (unsigned long to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 29 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 49 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 59 Info 747: Significant prototype coercion (arg. no. 2) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"99 51 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"100 49 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"100 49 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"105 55 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"105 55 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"105 65 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"105 66 Warning 668: Possibly passing a null pointer to function 'memcpy(void *, const void *, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"110 45 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"111 70 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"111 70 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"116 51 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"116 51 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"116 51 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"116 51 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"116 65 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"121 44 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"121 44 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"121 65 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"121 66 Warning 613: Possible use of null pointer 'data_out' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 98]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"122 5 Note 953: Variable 'errors' (line 106) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"106 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"131 42 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"133 1 Note 953: Variable 'data_blocks' (line 97) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"97 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"133 1 Note 953: Variable 'data_out' (line 98) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"133 1 Note 952: Parameter 'in_data' (line 95) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"95 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"133 1 Note 952: Parameter 'in_data_len' (line 95) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"95 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"133 1 Warning 550: Symbol 'failed_cnt' (line 102) not accessed
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"102 1 Info 830: Location cited in prior message
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/bch/src/ecc.cpp (C++)
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"43 36 Warning 613: Possible use of null pointer 'ecc::data_buff' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/ecc.cpp line 13: ecc::ecc_init(?, ?) #1
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"43 1 Warning 613: Possible use of null pointer 'ecc::data_buff' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"71 65 Warning 668: Possibly passing a null pointer to function 'memcpy(void *, const void *, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"73 56 Warning 668: Possibly passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"75 67 Warning 613: Possible use of null pointer 'data_pkg' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 69]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"78 36 Info 802: Conceivably passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42] -- Effective C++ #7
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"80 56 Info 802: Conceivably passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44] -- Effective C++ #7
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"83 83 Warning 613: Possible use of null pointer 'data_pkg' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 69]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"69 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"105 66 Warning 668: Possibly passing a null pointer to function 'memcpy(void *, const void *, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 42]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"42 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"110 45 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"111 70 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"111 70 Warning 613: Possible use of null pointer 'ecc::errloc' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 44]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"44 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"121 66 Warning 613: Possible use of null pointer 'data_out' in left argument to operator 'ptr+int' [Reference: file /home/snikulov/work/vidstream/src/bch/src/ecc.cpp: line 98]
+"/home/snikulov/work/vidstream/src/bch/src/ecc.cpp"98 1 Info 831: Reference cited in prior message
+
+Count   Type    Number  Text
+
+5       Error   10      Expecting ___
+2       Error   19      Useless Declaration
+10      Error   39      Redefinition of symbol '___' ___
+9       Error   40      Undeclared identifier '___'
+4       Error   129     declaration expected, identifier '___' ignored
+1       Error   151     Token '___' inconsistent with abstract type
+9       Error   1054    template variable declaration expects a type, int assumed
+1       Warning 550     Symbol '___' (___) not accessed
+16      Warning 613     Possible use of null pointer '___' in ___argument to operator '___'___
+7       Warning 647     Suspicious truncation
+6       Warning 668     Possibly passing a null pointer to function '___', ___
+8       Warning 679     Suspicious Truncation in arithmetic expression combining with pointer
+5       Warning 1566    member '___' (___) might have been initialized by a separate function but no '-sem(___,initializer)' was seen
+1       Info    701     Shift left of signed quantity (___)
+2       Info    712     Loss of precision (___) (___ to ___)
+18      Info    747     Significant prototype coercion (___) ___ to ___
+4       Info    802     Conceivably passing a null pointer to function '___', ___
+2       Info    1740    pointer member '___' (___) not directly freed or zeroed by destructor
+8       Note    952     Parameter '___' (___) could be declared const
+5       Note    953     Variable '___' (___) could be declared as const
+4       Note    1924    C-style cast
+5       Note    1927    Symbol '___' did not appear in the constructor initializer list
