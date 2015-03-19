@@ -840,79 +840,79 @@
 "/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"92 1 Info 1762: Member function 'MainWindow::adjust_preset(void)' could be made const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"114 15 Warning 534: Ignoring return value of function 'QDialog::exec(void)' (compare with line 100, file /usr/include/QtGui/qdialog.h)
 "/usr/include/QtGui/qdialog.h"100 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"132 1 Note 952: Parameter 'img' (line 120) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"129 1 Note 952: Parameter 'img' (line 120) could be declared const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"120 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Warning 429: Custodial pointer 'qi' (line 136) has not been freed or returned
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Note 953: Variable 'qi' (line 136) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"148 1 Note 953: Variable 'w' (line 142) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"142 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"148 1 Note 953: Variable 'h' (line 143) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"143 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"151 1 Warning 578: Declaration of symbol 'data' hides symbol 'QWidget::data' (line 815, file /usr/include/QtGui/qwidget.h)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"135 1 Warning 429: Custodial pointer 'qi' (line 133) has not been freed or returned
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"135 1 Note 953: Variable 'qi' (line 133) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"145 1 Note 953: Variable 'w' (line 139) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"139 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"145 1 Note 953: Variable 'h' (line 140) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"140 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"148 1 Warning 578: Declaration of symbol 'data' hides symbol 'QWidget::data' (line 815, file /usr/include/QtGui/qwidget.h)
 "/usr/include/QtGui/qwidget.h"815 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"196 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'mbps' (line 181) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"181 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'jpeg_auto_q' (line 190) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"190 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'jpeg_cfg_q' (line 191) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"191 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'speed' (line 180) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"180 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"205 1 Warning 578: Declaration of symbol 'index' hides symbol 'index(char *, int)' (line 475, file /usr/include/string.h)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 1 Note 953: Variable 'mbps' (line 178) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"178 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 1 Note 953: Variable 'jpeg_auto_q' (line 187) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"187 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 1 Note 953: Variable 'jpeg_cfg_q' (line 188) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"188 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 1 Note 953: Variable 'speed' (line 177) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"177 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Warning 578: Declaration of symbol 'index' hides symbol 'index(char *, int)' (line 475, file /usr/include/string.h)
 "/usr/include/string.h"475 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"211 50 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<std::vector<profile>>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"213 46 Warning 571: Suspicious cast
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"221 40 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"208 50 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<std::vector<profile>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"210 46 Warning 571: Suspicious cast
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"218 40 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"222 46 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"219 46 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"223 53 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"220 53 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"225 65 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"225 65 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"227 48 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"222 65 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"222 65 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"224 48 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"228 50 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"225 50 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"230 42 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"230 42 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"231 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"227 42 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"227 42 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"228 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"232 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"229 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"237 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"234 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"238 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"235 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"239 41 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"236 41 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"240 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const float &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"237 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const float &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"241 43 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"238 43 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"242 36 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"239 36 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
 "/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"245 1 Note 952: Parameter 'index' (line 204) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"204 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"245 1 Info 1762: Member function 'MainWindow::on_comboBox_profiles_currentIndexChanged(int)' could be made const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"242 1 Note 952: Parameter 'index' (line 201) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"201 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"242 1 Info 1762: Member function 'MainWindow::on_comboBox_profiles_currentIndexChanged(int)' could be made const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"19 1 Warning 551: Symbol 'res_modes' (line 19, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
 "/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"30 1 Warning 551: Symbol 'bch_modes' (line 30, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
 
 /// Start of Pass 2 ///
 
 --- Module:   /home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp (C++)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Warning 429: Custodial pointer 'qi' (line 136) has not been freed or returned
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"135 1 Warning 429: Custodial pointer 'qi' (line 133) has not been freed or returned
 "/usr/include/sys/types.h"151 1 Info 830: Location cited in prior message
 "/usr/include/c++/4.8/cstdlib"166 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"133 1 Info 830: Location cited in prior message
 
 --- Global Wrap-up
 

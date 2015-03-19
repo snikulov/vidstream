@@ -855,10 +855,6 @@
 "/usr/include/boost/functional/hash/hash.hpp"444 46 Error 10: Expecting >
 "/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
 "/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"27 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/stat/stat_data.hpp'
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"29 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/channel/bchwrapper.hpp'
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 2 in macro 'BOOST_FOREACH'
@@ -1330,13 +1326,11 @@
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
 "/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"87 1 Info 1714: Member function 'cfg_sync_thread::operator()(void)' (line 87, file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp) not referenced
 
 Count   Type    Number  Text
 
-15      Error   10      Expecting ___
+14      Error   10      Expecting ___
 3       Error   19      Useless Declaration
 8       Error   26      Expected an expression, found '___'
 15      Error   39      Redefinition of symbol '___' ___
@@ -1346,13 +1340,13 @@ Count   Type    Number  Text
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
 1       Error   200     Internal Error, subcode=___
-77      Error   1013    Symbol '___' not a member of class '___'
-77      Error   1015    Symbol '___' not found in class
+76      Error   1013    Symbol '___' not a member of class '___'
+76      Error   1015    Symbol '___' not found in class
 70      Error   1023    Call '___' is ambiguous;  candidates: ___
 4       Error   1025    No ___ matches invocation '___'___
 6       Error   1039    Symbol '___' is not a member of class '___'
 6       Error   1040    Symbol '___' is not a legal declaration within class '___'
-8       Error   1051    Symbol '___' is both a function and a variable
+7       Error   1051    Symbol '___' is both a function and a variable
 27      Error   1054    template variable declaration expects a type, int assumed
 1       Error   1070    No scope in which to find symbol '___'
 3       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
@@ -1378,7 +1372,7 @@ Count   Type    Number  Text
 1       Info    1712    default constructor not defined for class '___'
 1       Info    1714    Member function '___' (___) not referenced
 1       Info    1725    class member '___' is a reference
-14      Info    1754    Expected symbol '___' to be declared for class '___'
+12      Info    1754    Expected symbol '___' to be declared for class '___'
 2       Info    1762    Member function '___' could be made const
 1       Info    1764    Reference parameter '___' (___) could be declared const ref
 1       Info    1790    Base class '___' has no non-destructor virtual functions

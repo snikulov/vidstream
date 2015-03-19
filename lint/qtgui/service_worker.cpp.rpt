@@ -806,10 +806,6 @@
 "/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"85 40 Error 1051: Symbol 'abs' is both a function and a variable
 "/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"452 36 Error 10: Expecting identifier or other declarator
 "/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"457 36 Error 10: Expecting identifier or other declarator
-"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
 
   While instantiating struct boost::uint_t<8> at File /usr/include/boost/integer/integer_mask.hpp line 89
 "/usr/include/boost/integer.hpp"157 63 Error 1015: Symbol 'digits' not found in class
@@ -999,12 +995,10 @@
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
 
 Count   Type    Number  Text
 
-19      Error   10      Expecting ___
+18      Error   10      Expecting ___
 3       Error   19      Useless Declaration
 8       Error   26      Expected an expression, found '___'
 15      Error   39      Redefinition of symbol '___' ___
@@ -1013,13 +1007,13 @@ Count   Type    Number  Text
 4       Error   91      Line exceeds ___ characters (use +linebuf)
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
-77      Error   1013    Symbol '___' not a member of class '___'
-77      Error   1015    Symbol '___' not found in class
+76      Error   1013    Symbol '___' not a member of class '___'
+76      Error   1015    Symbol '___' not found in class
 4       Error   1025    No ___ matches invocation '___'___
 4       Error   1039    Symbol '___' is not a member of class '___'
 4       Error   1040    Symbol '___' is not a legal declaration within class '___'
 8       Error   1048    expected a constant expression
-8       Error   1051    Symbol '___' is both a function and a variable
+7       Error   1051    Symbol '___' is both a function and a variable
 32      Error   1054    template variable declaration expects a type, int assumed
 5       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
 1       Warning 451     Header file '___' repeatedly included but does not have a standard include guard
@@ -1029,7 +1023,7 @@ Count   Type    Number  Text
 20      Warning 1512    destructor for base class '___' (___) is not virtual
 1       Info    766     Header file '___' not used in module '___'
 6       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
-15      Info    1754    Expected symbol '___' to be declared for class '___'
+13      Info    1754    Expected symbol '___' to be declared for class '___'
 2       Note    953     Variable '___' (___) could be declared as const
 5       Note    1926    Symbol '___'s default constructor implicitly called
 2       Note    1928    Symbol '___' did not appear in the constructor initializer list

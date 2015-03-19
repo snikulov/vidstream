@@ -917,10 +917,6 @@
 "/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"994 12 Error 40: Undeclared identifier 'ad_reference'
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"3 10 Warning 537: Repeated include file '/usr/include/c++/4.8/iostream'
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"4 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/nanopp/nn.hpp'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1928: Symbol 'noncopyable' did not appear in the constructor initializer list -- Effective C++ #12
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::codec_lk_'s default constructor implicitly called -- Effective C++ #12
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::inmx_'s default constructor implicitly called -- Effective C++ #12
@@ -968,6 +964,7 @@
 "/usr/include/bits/waitstatus.h"66 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"164 1 Note 952: Parameter 'wait' (line 147) could be declared const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"147 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"166 1 Info 766: Header file '/home/snikulov/work/vidstream/include/utils/converters.hpp' not used in module 'src/in_channel.cpp'
 
 /// Start of Pass 2 ///
 
@@ -977,12 +974,10 @@
 
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 1 Warning 526: Symbol '__builtin_expect()' (line 65, file /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp) not defined
 "/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 1 Warning 628: no argument information provided for function '__builtin_expect()' (line 65, file /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp)
- Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
 
 Count   Type    Number  Text
 
-15      Error   10      Expecting ___
+14      Error   10      Expecting ___
 3       Error   19      Useless Declaration
 15      Error   39      Redefinition of symbol '___' ___
 33      Error   40      Undeclared identifier '___'
@@ -990,13 +985,13 @@ Count   Type    Number  Text
 4       Error   91      Line exceeds ___ characters (use +linebuf)
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
-77      Error   1013    Symbol '___' not a member of class '___'
-77      Error   1015    Symbol '___' not found in class
+76      Error   1013    Symbol '___' not a member of class '___'
+76      Error   1015    Symbol '___' not found in class
 1       Error   1025    No ___ matches invocation '___'___
 4       Error   1039    Symbol '___' is not a member of class '___'
 4       Error   1040    Symbol '___' is not a legal declaration within class '___'
 8       Error   1048    expected a constant expression
-4       Error   1051    Symbol '___' is both a function and a variable
+3       Error   1051    Symbol '___' is both a function and a variable
 32      Error   1054    template variable declaration expects a type, int assumed
 5       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
 6       Error   1075    Ambiguous reference to symbol '___' and symbol '___'
@@ -1011,9 +1006,9 @@ Count   Type    Number  Text
 5       Info    717     do ... while(0);
 5       Info    730     Boolean argument to function
 1       Info    737     Loss of sign in promotion from ___ to ___
+1       Info    766     Header file '___' not used in module '___'
 1       Info    838     Previously assigned value to variable '___' has not been used
 1       Info    864     Expression involving variable '___' possibly depends on order of evaluation
-2       Info    1754    Expected symbol '___' to be declared for class '___'
 1       Info    1764    Reference parameter '___' (___) could be declared const ref
 1       Info    1788    Variable '___' (___) (type '___') is referenced only by its constructor or destructor
 1       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___

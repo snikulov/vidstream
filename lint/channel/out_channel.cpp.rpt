@@ -796,10 +796,6 @@
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"3 10 Warning 537: Repeated include file '/usr/include/c++/4.8/iostream'
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"4 10 Warning 537: Repeated include file '/usr/include/c++/4.8/stdexcept'
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"5 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/nanopp/nn.hpp'
@@ -816,8 +812,8 @@
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"9 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"21 26 Warning 1551: Function may throw exception '...' in destructor 'out_channel::~out_channel(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"23 15 Warning 1551: Function may throw exception '...' in destructor 'out_channel::~out_channel(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
-"/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"24 1 Info 1740: pointer member 'out_channel::stat_' (line 54, file /home/snikulov/work/vidstream/src/channel/hdr/out_channel_int.hpp) not directly freed or zeroed by destructor -- Effective C++ #6
-"/home/snikulov/work/vidstream/src/channel/hdr/out_channel_int.hpp"54 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"24 1 Info 1740: pointer member 'out_channel::stat_' (line 58, file /home/snikulov/work/vidstream/src/channel/hdr/out_channel_int.hpp) not directly freed or zeroed by destructor -- Effective C++ #6
+"/home/snikulov/work/vidstream/src/channel/hdr/out_channel_int.hpp"58 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"56 1 Note 953: Variable 'rc' (line 34) could be declared as const --- Eff. C++ 3rd Ed. item 3
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"34 1 Info 830: Location cited in prior message
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"64 47 Info 835: A zero has been given as right argument to operator '+'
@@ -886,21 +882,19 @@
 
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"98 1 Warning 526: Symbol '__builtin_expect()' (line 98, file /home/snikulov/work/vidstream/src/channel/src/out_channel.cpp) not defined
 "/home/snikulov/work/vidstream/src/channel/src/out_channel.cpp"98 1 Warning 628: no argument information provided for function '__builtin_expect()' (line 98, file /home/snikulov/work/vidstream/src/channel/src/out_channel.cpp)
- Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
 
 Count   Type    Number  Text
 
-8       Error   10      Expecting ___
+7       Error   10      Expecting ___
 3       Error   19      Useless Declaration
 12      Error   39      Redefinition of symbol '___' ___
 17      Error   40      Undeclared identifier '___'
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
-72      Error   1013    Symbol '___' not a member of class '___'
-72      Error   1015    Symbol '___' not found in class
+71      Error   1013    Symbol '___' not a member of class '___'
+71      Error   1015    Symbol '___' not found in class
 1       Error   1025    No ___ matches invocation '___'___
-4       Error   1051    Symbol '___' is both a function and a variable
+3       Error   1051    Symbol '___' is both a function and a variable
 19      Error   1054    template variable declaration expects a type, int assumed
 2       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
 6       Error   1075    Ambiguous reference to symbol '___' and symbol '___'
@@ -922,7 +916,6 @@ Count   Type    Number  Text
 1       Info    838     Previously assigned value to variable '___' has not been used
 1       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
 1       Info    1740    pointer member '___' (___) not directly freed or zeroed by destructor
-2       Info    1754    Expected symbol '___' to be declared for class '___'
 1       Info    1764    Reference parameter '___' (___) could be declared const ref
 2       Info    1788    Variable '___' (___) (type '___') is referenced only by its constructor or destructor
 1       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
