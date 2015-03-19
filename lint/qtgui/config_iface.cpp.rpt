@@ -1,0 +1,1029 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
+"/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 34
+"/usr/include/boost/type_traits/is_integral.hpp"34 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/cmath"82 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"88 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"92 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"153 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"155 66 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"257 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"272 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"292 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"294 66 Error 26: Expected an expression, found ','
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Integer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 67
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"67 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SignedInteger<<1>>>)> at File /usr/include/boost/concept_check.hpp line 93
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"93 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>)> at File /usr/include/boost/concept_check.hpp line 110
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"110 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>)> at File /usr/include/boost/concept_check.hpp line 132
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"132 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Assignable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 140
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Assignable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Assignable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Assignable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"140 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>)> at File /usr/include/boost/concept_check.hpp line 162
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"162 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 186
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"186 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 211
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"211 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 236
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"236 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 246
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"246 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Comparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 256
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Comparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Comparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Comparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"256 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 286
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 58 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"286 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 58 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 287
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 61 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"287 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 61 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 288
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 60 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"288 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 60 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 289
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 62 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"289 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 62 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 290
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 63 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"290 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 63 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 291
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 65 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"291 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 65 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 293
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 52 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"293 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 52 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 294
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 53 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"294 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 53 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 295
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 54 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"295 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 54 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 296
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 56 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"296 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 56 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 297
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 51 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"297 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 51 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 304
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"304 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 324
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"324 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>)> at File /usr/include/boost/concept_check.hpp line 354
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"354 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 384
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"384 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 403
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"403 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 424
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"424 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 451
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"451 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::InputIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 515
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::InputIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::InputIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::InputIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"515 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 532
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"532 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 546
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"546 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 564
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"564 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 574
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"574 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 592
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"592 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 604
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"604 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 629
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"629 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Container<<1>>>)> at File /usr/include/boost/concept_check.hpp line 651
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Container<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Container<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Container<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"651 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>)> at File /usr/include/boost/concept_check.hpp line 678
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"678 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 698
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"698 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 711
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"711 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 727
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"727 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 752
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"752 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 771
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"771 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 798
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"798 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Sequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 820
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Sequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Sequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Sequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"820 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 857
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"857 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 870
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"870 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 897
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"897 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 933
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"933 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 951
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"951 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 970
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"970 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 981
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"981 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 995
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"995 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Collection<<1>>>)> at File /usr/include/boost/concept_check.hpp line 1044
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Collection<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Collection<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Collection<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"1044 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 2 in macro 'BOOST_FOREACH'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 774: Boolean within 'if' always evaluates to False [Reference: file /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp: line 13]
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_CONTAIN'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_EVALUATE'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>, bool)' is ambiguous;  candidates: boost::foreach_detail_::make_probe(<1>&, bool &) (line 555, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::make_probe(const <1>&, bool &) (line 558, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"555 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"558 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::make_probe(const <1>&, bool &)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1793: While calling 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>(void)': Initializing the implicit object parameter 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> &' (a non-const reference) with a non-lvalue (the temporary object created by calling 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, bool &)')
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>, bool)' is ambiguous;  candidates: boost::foreach_detail_::make_probe(<1>&, bool &) (line 555, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::make_probe(const <1>&, bool &) (line 558, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"555 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"558 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::make_probe(const <1>&, bool &)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1793: While calling 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>(void)': Initializing the implicit object parameter 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> &' (a non-const reference) with a non-lvalue (the temporary object created by calling 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, bool &)')
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 864: Expression involving variable '_foreach_is_rvalue13' possibly depends on order of evaluation
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_BEGIN'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+
+  While instantiating boost::foreach_detail_::auto_any<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp line 13
+  While instantiating boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator at File /usr/include/boost/foreach.hpp line 266
+"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"99 70 Error 1070: No scope in which to find symbol 'const_iterator'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 1 Info 831: Reference cited in prior message
+"/usr/include/boost/foreach.hpp"266 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"99 70 Error 1054: template variable declaration expects a type, int assumed
+
+"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"103 68 Error 1015: Symbol 'base_type' not found in class
+
+"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"103 68 Error 1013: Symbol 'base_type' not a member of class 'const_iterator'
+
+"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"109 5 Error 200: Internal Error, subcode=2231
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_END'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+
+  While instantiating struct boost::foreach_detail_::foreach_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> at File /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp line 13
+  While instantiating struct boost::iterator_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/foreach.hpp line 401
+  While instantiating struct boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/iterator/iterator_traits.hpp line 36
+  While instantiating struct std::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/detail/iterator.hpp line 83
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"165 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::iterator_category' is not a member of class 'const_iterator'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 1 Info 831: Reference cited in prior message
+"/usr/include/boost/detail/iterator.hpp"83 1 Info 831: Reference cited in prior message
+"/usr/include/boost/iterator/iterator_traits.hpp"36 1 Info 831: Reference cited in prior message
+"/usr/include/boost/foreach.hpp"401 1 Info 831: Reference cited in prior message
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"165 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::iterator_category' is not a legal declaration within class 'iterator_traits'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"166 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::value_type' is not a member of class 'const_iterator'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"166 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::value_type' is not a legal declaration within class 'iterator_traits'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"167 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::difference_type' is not a member of class 'const_iterator'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"167 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::difference_type' is not a legal declaration within class 'iterator_traits'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"168 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::pointer' is not a member of class 'const_iterator'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"168 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::pointer' is not a legal declaration within class 'iterator_traits'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"169 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::reference' is not a member of class 'const_iterator'
+
+"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"169 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::reference' is not a legal declaration within class 'iterator_traits'
+
+  While instantiating struct boost::foreach_detail_::foreach_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> at File /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp line 13
+  While instantiating struct boost::iterator_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/foreach.hpp line 401
+"/usr/include/boost/iterator/iterator_traits.hpp"36 74 Error 1039: Symbol 'boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator>::reference' is not a member of class 'iterator_traits'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 1 Info 831: Reference cited in prior message
+"/usr/include/boost/foreach.hpp"401 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/iterator/iterator_traits.hpp"36 74 Error 1040: Symbol 'boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator>::reference' is not a legal declaration within class 'iterator_reference'
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1025: No template matches invocation 'boost::foreach_detail_::deref(const struct boost::foreach_detail_::auto_any_base, struct boost::foreach_detail_::type2type<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> *)', 1 candidates found, 1 matched the argument count
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::deref(const struct boost::foreach_detail_::auto_any_base &, boost::foreach_detail_::type2type<<1>,<2>> *)' arbitrarily selected.  Refer to Error 1025
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
+"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
+"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 64: Type mismatch (arg. no. 2) (boost::foreach_detail_::type2type<<1>,<2>> * = boost::foreach_detail_::type2type<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> *)
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"13 75 Error 64: Type mismatch (initialization) (std::pair<const std::basic_string<char>,boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> = boost::foreach_detail_::foreach_reference<<1>,<2>>::type)
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"37 1 Note 952: Parameter 'arr' (line 29) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"29 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"37 1 Note 952: Parameter 'len' (line 29) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"29 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"55 37 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"55 37 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"57 23 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"64 1 Note 953: Variable 'ret_val' (line 51) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"51 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"72 37 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"72 37 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"74 23 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"81 1 Note 953: Variable 'ret_val' (line 68) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp"68 1 Info 830: Location cited in prior message
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/config_iface.cpp (C++)
+
+Count   Type    Number  Text
+
+7       Error   10      Expecting ___
+2       Error   19      Useless Declaration
+8       Error   26      Expected an expression, found '___'
+10      Error   39      Redefinition of symbol '___' ___
+9       Error   40      Undeclared identifier '___'
+2       Error   64      Type mismatch (___) (___)
+4       Error   129     declaration expected, identifier '___' ignored
+1       Error   151     Token '___' inconsistent with abstract type
+1       Error   200     Internal Error, subcode=___
+56      Error   1013    Symbol '___' not a member of class '___'
+56      Error   1015    Symbol '___' not found in class
+70      Error   1023    Call '___' is ambiguous;  candidates: ___
+1       Error   1025    No ___ matches invocation '___'___
+6       Error   1039    Symbol '___' is not a member of class '___'
+6       Error   1040    Symbol '___' is not a legal declaration within class '___'
+3       Error   1051    Symbol '___' is both a function and a variable
+14      Error   1054    template variable declaration expects a type, int assumed
+1       Error   1070    No scope in which to find symbol '___'
+2       Warning 574     Signed-unsigned mix with relational
+16      Warning 666     Expression with side effects passed to repeated parameter ___ in macro '___'
+2       Info    732     Loss of sign (___) (___ to ___)
+2       Info    737     Loss of sign in promotion from ___ to ___
+2       Info    747     Significant prototype coercion (___) ___ to ___
+1       Info    774     Boolean within '___' always evaluates to ___
+1       Info    864     Expression involving variable '___' possibly depends on order of evaluation
+71      Info    1703    Function '___' arbitrarily selected.  Refer to Error ___
+2       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
+2       Note    917     Prototype coercion (___) ___ to ___
+2       Note    952     Parameter '___' (___) could be declared const
+2       Note    953     Variable '___' (___) could be declared as const

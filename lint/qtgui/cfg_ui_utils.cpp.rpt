@@ -1,0 +1,771 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
+"/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 34
+"/usr/include/boost/type_traits/is_integral.hpp"34 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 73
+"/usr/include/boost/type_traits/is_integral.hpp"73 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
+"/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/cmath"82 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"88 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/c++/4.8/cmath"92 3 Error 1051: Symbol 'abs' is both a function and a variable
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"153 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"155 66 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"257 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"272 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"292 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"294 66 Error 26: Expected an expression, found ','
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Integer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 67
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"67 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SignedInteger<<1>>>)> at File /usr/include/boost/concept_check.hpp line 93
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SignedInteger<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"93 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>)> at File /usr/include/boost/concept_check.hpp line 110
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnsignedInteger<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"110 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>)> at File /usr/include/boost/concept_check.hpp line 132
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DefaultConstructible<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"132 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Assignable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 140
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Assignable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Assignable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Assignable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"140 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>)> at File /usr/include/boost/concept_check.hpp line 162
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::CopyConstructible<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"162 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 186
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SGIAssignable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"186 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 211
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Convertible<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"211 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 236
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualityComparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"236 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 246
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanComparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"246 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Comparable<<1>>>)> at File /usr/include/boost/concept_check.hpp line 256
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Comparable<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Comparable<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Comparable<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"256 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 286
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::EqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 58 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"286 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 58 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 287
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::NotEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 61 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"287 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 61 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 288
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessThanOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 60 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"288 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 60 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 289
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::LessEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 62 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"289 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 62 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 290
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterThanOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 63 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"290 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 63 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 291
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::GreaterEqualOp<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 65 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"291 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 65 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 293
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PlusOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 52 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"293 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 52 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 294
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::TimesOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 53 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"294 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 53 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 295
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::DivideOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 54 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"295 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 54 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 296
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SubtractOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 56 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"296 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 56 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 297
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ModOp<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 51 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"297 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 51 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 304
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Generator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"304 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 324
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryFunction<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"324 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>)> at File /usr/include/boost/concept_check.hpp line 354
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryFunction<<1>,<2>,<3>,<4>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"354 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 384
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UnaryPredicate<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"384 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 403
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BinaryPredicate<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"403 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>)> at File /usr/include/boost/concept_check.hpp line 424
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Const_BinaryPredicate<<1>,<2>,<3>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"424 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 451
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AdaptableGenerator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"451 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::InputIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 515
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::InputIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::InputIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::InputIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"515 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>)> at File /usr/include/boost/concept_check.hpp line 532
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::OutputIterator<<1>,<2>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"532 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 546
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"546 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 564
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"564 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 574
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BidirectionalIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"574 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 592
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_BidirectionalIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"592 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 604
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"604 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>)> at File /usr/include/boost/concept_check.hpp line 629
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessIterator<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"629 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Container<<1>>>)> at File /usr/include/boost/concept_check.hpp line 651
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Container<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Container<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Container<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"651 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>)> at File /usr/include/boost/concept_check.hpp line 678
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_Container<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"678 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 698
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ForwardContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"698 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 711
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ForwardContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"711 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 727
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::ReversibleContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"727 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 752
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_ReversibleContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"752 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 771
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::RandomAccessContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"771 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 798
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Mutable_RandomAccessContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"798 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Sequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 820
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Sequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Sequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Sequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"820 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 857
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::FrontInsertionSequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"857 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>)> at File /usr/include/boost/concept_check.hpp line 870
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::BackInsertionSequence<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"870 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 897
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::AssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"897 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 933
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::UniqueAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"933 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 951
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::MultipleAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"951 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 970
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SimpleAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"970 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 981
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::PairAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"981 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 995
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SortedAssociativeContainer<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"995 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+
+  While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Collection<<1>>>)> at File /usr/include/boost/concept_check.hpp line 1044
+  While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Collection<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Collection<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
+  While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Collection<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1015: Symbol 'constraints' not found in class
+"/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept_check.hpp"1044 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"31 40 Warning 534: Ignoring return value of function 'ui_set_resolution_index(Ui::SettingsDialog &, const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &)' (compare with line 73, file /home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h)
+"/home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h"73 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"32 45 Warning 534: Ignoring return value of function 'ui_set_bch_preset_list_index(Ui::SettingsDialog &, const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &)' (compare with line 79, file /home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h)
+"/home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h"79 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"38 5 Info 715: Symbol 'ex' (line 36) not referenced
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"36 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"38 5 Info 1764: Reference parameter 'ex' (line 36) could be declared const ref --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"36 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"44 55 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"45 55 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"46 62 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"47 59 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"48 57 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"49 62 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const bool &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"50 69 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const double &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"51 59 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"53 56 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"54 58 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"55 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"58 60 Warning 534: Ignoring return value of function 'cfg_set_resolution_by_list_index(boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, int)' (compare with line 76, file /home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h)
+"/home/snikulov/work/vidstream/src/qtgui/hdr/settingsdialog.h"76 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"68 36 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"68 36 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"80 1 Info 1764: Reference parameter 'u' (line 61) could be declared const ref --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"61 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"80 1 Note 953: Variable 'w' (line 65) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"65 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"80 1 Note 953: Variable 'h' (line 66) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"66 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"84 39 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"84 39 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"88 36 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"89 37 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"90 5 Note 953: Variable 'w' (line 86) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"86 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"90 5 Note 953: Variable 'h' (line 87) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"87 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"97 1 Note 952: Parameter 'idx' (line 82) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"82 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"121 1 Note 953: Variable 't' (line 105) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"105 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"121 1 Info 1764: Reference parameter 'u' (line 100) could be declared const ref --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"100 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"121 1 Note 953: Variable 'm' (line 104) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"104 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"126 42 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"126 42 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"131 33 Warning 574: Signed-unsigned mix with relational
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"131 33 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"138 32 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"139 32 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"154 1 Info 1764: Reference parameter 'u' (line 124) could be declared const ref --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"124 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"154 1 Note 952: Parameter 'idx' (line 124) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"124 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"161 52 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"161 52 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"175 53 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"175 53 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"187 30 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"188 30 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"189 32 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"190 35 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"191 33 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"192 33 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"193 36 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const float &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"194 34 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"196 34 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"197 35 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"198 27 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
+"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"200 42 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"200 42 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"200 46 Warning 534: Ignoring return value of function 'cfg_set_resolution_by_list_index(boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, int)' (compare with line 82)
+"/home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp"82 1 Info 830: Location cited in prior message
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/cfg_ui_utils.cpp (C++)
+
+--- Global Wrap-up
+
+ Info 1754: Expected symbol 'operator*=' to be declared for class 'QPainterPath' -- More Effective C++ #22
+"/usr/include/QtGui/qstyleoption.h"907 1 Warning 1512: destructor for base class 'QStyleHintReturn' (line 907, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"67 1 Warning 1512: destructor for base class 'QStyleOption' (line 67, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"687 1 Warning 1512: destructor for base class 'QStyleOptionComplex' (line 687, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"504 1 Warning 1512: destructor for base class 'QStyleOptionDockWidget' (line 504, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"118 1 Warning 1512: destructor for base class 'QStyleOptionFrame' (line 118, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"134 1 Warning 1512: destructor for base class 'QStyleOptionFrameV2' (line 134, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"396 1 Warning 1512: destructor for base class 'QStyleOptionProgressBar' (line 396, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"304 1 Warning 1512: destructor for base class 'QStyleOptionTab' (line 304, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"218 1 Warning 1512: destructor for base class 'QStyleOptionTabBarBase' (line 218, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"333 1 Warning 1512: destructor for base class 'QStyleOptionTabV2' (line 333, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"175 1 Warning 1512: destructor for base class 'QStyleOptionTabWidgetFrame' (line 175, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"633 1 Warning 1512: destructor for base class 'QStyleOptionToolBox' (line 633, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"539 1 Warning 1512: destructor for base class 'QStyleOptionViewItem' (line 539, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"562 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV2' (line 562, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"590 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV3' (line 590, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtCore/qstringlist.h"66 1 Warning 1512: destructor for base class 'QList<QString>' (line 66, file /usr/include/QtCore/qstringlist.h) is not virtual
+"/usr/include/QtGui/qitemselectionmodel.h"231 1 Warning 1512: destructor for base class 'QList<QItemSelectionRange>' (line 231, file /usr/include/QtGui/qitemselectionmodel.h) is not virtual
+"/usr/include/QtGui/qbrush.h"201 1 Warning 1512: destructor for base class 'QGradient' (line 201, file /usr/include/QtGui/qbrush.h) is not virtual
+"/usr/include/QtGui/qpolygon.h"60 1 Warning 1512: destructor for base class 'QVector<QPoint>' (line 60, file /usr/include/QtGui/qpolygon.h) is not virtual
+"/usr/include/QtGui/qpolygon.h"134 1 Warning 1512: destructor for base class 'QVector<QPointF>' (line 134, file /usr/include/QtGui/qpolygon.h) is not virtual
+
+Count   Type    Number  Text
+
+7       Error   10      Expecting ___
+2       Error   19      Useless Declaration
+8       Error   26      Expected an expression, found '___'
+10      Error   39      Redefinition of symbol '___' ___
+9       Error   40      Undeclared identifier '___'
+4       Error   129     declaration expected, identifier '___' ignored
+1       Error   151     Token '___' inconsistent with abstract type
+55      Error   1013    Symbol '___' not a member of class '___'
+55      Error   1015    Symbol '___' not found in class
+3       Error   1051    Symbol '___' is both a function and a variable
+13      Error   1054    template variable declaration expects a type, int assumed
+30      Warning 534     Ignoring return value of function '___' (compare with ___)
+4       Warning 574     Signed-unsigned mix with relational
+20      Warning 1512    destructor for base class '___' (___) is not virtual
+1       Info    715     Symbol '___' (___) not referenced
+4       Info    737     Loss of sign in promotion from ___ to ___
+6       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
+1       Info    1754    Expected symbol '___' to be declared for class '___'
+4       Info    1764    Reference parameter '___' (___) could be declared const ref
+2       Note    952     Parameter '___' (___) could be declared const
+6       Note    953     Variable '___' (___) could be declared as const

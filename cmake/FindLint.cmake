@@ -40,6 +40,8 @@ if(LINT_EXECUTABLE)
         foreach(_one_inc_dir ${_inc_dirs})
             list(APPEND PROJECT_INCLUDE_DIRS "-i\"${_one_inc_dir}\"")
         endforeach(_one_inc_dir)
+        
+        list(APPEND PROJECT_INCLUDE_DIRS "-i\"${CMAKE_CURRENT_BINARY_DIR}\"")
 
         set(_all_files_reports)
 

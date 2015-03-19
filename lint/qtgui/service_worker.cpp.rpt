@@ -1,24 +1,14 @@
 
---- Module:   /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp (C++)
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp (C++)
 "/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
 "/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
 "/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
 "/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
 "/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"8 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/build/deps/include/log4cplus/loglevel.h'
 "/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
 "/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
 "/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
 "/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
-"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
-"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
-"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
-"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
-"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
-"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
-"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
-"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
 "/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 40: Undeclared identifier 'int128_type'
 "/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/boost/type_traits/is_integral.hpp"73 69 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 34
@@ -51,16 +41,28 @@
 "/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
 "/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
 "/usr/include/c++/4.8/cmath"82 3 Error 1051: Symbol 'abs' is both a function and a variable
 "/usr/include/c++/4.8/cmath"88 3 Error 1051: Symbol 'abs' is both a function and a variable
 "/usr/include/c++/4.8/cmath"92 3 Error 1051: Symbol 'abs' is both a function and a variable
-"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/math/policies/policy.hpp"819 28 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/math/policies/policy.hpp"819 30 Error 10: Expecting >
-"/usr/include/boost/math/policies/policy.hpp"819 36 Error 1073: Insufficient number of template parameters for 'boost::math::policies::precision<<1>,<2>>'; int assumed
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 64 Error 10: Expecting ')'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 69 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"153 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"155 66 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"257 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"272 65 Error 26: Expected an expression, found '}'
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"292 65 Error 26: Expected an expression, found ','
+"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"294 66 Error 26: Expected an expression, found ','
 
   While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Integer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 67
   While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
@@ -611,6 +613,33 @@
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/move/core.hpp"66 6 Error 19: Useless Declaration
+"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 423
+"/usr/include/boost/functional/hash/hash.hpp"423 1 Info 830: Location cited in prior message
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 10: Expecting >
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 443
+"/usr/include/boost/functional/hash/hash.hpp"443 1 Info 830: Location cited in prior message
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 10: Expecting >
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
 
   While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>)> at File /usr/include/boost/iterator/iterator_concepts.hpp line 50
   While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
@@ -707,8 +736,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::IncrementableIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"124 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"124 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -717,8 +746,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::SinglePassIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"146 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"146 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -727,8 +756,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::ForwardIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"185 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"185 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -737,8 +766,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::BidirectionalIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"212 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"212 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -747,8 +776,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::RandomAccessIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"233 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"233 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -757,8 +786,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SinglePassRangeConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"262 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"262 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -767,15 +796,90 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::WriteableRangeConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/range/concepts.hpp"310 1 Info 831: Reference cited in prior message
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
+"/usr/include/boost/range/concepts.hpp"310 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"82 38 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"83 40 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"84 44 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"85 40 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"452 36 Error 10: Expecting identifier or other declarator
+"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"457 36 Error 10: Expecting identifier or other declarator
+"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
+
+  While instantiating struct boost::uint_t<8> at File /usr/include/boost/integer/integer_mask.hpp line 89
+"/usr/include/boost/integer.hpp"157 63 Error 1015: Symbol 'digits' not found in class
+"/usr/include/boost/integer/integer_mask.hpp"89 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"157 63 Error 1013: Symbol 'digits' not a member of class 'numeric_limits'
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+  While instantiating struct boost::uint_t<16> at File /usr/include/boost/integer/integer_mask.hpp line 92
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"92 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 19 Error 1039: Symbol 'boost::detail::uint_least_helper<0>::least' is not a member of class 'uint_least_helper'
+
+"/usr/include/boost/integer.hpp"160 19 Error 1040: Symbol 'boost::detail::uint_least_helper<0>::least' is not a legal declaration within class 'uint_t'
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 1039: Symbol 'boost::uint_t<16>::least' is not a member of class 'uint_t'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 1040: Symbol 'boost::uint_t<16>::least' is not a legal declaration within class 'low_bits_mask_t'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 10: Expecting ';'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 40: Undeclared identifier 'sig_bits'
+
+  While instantiating struct boost::uint_t<0> at File /usr/include/boost/integer/integer_mask.hpp line 96
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"96 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+  While instantiating struct boost::uint_t<64> at File /usr/include/boost/integer/integer_mask.hpp line 100
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"100 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 19 Error 1039: Symbol 'boost::detail::uint_least_helper<0>::least' is not a member of class 'uint_least_helper'
+
+"/usr/include/boost/integer.hpp"160 19 Error 1040: Symbol 'boost::detail::uint_least_helper<0>::least' is not a legal declaration within class 'uint_t'
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 1039: Symbol 'boost::uint_t<64>::least' is not a member of class 'uint_t'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 1040: Symbol 'boost::uint_t<64>::least' is not a legal declaration within class 'low_bits_mask_t'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 10: Expecting ';'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 40: Undeclared identifier 'sig_bits'
+"/usr/include/boost/math/policies/policy.hpp"819 28 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/policies/policy.hpp"819 30 Error 10: Expecting >
+"/usr/include/boost/math/policies/policy.hpp"819 36 Error 1073: Insufficient number of template parameters for 'boost::math::policies::precision<<1>,<2>>'; int assumed
 "/usr/include/boost/lexical_cast.hpp"315 55 Error 40: Undeclared identifier 'int128_type'
 "/usr/include/boost/lexical_cast.hpp"315 55 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/boost/lexical_cast.hpp"316 55 Error 40: Undeclared identifier 'uint128_type'
 "/usr/include/boost/lexical_cast.hpp"316 55 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/boost/lexical_cast.hpp"316 55 Error 39: Redefinition of symbol 'boost::detail::stream_char_common<int>' conflicts with line 315
+"/home/snikulov/work/vidstream/src/qtgui/hdr/mainwindow.h"13 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/cstdlib"166 1 Info 830: Location cited in prior message
 "/usr/include/boost/lexical_cast.hpp"315 1 Info 830: Location cited in prior message
 
   While instantiating struct boost::detail::lcast_src_length_integral<int> at File /usr/include/boost/lexical_cast.hpp line 600
@@ -813,519 +917,76 @@
 "/usr/include/boost/lexical_cast.hpp"1835 57 Error 49: Expected a type
 "/usr/include/boost/lexical_cast.hpp"1836 49 Error 10: Expecting ',' or ')'
 "/usr/include/boost/lexical_cast.hpp"1836 57 Error 49: Expected a type
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"14 10 Warning 537: Repeated include file '/usr/include/boost/shared_ptr.hpp'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 64 Error 10: Expecting ')'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 69 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 64 Error 10: Expecting ')'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 69 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"153 65 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"155 66 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"257 65 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"272 65 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"292 65 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"294 66 Error 26: Expected an expression, found ','
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"82 38 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"83 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"84 44 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"85 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"452 36 Error 10: Expecting identifier or other declarator
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"457 36 Error 10: Expecting identifier or other declarator
-"/usr/include/boost/move/core.hpp"66 6 Error 19: Useless Declaration
-"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 423
-"/usr/include/sys/types.h"151 1 Info 830: Location cited in prior message
-"/usr/include/c++/4.8/cstdlib"166 1 Info 830: Location cited in prior message
-"/usr/include/boost/functional/hash/hash.hpp"423 1 Info 830: Location cited in prior message
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 10: Expecting >
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 443
-"/usr/include/boost/functional/hash/hash.hpp"443 1 Info 830: Location cited in prior message
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 10: Expecting >
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
-"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"27 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/stat/stat_data.hpp'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"29 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/channel/bchwrapper.hpp'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"37 1 Note 957: Function 'display(int, const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &)' defined without a prototype in scope
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 2 in macro 'BOOST_FOREACH'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 774: Boolean within 'if' always evaluates to False [Reference: file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp: line 41]
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 1 Info 831: Reference cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_CONTAIN'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_EVALUATE'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>, bool)' is ambiguous;  candidates: boost::foreach_detail_::make_probe(<1>&, bool &) (line 555, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::make_probe(const <1>&, bool &) (line 558, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"555 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"558 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::make_probe(const <1>&, bool &)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1793: While calling 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>(void)': Initializing the implicit object parameter 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> &' (a non-const reference) with a non-lvalue (the temporary object created by calling 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, bool &)')
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>, bool)' is ambiguous;  candidates: boost::foreach_detail_::make_probe(<1>&, bool &) (line 555, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::make_probe(const <1>&, bool &) (line 558, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"555 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"558 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::make_probe(const <1>&, bool &)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1793: While calling 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>(void)': Initializing the implicit object parameter 'boost::foreach_detail_::rvalue_probe<const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> &' (a non-const reference) with a non-lvalue (the temporary object created by calling 'boost::foreach_detail_::make_probe(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &, bool &)')
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 864: Expression involving variable '_foreach_is_rvalue41' possibly depends on order of evaluation
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_BEGIN'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-
-  While instantiating boost::foreach_detail_::auto_any<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp line 41
-  While instantiating boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator at File /usr/include/boost/foreach.hpp line 266
-"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"99 70 Error 1070: No scope in which to find symbol 'const_iterator'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 1 Info 831: Reference cited in prior message
-"/usr/include/boost/foreach.hpp"266 1 Info 831: Reference cited in prior message
-
-"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"99 70 Error 1054: template variable declaration expects a type, int assumed
-
-"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"103 68 Error 1015: Symbol 'base_type' not found in class
-
-"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"103 68 Error 1013: Symbol 'base_type' not a member of class 'const_iterator'
-
-"/usr/include/boost/property_tree/detail/ptree_implementation.hpp"109 5 Error 200: Internal Error, subcode=2231
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_END'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_SHOULD_COPY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_IS_LIGHTWEIGHT_PROXY'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Warning 666: Expression with side effects passed to repeated parameter 1 in macro 'BOOST_FOREACH_TYPEOF'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-
-  While instantiating struct boost::foreach_detail_::foreach_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> at File /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp line 41
-  While instantiating struct boost::iterator_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/foreach.hpp line 401
-  While instantiating struct boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/iterator/iterator_traits.hpp line 36
-  While instantiating struct std::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/detail/iterator.hpp line 83
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"165 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::iterator_category' is not a member of class 'const_iterator'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 1 Info 831: Reference cited in prior message
-"/usr/include/boost/detail/iterator.hpp"83 1 Info 831: Reference cited in prior message
-"/usr/include/boost/iterator/iterator_traits.hpp"36 1 Info 831: Reference cited in prior message
-"/usr/include/boost/foreach.hpp"401 1 Info 831: Reference cited in prior message
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"165 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::iterator_category' is not a legal declaration within class 'iterator_traits'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"166 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::value_type' is not a member of class 'const_iterator'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"166 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::value_type' is not a legal declaration within class 'iterator_traits'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"167 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::difference_type' is not a member of class 'const_iterator'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"167 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::difference_type' is not a legal declaration within class 'iterator_traits'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"168 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::pointer' is not a member of class 'const_iterator'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"168 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::pointer' is not a legal declaration within class 'iterator_traits'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"169 53 Error 1039: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::reference' is not a member of class 'const_iterator'
-
-"/usr/include/c++/4.8/bits/stl_iterator_base_types.h"169 53 Error 1040: Symbol 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator::reference' is not a legal declaration within class 'iterator_traits'
-
-  While instantiating struct boost::foreach_detail_::foreach_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> at File /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp line 41
-  While instantiating struct boost::iterator_reference<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator> at File /usr/include/boost/foreach.hpp line 401
-"/usr/include/boost/iterator/iterator_traits.hpp"36 74 Error 1039: Symbol 'boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator>::reference' is not a member of class 'iterator_traits'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 1 Info 831: Reference cited in prior message
-"/usr/include/boost/foreach.hpp"401 1 Info 831: Reference cited in prior message
-
-"/usr/include/boost/iterator/iterator_traits.hpp"36 74 Error 1040: Symbol 'boost::detail::iterator_traits<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::const_iterator>::reference' is not a legal declaration within class 'iterator_reference'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1025: No template matches invocation 'boost::foreach_detail_::deref(const struct boost::foreach_detail_::auto_any_base, struct boost::foreach_detail_::type2type<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> *)', 1 candidates found, 1 matched the argument count
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::deref(const struct boost::foreach_detail_::auto_any_base &, boost::foreach_detail_::type2type<<1>,<2>> *)' arbitrarily selected.  Refer to Error 1025
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 1023: Call 'boost::foreach_detail_::is_const_(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>)' is ambiguous;  candidates: boost::foreach_detail_::is_const_(<1>&) (line 224, file /usr/include/boost/foreach.hpp) and boost::foreach_detail_::is_const_(const <1>&) (line 228, file /usr/include/boost/foreach.hpp)'
-"/usr/include/boost/foreach.hpp"224 1 Info 830: Location cited in prior message
-"/usr/include/boost/foreach.hpp"228 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Info 1703: Function 'boost::foreach_detail_::is_const_(const <1>&)' arbitrarily selected.  Refer to Error 1023
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 64: Type mismatch (arg. no. 2) (boost::foreach_detail_::type2type<<1>,<2>> * = boost::foreach_detail_::type2type<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>,mpl_::bool_<1>> *)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"41 66 Error 64: Type mismatch (initialization) (std::pair<const std::basic_string<char>,boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>> = boost::foreach_detail_::foreach_reference<<1>,<2>>::type)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 34 Info 1793: While calling 'std::basic_string<char>::assign(unsigned long, char)': Initializing the implicit object parameter 'std::basic_string<char> &' (a non-const reference) with a non-lvalue (a temporary object of type 'std::basic_string<char>')
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"47 42 Warning 647: Suspicious truncation
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"60 1 Note 1932: Base class 'boost::noncopyable_::noncopyable' is not abstract -- More Effective C++ #33
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"60 1 Info 1790: Base class 'boost::noncopyable_::noncopyable' has no non-destructor virtual functions
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Info 1725: class member 'cfg_sync_thread::stop_' is a reference
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"167 28 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"170 1 Warning 1509: The destructor of derived class 'cfg_sync_thread' is non-trivial, but the non-trivial destructor of base class 'boost::noncopyable_::noncopyable' is not virtual -- Effective C++ #14 & Eff. C++ 3rd Ed. item 7
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"64 13 Warning 578: Declaration of symbol 'stat' hides symbol 'stat(const char *, struct stat *)' (line 453, file /usr/include/sys/stat.h)
-"/usr/include/sys/stat.h"453 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"65 9 Note 1928: Symbol 'noncopyable' did not appear in the constructor initializer list -- Effective C++ #12
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"65 9 Note 1926: Symbol 'cfg_sync_thread::trans_'s default constructor implicitly called -- Effective C++ #12
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"65 9 Note 1926: Symbol 'cfg_sync_thread::subs_'s default constructor implicitly called -- Effective C++ #12
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"65 10 Note 952: Parameter 'stat' (line 63) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"63 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"71 47 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"72 52 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"73 53 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned long &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"74 50 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned long &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"75 53 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned long &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"76 55 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"77 50 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned long &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"78 47 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const unsigned long &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"79 57 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const double &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"80 57 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"85 9 Info 1762: Member function 'cfg_sync_thread::send_request(void)' could be made const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"99 29 Info 774: Boolean within 'if' always evaluates to False [Reference: file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp: line 91]
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"91 1 Info 831: Reference cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"131 70 Info 864: Expression involving variable 'cfgdata' possibly depends on order of evaluation
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"135 31 Info 1702: operator 'operator*' is both an ordinary function 'boost::chrono::operator*(const boost::chrono::duration<<1>,<2>> &, const <3>&)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"135 37 Info 1702: operator 'operator!=' is both an ordinary function 'boost::chrono::operator!=(const boost::chrono::duration<<1>,<2>> &, const boost::chrono::duration<<3>,<4>> &)' and a member function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::operator!=(const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &) const'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"138 50 Info 1702: operator 'operator*' is both an ordinary function 'boost::chrono::operator*(const boost::chrono::duration<<1>,<2>> &, const <3>&)' and a member function 'boost::shared_ptr<boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"150 17 Info 1764: Reference parameter 'ex' (line 145) could be declared const ref --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"145 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"154 40 Info 1762: Member function 'cfg_sync_thread::ready(void)' could be made const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"159 9 Note 952: Parameter 'sub' (line 156) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"170 1 Info 1712: default constructor not defined for class 'cfg_sync_thread'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"177 1 Note 957: Function 'quit_signal_handler(int)' defined without a prototype in scope
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"183 1 Info 715: Symbol 'signum' (line 176) not referenced
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"176 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"183 1 Note 952: Parameter 'signum' (line 176) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"176 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"202 40 Warning 534: Ignoring return value of function 'signal(int, void (*)(int))' (compare with line 102, file /usr/include/signal.h)
-"/usr/include/signal.h"102 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"207 9 Info 1793: While calling 'boost::program_options::options_description_easy_init::operator()(const char *, const boost::program_options::value_semantic *, const char *)': Initializing the implicit object parameter 'boost::program_options::options_description_easy_init &' (a non-const reference) with a non-lvalue (a temporary object of type 'boost::program_options::options_description_easy_init')
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"210 32 Warning 534: Ignoring return value of function 'boost::program_options::options_description_easy_init::operator()(const char *, const char *)' (compare with line 148, file /usr/include/boost/program_options/options_description.hpp)
-"/usr/include/boost/program_options/options_description.hpp"148 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"230 48 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::reference_wrapper<cfg_sync_thread>)', 17 candidates found, 5 matched the argument count
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 94 Info 730: Boolean argument to function
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 94 Info 717: do ... while(0);
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"263 40 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"263 40 Note 917: Prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"264 21 Info 1702: operator 'operator*' is both an ordinary function 'boost::chrono::operator*(const boost::chrono::duration<<1>,<2>> &, const <3>&)' and a member function 'boost::scoped_ptr<vidstream::camera>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"272 31 Warning 534: Ignoring return value of function 'cfg_sync_thread::subscribe(cfg_notify *)' (compare with line 156)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"273 32 Warning 534: Ignoring return value of function 'cfg_sync_thread::subscribe(cfg_notify *)' (compare with line 156)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"274 33 Warning 534: Ignoring return value of function 'cfg_sync_thread::subscribe(cfg_notify *)' (compare with line 156)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"156 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"276 49 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::reference_wrapper<vidstream::frame_producer>)', 17 candidates found, 5 matched the argument count
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"277 49 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::reference_wrapper<vidstream::frame_processor>)', 17 candidates found, 5 matched the argument count
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"283 76 Info 730: Boolean argument to function
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"283 76 Info 717: do ... while(0);
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 952: Parameter 'argv' (line 186) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"186 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Info 818: Pointer parameter 'argv' (line 186) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"186 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'quality' (line 246) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"246 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'frame_rate' (line 244) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"244 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'w' (line 242) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"242 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'h' (line 243) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"243 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'bw' (line 245) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"245 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'bch_n' (line 240) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"240 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 953: Variable 'bch_t' (line 241) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"241 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"286 1 Note 952: Parameter 'argc' (line 186) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"186 1 Info 830: Location cited in prior message
+"/usr/include/boost/math/constants/constants.hpp"87 61 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 63 Error 10: Expecting >
+"/usr/include/boost/math/constants/constants.hpp"87 67 Error 1073: Insufficient number of template parameters for 'boost::is_convertible<<1>,<2>>'; int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 61 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 63 Error 10: Expecting >
+"/usr/include/boost/math/constants/constants.hpp"87 67 Error 1073: Insufficient number of template parameters for 'boost::is_convertible<<1>,<2>>'; int assumed
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"693 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"694 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"793 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"794 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"893 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"894 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"993 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"994 12 Error 40: Undeclared identifier 'ad_reference'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"10 10 Warning 537: Repeated include file '/usr/include/boost/function.hpp'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"10 10 Warning 451: Header file '/usr/include/boost/function.hpp' repeatedly included but does not have a standard include guard
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1928: Symbol 'worker' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1928: Symbol 'noncopyable' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1926: Symbol 'service_worker::bch_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1926: Symbol 'service_worker::rcv_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1926: Symbol 'service_worker::cfgsrv_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1926: Symbol 'service_worker::cfgthread_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"14 1 Note 1926: Symbol 'service_worker::process_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"46 35 Warning 534: Ignoring return value of function 'ctrlsrv::subscribe(cfg_notify *)' (compare with line 69, file /home/snikulov/work/vidstream/src/qtgui/hdr/ctrlsrv.hpp)
+"/home/snikulov/work/vidstream/src/qtgui/hdr/ctrlsrv.hpp"69 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 59 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<ctrlsrv>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 59 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<ctrlsrv>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 60 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::reference_wrapper<ctrlsrv>)', 17 candidates found, 5 matched the argument count
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 59 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<ctrlsrv>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 59 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<ctrlsrv>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"49 60 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::reference_wrapper<ctrlsrv>)', 17 candidates found, 5 matched the argument count
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"50 43 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<jpeg_receiver>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"50 43 Error 1025: No function or template matches invocation 'boost::thread::thread(jpeg_receiver)', 17 candidates found, 5 matched the argument count
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"50 43 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<jpeg_receiver>::operator*(void) const'
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"50 43 Error 1025: No function or template matches invocation 'boost::thread::thread(jpeg_receiver)', 17 candidates found, 5 matched the argument count
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"52 1 Note 953: Variable 't' (line 43) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"43 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"52 1 Note 953: Variable 'm' (line 42) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"42 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"19 1 Warning 551: Symbol 'res_modes' (line 19, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
+"/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"30 1 Warning 551: Symbol 'bch_modes' (line 30, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
+"/home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp"64 1 Info 766: Header file '/home/snikulov/work/vidstream/include/ocv/ocv_output.hpp' not used in module 'src/service_worker.cpp'
 
 /// Start of Pass 2 ///
 
---- Module:   /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp (C++)
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"162 20 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"167 28 Note 958: Padding of 7 byte(s) is required to align member on 8 byte boundary
+--- Module:   /home/snikulov/work/vidstream/src/qtgui/src/service_worker.cpp (C++)
 
 --- Global Wrap-up
 
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"36 1 Info 714: Symbol 'display(int, const boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>> &)' (line 36, file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp) not referenced
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 1 Warning 526: Symbol '__builtin_expect()' (line 234, file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp) not defined
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"234 1 Warning 628: no argument information provided for function '__builtin_expect()' (line 234, file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp)
+ Info 1754: Expected symbol 'operator*=' to be declared for class 'QPainterPath' -- More Effective C++ #22
+"/usr/include/QtGui/qstyleoption.h"907 1 Warning 1512: destructor for base class 'QStyleHintReturn' (line 907, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"67 1 Warning 1512: destructor for base class 'QStyleOption' (line 67, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"687 1 Warning 1512: destructor for base class 'QStyleOptionComplex' (line 687, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"504 1 Warning 1512: destructor for base class 'QStyleOptionDockWidget' (line 504, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"118 1 Warning 1512: destructor for base class 'QStyleOptionFrame' (line 118, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"134 1 Warning 1512: destructor for base class 'QStyleOptionFrameV2' (line 134, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"396 1 Warning 1512: destructor for base class 'QStyleOptionProgressBar' (line 396, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"304 1 Warning 1512: destructor for base class 'QStyleOptionTab' (line 304, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"218 1 Warning 1512: destructor for base class 'QStyleOptionTabBarBase' (line 218, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"333 1 Warning 1512: destructor for base class 'QStyleOptionTabV2' (line 333, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"175 1 Warning 1512: destructor for base class 'QStyleOptionTabWidgetFrame' (line 175, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"633 1 Warning 1512: destructor for base class 'QStyleOptionToolBox' (line 633, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"539 1 Warning 1512: destructor for base class 'QStyleOptionViewItem' (line 539, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"562 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV2' (line 562, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtGui/qstyleoption.h"590 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV3' (line 590, file /usr/include/QtGui/qstyleoption.h) is not virtual
+"/usr/include/QtCore/qstringlist.h"66 1 Warning 1512: destructor for base class 'QList<QString>' (line 66, file /usr/include/QtCore/qstringlist.h) is not virtual
+"/usr/include/QtGui/qitemselectionmodel.h"231 1 Warning 1512: destructor for base class 'QList<QItemSelectionRange>' (line 231, file /usr/include/QtGui/qitemselectionmodel.h) is not virtual
+"/usr/include/QtGui/qbrush.h"201 1 Warning 1512: destructor for base class 'QGradient' (line 201, file /usr/include/QtGui/qbrush.h) is not virtual
+"/usr/include/QtGui/qpolygon.h"60 1 Warning 1512: destructor for base class 'QVector<QPoint>' (line 60, file /usr/include/QtGui/qpolygon.h) is not virtual
+"/usr/include/QtGui/qpolygon.h"134 1 Warning 1512: destructor for base class 'QVector<QPointF>' (line 134, file /usr/include/QtGui/qpolygon.h) is not virtual
  Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
@@ -1340,62 +1001,35 @@
  Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
  Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
-"/home/snikulov/work/vidstream/src/capture/src/main_capture.cpp"87 1 Info 1714: Member function 'cfg_sync_thread::operator()(void)' (line 87, file /home/snikulov/work/vidstream/src/capture/src/main_capture.cpp) not referenced
 
 Count   Type    Number  Text
 
-15      Error   10      Expecting ___
+19      Error   10      Expecting ___
 3       Error   19      Useless Declaration
 8       Error   26      Expected an expression, found '___'
 15      Error   39      Redefinition of symbol '___' ___
-23      Error   40      Undeclared identifier '___'
+33      Error   40      Undeclared identifier '___'
 2       Error   49      Expected a type
-2       Error   64      Type mismatch (___) (___)
+4       Error   91      Line exceeds ___ characters (use +linebuf)
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
-1       Error   200     Internal Error, subcode=___
 77      Error   1013    Symbol '___' not a member of class '___'
 77      Error   1015    Symbol '___' not found in class
-70      Error   1023    Call '___' is ambiguous;  candidates: ___
 4       Error   1025    No ___ matches invocation '___'___
-6       Error   1039    Symbol '___' is not a member of class '___'
-6       Error   1040    Symbol '___' is not a legal declaration within class '___'
+4       Error   1039    Symbol '___' is not a member of class '___'
+4       Error   1040    Symbol '___' is not a legal declaration within class '___'
+8       Error   1048    expected a constant expression
 8       Error   1051    Symbol '___' is both a function and a variable
-27      Error   1054    template variable declaration expects a type, int assumed
-1       Error   1070    No scope in which to find symbol '___'
-3       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
-1       Warning 526     Symbol '___' (___) not defined
-15      Warning 534     Ignoring return value of function '___' (compare with ___)
-4       Warning 537     Repeated include file '___'
-1       Warning 578     Declaration of symbol '___' hides symbol '___' (___)
-1       Warning 628     no argument information provided for function '___' (___)
-1       Warning 647     Suspicious truncation
-16      Warning 666     Expression with side effects passed to repeated parameter ___ in macro '___'
-1       Warning 1509    The destructor of derived class '___' is non-trivial, but the non-trivial destructor of base class '___' is not virtual
-1       Info    714     Symbol '___' (___) not referenced
-1       Info    715     Symbol '___' (___) not referenced
-2       Info    717     do ... while(0);
-2       Info    730     Boolean argument to function
-1       Info    732     Loss of sign (___) (___ to ___)
-2       Info    747     Significant prototype coercion (___) ___ to ___
-2       Info    774     Boolean within '___' always evaluates to ___
-1       Info    818     Pointer parameter '___' (___) could be declared as pointing to const
-2       Info    864     Expression involving variable '___' possibly depends on order of evaluation
-4       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
-71      Info    1703    Function '___' arbitrarily selected.  Refer to Error ___
-1       Info    1712    default constructor not defined for class '___'
-1       Info    1714    Member function '___' (___) not referenced
-1       Info    1725    class member '___' is a reference
-14      Info    1754    Expected symbol '___' to be declared for class '___'
-2       Info    1762    Member function '___' could be made const
-1       Info    1764    Reference parameter '___' (___) could be declared const ref
-1       Info    1790    Base class '___' has no non-destructor virtual functions
-4       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
-2       Note    917     Prototype coercion (___) ___ to ___
-5       Note    952     Parameter '___' (___) could be declared const
-7       Note    953     Variable '___' (___) could be declared as const
-2       Note    957     Function '___' defined without a prototype in scope
-4       Note    958     Padding of ___ byte(s) is required to align ___ on ___ byte boundary
-2       Note    1926    Symbol '___'s default constructor implicitly called
-1       Note    1928    Symbol '___' did not appear in the constructor initializer list
-1       Note    1932    Base class '___' is not abstract
+32      Error   1054    template variable declaration expects a type, int assumed
+5       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
+1       Warning 451     Header file '___' repeatedly included but does not have a standard include guard
+1       Warning 534     Ignoring return value of function '___' (compare with ___)
+1       Warning 537     Repeated include file '___'
+2       Warning 551     Symbol '___' (___) not accessed
+20      Warning 1512    destructor for base class '___' (___) is not virtual
+1       Info    766     Header file '___' not used in module '___'
+6       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
+15      Info    1754    Expected symbol '___' to be declared for class '___'
+2       Note    953     Variable '___' (___) could be declared as const
+5       Note    1926    Symbol '___'s default constructor implicitly called
+2       Note    1928    Symbol '___' did not appear in the constructor initializer list
