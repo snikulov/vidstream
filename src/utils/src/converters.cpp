@@ -1,8 +1,8 @@
-#include <boost/dynamic_bitset.hpp>
-#include <itpp/itcomm.h>
+#include <utils/converters.hpp>
 
 namespace vidstream
 {
+#ifdef BUILD_WITH_ITPP
     void to_itppbvec(const boost::dynamic_bitset<uint8_t>& bdb, itpp::bvec& ib)
     {
         size_t len = bdb.size();
@@ -32,13 +32,6 @@ namespace vidstream
         }
     }
 
-    void to_vector(const boost::dynamic_bitset<uint8_t>& bdb, std::vector<uint8_t>& data)
-    {
-        std::vector<uint8_t> res(bdb.num_blocks());
-        to_block_range(bdb, res.begin());
-        data.swap(res);
-    }
-
     void to_vector(const itpp::bvec& ib, std::vector<uint8_t>& data)
     {
         boost::dynamic_bitset<uint8_t> dst;
@@ -48,5 +41,16 @@ namespace vidstream
         to_vector(dst, res);
         data.swap(res);
     }
+
+#endif
+
+    void to_vector(const boost::dynamic_bitset<boost::uint8_t>& bdb,
+           std::vector<boost::uint8_t>& data)
+    {
+        std::vector<boost::uint8_t> res(bdb.num_blocks());
+        to_block_range(bdb, res.begin());
+        data.swap(res);
+    }
+
 }
 
