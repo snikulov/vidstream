@@ -1,0 +1,958 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/bch/src/bch.cpp (C++)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"13 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"23 31 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"24 26 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"27 31 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"28 25 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"31 31 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"32 25 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"35 31 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"36 25 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"39 31 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"40 25 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"43 18 Info 732: Loss of sign (return) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"43 18 Warning 438: Last value assigned to variable 'x' (defined at line 17) not used
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"17 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"45 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"51 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"60 43 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"63 78 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"63 78 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"66 57 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"70 1 Note 952: Parameter 'ecc' (line 56) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"56 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"70 1 Note 952: Parameter 'bch' (line 54) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"54 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"70 1 Info 818: Pointer parameter 'bch' (line 54) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"54 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"72 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"82 39 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"84 53 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"84 53 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"85 36 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"86 1 Note 953: Variable 'nwords' (line 79) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"79 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"86 1 Note 952: Parameter 'dst' (line 75) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"75 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"86 1 Note 952: Parameter 'bch' (line 75) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"75 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"86 1 Info 818: Pointer parameter 'bch' (line 75) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"75 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"88 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"98 9 Info 725: Expected positive indentation from line 97
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"97 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"101 39 Info 835: A zero has been given as right argument to operator '>>'
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"106 36 Info 835: A zero has been given as right argument to operator '>>'
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"107 53 Info 747: Significant prototype coercion (arg. no. 3) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"107 53 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"108 1 Note 953: Variable 'nwords' (line 95) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"95 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"108 1 Note 952: Parameter 'src' (line 92) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"92 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"108 1 Note 952: Parameter 'bch' (line 91) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"91 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"108 1 Info 818: Pointer parameter 'bch' (line 91) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"91 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"110 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"126 1 Info 1784: Symbol 'encode_bch(struct bch_control *, const unsigned char *, unsigned int, unsigned char *)' previously declared as "C", compare with line 64, file /home/snikulov/work/vidstream/src/bch/hdr/bch.h
+"/home/snikulov/work/vidstream/src/bch/hdr/bch.h"64 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"132 55 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"133 55 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"134 55 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"138 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"144 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"145 28 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"147 49 Info 712: Loss of precision (assignment) (unsigned long to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"153 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"154 28 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"154 33 Info 1773: Attempt to cast away const (or volatile)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"154 33 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"156 23 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"160 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"172 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"173 11 Info 725: Expected positive indentation from line 171
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"171 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"173 47 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"174 44 Info 835: A zero has been given as right argument to operator '>>'
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"174 53 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"175 53 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"176 53 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"177 53 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"180 37 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"186 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"190 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"193 1 Note 952: Parameter 'ecc' (line 125) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"125 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"193 1 Note 952: Parameter 'bch' (line 124) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"124 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"203 17 Info 713: Loss of precision (return) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"204 1 Note 952: Parameter 'bch' (line 195) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"195 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"204 1 Info 818: Pointer parameter 'bch' (line 195) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"195 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"206 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"212 33 Info 713: Loss of precision (return) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"213 1 Note 952: Parameter 'v' (line 209) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"209 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"213 1 Note 952: Parameter 'bch' (line 209) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"209 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"213 1 Info 818: Pointer parameter 'bch' (line 209) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"209 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"217 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"218 24 Info 713: Loss of precision (arg. no. 1) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"218 27 Info 713: Loss of precision (return) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"219 1 Note 952: Parameter 'poly' (line 215) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"215 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"223 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"233 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"240 1 Note 952: Parameter 'a' (line 235) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"235 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"240 1 Note 952: Parameter 'b' (line 236) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"236 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"240 1 Note 952: Parameter 'bch' (line 235) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"235 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"245 1 Note 952: Parameter 'a' (line 242) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"242 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"245 1 Note 952: Parameter 'bch' (line 242) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"242 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"252 1 Note 952: Parameter 'a' (line 247) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"247 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"252 1 Note 952: Parameter 'b' (line 248) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"248 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"252 1 Note 952: Parameter 'bch' (line 247) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"247 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"257 1 Note 952: Parameter 'a' (line 254) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"254 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"257 1 Note 952: Parameter 'bch' (line 254) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"254 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"257 1 Info 818: Pointer parameter 'bch' (line 254) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"254 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"261 44 Info 732: Loss of sign (arg. no. 2) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"262 1 Note 952: Parameter 'i' (line 259) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"259 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"262 1 Note 952: Parameter 'bch' (line 259) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"259 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"267 1 Note 952: Parameter 'x' (line 264) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"264 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"267 1 Note 952: Parameter 'bch' (line 264) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"264 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"267 1 Info 818: Pointer parameter 'bch' (line 264) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"264 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"272 1 Note 952: Parameter 'x' (line 269) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"269 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"272 1 Note 952: Parameter 'bch' (line 269) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"269 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"274 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"283 31 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"285 26 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"287 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"288 27 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"291 40 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"291 40 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"291 40 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"291 40 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"293 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"302 40 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"306 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"308 26 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"309 1 Note 952: Parameter 'syn' (line 278) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"278 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"309 1 Note 952: Parameter 'bch' (line 277) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"277 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"313 45 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"313 45 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"314 1 Note 952: Parameter 'src' (line 311) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"311 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"314 1 Info 818: Pointer parameter 'src' (line 311) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"311 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"314 1 Note 952: Parameter 'dst' (line 311) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"311 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"327 39 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"327 39 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"328 38 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"328 38 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"335 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"338 35 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"338 35 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"340 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"341 46 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"341 61 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"344 67 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"345 51 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"345 51 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"345 72 Info 713: Loss of precision (arg. no. 2) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"348 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"349 42 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"354 41 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"357 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"359 38 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"361 72 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"361 72 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"365 42 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"366 1 Note 953: Variable 'elp_copy' (line 324) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"324 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"366 1 Note 953: Variable 'elp' (line 322) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"322 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"366 1 Note 953: Variable 'pelp' (line 323) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"323 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"366 1 Note 952: Parameter 'syn' (line 317) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"317 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"366 1 Note 952: Parameter 'bch' (line 316) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"316 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"368 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"375 31 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"380 22 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"382 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"386 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"399 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"406 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"411 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"415 37 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"416 33 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"420 60 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"420 61 Warning 644: Variable 'param' (line 377) may not have been initialized --- Eff. C++ 3rd Ed. item 4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"377 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"424 28 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"425 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"429 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"431 72 Info 702: Shift right of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"433 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"437 53 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"442 1 Note 952: Parameter 'rows' (line 372) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"372 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"442 1 Note 952: Parameter 'nsol' (line 373) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"373 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"442 1 Note 952: Parameter 'bch' (line 372) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"372 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"442 1 Info 818: Pointer parameter 'bch' (line 372) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"372 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"442 1 Note 952: Parameter 'sol' (line 373) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"373 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"444 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"453 31 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"460 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"462 25 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"462 47 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"463 57 Info 732: Loss of sign (arg. no. 2) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"464 57 Info 732: Loss of sign (arg. no. 2) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"468 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 36 Info 702: Shift right of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 53 Warning 502: Expected unsigned type
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 53 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 62 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 62 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 33 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 39 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 39 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"480 1 Note 952: Parameter 'a' (line 448) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"448 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"480 1 Note 952: Parameter 'b' (line 449) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"449 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"480 1 Note 952: Parameter 'c' (line 449) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"449 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"480 1 Note 952: Parameter 'roots' (line 450) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"450 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"480 1 Note 952: Parameter 'bch' (line 448) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"448 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"482 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"491 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"492 77 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"492 77 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"493 63 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"495 1 Note 952: Parameter 'poly' (line 485) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"485 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"495 1 Info 818: Pointer parameter 'poly' (line 485) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"485 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"495 1 Note 952: Parameter 'roots' (line 486) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"486 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"495 1 Note 952: Parameter 'bch' (line 485) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"485 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"497 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"512 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"513 53 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"513 54 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"513 53 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"513 54 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"513 54 Info 713: Loss of precision (arg. no. 2) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"514 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"525 37 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"527 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"529 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"530 64 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"530 64 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"531 62 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"531 65 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"530 64 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"530 64 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"531 62 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"531 65 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"531 66 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"532 64 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"532 64 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"533 64 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"533 67 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"532 64 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"532 64 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"533 64 Info 834: Operator '-' followed by operator '+' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"533 67 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"533 68 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"537 1 Note 952: Parameter 'poly' (line 500) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"500 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"537 1 Info 818: Pointer parameter 'poly' (line 500) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"500 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"537 1 Note 952: Parameter 'roots' (line 501) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"501 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"537 1 Note 952: Parameter 'bch' (line 500) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"500 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"539 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"549 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"555 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"556 52 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"557 52 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"558 52 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"560 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"562 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"565 73 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"570 1 Note 952: Parameter 'poly' (line 542) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"542 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"570 1 Info 818: Pointer parameter 'poly' (line 542) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"542 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"570 1 Note 952: Parameter 'roots' (line 543) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"543 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"570 1 Note 952: Parameter 'bch' (line 542) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"542 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"572 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"584 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"591 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"593 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"595 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"598 53 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"598 53 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"600 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"610 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"612 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"619 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"624 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"627 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"629 52 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"634 1 Note 952: Parameter 'poly' (line 575) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"575 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"634 1 Info 818: Pointer parameter 'poly' (line 575) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"575 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"634 1 Note 952: Parameter 'roots' (line 576) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"576 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"634 1 Note 952: Parameter 'bch' (line 575) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"575 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"636 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"642 26 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"642 66 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"642 66 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"644 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"646 68 Info 732: Loss of sign (arg. no. 2) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"647 1 Note 952: Parameter 'a' (line 640) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"640 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"647 1 Note 953: Variable 'd' (line 642) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"642 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"647 1 Note 952: Parameter 'rep' (line 640) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"640 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"647 1 Note 953: Variable 'l' (line 642) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"642 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"647 1 Note 952: Parameter 'bch' (line 639) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"639 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"649 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"662 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"671 32 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"676 74 Info 732: Loss of sign (arg. no. 2) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"683 1 Note 952: Parameter 'a' (line 652) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"652 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"683 1 Note 952: Parameter 'b' (line 653) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"653 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"683 1 Note 953: Variable 'c' (line 656) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"656 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"683 1 Note 952: Parameter 'bch' (line 652) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"652 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"685 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"693 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"695 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"696 76 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"696 76 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"701 1 Note 952: Parameter 'a' (line 688) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"688 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"701 1 Note 952: Parameter 'q' (line 689) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"689 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"701 1 Note 952: Parameter 'b' (line 689) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"689 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"701 1 Note 952: Parameter 'bch' (line 688) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"688 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"703 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"729 1 Note 952: Parameter 'bch' (line 706) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"706 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"731 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"739 31 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"742 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"748 41 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"748 41 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"750 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"754 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"755 32 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"757 33 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"758 35 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"765 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"773 1 Note 952: Parameter 'f' (line 736) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"736 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"773 1 Note 952: Parameter 'out' (line 737) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"737 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"773 1 Note 952: Parameter 'z' (line 736) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"736 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"773 1 Note 952: Parameter 'k' (line 735) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"735 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"773 1 Note 952: Parameter 'bch' (line 735) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"735 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"775 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"792 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"796 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"800 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"802 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 54 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 56 Info 740: Unusual pointer cast (incompatible indirect types)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 72 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 953: Variable 'q' (line 782) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"782 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 952: Parameter 'f' (line 778) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"778 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 952: Parameter 'g' (line 779) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"779 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 952: Parameter 'h' (line 779) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"779 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 953: Variable 'f2' (line 781) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"781 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 953: Variable 'z' (line 784) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"784 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 952: Parameter 'k' (line 778) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"778 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 952: Parameter 'bch' (line 778) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"778 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"808 1 Note 953: Variable 'tk' (line 783) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"783 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"810 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"821 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"835 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"838 49 Info 713: Loss of precision (arg. no. 2) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"847 1 Note 952: Parameter 'poly' (line 815) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"815 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"847 1 Note 952: Parameter 'roots' (line 815) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"815 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"847 1 Note 952: Parameter 'k' (line 814) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"814 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"847 1 Note 952: Parameter 'bch' (line 814) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"814 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"850 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"861 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"867 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"884 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"930 1 Info 1784: Symbol 'decode_bch(struct bch_control *, const unsigned char *, unsigned int, const unsigned char *, const unsigned char *, const unsigned int *, unsigned int *)' previously declared as "C", compare with line 67, file /home/snikulov/work/vidstream/src/bch/hdr/bch.h
+"/home/snikulov/work/vidstream/src/bch/hdr/bch.h"67 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"936 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"938 9 Info 725: Expected positive indentation from line 937
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"937 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"940 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"943 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"945 17 Warning 525: Negative indentation from line 944
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"944 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"948 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"951 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"954 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"955 54 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"960 33 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"974 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"981 44 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'recv_ecc' (line 928) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"928 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'calc_ecc' (line 928) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"928 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'errloc' (line 929) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"929 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'data' (line 927) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"927 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'bch' (line 927) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"927 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"986 1 Note 952: Parameter 'len' (line 927) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"927 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"988 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"994 46 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"996 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1001 38 Info 734: Loss of precision (assignment) (32 bits to 16 bits)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1002 38 Info 734: Loss of precision (assignment) (32 bits to 16 bits)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1004 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Note 952: Parameter 'poly' (line 991) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Note 952: Parameter 'bch' (line 991) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Info 818: Pointer parameter 'bch' (line 991) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1016 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1023 40 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1024 58 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1025 58 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1027 64 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1027 64 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1027 64 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1027 64 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1030 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1032 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1033 58 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1034 42 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1037 33 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1042 54 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1048 1 Note 952: Parameter 'g' (line 1019) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1019 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1048 1 Note 952: Parameter 'bch' (line 1019) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1019 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1048 1 Info 818: Pointer parameter 'bch' (line 1019) could be declared as pointing to const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1019 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1050 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1055 31 Info 713: Loss of precision (initialization) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1059 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1062 52 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1062 52 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1069 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1070 22 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1087 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1089 1 Note 952: Parameter 'bch' (line 1053) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1053 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1099 1 Note 952: Parameter 'err' (line 1091) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1091 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1099 1 Note 952: Parameter 'size' (line 1091) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1091 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1101 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 18 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 43 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 43 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1114 27 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1114 63 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1114 63 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1115 25 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1115 76 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1115 76 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1120 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1123 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1124 52 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1124 52 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1128 44 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1131 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1136 25 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1138 38 Warning 679: Suspicious Truncation in arithmetic expression combining with pointer
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1146 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1147 21 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1151 42 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1153 37 Info 834: Operator '-' followed by operator '-' is confusing.  Use parentheses.
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1153 39 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1157 27 Info 737: Loss of sign in promotion from int to unsigned int
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1157 27 Info 713: Loss of precision (assignment) (unsigned int to int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1166 1 Note 952: Parameter 'bch' (line 1104) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1104 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1168 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1190 1 Info 1784: Symbol 'init_bch(int, int, unsigned int)' previously declared as "C", compare with line 60, file /home/snikulov/work/vidstream/src/bch/hdr/bch.h
+"/home/snikulov/work/vidstream/src/bch/hdr/bch.h"60 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1199 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1206 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1211 9 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1213 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1214 9 Warning 539: Did not expect positive indentation from line 1205
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1205 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1214 40 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1215 17 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1216 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1218 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1222 24 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1222 33 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1224 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1226 19 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1227 19 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1228 25 Info 701: Shift left of signed quantity (int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1229 38 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1230 45 Info 732: Loss of sign (assignment) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1231 32 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1231 77 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1231 77 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1232 32 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1232 77 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1232 77 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1233 32 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1233 76 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1233 76 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1234 32 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1235 32 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1236 36 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1236 69 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1236 69 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1237 36 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1237 68 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1237 68 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1237 68 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1237 68 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1238 27 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1238 61 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1238 61 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1238 61 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1238 61 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1239 31 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1239 75 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1239 75 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1239 75 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1239 75 Info 776: Possible truncation of addition
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 12 Info 725: Expected positive indentation from line 1241
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1241 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 36 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 61 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 61 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 61 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1242 61 Warning 647: Suspicious truncation
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1245 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1249 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1251 9 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1254 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1261 17 Info 801: Use of goto is deprecated
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1267 16 Warning 593: Custodial pointer 'bch' (line 1194) possibly not freed or returned
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1194 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1268 1 Note 952: Parameter 't' (line 1189) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1189 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1268 1 Note 952: Parameter 'm' (line 1189) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1189 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1270 1 Note 1904: Old-style C comment -- Effective C++ #4
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1275 1 Info 1784: Symbol 'free_bch(struct bch_control *)' previously declared as "C", compare with line 62, file /home/snikulov/work/vidstream/src/bch/hdr/bch.h
+"/home/snikulov/work/vidstream/src/bch/hdr/bch.h"62 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1294 1 Note 952: Parameter 'bch' (line 1274) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1274 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"48 1 Info 754: local struct member 'gf_poly_deg1::c' (line 48, file /home/snikulov/work/vidstream/src/bch/src/bch.cpp) not referenced
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/bch/src/bch.cpp (C++)
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"154 33 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 946: encode_bch(?, !=0, ?, 0) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"154 1 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 479: solve_linear_system(?, [16], ?, 4) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"420 1 Warning 676: Possibly negative subscript (-2) in operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 383, 412, 413, 415, 420, 479]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"383 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"412 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"413 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"415 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"420 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"479 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 479: solve_linear_system(?, [16], ?, 4) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"419 1 Warning 676: Possibly negative subscript (-1) in operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 383, 412, 415, 419, 479]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"383 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"412 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"415 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"419 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"479 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 62 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 62 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 39 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 39 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 561: find_affine4_roots(?, ?, ?, ?, [4]) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 561: find_affine4_roots(?, ?, ?, ?, [4]) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 561: find_affine4_roots(?, ?, ?, ?, [4]) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 561: find_affine4_roots(?, ?, ?, ?, [4]) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 625: find_affine4_roots(?, ?, ?, ?, ?) #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 625: find_affine4_roots(?, ?, ?, ?, ?) #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 474]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"474 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 625: find_affine4_roots(?, ?, ?, ?, ?) #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Warning 662: Possible creation of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 625: find_affine4_roots(?, ?, ?, ?, ?) #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Warning 661: Possible access of out-of-bounds pointer (8 beyond end of data) by operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 472, 473, 476]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"472 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"473 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"476 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 72 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 838: factor_polynomial(?, ?, ?, [1], [1]) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 1 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 840: find_poly_roots(?, !=0, !=0, ?) #1
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 838: factor_polynomial(?, !=0, !=0, [1], [1]) #2
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"803 1 Info 826: Suspicious pointer-to-pointer conversion (area too small)
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1247: build_gf_tables([1]?, ?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Warning 429: Custodial pointer 'bch' (line 991) has not been freed or returned
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1247: build_gf_tables([1]?, ?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Warning 429: Custodial pointer 'bch' (line 991) has not been freed or returned
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1247: build_gf_tables([1]?, ?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1014 1 Warning 429: Custodial pointer 'bch' (line 991) has not been freed or returned
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"991 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1124 53 Warning 668: Possibly passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1114]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1114 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1132 19 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1133 20 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1138 43 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1138 43 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1139 40 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 76 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 76 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 76 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1142 58 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1142 58 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1143 33 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1147 21 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1153 40 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1156 36 Warning 613: Possible use of null pointer 'genpoly' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1115]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1115 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1159 31 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1124 1 Warning 668: Possibly passing a null pointer to function 'memset(void *, int, unsigned long)', arg. no. 1 [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1114]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1114 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1132 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1133 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1138 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1138 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1139 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1140 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1142 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1142 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1143 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1147 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1153 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1156 1 Warning 613: Possible use of null pointer 'genpoly' in left argument to operator '[' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1115]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1115 1 Info 831: Reference cited in prior message
+
+During Specific Walk:
+  File /home/snikulov/work/vidstream/src/bch/src/bch.cpp line 1252: compute_generator_polynomial([1]?) #1
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1159 1 Warning 613: Possible use of null pointer 'g' in left argument to operator '->' [Reference: file /home/snikulov/work/vidstream/src/bch/src/bch.cpp: lines 1096, 1113]
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1096 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1113 1 Info 831: Reference cited in prior message
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1267 16 Warning 593: Custodial pointer 'bch' (line 1194) possibly not freed or returned
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"1194 1 Info 830: Location cited in prior message
+
+--- Global Wrap-up
+
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"173 1 Warning 526: Symbol '__builtin_bswap32()' (line 173, file /home/snikulov/work/vidstream/src/bch/src/bch.cpp) not defined
+"/home/snikulov/work/vidstream/src/bch/src/bch.cpp"173 1 Warning 628: no argument information provided for function '__builtin_bswap32()' (line 173, file /home/snikulov/work/vidstream/src/bch/src/bch.cpp)
+
+Count   Type    Number  Text
+
+3       Warning 429     Custodial pointer '___' (___) has not been freed or returned
+1       Warning 438     Last value assigned to variable '___' (___) not used
+1       Warning 502     Expected unsigned type
+1       Warning 525     Negative indentation from ___
+1       Warning 526     Symbol '___' (___) not defined
+1       Warning 539     Did not expect positive indentation from ___
+2       Warning 593     Custodial pointer '___' (___) possibly not freed or returned
+30      Warning 613     Possible use of null pointer '___' in ___argument to operator '___'___
+1       Warning 628     no argument information provided for function '___' (___)
+1       Warning 644     Variable '___' (___) may not have been initialized
+22      Warning 647     Suspicious truncation
+8       Warning 661     ___ of out-of-bounds pointer (___ beyond end of data) by operator '___'___
+8       Warning 662     ___ of out-of-bounds pointer (___ beyond end of data) by operator '___'___
+2       Warning 668     Possibly passing a null pointer to function '___', ___
+2       Warning 676     ___negative subscript (___) in operator '___'___
+26      Warning 679     Suspicious Truncation in arithmetic expression combining with pointer
+18      Info    701     Shift left of signed quantity (___)
+2       Info    702     Shift right of signed quantity (___)
+1       Info    712     Loss of precision (___) (___ to ___)
+26      Info    713     Loss of precision (___) (___ to ___)
+4       Info    725     Expected positive indentation from ___
+19      Info    732     Loss of sign (___) (___ to ___)
+2       Info    734     Loss of precision (___) (___ bits to ___ bits)
+42      Info    737     Loss of sign in promotion from ___ to ___
+1       Info    740     Unusual pointer cast (incompatible indirect types)
+3       Info    747     Significant prototype coercion (___) ___ to ___
+1       Info    754     local ___ member '___' (___) not referenced
+16      Info    776     Possible truncation of addition
+8       Info    801     Use of goto is deprecated
+15      Info    818     Pointer parameter '___' (___) could be declared as pointing to const
+7       Info    826     Suspicious pointer-to-pointer conversion (area too small)
+13      Info    834     Operator '___' followed by operator '___' is confusing.  Use parentheses.
+3       Info    835     A zero has been given as ___ argument to operator '___'
+1       Info    1773    Attempt to cast away const (or volatile)
+4       Info    1784    Symbol '___' previously declared as "C", ___
+97      Note    952     Parameter '___' (___) could be declared const
+12      Note    953     Variable '___' (___) could be declared as const
+121     Note    1904    Old-style C comment
+20      Note    1924    C-style cast

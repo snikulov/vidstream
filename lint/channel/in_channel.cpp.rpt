@@ -1,5 +1,5 @@
 
---- Module:   /home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp (C++)
+--- Module:   /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp (C++)
 "/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
 "/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
 "/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
@@ -41,6 +41,7 @@
 "/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/boost/type_traits/is_integral.hpp"74 70 Error 39: Redefinition of symbol 'boost::is_integral<int>' conflicts with line 74
 "/usr/include/boost/type_traits/is_integral.hpp"74 1 Info 830: Location cited in prior message
+"/usr/include/boost/move/core.hpp"66 6 Error 19: Useless Declaration
 "/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
 "/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
 "/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
@@ -53,16 +54,38 @@
 "/usr/include/c++/4.8/cmath"82 3 Error 1051: Symbol 'abs' is both a function and a variable
 "/usr/include/c++/4.8/cmath"88 3 Error 1051: Symbol 'abs' is both a function and a variable
 "/usr/include/c++/4.8/cmath"92 3 Error 1051: Symbol 'abs' is both a function and a variable
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 64 Error 10: Expecting ')'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"118 69 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 64 Error 10: Expecting ')'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"133 69 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"153 65 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"155 66 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"257 65 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"272 65 Error 26: Expected an expression, found '}'
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"292 65 Error 26: Expected an expression, found ','
-"/usr/include/boost/spirit/home/classic/meta/impl/fundamental.ipp"294 66 Error 26: Expected an expression, found ','
+"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 423
+"/usr/include/boost/functional/hash/hash.hpp"423 1 Info 830: Location cited in prior message
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 10: Expecting >
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
+"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 443
+"/usr/include/boost/functional/hash/hash.hpp"443 1 Info 830: Location cited in prior message
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 10: Expecting >
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
+"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"34 38 Error 1075: Ambiguous reference to symbol 'mpl_::_1' and symbol '__ns_208228528_in_channel_1::_1'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"47 38 Error 1075: Ambiguous reference to symbol 'mpl_::_2' and symbol '__ns_208228528_in_channel_1::_2'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"60 38 Error 1075: Ambiguous reference to symbol 'mpl_::_3' and symbol '__ns_208228528_in_channel_1::_3'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"73 38 Error 1075: Ambiguous reference to symbol 'mpl_::_4' and symbol '__ns_208228528_in_channel_1::_4'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"86 38 Error 1075: Ambiguous reference to symbol 'mpl_::_5' and symbol '__ns_208228528_in_channel_1::_5'
+"/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp"99 38 Error 1075: Ambiguous reference to symbol 'mpl_::_6' and symbol '__ns_208228528_in_channel_1::_6'
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
 
   While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost::Integer<<1>>>)> at File /usr/include/boost/concept_check.hpp line 67
   While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost::Integer<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
@@ -613,33 +636,6 @@
 "/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 3 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
-"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"80 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/type_traits/make_unsigned.hpp"112 22 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/move/core.hpp"66 6 Error 19: Useless Declaration
-"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"90 49 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"92 50 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 423
-"/usr/include/boost/functional/hash/hash.hpp"423 1 Info 830: Location cited in prior message
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 10: Expecting >
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
-"/usr/include/boost/functional/hash/hash.hpp"443 45 Error 40: Undeclared identifier 'int128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 39: Redefinition of symbol 'boost::hash<int>' conflicts with line 443
-"/usr/include/boost/functional/hash/hash.hpp"443 1 Info 830: Location cited in prior message
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1054: template variable declaration expects a type, int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 10: Expecting >
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 1073: Insufficient number of template parameters for 'std::unary_function<<1>,<2>>'; int assumed
-"/usr/include/boost/functional/hash/hash.hpp"444 46 Error 40: Undeclared identifier 'uint128_type'
 
   While instantiating struct boost::concepts::requirement_<void (*)(boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>)> at File /usr/include/boost/iterator/iterator_concepts.hpp line 50
   While instantiating struct boost::mpl::if_<boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>>,boost::concepts::constraint<boost::concepts::usage_requirements<boost_concepts::ReadableIterator<<1>>>>,boost::concepts::requirement<boost::concepts::failed ************usage_requirements::************>> at File /usr/include/boost/concept/detail/general.hpp line 56
@@ -736,8 +732,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::IncrementableIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"124 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -746,8 +742,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::SinglePassIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"146 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 9 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -756,8 +752,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::ForwardIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"185 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -766,8 +762,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::BidirectionalIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"212 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -776,8 +772,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::range_detail::RandomAccessIteratorConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"233 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 10 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -786,8 +782,8 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::SinglePassRangeConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"262 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
 
@@ -796,191 +792,233 @@
   While instantiating struct boost::concepts::not_satisfied<boost::concepts::usage_requirements<boost::WriteableRangeConcept<<1>>>> at File /usr/include/boost/mpl/if.hpp line 63
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1015: Symbol 'constraints' not found in class
 "/usr/include/boost/mpl/if.hpp"63 1 Info 831: Reference cited in prior message
-"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 "/usr/include/boost/range/concepts.hpp"310 1 Info 831: Reference cited in prior message
+"/usr/include/boost/concept/detail/general.hpp"56 1 Info 831: Reference cited in prior message
 
 "/usr/include/boost/concept/detail/has_constraints.hpp"44 5 Error 1013: Symbol 'constraints' not a member of class 'usage_requirements'
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"82 38 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"83 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"84 44 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/cvstd.hpp"85 40 Error 1051: Symbol 'abs' is both a function and a variable
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"452 36 Error 10: Expecting identifier or other declarator
-"/home/snikulov/work/vidstream/build/deps/include/opencv2/core/matx.hpp"457 36 Error 10: Expecting identifier or other declarator
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"13 32 Note 1924: C-style cast -- More Effective C++ #2
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"13 32 Note 1924: C-style cast -- More Effective C++ #2
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"13 76 Info 712: Loss of precision (arg. no. 4) (unsigned long to int)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"13 76 Info 747: Significant prototype coercion (arg. no. 4) unsigned long to int
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"14 17 Warning 534: Ignoring return value of function 'QImage::bits(void)' (compare with line 190, file /usr/include/QtGui/qimage.h)
-"/home/snikulov/work/vidstream/src/qtgui/hdr/mainwindow.h"13 1 Info 830: Location cited in prior message
-"/usr/include/c++/4.8/cstdlib"166 1 Info 830: Location cited in prior message
-"/usr/include/QtGui/qimage.h"190 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"20 51 Warning 578: Declaration of symbol 'parent' hides symbol 'QObject::parent(void) const' (line 273, file /usr/include/QtCore/qobject.h)
-"/usr/include/QtCore/qobject.h"273 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"23 10 Info 1732: new in constructor for class 'MainWindow' which has no assignment operator -- Effective C++ #11
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"23 10 Info 1733: new in constructor for class 'MainWindow' which has no copy constructor -- Effective C++ #11
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"30 1 Note 1926: Symbol 'MainWindow::worker_'s default constructor implicitly called -- Effective C++ #12
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"30 1 Note 1926: Symbol 'MainWindow::presets_'s default constructor implicitly called -- Effective C++ #12
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"46 61 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<std::vector<profile>>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"64 53 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"64 53 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"65 43 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"65 43 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"64 53 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"64 53 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"65 43 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"65 43 Info 840: Use of nul character in a string literal
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"66 34 Warning 534: Ignoring return value of function 'QObject::connect(const QObject *, const char *, const char *, enum Qt::ConnectionType) const' (compare with line 337, file /usr/include/QtCore/qobject.h)
-"/usr/include/QtCore/qobject.h"337 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"70 1 Note 952: Parameter 'cfg' (line 20) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"20 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"70 1 Note 952: Parameter 'parent' (line 20) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"20 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"74 17 Warning 1551: Function may throw exception '...' in destructor 'MainWindow::~MainWindow(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"75 18 Warning 1551: Function may throw exception '...' in destructor 'MainWindow::~MainWindow(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"92 1 Info 1762: Member function 'MainWindow::adjust_preset(void)' could be made const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"114 15 Warning 534: Ignoring return value of function 'QDialog::exec(void)' (compare with line 100, file /usr/include/QtGui/qdialog.h)
-"/usr/include/QtGui/qdialog.h"100 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"132 1 Note 952: Parameter 'img' (line 120) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"120 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 47 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<cv::Mat>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Warning 429: Custodial pointer 'qi' (line 136) has not been freed or returned
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Note 953: Variable 'qi' (line 136) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"148 1 Note 953: Variable 'w' (line 142) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"142 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"148 1 Note 953: Variable 'h' (line 143) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"143 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"151 1 Warning 578: Declaration of symbol 'data' hides symbol 'QWidget::data' (line 815, file /usr/include/QtGui/qwidget.h)
-"/usr/include/QtGui/qwidget.h"815 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"199 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'mbps' (line 181) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"181 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'jpeg_auto_q' (line 190) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"190 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'jpeg_cfg_q' (line 191) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"191 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"202 1 Note 953: Variable 'speed' (line 180) could be declared as const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"180 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"205 1 Warning 578: Declaration of symbol 'index' hides symbol 'index(char *, int)' (line 475, file /usr/include/string.h)
-"/usr/include/string.h"475 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"211 50 Info 1702: operator 'operator*' is both an ordinary function 'operator*(const QSize &, double)' and a member function 'boost::shared_ptr<std::vector<profile>>::operator*(void) const'
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"213 46 Warning 571: Suspicious cast
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"221 40 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"222 46 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"223 53 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"225 65 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"225 65 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"227 48 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"228 50 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"230 42 Info 732: Loss of sign (arg. no. 1) (int to unsigned long)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"230 42 Info 747: Significant prototype coercion (arg. no. 1) int to unsigned long
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"231 44 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"232 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"237 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"238 39 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"239 41 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"240 45 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const float &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"241 43 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"242 36 Warning 534: Ignoring return value of function 'boost::property_tree::basic_ptree<std::basic_string<char>,std::basic_string<char>>::put(const boost::property_tree::string_path<std::basic_string<char>,boost::property_tree::id_translator<std::basic_string<char>>> &, const int &)' (compare with line 456, file /usr/include/boost/property_tree/ptree.hpp)
-"/usr/include/boost/property_tree/ptree.hpp"456 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"245 1 Note 952: Parameter 'index' (line 204) could be declared const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"204 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"245 1 Info 1762: Member function 'MainWindow::on_comboBox_profiles_currentIndexChanged(int)' could be made const --- Eff. C++ 3rd Ed. item 3
-"/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"19 1 Warning 551: Symbol 'res_modes' (line 19, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
-"/home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp"30 1 Warning 551: Symbol 'bch_modes' (line 30, file /home/snikulov/work/vidstream/src/qtgui/hdr/config_iface.hpp) not accessed
+
+  While instantiating struct boost::uint_t<8> at File /usr/include/boost/integer/integer_mask.hpp line 89
+"/usr/include/boost/integer.hpp"157 63 Error 1015: Symbol 'digits' not found in class
+"/usr/include/boost/integer/integer_mask.hpp"89 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"157 63 Error 1013: Symbol 'digits' not a member of class 'numeric_limits'
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+  While instantiating struct boost::uint_t<16> at File /usr/include/boost/integer/integer_mask.hpp line 92
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"92 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 19 Error 1039: Symbol 'boost::detail::uint_least_helper<0>::least' is not a member of class 'uint_least_helper'
+
+"/usr/include/boost/integer.hpp"160 19 Error 1040: Symbol 'boost::detail::uint_least_helper<0>::least' is not a legal declaration within class 'uint_t'
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 1039: Symbol 'boost::uint_t<16>::least' is not a member of class 'uint_t'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 1040: Symbol 'boost::uint_t<16>::least' is not a legal declaration within class 'low_bits_mask_t'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 10: Expecting ';'
+"/usr/include/boost/integer/integer_mask.hpp"92 48 Error 40: Undeclared identifier 'sig_bits'
+
+  While instantiating struct boost::uint_t<0> at File /usr/include/boost/integer/integer_mask.hpp line 96
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"96 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+  While instantiating struct boost::uint_t<64> at File /usr/include/boost/integer/integer_mask.hpp line 100
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+"/usr/include/boost/integer/integer_mask.hpp"100 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/integer.hpp"160 9 Error 1048: expected a constant expression
+
+"/usr/include/boost/integer.hpp"160 19 Error 1039: Symbol 'boost::detail::uint_least_helper<0>::least' is not a member of class 'uint_least_helper'
+
+"/usr/include/boost/integer.hpp"160 19 Error 1040: Symbol 'boost::detail::uint_least_helper<0>::least' is not a legal declaration within class 'uint_t'
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+
+"/usr/include/boost/integer.hpp"162 40 Error 40: Undeclared identifier 'least'
+
+"/usr/include/boost/integer.hpp"162 40 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 1039: Symbol 'boost::uint_t<64>::least' is not a member of class 'uint_t'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 1040: Symbol 'boost::uint_t<64>::least' is not a legal declaration within class 'low_bits_mask_t'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 10: Expecting ';'
+"/usr/include/boost/integer/integer_mask.hpp"100 47 Error 40: Undeclared identifier 'sig_bits'
+"/usr/include/boost/math/policies/policy.hpp"819 28 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/policies/policy.hpp"819 30 Error 10: Expecting >
+"/usr/include/boost/math/policies/policy.hpp"819 36 Error 1073: Insufficient number of template parameters for 'boost::math::policies::precision<<1>,<2>>'; int assumed
+"/usr/include/boost/lexical_cast.hpp"315 55 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/lexical_cast.hpp"315 55 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"316 55 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/lexical_cast.hpp"316 55 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"316 55 Error 39: Redefinition of symbol 'boost::detail::stream_char_common<int>' conflicts with line 315
+"/usr/include/boost/lexical_cast.hpp"315 1 Info 830: Location cited in prior message
+
+  While instantiating struct boost::detail::lcast_src_length_integral<int> at File /usr/include/boost/lexical_cast.hpp line 600
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1015: Symbol 'is_signed' not found in class
+"/usr/include/boost/lexical_cast.hpp"600 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1013: Symbol 'is_signed' not a member of class 'numeric_limits'
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1015: Symbol 'digits10' not found in class
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1013: Symbol 'digits10' not a member of class 'numeric_limits'
+
+  While instantiating struct boost::detail::lcast_src_length_integral<unsigned int> at File /usr/include/boost/lexical_cast.hpp line 601
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1015: Symbol 'is_signed' not found in class
+"/usr/include/boost/lexical_cast.hpp"601 1 Info 831: Reference cited in prior message
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1013: Symbol 'is_signed' not a member of class 'numeric_limits'
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1015: Symbol 'digits10' not found in class
+
+"/usr/include/boost/lexical_cast.hpp"586 15 Error 1013: Symbol 'digits10' not a member of class 'numeric_limits'
+"/usr/include/boost/lexical_cast.hpp"612 43 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/lexical_cast.hpp"612 43 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"612 43 Error 39: Redefinition of symbol 'boost::detail::lcast_src_length<int>' conflicts with line 600
+"/usr/include/boost/lexical_cast.hpp"600 1 Info 830: Location cited in prior message
+"/usr/include/boost/lexical_cast.hpp"612 43 Error 40: Undeclared identifier 'int128_type'
+"/usr/include/boost/lexical_cast.hpp"612 43 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"613 44 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/lexical_cast.hpp"613 44 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"613 44 Error 39: Redefinition of symbol 'boost::detail::lcast_src_length<int>' conflicts with line 612
+"/usr/include/boost/lexical_cast.hpp"612 1 Info 830: Location cited in prior message
+"/usr/include/boost/lexical_cast.hpp"613 44 Error 40: Undeclared identifier 'uint128_type'
+"/usr/include/boost/lexical_cast.hpp"613 44 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/lexical_cast.hpp"1835 50 Error 10: Expecting ',' or ')'
+"/usr/include/boost/lexical_cast.hpp"1835 57 Error 49: Expected a type
+"/usr/include/boost/lexical_cast.hpp"1836 49 Error 10: Expecting ',' or ')'
+"/usr/include/boost/lexical_cast.hpp"1836 57 Error 49: Expected a type
+"/usr/include/boost/math/constants/constants.hpp"87 61 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 63 Error 10: Expecting >
+"/usr/include/boost/math/constants/constants.hpp"87 67 Error 1073: Insufficient number of template parameters for 'boost::is_convertible<<1>,<2>>'; int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 61 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/boost/math/constants/constants.hpp"87 63 Error 10: Expecting >
+"/usr/include/boost/math/constants/constants.hpp"87 67 Error 1073: Insufficient number of template parameters for 'boost::is_convertible<<1>,<2>>'; int assumed
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"693 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"694 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"793 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"794 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"893 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"894 12 Error 40: Undeclared identifier 'ad_reference'
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"993 9 Error 91: Line exceeds 1198 characters (use +linebuf)
+"/usr/include/boost/fusion/container/vector/detail/preprocessed/vector10.hpp"994 12 Error 40: Undeclared identifier 'ad_reference'
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"3 10 Warning 537: Repeated include file '/usr/include/c++/4.8/iostream'
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"4 10 Warning 537: Repeated include file '/home/snikulov/work/vidstream/include/nanopp/nn.hpp'
+"/home/snikulov/work/vidstream/build/deps/include/itpp/base/binary.h"186 40 Error 1051: Symbol 'abs' is both a function and a variable
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1015: Symbol 'max' not found in class
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 1013: Symbol 'max' not a member of class 'numeric_limits'
+"/home/snikulov/work/vidstream/build/deps/include/itpp/comm/llr.h"61 54 Error 10: Expecting a function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1928: Symbol 'noncopyable' did not appear in the constructor initializer list -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::codec_lk_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::inmx_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::incond_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::indata_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::sock_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::timer_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"11 1 Note 1926: Symbol 'in_channel::wt_'s default constructor implicitly called -- Effective C++ #12
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"13 66 Error 1025: No function or template matches invocation 'boost::thread::thread(boost::_bi::bind_t<void,boost::_mfi::mf0<void,in_channel>,boost::_bi::list1<boost::_bi::value<in_channel *>>>)', 17 candidates found, 5 matched the argument count
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"13 67 Info 1793: While calling 'boost::thread::operator boost::detail::thread_move_t<boost::thread>(void)': Initializing the implicit object parameter 'boost::thread &' (a non-const reference) with a non-lvalue (a temporary object of type 'boost::thread')
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"19 25 Warning 1551: Function may throw exception '...' in destructor 'in_channel::~in_channel(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"21 15 Warning 1551: Function may throw exception '...' in destructor 'in_channel::~in_channel(void)' -- More Effective C++ #11 & Eff. C++ 3rd Ed. item 8
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 63 Warning 665: Unparenthesized parameter 2 in macro 'LOG4CPLUS_MACRO_BODY' is passed an expression
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 63 Info 730: Boolean argument to function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 63 Info 717: do ... while(0);
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"67 9 Note 953: Variable 'opt' (line 55) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"55 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"71 55 Warning 665: Unparenthesized parameter 2 in macro 'LOG4CPLUS_MACRO_BODY' is passed an expression
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"71 55 Info 730: Boolean argument to function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"71 55 Info 717: do ... while(0);
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"72 9 Info 1764: Reference parameter 'e' (line 68) could be declared const ref --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"68 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"96 71 Warning 665: Unparenthesized parameter 2 in macro 'LOG4CPLUS_MACRO_BODY' is passed an expression
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"96 71 Info 730: Boolean argument to function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"96 71 Info 717: do ... while(0);
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"101 1 Note 953: Variable 'rc' (line 84) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"84 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"109 31 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"109 41 Info 838: Previously assigned value to variable 'bytes' has not been used
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"113 65 Warning 665: Unparenthesized parameter 2 in macro 'LOG4CPLUS_MACRO_BODY' is passed an expression
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"113 65 Info 730: Boolean argument to function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"113 65 Info 717: do ... while(0);
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"114 30 Info 737: Loss of sign in promotion from int to unsigned long long
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"136 63 Info 864: Expression involving variable 'data' possibly depends on order of evaluation
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"138 5 Info 1788: Variable 'lk' (line 134) (type 'boost::unique_lock<boost::mutex>') is referenced only by its constructor or destructor
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"134 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"138 5 Warning 529: Symbol 'dres' (line 129) not subsequently referenced
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"129 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"138 5 Warning 438: Last value assigned to variable 'dres' (defined at line 129) not used
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"129 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"141 71 Warning 665: Unparenthesized parameter 2 in macro 'LOG4CPLUS_MACRO_BODY' is passed an expression
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"141 71 Info 730: Boolean argument to function
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"141 71 Info 717: do ... while(0);
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"148 1 Warning 578: Declaration of symbol 'wait' hides symbol 'wait' (line 66, file /usr/include/bits/waitstatus.h)
+"/usr/include/bits/waitstatus.h"66 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"164 1 Note 952: Parameter 'wait' (line 147) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"147 1 Info 830: Location cited in prior message
 
 /// Start of Pass 2 ///
 
---- Module:   /home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp (C++)
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"138 1 Warning 429: Custodial pointer 'qi' (line 136) has not been freed or returned
-"/usr/include/sys/types.h"151 1 Info 830: Location cited in prior message
-"/usr/include/c++/4.8/cstdlib"166 1 Info 830: Location cited in prior message
-"/home/snikulov/work/vidstream/src/qtgui/src/mainwindow.cpp"136 1 Info 830: Location cited in prior message
+--- Module:   /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp (C++)
 
 --- Global Wrap-up
 
- Info 1754: Expected symbol 'operator*=' to be declared for class 'QPainterPath' -- More Effective C++ #22
-"/usr/include/QtGui/qstyleoption.h"907 1 Warning 1512: destructor for base class 'QStyleHintReturn' (line 907, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"67 1 Warning 1512: destructor for base class 'QStyleOption' (line 67, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"687 1 Warning 1512: destructor for base class 'QStyleOptionComplex' (line 687, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"504 1 Warning 1512: destructor for base class 'QStyleOptionDockWidget' (line 504, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"118 1 Warning 1512: destructor for base class 'QStyleOptionFrame' (line 118, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"134 1 Warning 1512: destructor for base class 'QStyleOptionFrameV2' (line 134, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"396 1 Warning 1512: destructor for base class 'QStyleOptionProgressBar' (line 396, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"304 1 Warning 1512: destructor for base class 'QStyleOptionTab' (line 304, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"218 1 Warning 1512: destructor for base class 'QStyleOptionTabBarBase' (line 218, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"333 1 Warning 1512: destructor for base class 'QStyleOptionTabV2' (line 333, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"175 1 Warning 1512: destructor for base class 'QStyleOptionTabWidgetFrame' (line 175, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"633 1 Warning 1512: destructor for base class 'QStyleOptionToolBox' (line 633, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"539 1 Warning 1512: destructor for base class 'QStyleOptionViewItem' (line 539, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"562 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV2' (line 562, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtGui/qstyleoption.h"590 1 Warning 1512: destructor for base class 'QStyleOptionViewItemV3' (line 590, file /usr/include/QtGui/qstyleoption.h) is not virtual
-"/usr/include/QtCore/qstringlist.h"66 1 Warning 1512: destructor for base class 'QList<QString>' (line 66, file /usr/include/QtCore/qstringlist.h) is not virtual
-"/usr/include/QtGui/qitemselectionmodel.h"231 1 Warning 1512: destructor for base class 'QList<QItemSelectionRange>' (line 231, file /usr/include/QtGui/qitemselectionmodel.h) is not virtual
-"/usr/include/QtGui/qbrush.h"201 1 Warning 1512: destructor for base class 'QGradient' (line 201, file /usr/include/QtGui/qbrush.h) is not virtual
-"/usr/include/QtGui/qpolygon.h"60 1 Warning 1512: destructor for base class 'QVector<QPoint>' (line 60, file /usr/include/QtGui/qpolygon.h) is not virtual
-"/usr/include/QtGui/qpolygon.h"134 1 Warning 1512: destructor for base class 'QVector<QPointF>' (line 134, file /usr/include/QtGui/qpolygon.h) is not virtual
- Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator+=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator-=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator-=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator-=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator*=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator*=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator*=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
- Info 1754: Expected symbol 'operator/=' to be declared for class 'cv::MatExpr' -- More Effective C++ #22
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 1 Warning 526: Symbol '__builtin_expect()' (line 65, file /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp) not defined
+"/home/snikulov/work/vidstream/src/channel/src/in_channel.cpp"65 1 Warning 628: no argument information provided for function '__builtin_expect()' (line 65, file /home/snikulov/work/vidstream/src/channel/src/in_channel.cpp)
+ Info 1754: Expected symbol 'operator*=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
+ Info 1754: Expected symbol 'operator+=' to be declared for class 'itpp::GF2mat' -- More Effective C++ #22
 
 Count   Type    Number  Text
 
-11      Error   10      Expecting ___
+15      Error   10      Expecting ___
 3       Error   19      Useless Declaration
-8       Error   26      Expected an expression, found '___'
-12      Error   39      Redefinition of symbol '___' ___
-17      Error   40      Undeclared identifier '___'
+15      Error   39      Redefinition of symbol '___' ___
+33      Error   40      Undeclared identifier '___'
+2       Error   49      Expected a type
+4       Error   91      Line exceeds ___ characters (use +linebuf)
 4       Error   129     declaration expected, identifier '___' ignored
 1       Error   151     Token '___' inconsistent with abstract type
-71      Error   1013    Symbol '___' not a member of class '___'
-71      Error   1015    Symbol '___' not found in class
-7       Error   1051    Symbol '___' is both a function and a variable
-19      Error   1054    template variable declaration expects a type, int assumed
-2       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
-2       Warning 429     Custodial pointer '___' (___) has not been freed or returned
-17      Warning 534     Ignoring return value of function '___' (compare with ___)
-2       Warning 551     Symbol '___' (___) not accessed
-1       Warning 571     Suspicious cast
-3       Warning 578     Declaration of symbol '___' hides symbol '___' (___)
-20      Warning 1512    destructor for base class '___' (___) is not virtual
+77      Error   1013    Symbol '___' not a member of class '___'
+77      Error   1015    Symbol '___' not found in class
+1       Error   1025    No ___ matches invocation '___'___
+4       Error   1039    Symbol '___' is not a member of class '___'
+4       Error   1040    Symbol '___' is not a legal declaration within class '___'
+8       Error   1048    expected a constant expression
+4       Error   1051    Symbol '___' is both a function and a variable
+32      Error   1054    template variable declaration expects a type, int assumed
+5       Error   1073    Insufficient number of template parameters for '___'; ___ assumed
+6       Error   1075    Ambiguous reference to symbol '___' and symbol '___'
+1       Warning 438     Last value assigned to variable '___' (___) not used
+1       Warning 526     Symbol '___' (___) not defined
+1       Warning 529     Symbol '___' (___) not subsequently referenced
+2       Warning 537     Repeated include file '___'
+1       Warning 578     Declaration of symbol '___' hides symbol '___' (___)
+1       Warning 628     no argument information provided for function '___' (___)
+5       Warning 665     Unparenthesized parameter ___ in macro '___' is passed an expression
 2       Warning 1551    Function may throw exception '___' in destructor '___'
-1       Info    712     Loss of precision (___) (___ to ___)
-2       Info    732     Loss of sign (___) (___ to ___)
-3       Info    747     Significant prototype coercion (___) ___ to ___
-8       Info    840     Use of nul character in a string literal
-6       Info    1702    operator '___' is both an ordinary function '___' and a member function '___'
-1       Info    1732    new in constructor for class '___' which has no assignment operator
-1       Info    1733    new in constructor for class '___' which has no copy constructor
-13      Info    1754    Expected symbol '___' to be declared for class '___'
-2       Info    1762    Member function '___' could be made const
-4       Note    952     Parameter '___' (___) could be declared const
-7       Note    953     Variable '___' (___) could be declared as const
-2       Note    1924    C-style cast
-2       Note    1926    Symbol '___'s default constructor implicitly called
+5       Info    717     do ... while(0);
+5       Info    730     Boolean argument to function
+1       Info    737     Loss of sign in promotion from ___ to ___
+1       Info    838     Previously assigned value to variable '___' has not been used
+1       Info    864     Expression involving variable '___' possibly depends on order of evaluation
+2       Info    1754    Expected symbol '___' to be declared for class '___'
+1       Info    1764    Reference parameter '___' (___) could be declared const ref
+1       Info    1788    Variable '___' (___) (type '___') is referenced only by its constructor or destructor
+1       Info    1793    ___Initializing the implicit object parameter '___' (a non-const reference) with ___
+1       Note    952     Parameter '___' (___) could be declared const
+2       Note    953     Variable '___' (___) could be declared as const
+1       Note    1924    C-style cast
+7       Note    1926    Symbol '___'s default constructor implicitly called
+1       Note    1928    Symbol '___' did not appear in the constructor initializer list
