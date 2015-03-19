@@ -11,7 +11,11 @@
 #include <boost/shared_ptr.hpp>
 
 #include <nanopp/nn.hpp>
+
+#ifdef BUILD_WITH_ITPP
 #include <itpp/itcomm.h>
+#endif
+
 #include <channel/bchwrapper.hpp>
 #include <perf/perf_clock.hpp>
 #include <stat/stat_data.hpp>
