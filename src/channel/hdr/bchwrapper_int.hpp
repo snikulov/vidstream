@@ -75,9 +75,11 @@ private:
         {
             switch(t)
             {
+#ifdef BUILD_WITH_ITPP
                 case BCH_CODEC_ITPP:
                     ret.reset(new bch_codec_itpp(n_, t_));
                     break;
+#endif
                 case BCH_CODEC_KERNEL:
                     ret.reset(new bch_codec_kernel(n_, t_));
                     break;
