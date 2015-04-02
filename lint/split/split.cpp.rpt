@@ -1,0 +1,136 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/split/src/split.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"15 15 Info 734: Loss of precision (assignment) (31 bits to 8 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"16 13 Info 734: Loss of precision (assignment) (31 bits to 8 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"20 21 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"23 25 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"29 21 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"34 21 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"37 1 Note 952: Parameter 'c' (line 12) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"12 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"42 1 Note 952: Parameter 'c' (line 39) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"39 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"50 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"52 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"54 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"56 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"58 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"60 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"62 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"64 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"65 5 Info 744: switch statement has no default
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"68 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"72 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"76 21 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"78 26 Info 1776: Converting a string literal to char * is not const safe (return)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"79 1 Note 952: Parameter 'c' (line 45) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"45 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"89 23 Warning 569: Loss of information (arg. no. 1) (8 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"89 24 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"90 23 Info 713: Loss of precision (arg. no. 1) (unsigned char to char)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"90 24 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"98 20 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"98 21 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"99 20 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"99 21 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"101 35 Info 732: Loss of sign (initialization) (int to unsigned int)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"102 24 Note 1924: C-style cast -- More Effective C++ #2
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"102 36 Info 747: Significant prototype coercion (arg. no. 1) unsigned int to unsigned long
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"105 31 Info 747: Significant prototype coercion (arg. no. 2) unsigned int to long
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"112 33 Info 747: Significant prototype coercion (arg. no. 2) unsigned int to long
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"112 34 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::write(const char *, long)' (compare with line 334, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"334 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"127 28 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"127 29 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"132 1 Info 1746: parameter 'm' in function 'scan_section_with_len(struct Marker, std::basic_istream<char> &, std::basic_ostream<char> *)' could be made const reference -- Effective C++ #22 & Eff. C++ 3rd Ed. item 3& Eff. C++ 3rd Ed. item 20
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"132 1 Note 952: Parameter 'm' (line 84) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"84 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"132 1 Note 952: Parameter 'fout' (line 84) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"84 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"132 1 Note 953: Variable 'len' (line 101) could be declared as const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"101 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"141 23 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"141 39 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"143 37 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"146 30 Warning 569: Loss of information (arg. no. 1) (8 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"146 31 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"147 30 Info 713: Loss of precision (arg. no. 1) (unsigned char to char)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"147 31 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"151 27 Warning 641: Converting enum 'Markers' to 'int'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"178 28 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"178 29 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"179 28 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"179 29 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"180 37 Info 737: Loss of sign in promotion from int to unsigned long
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"194 28 Warning 534: Ignoring return value of function 'std::basic_istream<char>::unget(void)' (compare with line 537, file /usr/include/c++/4.8/istream)
+"/usr/include/c++/4.8/istream"537 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"201 32 Info 734: Loss of precision (arg. no. 1) (31 bits to 7 bits)
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"201 33 Warning 534: Ignoring return value of function 'std::basic_ostream<char>::put(char)' (compare with line 302, file /usr/include/c++/4.8/ostream)
+"/usr/include/c++/4.8/ostream"302 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"216 5 Warning 527: Unreachable code at token 'return'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"217 1 Note 952: Parameter 'fheader' (line 136) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"136 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"217 1 Info 1746: parameter 'm' in function 'scan_section(struct Marker, std::basic_istream<char> &, std::basic_ostream<char> *, std::basic_ostream<char> &, char, unsigned long &)' could be made const reference -- Effective C++ #22 & Eff. C++ 3rd Ed. item 3& Eff. C++ 3rd Ed. item 20
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"217 1 Note 952: Parameter 'm' (line 136) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"136 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"217 1 Note 952: Parameter 'safe' (line 137) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"137 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"258 1 Note 952: Parameter 'fh' (line 220) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"220 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"258 1 Note 952: Parameter 'safe' (line 220) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"220 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"263 1 Note 952: Parameter 'c' (line 260) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"260 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"268 1 Note 952: Parameter 'c' (line 265) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"265 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"273 1 Note 952: Parameter 'c' (line 270) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"270 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"280 1 Note 952: Parameter 'c' (line 275) could be declared const --- Eff. C++ 3rd Ed. item 3
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"275 1 Info 830: Location cited in prior message
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"295 5 Info 850: for loop index variable 'i' whose type category is 'integral' is modified in body of the for loop that began at 'line 284'
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"284 1 Info 830: Location cited in prior message
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/split/src/split.cpp (C++)
+
+--- Global Wrap-up
+
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"45 1 Info 714: Symbol 'marker_name(int)' (line 45, file /home/snikulov/work/vidstream/src/split/src/split.cpp) not referenced
+"/home/snikulov/work/vidstream/src/split/src/split.cpp"260 1 Info 714: Symbol 'is_dri_int(unsigned char)' (line 260, file /home/snikulov/work/vidstream/src/split/src/split.cpp) not referenced
+
+Count   Type    Number  Text
+
+1       Error   10      Expecting ___
+4       Error   129     declaration expected, identifier '___' ignored
+1       Warning 527     Unreachable code at token '___'
+12      Warning 534     Ignoring return value of function '___' (compare with ___)
+2       Warning 569     Loss of information (___) (___ bits to ___ bits)
+8       Warning 641     Converting enum '___' to '___'
+2       Info    713     Loss of precision (___) (___ to ___)
+2       Info    714     Symbol '___' (___) not referenced
+1       Info    732     Loss of sign (___) (___ to ___)
+8       Info    734     Loss of precision (___) (___ bits to ___ bits)
+1       Info    737     Loss of sign in promotion from ___ to ___
+1       Info    744     switch statement has no default
+3       Info    747     Significant prototype coercion (___) ___ to ___
+1       Info    850     for loop index variable '___' whose type category is '___' is modified in body of the for loop that began at '___'
+2       Info    1746    parameter '___' in function '___' could be made const reference
+12      Info    1776    Converting a string literal to ___ is not const safe (___)
+14      Note    952     Parameter '___' (___) could be declared const
+1       Note    953     Variable '___' (___) could be declared as const
+1       Note    1924    C-style cast

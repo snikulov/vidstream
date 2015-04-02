@@ -1,0 +1,34 @@
+
+--- Module:   /home/snikulov/work/vidstream/src/utils/src/converters.cpp (C++)
+"/usr/include/c++/4.8/cstdlib"179 3 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 7 Error 129: declaration expected, identifier 'std::abs' ignored
+"/usr/include/c++/4.8/cstdlib"179 16 Error 129: declaration expected, identifier 'std::__int128' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 129: declaration expected, identifier 'std::__x' ignored
+"/usr/include/c++/4.8/cstdlib"179 19 Error 10: Expecting identifier or other declarator
+"/usr/include/boost/config/suffix.hpp"496 35 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"496 46 Error 19: Useless Declaration
+"/usr/include/boost/config/suffix.hpp"497 44 Error 10: Expecting ';'
+"/usr/include/boost/config/suffix.hpp"497 56 Error 19: Useless Declaration
+"/usr/include/c++/4.8/limits"1405 27 Error 40: Undeclared identifier '__int128'
+"/usr/include/c++/4.8/limits"1405 27 Error 1054: template variable declaration expects a type, int assumed
+"/usr/include/c++/4.8/limits"1406 27 Error 39: Redefinition of symbol 'std::numeric_limits<int>' conflicts with line 982
+"/usr/include/c++/4.8/limits"982 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1410 7 Error 10: Expecting ';'
+"/usr/include/c++/4.8/limits"1479 36 Error 151: Token '__int128' inconsistent with abstract type
+"/usr/include/c++/4.8/limits"1480 36 Error 39: Redefinition of symbol 'std::numeric_limits<unsigned int>' conflicts with line 1049
+"/usr/include/c++/4.8/limits"1049 1 Info 830: Location cited in prior message
+"/usr/include/c++/4.8/limits"1484 7 Error 10: Expecting ';'
+
+/// Start of Pass 2 ///
+
+--- Module:   /home/snikulov/work/vidstream/src/utils/src/converters.cpp (C++)
+
+Count   Type    Number  Text
+
+5       Error   10      Expecting ___
+2       Error   19      Useless Declaration
+2       Error   39      Redefinition of symbol '___' ___
+1       Error   40      Undeclared identifier '___'
+4       Error   129     declaration expected, identifier '___' ignored
+1       Error   151     Token '___' inconsistent with abstract type
+1       Error   1054    template variable declaration expects a type, int assumed

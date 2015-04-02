@@ -1,0 +1,9 @@
+{
+    "profiles" : [
+        {"name":"Profile #1", "bw":10, "fps":25, "jpg_quality":60, "bch_idx":3, "res_idx":2},
+        {"name":"Profile - #2", "bw":10, "fps":25, "jpg_quality":40, "bch_idx":1, "res_idx":2},
+        {"name":"Profile #3", "bw":10, "fps":20, "jpg_quality":30, "bch_idx":2, "res_idx":2},
+        {"name":"Profile #4", "bw":5,  "fps":15, "jpg_quality":40, "bch_idx":2, "res_idx":2},
+        {"name":"Profile #5", "bw":5,  "fps":25, "jpg_quality":40, "bch_idx":1, "res_idx":3}
+    ]
+}
