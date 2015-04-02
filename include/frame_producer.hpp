@@ -20,6 +20,7 @@ namespace vidstream
                 : cam_(cam), frame_rate_(frame_rate), sec_per_frame_(1.0/frame_rate_)
                 , q_(q), stop_(stop_flag), stat_(stat)
             {
+                ns_per_frame_ = recalculate_ns_per_frame(sec_per_frame_);
             }
 
             void operator()() const
@@ -74,20 +75,24 @@ namespace vidstream
                     boost::mutex::scoped_lock lk(mx_);
                     frame_rate_ = fps_lim;
                     sec_per_frame_ = 1.0/frame_rate_;
+                    ns_per_frame_ = recalculate_ns_per_frame(sec_per_frame_);
                 }
             }
 
 
         private:
 
+            boost::chrono::nanoseconds recalculate_ns_per_frame(double sec_pf)
+            {
+                boost::chrono::duration<double> spf(sec_pf);
+                return boost::chrono::duration_cast<boost::chrono::nanoseconds>(spf);
+            }
+
             void fps_rate_limit(const boost::chrono::steady_clock::duration& frame_get_time) const
             {
-                boost::chrono::duration<double> spf(sec_per_frame_);
-                boost::chrono::nanoseconds ns_per_frame =
-                        boost::chrono::duration_cast<boost::chrono::nanoseconds>(spf);
-                if (frame_get_time < ns_per_frame)
+                if (frame_get_time < ns_per_frame_)
                 {
-                     boost::this_thread::sleep_for(ns_per_frame - frame_get_time);
+                     boost::this_thread::sleep_for(ns_per_frame_ - frame_get_time);
                 }
             }
 
@@ -99,6 +104,8 @@ namespace vidstream
             monitor_queue<camera_frame_t>& q_;
             int& stop_;
             stat_data_t * stat_;
+
+            boost::chrono::nanoseconds ns_per_frame_;
     };
 
 } /* namespace vidstream */
