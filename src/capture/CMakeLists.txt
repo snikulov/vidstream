@@ -11,6 +11,8 @@ set(SRC_FILES
 
 add_executable(${TARGET_NAME} ${SRC_FILES} ${GLB_HDR_FILES})
 
+add_dependencies(${TARGET_NAME} ext.nanomsg ext.opencv ext.log4cplus)
+
 lint_check_sources(${TARGET_NAME} ${SRC_FILES})
 
 if(WITH_CAPTURE_UI)

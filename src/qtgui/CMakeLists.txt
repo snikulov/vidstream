@@ -72,6 +72,8 @@ else()
     add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${MOC_SRC} ${HDR_FILES} ${GLB_HDR_FILES})
 endif()
 
+add_dependencies(${TARGET_NAME} ext.nanomsg ext.opencv ext.log4cplus)
+
 lint_check_sources(${TARGET_NAME} ${SRC_FILES})
 
 if(USE_QT5)
