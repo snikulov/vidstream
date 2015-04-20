@@ -33,9 +33,6 @@ public:
 
     void operator()() const
     {
-#if defined(CAPTURE_UI)
-        cv::namedWindow("Capture",1);
-#endif
         boost::shared_ptr<jpeg_transport> jpgtrans(new jpeg_transport());
 
         boost::shared_ptr<out_channel> outsink(new out_channel(url_, codec_, stat_));
@@ -59,15 +56,11 @@ public:
 
                 if (*is_bw_)
                 {
-                    boost::shared_ptr<cv::Mat> gs(new cv::Mat());
-                    cvtColor(*frame, *gs, cv::COLOR_RGB2GRAY);
+                    boost::shared_ptr<cv::Mat> gs( new cv::Mat() );
+                    cvtColor(*frame, *gs, cv::COLOR_BGR2GRAY);
                     frame.swap(gs);
                 }
 
-#if defined(CAPTURE_UI)
-                // process incoming frame from camera
-                cv::imshow("Capture", *frame);
-#endif
                 // pack frame into jpeg with rst
                 jpeg_data_t     jpg(jb_->from_cvmat(frame));
                 jpeg_rst_idxs_t rst(jb_->rst_idxs(jpg));
@@ -94,14 +87,6 @@ public:
                 stat_->num_rst_ = rst->size();
                 stat_->ecc_payload_coef_ = codec_.get_encode_coef();
            }
-
-#if defined(CAPTURE_UI)
-            // only when UI screen
-            if(cv::waitKey(10) >= 0)
-            {
-                stop_ = true;
-            }
-#endif
 
             stat_->process_fps_= get_process_fps();
         }

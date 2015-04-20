@@ -281,7 +281,10 @@ bool is_valid_marker(unsigned char c)
 
 bool get_all_rst_blocks(const std::vector<unsigned char>& buf, std::vector<std::size_t>& out_idx)
 {
-    for(std::size_t i = 0; i < buf.size(); i++)
+    out_idx.reserve(8000);
+    size_t dlen = buf.size();
+
+    for(std::size_t i = 0; i < dlen; ++i)
     {
         if (0xff == buf[i])
         {

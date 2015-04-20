@@ -260,7 +260,7 @@ int main(int argc, char** argv)
 
     boost::shared_ptr<jpeg_builder> jb(new jpeg_builder());
 
-    monitor_queue<camera_frame_t> mq(20);
+    monitor_queue<camera_frame_t> mq(10);
     camera& c = *cam;
 
 

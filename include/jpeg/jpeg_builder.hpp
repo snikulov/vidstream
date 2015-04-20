@@ -55,6 +55,8 @@ public:
     jpeg_data_t from_cvmat(const camera_frame_t frame)
     {
         jpeg_data_t ret_buf(new std::vector<unsigned char>());
+        ret_buf->reserve(200*1024); // reserve 200Kb
+
         if (frame && !frame->empty())
         {
             boost::mutex::scoped_lock lk(mx_);
