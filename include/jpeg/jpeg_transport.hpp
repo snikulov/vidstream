@@ -37,6 +37,8 @@ public:
         std::vector<unsigned char>& rdata = *data;
 
         std::vector<uint8_t> outdata;
+        outdata.reserve(rdata.size());
+
         outdata.insert(outdata.end(), start_mark_.begin(), start_mark_.end());
         outdata.insert(outdata.end(), rdata.begin()+ridx[0], rdata.begin()+ridx[ridx.size()-1]);
         outdata.insert(outdata.end(), start_mark_.begin(), start_mark_.end());

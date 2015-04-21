@@ -24,6 +24,8 @@ option(USE_QT5 "Use qt5 for build" OFF)
 option(WITH_ITPP "Build and use ITPP" OFF)
 option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN "Build with address sanitizer" OFF)
+option(WITH_TSAN "Build with thread sanitizer" OFF)
+
 if (TARGET_CROSS)
     option(WITH_QTGUI "Build QtGUI Application" OFF)
 else()
@@ -38,11 +40,22 @@ find_package(Lint)
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -W")
+
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Ofast")
+
     if (WITH_ASAN)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
     endif()
+
+    if (WITH_TSAN)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -g -fPIC")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=thread -g -fPIC")
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie")
+    endif()
+
 endif()
 
 link_directories(${CMAKE_BINARY_DIR})
@@ -107,7 +120,11 @@ add_subdirectory(ext/nanomsg)
 
 # log4cplus build from ext/log4cplus
 add_subdirectory(ext/log4cplus)
-set(LOG4CPLUS_LIBRARIES log4cplusS)
+if (WITH_TSAN)
+    set(LOG4CPLUS_LIBRARIES log4cplus)
+else()
+    set(LOG4CPLUS_LIBRARIES log4cplusS)
+endif()
 
 add_subdirectory(ext/opencv)
 

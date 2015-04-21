@@ -57,7 +57,7 @@ public:
                 if (*is_bw_)
                 {
                     boost::shared_ptr<cv::Mat> gs( new cv::Mat() );
-                    cvtColor(*frame, *gs, cv::COLOR_BGR2GRAY);
+                    cvtColor(*frame, *gs, cv::COLOR_RGB2GRAY);
                     frame.swap(gs);
                 }
 
