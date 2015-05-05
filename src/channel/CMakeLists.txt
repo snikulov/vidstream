@@ -28,7 +28,6 @@ add_library(${TARGET_NAME}
     ${SRC_FILES}
     ${HDR_FILES})
 
-add_dependencies(${TARGET_NAME} ext.nanomsg)
+add_dependencies(${TARGET_NAME} ext.nanomsg ext.log4cplus)
 
 lint_check_sources(${TARGET_NAME} ${SRC_FILES})
-

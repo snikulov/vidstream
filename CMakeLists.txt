@@ -31,7 +31,8 @@ if (TARGET_CROSS)
 else()
     option(WITH_QTGUI "Build QtGUI Application" ON)
 endif()
-option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" OFF)
+
+option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" ON)
 option(USE_BOOST_STATIC "Build with static Boost C++ libs" OFF)
 
 find_package(Threads REQUIRED)
