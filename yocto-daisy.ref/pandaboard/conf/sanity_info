@@ -1,0 +1,3 @@
+SANITY_VERSION 1
+TMPDIR /home/snikulov/work/yocto/Daisy/build-panda/tmp
+SSTATE_DIR /home/snikulov/work/yocto/Daisy/build-panda/sstate-cache
