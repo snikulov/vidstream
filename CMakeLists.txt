@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(vidstream C CXX)
+project(vidstream)
 
 if (CMAKE_TOOLCHAIN_FILE)
     message("Cross compiling project vidstream...")
@@ -19,21 +19,19 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(WITH_TEST "Build UnitTests" OFF)
-option(USE_QT5 "Use qt5 for build" OFF)
-option(WITH_ITPP "Build and use ITPP" OFF)
+
+option(WITH_ITPP       "Build and use ITPP" OFF)
+option(WITH_TEST       "Build UnitTests" OFF)
 option(WITH_CAPTURE_UI "Build with capture window" OFF)
-option(WITH_ASAN "Build with address sanitizer" OFF)
-option(WITH_TSAN "Build with thread sanitizer" OFF)
+option(WITH_ASAN       "Build with address sanitizer" OFF)
+option(WITH_TSAN       "Build with thread sanitizer" OFF)
+option(WITH_QTGUI      "Build QtGUI Application" ON)
+option(WITH_EXT_JPEG   "Build libjpeg-turbo from external repository" ON)
 
-if (TARGET_CROSS)
-    option(WITH_QTGUI "Build QtGUI Application" OFF)
-else()
-    option(WITH_QTGUI "Build QtGUI Application" ON)
-endif()
-
-option(WITH_EXT_JPEG "Build libjpeg-turbo from external repository" ON)
-option(USE_BOOST_STATIC "Build with static Boost C++ libs" OFF)
+option(USE_BOOST_STATIC "Use static Boost C++ libs" OFF)
+option(USE_QT5          "Use qt5 for build" OFF)
+option(USE_V4L          "Build OpenCV with V4L support if found" ON)
+option(USE_GST          "Build OpenCV with Gstreamer support if found" ON)
 
 find_package(Threads REQUIRED)
 find_package(Lint)
