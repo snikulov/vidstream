@@ -20,9 +20,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
-option(WITH_ITPP       "Build and use ITPP" OFF)
 option(WITH_TEST       "Build UnitTests" OFF)
-option(WITH_CAPTURE_UI "Build with capture window" OFF)
 option(WITH_ASAN       "Build with address sanitizer" OFF)
 option(WITH_TSAN       "Build with thread sanitizer" OFF)
 option(WITH_QTGUI      "Build QtGUI Application" ON)
