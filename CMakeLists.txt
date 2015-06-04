@@ -31,8 +31,14 @@ option(USE_QT5          "Use qt5 for build" OFF)
 option(USE_V4L          "Build OpenCV with V4L support if found" ON)
 option(USE_GST          "Build OpenCV with Gstreamer support if found" ON)
 
+option(WITH_FPS_LIM     "Rate limit capture to FPS" ON)
+
 find_package(Threads REQUIRED)
 find_package(Lint)
+
+if(WITH_FPS_LIM)
+    add_definitions(-DFPS_LIMIT)
+endif()
 
 if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -W")

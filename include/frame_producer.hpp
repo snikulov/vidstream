@@ -31,17 +31,23 @@ namespace vidstream
 
                 camera_frame_t frame;
                 unsigned long long sec = 1;
-                unsigned long long fcount = 0;
+                unsigned long long fcount = 1;
 
                 timer<boost::chrono::steady_clock> t1;
+#if FPS_LIMIT
                 timer<boost::chrono::steady_clock> t2;
+#endif
+                unsigned long long fps = 0;
 
                 while(!stop_)
                 {
+#if FPS_LIMIT
                     t2.restart();
+#endif
                     frame = cam_.get_frame();
+#if FPS_LIMIT
                     fps_rate_limit(t2.elapsed());
-
+#endif
                     if (frame)
                     {
                         fcount++;
@@ -52,12 +58,15 @@ namespace vidstream
                         LOG4CPLUS_WARN(log_, "Camera return empty frame: " << fcount);
                     }
 
-                    sec = t1.sec();
-                    sec = sec ? sec : 1; // 0 div check
+                    if (!(fcount%25))
+                    {
 
-                    unsigned long long fps = fcount/sec;
-                    stat_->cam_fps_ = fps;
-                    stat_->tsec_ = sec;
+                        sec = t1.sec();
+                        sec = sec ? sec : 1; // 0 div check
+                        fps = fcount/sec;
+                        stat_->cam_fps_ = fps;
+                        stat_->tsec_ = sec;
+                    }
                 }
 
                 LOG4CPLUS_INFO(log_, "Frame producer exited...");
@@ -69,6 +78,7 @@ namespace vidstream
 
             void cfg_changed(const boost::property_tree::ptree& cfg)
             {
+#if FPS_LIMIT
                 int fps_lim = cfg.get<int>("cfg.fps.lim");
                 if (frame_rate_ != fps_lim)
                 {
@@ -77,6 +87,7 @@ namespace vidstream
                     sec_per_frame_ = 1.0/frame_rate_;
                     ns_per_frame_ = recalculate_ns_per_frame(sec_per_frame_);
                 }
+#endif
             }
 
 
@@ -88,6 +99,7 @@ namespace vidstream
                 return boost::chrono::duration_cast<boost::chrono::nanoseconds>(spf);
             }
 
+#if FPS_LIMIT
             void fps_rate_limit(const boost::chrono::steady_clock::duration& frame_get_time) const
             {
                 if (frame_get_time < ns_per_frame_)
@@ -95,6 +107,7 @@ namespace vidstream
                      boost::this_thread::sleep_for(ns_per_frame_ - frame_get_time);
                 }
             }
+#endif
 
             /* data */
             const camera& cam_;
