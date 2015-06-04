@@ -32,6 +32,13 @@ option(USE_V4L          "Build OpenCV with V4L support if found" ON)
 option(USE_GST          "Build OpenCV with Gstreamer support if found" ON)
 
 option(WITH_FPS_LIM     "Rate limit capture to FPS" ON)
+option(BUILD_ON_ARM     "Build on target ARM machine" OFF)
+
+
+if(BUILD_ON_ARM)
+    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -march=armv7-a -marm -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -marm -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9")
+endif()
 
 find_package(Threads REQUIRED)
 find_package(Lint)
