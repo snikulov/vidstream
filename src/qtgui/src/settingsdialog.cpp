@@ -48,6 +48,17 @@ SettingsDialog::SettingsDialog(cfg_ptr_t cfg, boost::shared_ptr<profile_list_t> 
     write_config_file(cfg_, CONFIG_FILE_NAME);
 
     (void)ui_update(*ui, *cfg_);
+    profile p(""
+              , cfg_->get<int>("cfg.bw")
+              , cfg_->get<int>("cfg.fps.lim")
+              , cfg_->get<int>("cfg.img.q")
+              , find_index(get_bch_mode_list(), std::make_pair(cfg_->get<int>("cfg.bch.n"), cfg_->get<int>("cfg.bch.t")))
+              , find_index(get_resolution_list(), std::make_pair(cfg_->get<int>("cfg.img.width"), cfg_->get<int>("cfg.img.height")))
+              );
+
+    int idx = find_index(plist_, p);
+    idx++;
+    ui->comboBox_config_preset->setCurrentIndex(idx);
 }
 
 SettingsDialog::~SettingsDialog()

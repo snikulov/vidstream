@@ -3,6 +3,7 @@
 
 #include "settingsdialog.h"
 #include "service_worker.hpp"
+#include "config_iface.hpp"
 
 
 
@@ -32,6 +33,7 @@ MainWindow::MainWindow(bool cfg, QWidget *parent) :
     if(!read_config_file(cfg_, CONFIG_FILE_NAME))
     {
         init_config_defaults(cfg_);
+        write_config_file(cfg_, CONFIG_FILE_NAME);
     }
 
     cfg_ptr_t pset(new boost::property_tree::ptree);
@@ -238,5 +240,6 @@ void MainWindow::on_comboBox_profiles_currentIndexChanged(int index)
             cfg_->put("cfg.fps.lim",   25);
             cfg_->put("cfg.bw", 10);
         }
+        write_config_file(cfg_, CONFIG_FILE_NAME);
     }
 }

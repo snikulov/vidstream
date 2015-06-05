@@ -196,6 +196,7 @@ void init_config_defaults(cfg_ptr_t cfg)
     cfg->put("cfg.cmdport", 9900);
     cfg->put("cfg.dataport", 9950);
     cfg->put("cfg.bw", 10);
+    cfg->put("cfg.ip", "127.0.0.1");
 
     cfg_set_resolution_by_list_index(*cfg, 2);
 }

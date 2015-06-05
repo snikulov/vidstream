@@ -2,10 +2,8 @@ Before you begin:
 1. Install git: sudo apt-get install git
 2. Do one-time git setup: http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup
 3. Get sources from repository
-git clone --recurse-submodules <git>
-             or
-git clone <git>
-git submodule update --init --recursive
+git clone git@bitbucket.org:snikulov/vidstream.git
+
 -------------------------------------------------
 Install dependencies for Ubuntu:
 1. Install boost libraries (dynamic linking): sudo apt-get install libboost-all-dev
@@ -97,21 +95,6 @@ TBD
 # make
 # sudo make install
 
-3. ext/libjpeg-turbo - for some jpeg manipulation, will be used in opencv
- - build
-# autoreconf -fiv
-# ./configure --with-jpeg8 --prefix=/usr/local
-# make
-# sudo make install
-
-4. ext/opencv - for video capture and image manipulation
-- build
-For 64 bit system:
-# cmake <path to opencv source> -DBUILD_JPEG=OFF -DCMAKE_INSTALL_PREFIX=/usr/local -DJPEG_INCLUDE_DIR=/usr/local -DJPEG_LIBRARY=/usr/local/lib64/libjpeg.so.8
-or for 32bit system:
-# cmake <path to opencv source> -DBUILD_JPEG=OFF -DCMAKE_INSTALL_PREFIX=/usr/local -DJPEG_INCLUDE_DIR=/usr/local -DJPEG_LIBRARY=/usr/local/lib/libjpeg.so.8
-# make
-# sudo make install
 
 5. Build system 
 1 cd build
@@ -120,3 +103,18 @@ or for 32bit system:
 # make
 
 ./capture --file=/media/sf_share/test.avi 
+
+Options which can be controlled during build generation
+
+using -D<option name>=ON/OFF in cmake invocation
+
+    option(WITH_TEST       "Build UnitTests" OFF)
+    option(WITH_ASAN       "Build with address sanitizer" OFF)
+    option(WITH_TSAN       "Build with thread sanitizer" OFF)
+    option(WITH_QTGUI      "Build QtGUI Application" ON)
+    option(WITH_EXT_JPEG   "Build libjpeg-turbo from external repository" ON)
+
+    option(USE_BOOST_STATIC "Use static Boost C++ libs" OFF)
+    option(USE_QT5          "Use qt5 for build" OFF)
+    option(USE_V4L          "Build OpenCV with V4L support if found" ON)
+    option(USE_GST          "Build OpenCV with Gstreamer support if found" ON)
