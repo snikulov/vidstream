@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 set(TARGET_NAME qtgui)
 project(${TARGET_NAME} CXX)
 
@@ -12,22 +12,12 @@ endif()
 
 if(USE_QT5)
     set(CMAKE_AUTOMOC ON)
+    set(CMAKE_AUTORCC ON)
 #    set(CMAKE_AUTOUIC ON)
 
-    cmake_policy(SET CMP0020 OLD)
+    find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
 
-    find_package(Qt5Widgets REQUIRED)
-    include_directories(${Qt5Widgets_INCLUDES})
-    add_definitions(${Qt5Widgets_DEFINITIONS})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
-
-    find_package(Qt5Network REQUIRED)
-    include_directories(${Qt5Network_INCLUDE_DIRS})
-    add_definitions(${Qt5Network_DEFINITIONS})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Network_EXECUTABLE_COMPILE_FLAGS}")
- 
 else()
-#    find_package(Qt4 REQUIRED)
     find_package(Qt4 COMPONENTS QtCore QtGui QtNetwork REQUIRED)
     include(${QT_USE_FILE})
 endif()
@@ -63,8 +53,7 @@ set(UI_FILES
 )
 
 if(USE_QT5)
-     qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
-#    qt5_wrap_cpp(MOC_SRC ${HDR_FILES})
+    qt5_wrap_ui(UI_SRC_FILES ${UI_FILES})
     add_executable(${TARGET_NAME} ${SRC_FILES} ${UI_SRC_FILES} ${HDR_FILES} ${GLB_HDR_FILES})
 else()
     QT4_WRAP_UI(UI_SRC_FILES ${UI_FILES})
@@ -77,7 +66,7 @@ add_dependencies(${TARGET_NAME} ext.nanomsg ext.opencv ext.log4cplus)
 lint_check_sources(${TARGET_NAME} ${SRC_FILES})
 
 if(USE_QT5)
-    target_link_libraries(${TARGET_NAME} ${Qt5Widgets_LIBRARIES} ${Qt5Network_LIBRARIES})
+    target_link_libraries(${TARGET_NAME} Qt5::Widgets Qt5::Network)
 else()
     target_link_libraries(${TARGET_NAME} ${QT_LIBRARIES})
 endif()
@@ -97,4 +86,3 @@ target_link_libraries(${TARGET_NAME}
 
 target_link_libraries(${TARGET_NAME} opencv_core opencv_highgui opencv_imgcodecs opencv_imgproc opencv_video opencv_videoio)
 target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
-
