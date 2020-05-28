@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
-
+cmake_minimum_required(VERSION 3.10)
 project(vidstream)
 
 if (CMAKE_TOOLCHAIN_FILE)
@@ -27,7 +26,7 @@ option(WITH_QTGUI      "Build QtGUI Application" ON)
 option(WITH_EXT_JPEG   "Build libjpeg-turbo from external repository" ON)
 
 option(USE_BOOST_STATIC "Use static Boost C++ libs" OFF)
-option(USE_QT5          "Use qt5 for build" OFF)
+option(USE_QT5          "Use qt5 for build" ON)
 option(USE_V4L          "Build OpenCV with V4L support if found" ON)
 option(USE_GST          "Build OpenCV with Gstreamer support if found" ON)
 
@@ -110,7 +109,7 @@ set(DEPS_LOCATION "${CMAKE_BINARY_DIR}/deps")
 set(ENV{PKG_CONFIG_PATH} "${DEPS_LOCATION}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}")
 message("env PKG_CONFIG_PATH = $ENV{PKG_CONFIG_PATH}")
 
-add_custom_target(envpkg 
+add_custom_target(envpkg
     COMMAND "PKG_CONFIG_PATH=${DEPS_LOCATION}/lib/pkgconfig"
     )
 

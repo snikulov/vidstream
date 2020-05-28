@@ -6,7 +6,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
-
+#include <iostream>
 
 
 bool ui_update(Ui::SettingsDialog &u, const boost::property_tree::ptree &cfg)
@@ -200,6 +200,3 @@ void init_config_defaults(cfg_ptr_t cfg)
 
     cfg_set_resolution_by_list_index(*cfg, 2);
 }
-
-
-
