@@ -8,7 +8,10 @@
 #include <opencv2/opencv.hpp>
 #include <types.hpp>
 
+#ifdef BUILD_WITH_ITPP
 #include "channel/channel.hpp"
+#endif
+
 #include "channel/out_channel.hpp"
 #include "channel/in_channel.hpp"
 #include "channel/bchwrapper.hpp"
@@ -32,26 +35,26 @@
 
 using namespace boost::unit_test;
 
-struct fixture
+struct myfixture
 {
-    fixture()
+    myfixture()
     {
         log4cplus::BasicConfigurator::doConfigure();
         log_ = log4cplus::Logger::getInstance("test");
     }
-    ~fixture() {}
+    ~myfixture() {}
 
     log4cplus::Logger log_;
 };
 
-BOOST_FIXTURE_TEST_SUITE(test_suite_channel, fixture)
+BOOST_FIXTURE_TEST_SUITE(test_suite_channel, myfixture)
 
-#if 0
+#ifdef BUILD_WITH_ITPP
 BOOST_AUTO_TEST_CASE( test_channel_case_1 )
 {
     channel ch("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9000");
     boost::this_thread::sleep_for(boost::chrono::microseconds(100));
-    BOOST_MESSAGE("test case with channel");
+    BOOST_TEST_MESSAGE("test case with channel");
 
     std::vector<uint8_t> src;
     boost::shared_ptr< std::vector<uint8_t> > dst;
@@ -72,7 +75,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_2)
     channel ch2("tcp://127.0.0.1:9001", "tcp://127.0.0.1:9000");
 
     boost::this_thread::sleep_for(boost::chrono::microseconds(200));
-    BOOST_MESSAGE("test case with two channel");
+    BOOST_TEST_MESSAGE("test case with two channel");
 
     std::vector<uint8_t> src;
     boost::shared_ptr< std::vector<uint8_t> > dst1;
@@ -99,7 +102,7 @@ BOOST_AUTO_TEST_CASE(test_channel_case_3)
 {
     channel ch("tcp://127.0.0.1:9000", "tcp://127.0.0.1:9000");
     boost::this_thread::sleep_for(boost::chrono::microseconds(100));
-    BOOST_MESSAGE("test case with channel");
+    BOOST_TEST_MESSAGE("test case with channel");
 
     boost::shared_ptr<itpp::Channel_Code> codec(new itpp::BCH(7, 3));
     ch.set_codec(codec);
@@ -167,16 +170,15 @@ BOOST_AUTO_TEST_CASE(test_channel_case_5)
     BOOST_CHECK_MESSAGE(test1 == target,
             "test1.size()=" << test1.size() << " received.size()=" << target.size());
 }
-#endif
-
-
-using namespace vidstream;
 
 BOOST_AUTO_TEST_CASE(test_channel_case_5)
 {
     itpp::bvec t = itpp::dec2bin(32, int(0xf0fffc07));
 }
 
+#endif
+
+using namespace vidstream;
 BOOST_AUTO_TEST_CASE(test_channel_case_6)
 {
     int i = 0;
@@ -277,6 +279,3 @@ BOOST_AUTO_TEST_CASE(test_channel_case_7)
 
 
 BOOST_AUTO_TEST_SUITE_END()
-
-
-

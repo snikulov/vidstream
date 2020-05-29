@@ -136,6 +136,7 @@ else()
 endif()
 
 add_subdirectory(ext/opencv)
+set(OpenCV_LIBS opencv_core opencv_highgui opencv_imgcodecs opencv_imgproc opencv_video opencv_videoio)
 
 # itpp build from ext/itpp
 if(WITH_ITPP)

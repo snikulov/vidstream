@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE( test_corrupt_case_1 )
     BOOST_CHECK_MESSAGE(num_err <= 12, "number of error bits: " << num_err);
     BOOST_CHECK_MESSAGE(err <= err_persent , "err: " << err << " error %: " << err_persent);
 
-    BOOST_MESSAGE("corrupt%: "<< err_persent << " err bits num:" << num_err << " err %:"<< err);
+    BOOST_TEST_MESSAGE("corrupt%: "<< err_persent << " err bits num:" << num_err << " err %:"<< err);
 }
 
 BOOST_AUTO_TEST_CASE( test_corrupt_case_2 )
@@ -103,6 +103,3 @@ BOOST_AUTO_TEST_CASE( test_corrupt_case_4 )
 
 
 BOOST_AUTO_TEST_SUITE_END()
-
-
-
