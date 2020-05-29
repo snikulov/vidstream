@@ -1,5 +1,5 @@
 # vidstream
-Experiments with bch encoding on video stream
+Experiments with bch encoding on mjpeg video stream
 
 How to build
 
